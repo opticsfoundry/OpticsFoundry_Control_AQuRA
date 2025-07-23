@@ -45,3 +45,10 @@ inpout32_source_and_bins/
 
 # Optional: Ignore user output folders or temporary data
 u/
+
+# Ignore all files in the directory
+DebugFiles/*
+Data/*
+# But keep the directory itself
+!DebugFiles/.gitkeep
+!Data/.gitkeep

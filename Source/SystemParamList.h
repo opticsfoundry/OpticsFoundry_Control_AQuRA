@@ -38,6 +38,7 @@ extern const bool On;
 extern const bool Off;
 extern double Pi;
 
+extern CString* WorkingDirectory;
 extern CString* HardwareConfigFilename;
 
 extern CString* UserIOConfigFilename;

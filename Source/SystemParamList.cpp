@@ -29,6 +29,7 @@ void CSystemParamList::Initialize() {
 	Pi=2.0*asin(1.0);	
 	NewMenu("System configuration parameters");
 	AddStatic("Files and folders", "", ColorGreen);
+	RegisterString(WorkingDirectory, "WorkingDirectory", "", 300, "Working directory");
 	RegisterString(HardwareConfigFilename, "HardwareConfigFilename", "ControlHardwareConfig.json", 300, "Hardware Config Filename");
 	RegisterString(UserIOConfigFilename, "UserIOConfigFilename", "ControlUserIOConfig.json", 300, "User IO Config Filename");
 	RegisterString(UserIOAlternativeCommandNames, "UserIOAlternativeCommandNames", "AlternativeCommandNames.txt", 300, "User IO alternative command names");
@@ -133,6 +134,7 @@ CSystemParamList::~CSystemParamList()
 double Pi;
 bool StartRemoteServer;
 
+CString* WorkingDirectory;
 CString* HardwareConfigFilename;
 CString* UserIOConfigFilename;
 CString* UserIOAlternativeCommandNames;

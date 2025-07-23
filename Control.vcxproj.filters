@@ -19,1073 +19,1073 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AD9852.cpp">
+    <ClCompile Include="Source\AD9852.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AD9858.cpp">
+    <ClCompile Include="Source\AD9858.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ADF4351.cpp">
+    <ClCompile Include="Source\AD9958.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Agilent33250A.cpp">
+    <ClCompile Include="Source\ADF4351.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Agilent33250ASerial.cpp">
+    <ClCompile Include="Source\Agilent33250A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnaIn.cpp">
+    <ClCompile Include="Source\Agilent33250ASerial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnalogOut.cpp">
+    <ClCompile Include="Source\AnaIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnaOut.cpp">
+    <ClCompile Include="Source\AnalogOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlackmanPulse.cpp">
+    <ClCompile Include="Source\AnaOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="burleighWA1000.cpp">
+    <ClCompile Include="Source\CHardwareConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calibration.cpp">
+    <ClCompile Include="Source\CoilDriverTorun100A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChannelReservationList.cpp">
+    <ClCompile Include="Source\CoilDriverTorun3x3A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChannelReservationListPoint.cpp">
+    <ClCompile Include="Source\ControlAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSocketUser.cpp">
+    <ClCompile Include="Source\BlackmanPulse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clntsock.cpp">
+    <ClCompile Include="Source\burleighWA1000.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="color.cpp">
+    <ClCompile Include="Source\Calibration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColorControl.cpp">
+    <ClCompile Include="Source\ChannelReservationList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConsecutiveCalibration.cpp">
+    <ClCompile Include="Source\ChannelReservationListPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Control.cpp">
+    <ClCompile Include="Source\ClientSocketUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CosineSquareRamp.cpp">
+    <ClCompile Include="Source\clntsock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DDSCalibration.cpp">
+    <ClCompile Include="Source\color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DelayedWaveform.cpp">
+    <ClCompile Include="Source\ColorControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogElement.cpp">
+    <ClCompile Include="Source\ConsecutiveCalibration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DigIn.cpp">
+    <ClCompile Include="Source\Control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DigitalOut.cpp">
+    <ClCompile Include="Source\CosineSquareRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DigOut.cpp">
+    <ClCompile Include="Source\CTimestamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DoublePoint.cpp">
+    <ClCompile Include="Source\CUserIOConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EasyDialog.cpp">
+    <ClCompile Include="Source\IOList_shortcuts_auto_created.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EIP548A.cpp">
+    <ClCompile Include="Source\LaserLock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementAnalogOut.cpp">
+    <ClCompile Include="Source\MultiWriteDeviceSPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementBool.cpp">
+    <ClCompile Include="Source\ParamList_shortcuts_auto_created.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementButton.cpp">
+    <ClCompile Include="Source\RemoteResetServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementDigitalOut.cpp">
+    <ClCompile Include="Source\SequenceImaging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementDouble.cpp">
+    <ClCompile Include="Source\SequenceListLambdaFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementGroupBox.cpp">
+    <ClCompile Include="Source\SequenceListSequencerCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementInt.cpp">
+    <ClCompile Include="Source\DDSCalibration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementStatic.cpp">
+    <ClCompile Include="Source\DelayedWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementString.cpp">
+    <ClCompile Include="Source\DialogElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementStringComboBox.cpp">
+    <ClCompile Include="Source\DigIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EvaporationSweep.cpp">
+    <ClCompile Include="Source\DigitalOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExecuteMeasurementDlg.cpp">
+    <ClCompile Include="Source\DigOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExecuteMeasurementDlgContainer.cpp">
+    <ClCompile Include="Source\DoublePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExpRamp.cpp">
+    <ClCompile Include="Source\EasyDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FiberLaser.cpp">
+    <ClCompile Include="Source\EIP548A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FlatToolTipCtrl.cpp">
+    <ClCompile Include="Source\ElementAnalogOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FluoLoadingDialog.cpp">
+    <ClCompile Include="Source\ElementBool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GPIB.cpp">
+    <ClCompile Include="Source\ElementButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GPIBDevice.cpp">
+    <ClCompile Include="Source\ElementDigitalOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Grid2DWaveform.cpp">
+    <ClCompile Include="Source\ElementDouble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HP5334A.cpp">
+    <ClCompile Include="Source\ElementGroupBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IO.cpp">
+    <ClCompile Include="Source\ElementInt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IOList.cpp">
+    <ClCompile Include="Source\ElementStatic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IORegister.cpp">
+    <ClCompile Include="Source\ElementString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IPGLaser.cpp">
+    <ClCompile Include="Source\ElementStringComboBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Keithley2000.cpp">
+    <ClCompile Include="Source\EthernetMultiIOControllerOpticsFoundry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Linear.cpp">
+    <ClCompile Include="Source\EvaporationSweep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lstnsock.cpp">
+    <ClCompile Include="Source\ExecuteMeasurementDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainDialog.cpp">
+    <ClCompile Include="Source\ExecuteMeasurementDlgContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Measurement.cpp">
+    <ClCompile Include="Source\ExpRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeasurementList.cpp">
+    <ClCompile Include="Source\FiberLaser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeasurementPoint.cpp">
+    <ClCompile Include="Source\FlatToolTipCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeasurementQueue.cpp">
+    <ClCompile Include="Source\FluoLoadingDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
+    <ClCompile Include="Source\GPIB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuGroupBox.cpp">
+    <ClCompile Include="Source\GPIBDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuObList.cpp">
+    <ClCompile Include="Source\Grid2DWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuObListElement.cpp">
+    <ClCompile Include="Source\HP5334A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuStatic.cpp">
+    <ClCompile Include="Source\IO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuTitle.cpp">
+    <ClCompile Include="Source\IOList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MessageReceiver.cpp">
+    <ClCompile Include="Source\IORegister.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultiIO.cpp">
+    <ClCompile Include="Source\IPGLaser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultiWriteDevice.cpp">
+    <ClCompile Include="Source\Keithley2000.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NetIO.cpp">
+    <ClCompile Include="Source\Linear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
+    <ClCompile Include="Source\lstnsock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkClient.cpp">
+    <ClCompile Include="Source\MainDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkServer.cpp">
+    <ClCompile Include="Source\Measurement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NI6024E.cpp">
+    <ClCompile Include="Source\MeasurementList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NI653x.cpp">
+    <ClCompile Include="Source\MeasurementPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NI67x3.cpp">
+    <ClCompile Include="Source\MeasurementQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OmegaiSeries.cpp">
+    <ClCompile Include="Source\MenuButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Output.cpp">
+    <ClCompile Include="Source\MenuGroupBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OvenControl.cpp">
+    <ClCompile Include="Source\MenuObList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParabolicRamp.cpp">
+    <ClCompile Include="Source\MenuObListElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParallelPort.cpp">
+    <ClCompile Include="Source\MenuStatic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Param.cpp">
+    <ClCompile Include="Source\MenuTitle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamBool.cpp">
+    <ClCompile Include="Source\Mesh3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamDouble.cpp">
+    <ClCompile Include="Source\MessageReceiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParameterDialog.cpp">
+    <ClCompile Include="Source\MultiIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamInt.cpp">
+    <ClCompile Include="Source\MultiWriteDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamList.cpp">
+    <ClCompile Include="Source\NetIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamRegister.cpp">
+    <ClCompile Include="Source\Network.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamString.cpp">
+    <ClCompile Include="Source\NetworkClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamStringComboBox.cpp">
+    <ClCompile Include="Source\NetworkServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polynom.cpp">
+    <ClCompile Include="Source\NI6024E.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pulse.cpp">
+    <ClCompile Include="Source\NI653x.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ramp.cpp">
+    <ClCompile Include="Source\SequenceManualUserIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RampdBLinear.cpp">
+    <ClCompile Include="Source\SequencerAbstract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RangeCheck.cpp">
+    <ClCompile Include="Source\NI67x3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
+    <ClCompile Include="Source\OmegaiSeries.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RemoteControl.cpp">
+    <ClCompile Include="Source\Output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RSSML0x.cpp">
+    <ClCompile Include="Source\OvenControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RunProgressDlg.cpp">
+    <ClCompile Include="Source\ParabolicRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sequence.cpp">
+    <ClCompile Include="Source\ParallelPort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceLib.cpp">
+    <ClCompile Include="Source\Param.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceList.cpp">
+    <ClCompile Include="Source\ParamBool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListAnalogOut.cpp">
+    <ClCompile Include="Source\ParamDouble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListComment.cpp">
+    <ClCompile Include="Source\ParameterDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListDigitalOut.cpp">
+    <ClCompile Include="Source\ParamInt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListMultiWriteDeviceValue.cpp">
+    <ClCompile Include="Source\ParamList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListPoint.cpp">
+    <ClCompile Include="Source\ParamRegister.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListRemoveWaveformGroup.cpp">
+    <ClCompile Include="Source\ParamString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListStoreOrRecallValue.cpp">
+    <ClCompile Include="Source\ParamStringComboBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListSyncCommand.cpp">
+    <ClCompile Include="Source\PixelFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListWaitTillEndOfWaveformGroup.cpp">
+    <ClCompile Include="Source\Polynom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListWaveform.cpp">
+    <ClCompile Include="Source\Pulse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListWaveformData.cpp">
+    <ClCompile Include="Source\Ramp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Serial.cpp">
+    <ClCompile Include="Source\RampdBLinear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SerialDevice.cpp">
+    <ClCompile Include="Source\RangeCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleColorButton.cpp">
+    <ClCompile Include="Source\Rectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sin.cpp">
+    <ClCompile Include="Source\RemoteControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SineRamp.cpp">
+    <ClCompile Include="Source\RSSML0x.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SingleWaveform.cpp">
+    <ClCompile Include="Source\RunProgressDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SlaveIO.cpp">
+    <ClCompile Include="Source\Sequence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SlaveIOList.cpp">
+    <ClCompile Include="Source\SequenceLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SlaveMainDialog.cpp">
+    <ClCompile Include="Source\SequenceList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SlaveServer.cpp">
+    <ClCompile Include="Source\SequenceListAnalogOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
+    <ClCompile Include="Source\SequenceListComment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SRS345.cpp">
+    <ClCompile Include="Source\SequenceListDigitalOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StaticHelp.cpp">
+    <ClCompile Include="Source\SequenceListMultiWriteDeviceValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StdAfx.cpp">
+    <ClCompile Include="Source\SequenceListPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StepwiseLinearCalibration.cpp">
+    <ClCompile Include="Source\SequenceListRemoveWaveformGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StepwiseLinearRamp.cpp">
+    <ClCompile Include="Source\SequenceListStoreOrRecallValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SyncCommand.cpp">
+    <ClCompile Include="Source\SequenceListSyncCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SystemParamList.cpp">
+    <ClCompile Include="Source\SequenceListWaitTillEndOfWaveformGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TektronixAWG5105.cpp">
+    <ClCompile Include="Source\SequenceListWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TektronixTDS524A.cpp">
+    <ClCompile Include="Source\SequenceListWaveformData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="theme.cpp">
+    <ClCompile Include="Source\SequencerEthernetOpticsFoundry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TimeStretch.cpp">
+    <ClCompile Include="Source\SequenceStandardUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TweezerRamp.cpp">
+    <ClCompile Include="Source\SequenceUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniMess.cpp">
+    <ClCompile Include="Source\Serial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniMessList.cpp">
+    <ClCompile Include="Source\SerialDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="USBMultiIO.cpp">
+    <ClCompile Include="Source\SimpleColorButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utilities.cpp">
+    <ClCompile Include="Source\Sin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UtilityDialog.cpp">
+    <ClCompile Include="Source\SineRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VCOCalibration.cpp">
+    <ClCompile Include="Source\SingleWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VerdiLaser.cpp">
+    <ClCompile Include="Source\SlaveIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vision.cpp">
+    <ClCompile Include="Source\SlaveIOList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Waveform.cpp">
+    <ClCompile Include="Source\SlaveMainDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaveformGenerator.cpp">
+    <ClCompile Include="Source\SlaveServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SlaveWaveform.cpp">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="Source\Square.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CosineRamp.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="Source\SRS345.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListWaitTillBusBufferEmpty.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="Source\StaticHelp.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PixelFont.cpp">
+    <ClCompile Include="Source\StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh3D.cpp">
+    <ClCompile Include="Source\StepwiseLinearCalibration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequencerAbstract.cpp">
+    <ClCompile Include="Source\StepwiseLinearRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EthernetMultiIOControllerOpticsFoundry.cpp">
+    <ClCompile Include="Source\SyncCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControlAPI.cpp">
+    <ClCompile Include="Source\SystemParamList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListSequencerCommand.cpp">
+    <ClCompile Include="Source\TektronixAWG5105.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTimestamp.cpp">
+    <ClCompile Include="Source\TektronixTDS524A.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoilDriverTorun3x3A.cpp">
+    <ClCompile Include="Source\theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoilDriverTorun100A.cpp">
+    <ClCompile Include="Source\TimeStretch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AD9958.cpp">
+    <ClCompile Include="Source\TweezerRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RemoteResetServer.cpp">
+    <ClCompile Include="Source\UniMess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CHardwareConfig.cpp">
+    <ClCompile Include="Source\UniMessList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CUserIOConfig.cpp">
+    <ClCompile Include="Source\USBMultiIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultiWriteDeviceSPI.cpp">
+    <ClCompile Include="Source\utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IOList_shortcuts_auto_created.cpp">
+    <ClCompile Include="Source\UtilityDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LaserLock.cpp">
+    <ClCompile Include="Source\VCOCalibration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequencerEthernetOpticsFoundry.cpp">
+    <ClCompile Include="Source\VerdiLaser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamList_shortcuts_auto_created.cpp">
+    <ClCompile Include="Source\Vision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceManualUserIO.cpp">
+    <ClCompile Include="Source\Waveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceImaging.cpp">
+    <ClCompile Include="Source\WaveformGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceListLambdaFunction.cpp">
+    <ClCompile Include="Source\SlaveWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceUtilities.cpp">
+    <ClCompile Include="Source\CosineRamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SequenceStandardUtilities.cpp">
+    <ClCompile Include="Source\SequenceListWaitTillBusBufferEmpty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Control.rc">
+    <ResourceCompile Include="Source\Control.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AD9852.h">
+    <ClInclude Include="Source\AD9852.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AD9858.h">
+    <ClInclude Include="Source\AD9858.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ADF4351.h">
+    <ClInclude Include="Source\AD9958.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Agilent33250A.h">
+    <ClInclude Include="Source\ADF4351.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Agilent33250ASerial.h">
+    <ClInclude Include="Source\Agilent33250A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnaIn.h">
+    <ClInclude Include="Source\Agilent33250ASerial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnalogOut.h">
+    <ClInclude Include="Source\AnaIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnaOut.h">
+    <ClInclude Include="Source\AnalogOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlackmanPulse.h">
+    <ClInclude Include="Source\AnaOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="burleighWA1000.h">
+    <ClInclude Include="Source\CHardwareConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Calibration.h">
+    <ClInclude Include="Source\CoilDriverTorun100A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChannelReservationList.h">
+    <ClInclude Include="Source\CoilDriverTorun3x3A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChannelReservationListPoint.h">
+    <ClInclude Include="Source\ControlAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSocketUser.h">
+    <ClInclude Include="Source\BlackmanPulse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="clntsock.h">
+    <ClInclude Include="Source\burleighWA1000.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="color.h">
+    <ClInclude Include="Source\Calibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ColorControl.h">
+    <ClInclude Include="Source\ChannelReservationList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConsecutiveCalibration.h">
+    <ClInclude Include="Source\ChannelReservationListPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control.h">
+    <ClInclude Include="Source\ClientSocketUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CosineRamp.h">
+    <ClInclude Include="Source\clntsock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CosineSquareRamp.h">
+    <ClInclude Include="Source\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DDSCalibration.h">
+    <ClInclude Include="Source\ColorControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DelayedWaveform.h">
+    <ClInclude Include="Source\ConsecutiveCalibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DialogElement.h">
+    <ClInclude Include="Source\Control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DigIn.h">
+    <ClInclude Include="Source\CosineRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DigitalOut.h">
+    <ClInclude Include="Source\CosineSquareRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DigOut.h">
+    <ClInclude Include="Source\CTimestamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DoublePoint.h">
+    <ClInclude Include="Source\CUserIOConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EasyDialog.h">
+    <ClInclude Include="Source\DDSCalibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EIP548A.h">
+    <ClInclude Include="Source\DelayedWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementAnalogOut.h">
+    <ClInclude Include="Source\DialogElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementBool.h">
+    <ClInclude Include="Source\DigIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementButton.h">
+    <ClInclude Include="Source\DigitalOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementDigitalOut.h">
+    <ClInclude Include="Source\DigOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementDouble.h">
+    <ClInclude Include="Source\DoublePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementGroupBox.h">
+    <ClInclude Include="Source\EasyDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementInt.h">
+    <ClInclude Include="Source\EIP548A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementStatic.h">
+    <ClInclude Include="Source\ElementAnalogOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementString.h">
+    <ClInclude Include="Source\ElementBool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ElementStringComboBox.h">
+    <ClInclude Include="Source\ElementButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EvaporationSweep.h">
+    <ClInclude Include="Source\ElementDigitalOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExecuteMeasurementDlg.h">
+    <ClInclude Include="Source\ElementDouble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExecuteMeasurementDlgContainer.h">
+    <ClInclude Include="Source\ElementGroupBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FiberLaser.h">
+    <ClInclude Include="Source\ElementInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlatToolTipCtrl.h">
+    <ClInclude Include="Source\ElementStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FluoLoadingDialog.h">
+    <ClInclude Include="Source\ElementString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FTD2XX.H">
+    <ClInclude Include="Source\ElementStringComboBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GPIB.h">
+    <ClInclude Include="Source\EthernetMultiIOController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GPIBDevice.h">
+    <ClInclude Include="Source\EthernetMultiIOControllerOpticsFoundry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Grid2DWaveform.h">
+    <ClInclude Include="Source\EvaporationSweep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HP5334A.h">
+    <ClInclude Include="Source\ExecuteMeasurementDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IO.h">
+    <ClInclude Include="Source\ExecuteMeasurementDlgContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IOList.h">
+    <ClInclude Include="Source\FiberLaser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IORegister.h">
+    <ClInclude Include="Source\FlatToolTipCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IPGLaser.h">
+    <ClInclude Include="Source\FluoLoadingDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keithley2000.h">
+    <ClInclude Include="Source\FTD2XX.H">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LaserLock.h">
+    <ClInclude Include="Source\GPIB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Linear.h">
+    <ClInclude Include="Source\GPIBDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lstnsock.h">
+    <ClInclude Include="Source\Grid2DWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainDialog.h">
+    <ClInclude Include="Source\HP5334A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Measurement.h">
+    <ClInclude Include="Source\include\pybind11\pybind11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeasurementList.h">
+    <ClInclude Include="Source\IO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeasurementPoint.h">
+    <ClInclude Include="Source\IOList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeasurementQueue.h">
+    <ClInclude Include="Source\IOList_shortcuts_auto_created.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuButton.h">
+    <ClInclude Include="Source\IORegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuGroupBox.h">
+    <ClInclude Include="Source\IPGLaser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuObList.h">
+    <ClInclude Include="Source\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuObListElement.h">
+    <ClInclude Include="Source\Keithley2000.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuStatic.h">
+    <ClInclude Include="Source\LaserLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuTitle.h">
+    <ClInclude Include="Source\Linear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MessageReceiver.h">
+    <ClInclude Include="Source\lstnsock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultiIO.h">
+    <ClInclude Include="Source\MainDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultiWriteDevice.h">
+    <ClInclude Include="Source\Measurement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NetIO.h">
+    <ClInclude Include="Source\MeasurementList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="network.h">
+    <ClInclude Include="Source\MeasurementPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkClient.h">
+    <ClInclude Include="Source\MeasurementQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkServer.h">
+    <ClInclude Include="Source\MenuButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NI6024E.h">
+    <ClInclude Include="Source\MenuGroupBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NI653x.h">
+    <ClInclude Include="Source\MenuObList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NI67x3.h">
+    <ClInclude Include="Source\MenuObListElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="nidaq.h">
+    <ClInclude Include="Source\MenuStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OmegaiSeries.h">
+    <ClInclude Include="Source\MenuTitle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Output.h">
+    <ClInclude Include="Source\Mesh3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OvenControl.h">
+    <ClInclude Include="Source\MessageReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParabolicRamp.h">
+    <ClInclude Include="Source\MultiIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParallelPort.h">
+    <ClInclude Include="Source\MultiWriteDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Param.h">
+    <ClInclude Include="Source\MultiWriteDeviceSPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamBool.h">
+    <ClInclude Include="Source\NetIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamDouble.h">
+    <ClInclude Include="Source\network.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParameterDialog.h">
+    <ClInclude Include="Source\NetworkClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Parameters.h">
+    <ClInclude Include="Source\NetworkServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamInt.h">
+    <ClInclude Include="Source\NI6024E.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamList.h">
+    <ClInclude Include="Source\NI653x.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamRegister.h">
+    <ClInclude Include="Source\ParamList_shortcuts_auto_created.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamString.h">
+    <ClInclude Include="Source\SequenceListLambdaFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamStringComboBox.h">
+    <ClInclude Include="Source\SequencerAbstract.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polynom.h">
+    <ClInclude Include="Source\SequencerEthernetFirefly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pulse.h">
+    <ClInclude Include="Source\NI67x3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ramp.h">
+    <ClInclude Include="Source\nidaq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RampdBLinear.h">
+    <ClInclude Include="Source\nidaqmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RangeCheck.h">
+    <ClInclude Include="Source\OmegaiSeries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
+    <ClInclude Include="Source\Output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RemoteControl.h">
+    <ClInclude Include="Source\OvenControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="Source\ParabolicRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RSSML0x.h">
+    <ClInclude Include="Source\ParallelPort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RunProgressDlg.h">
+    <ClInclude Include="Source\Param.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sequence.h">
+    <ClInclude Include="Source\ParamBool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceLib.h">
+    <ClInclude Include="Source\ParamDouble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceList.h">
+    <ClInclude Include="Source\ParameterDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListAnalogOut.h">
+    <ClInclude Include="Source\Parameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListComment.h">
+    <ClInclude Include="Source\ParamInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListDigitalOut.h">
+    <ClInclude Include="Source\ParamList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListMultiWriteDeviceValue.h">
+    <ClInclude Include="Source\ParamRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListPoint.h">
+    <ClInclude Include="Source\ParamString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListRemoveWaveformGroup.h">
+    <ClInclude Include="Source\ParamStringComboBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListStoreOrRecallValue.h">
+    <ClInclude Include="Source\PixelFont.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListSyncCommand.h">
+    <ClInclude Include="Source\Polynom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListWaitTillBusBufferEmpty.h">
+    <ClInclude Include="Source\Pulse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListWaitTillEndOfWaveformGroup.h">
+    <ClInclude Include="Source\Ramp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListWaveform.h">
+    <ClInclude Include="Source\RampdBLinear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListWaveformData.h">
+    <ClInclude Include="Source\RangeCheck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Serial.h">
+    <ClInclude Include="Source\Rectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SerialDevice.h">
+    <ClInclude Include="Source\RemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleColorButton.h">
+    <ClInclude Include="Source\RemoteResetServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sin.h">
+    <ClInclude Include="Source\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SineRamp.h">
+    <ClInclude Include="Source\RSSML0x.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SingleWaveform.h">
+    <ClInclude Include="Source\RunProgressDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SlaveIO.h">
+    <ClInclude Include="Source\Sequence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SlaveIOList.h">
+    <ClInclude Include="Source\SequenceLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SlaveMainDialog.h">
+    <ClInclude Include="Source\SequenceList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SlaveServer.h">
+    <ClInclude Include="Source\SequenceListAnalogOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SlaveWaveform.h">
+    <ClInclude Include="Source\SequenceListComment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="spline.h">
+    <ClInclude Include="Source\SequenceListDigitalOut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Square.h">
+    <ClInclude Include="Source\SequenceListMultiWriteDeviceValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SRS345.h">
+    <ClInclude Include="Source\SequenceListPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StaticHelp.h">
+    <ClInclude Include="Source\SequenceListRemoveWaveformGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StdAfx.h">
+    <ClInclude Include="Source\SequenceListSequencerCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StepwiseLinearCalibration.h">
+    <ClInclude Include="Source\SequenceListStoreOrRecallValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StepwiseLinearRamp.h">
+    <ClInclude Include="Source\SequenceListSyncCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SyncCommand.h">
+    <ClInclude Include="Source\SequenceListWaitTillBusBufferEmpty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SystemParamList.h">
+    <ClInclude Include="Source\SequenceListWaitTillEndOfWaveformGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TektronixAWG5105.h">
+    <ClInclude Include="Source\SequenceListWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TektronixTDS524A.h">
+    <ClInclude Include="Source\SequenceListWaveformData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TimeStretch.h">
+    <ClInclude Include="Source\SequencerEthernetOpticsFoundry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TweezerRamp.h">
+    <ClInclude Include="Source\Serial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniMess.h">
+    <ClInclude Include="Source\SerialDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniMessList.h">
+    <ClInclude Include="Source\SimpleColorButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBMultiIO.h">
+    <ClInclude Include="Source\Sin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utilities.h">
+    <ClInclude Include="Source\SineRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UtilityDialog.h">
+    <ClInclude Include="Source\SingleWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VCOCalibration.h">
+    <ClInclude Include="Source\SlaveIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VerdiLaser.h">
+    <ClInclude Include="Source\SlaveIOList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vision.h">
+    <ClInclude Include="Source\SlaveMainDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Waveform.h">
+    <ClInclude Include="Source\SlaveServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaveformGenerator.h">
+    <ClInclude Include="Source\SlaveWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="theme.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="Source\spline.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="nidaqmx.h">
+    <ClInclude Include="Source\Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PixelFont.h">
+    <ClInclude Include="Source\SRS345.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh3D.h">
+    <ClInclude Include="Source\StaticHelp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EthernetMultiIOController.h">
+    <ClInclude Include="Source\StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequencerAbstract.h">
+    <ClInclude Include="Source\StepwiseLinearCalibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequencerEthernetFirefly.h">
+    <ClInclude Include="Source\StepwiseLinearRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EthernetMultiIOControllerOpticsFoundry.h">
+    <ClInclude Include="Source\SyncCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControlAPI.h">
+    <ClInclude Include="Source\SystemParamList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListSequencerCommand.h">
+    <ClInclude Include="Source\TektronixAWG5105.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="typedefs.h">
+    <ClInclude Include="Source\TektronixTDS524A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTimestamp.h">
+    <ClInclude Include="Source\TimeStretch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoilDriverTorun3x3A.h">
+    <ClInclude Include="Source\TweezerRamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoilDriverTorun100A.h">
+    <ClInclude Include="Source\typedefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AD9958.h">
+    <ClInclude Include="Source\UniMess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RemoteResetServer.h">
+    <ClInclude Include="Source\UniMessList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\pybind11\pybind11.h">
+    <ClInclude Include="Source\USBMultiIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CHardwareConfig.h">
+    <ClInclude Include="Source\utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp">
+    <ClInclude Include="Source\UtilityDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CUserIOConfig.h">
+    <ClInclude Include="Source\VCOCalibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultiWriteDeviceSPI.h">
+    <ClInclude Include="Source\VerdiLaser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IOList_shortcuts_auto_created.h">
+    <ClInclude Include="Source\Vision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequencerEthernetOpticsFoundry.h">
+    <ClInclude Include="Source\Waveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParamList_shortcuts_auto_created.h">
+    <ClInclude Include="Source\WaveformGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceListLambdaFunction.h">
+    <ClInclude Include="Source\theme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1138,6 +1138,7 @@
     <None Include="ConfigFileCreators\ControlHardwareConfigFileCreator.py" />
     <None Include="ConfigFileCreators\ControlUserIOConfigFileCreator.py" />
     <None Include="ConfigParams\ControlHardwareConfig.json" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="AddressUsageTable.txt" />

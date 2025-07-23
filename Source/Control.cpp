@@ -412,6 +412,10 @@ extern "C" {
 				//return false;
 			}
 		}
+		if (*WorkingDirectory != "") {
+			if (*WorkingDirectory == ".") SetCurrentDirectory(*ParamFileDirectory);
+			else SetCurrentDirectory(*WorkingDirectory);
+		}
 		
 		Sequence->SetHardwareAccess(HardwareAccess);
 		Sequence->ConfigureHardware();
@@ -1032,12 +1036,14 @@ BOOL CControlApp::InitInstance()
 		CString arg(__argv[i]);
 		ControlMessageBox(arg);
 	}*/
+	CString *ParamFileDirectory;
 	if (!ParamFileName) {
 		std::wstring exeDir;
 		std::string configFileContent;
-		if (ReadLocalConfigFile(exeDir, configFileContent)) ParamFileName = new CString(configFileContent.c_str());
-		else if (__argc > 1) ParamFileName = new CString(__argv[1]);
-		else ParamFileName = new CString((exeDir + L"\\").c_str()); 
+		if (ReadLocalConfigFile(exeDir, configFileContent)) ParamFileDirectory = new CString(configFileContent.c_str());
+		else if (__argc > 1) ParamFileDirectory = new CString(__argv[1]);
+		else ParamFileDirectory = new CString((exeDir + L"\\").c_str());
+		ParamFileName = new CString(*ParamFileDirectory);
 		*ParamFileName += "ControlParam";
 	}
 	//SetProcessDPIAware(); // for system DPI awareness, if you don't want to have blurry windows in x64. Disadvantage: windows currently scale incorrectly.
@@ -1080,7 +1086,10 @@ BOOL CControlApp::InitInstance()
 	if (!LoadSystemParams(*ParamFileName)) {
 		ControlMessageBox("CControlApp::Initialize: system parameter file\n" + *ParamFileName + "\n not found.\n\nUsing default parameters.\nPlease check if the parameter filename (without extension and terminated bt enter) is stored in the \"config.txt\" file in the folder of the executable or as the executable's command line argument.");
 	}
-
+	if (*WorkingDirectory != "") {
+		if (*WorkingDirectory == ".") SetCurrentDirectory(*ParamFileDirectory);
+		else SetCurrentDirectory(*WorkingDirectory);
+	}
 
 	if (!AfxSocketInit()) {
 		AfxMessageBox(IDP_SOCKETS_INIT_FAILED);
@@ -1121,6 +1130,7 @@ BOOL CControlApp::InitInstance()
 
 	MeasurementQueue = new  CMeasurementQueue(false);
 	ReferenceMeasurementQueue = new CMeasurementQueue(true);
+
 	
 	if (ComputerNumber==-1) {
 		SlaveServer->Disable();
@@ -1160,6 +1170,8 @@ BOOL CControlApp::InitInstance()
 		delete dlg;
 		ActiveDialog=NULL;
 	}	
+	delete ParamFileDirectory;
+	ParamFileDirectory = nullptr;
 	return FALSE;
 }
 
@@ -1269,8 +1281,8 @@ void CControlApp::SaveParamsAsBinary(CString Name) {
 
 void CControlApp::SaveParamsAsASCII(CString Name) {
 	if (Name == "") Name = *ParamFileName;
-	int dotIndex = Name.ReverseFind('.');
-	if (dotIndex != -1) Name = Name.Left(dotIndex);
+	/*int dotIndex = Name.ReverseFind('.');
+	if (dotIndex != -1) Name = Name.Left(dotIndex);*/
 	ParamList->WriteToASCIIFile(Name+"_ParamList.txt", false, false);
 	UtilityDialog->WriteToASCIIFile(Name + "_UtilityDialog.txt", false, false);
 	SystemParamList->WriteToASCIIFile(Name + "_SystemParamList.txt", false, false);

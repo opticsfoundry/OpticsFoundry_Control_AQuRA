@@ -2059,6 +2059,7 @@
     <ClInclude Include="Source\theme.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ConfigFileCreators\ControlHardwareConfigFileCreator.py" />
     <None Include="ConfigFileCreators\ControlUserIOConfigFileCreator.py" />
