@@ -54,7 +54,7 @@ CDialog* ActiveDialog = NULL;
 CString* ParamFileName = NULL;
 bool HardwareAccess;
 
-
+//This is a second test of github synchronization
 
 /////////////////////////////////////////////////////////////////////////////
 // CControlApp construction
