@@ -1,7 +1,0 @@
-TARGETNAME=hwinterface
-TARGETPATH=.
-TARGETTYPE=DRIVER
-
-INCLUDES=c:\ddk\inc;..\
-
-SOURCES=hwinterfacedrv.c hwinterfacedrv.rc

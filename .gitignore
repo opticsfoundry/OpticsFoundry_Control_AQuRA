@@ -41,7 +41,7 @@ Makefile
 
 # Ignore other potentially large internal folders
 old_backup_code_snippets/
-input32_source_and_bins/
+inpout32_source_and_bins/
 
 # Optional: Ignore user output folders or temporary data
 u/

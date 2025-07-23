@@ -1,6 +1,0 @@
-LIBRARY INPOUT32
-
-EXPORTS
-
-Inp32		@1
-Out32		@2
