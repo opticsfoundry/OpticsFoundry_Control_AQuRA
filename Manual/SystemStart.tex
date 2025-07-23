@@ -1,0 +1,30 @@
+\section{Appendix}
+
+Starting up our system (Raizen lab rubidium experiment specific):
+
+\begin{verbatim}
+ Switch camera on to initialize camera:
+ Start IPLab Spectrum H on Mac
+ Go to Ext. PI:138 Set Camera...
+ Select: Asynchronous, one frame, Continuous clean, 10 cleans
+ Go to Ext. PI:138 Take Image...
+ Press manual trigger button
+
+ Start Labview.
+ Load "Rb Camera & Analog Inputs.vi"
+ Start it
+
+ On acquisition computer:
+
+ load Borland C++
+ load project Vision
+ start Vision
+ (to change IP of TCP/IP network princeton camera,
+ modify setup.h and force rebuild all)
+
+ On control computer:
+
+  load Visual C++
+  load Control project
+  start Control
+\end{verbatim}

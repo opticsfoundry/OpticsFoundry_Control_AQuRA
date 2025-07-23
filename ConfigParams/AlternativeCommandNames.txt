@@ -1,0 +1,22 @@
+MOTCurrent = SetMOTCoilCurrent * 2 + 0
+ChillerSetpoint = SetChillerSetpoint * 1 + 0
+LatticePowerSetpoint = SetLatticePowerSetpoint * 1 + 0
+PMTGain = SetPMTGain * 1 + 0
+ElectrodeAVoltage = SetElectrodeAVoltage * 1 + 0
+ElectrodeBVoltage = SetElectrodeBVoltage * 1 + 0
+ElectrodeCVoltage = SetElectrodeCVoltage * 1 + 0
+OvenVoltageSetpoint = SetOvenVoltage * 1 + 0
+CameraTrigger0 = SwitchCameraTrigger0 * 1 + 0	
+CameraTrigger1 = SwitchCameraTrigger1 * 1 + 0
+PMTTrigger = SwitchPMTTrigger * 1 + 0
+
+//an empty line is ok
+
+MOTHelmholtz = SwitchMOTCoilsToHelmholtz * 1 + 0
+ElectrodeA = SwitchElectrodeA * 1 + 0
+ElectrodeB = SwitchElectrodeB * 1 + 0
+ElectrodeC = SwitchElectrodeC * 1 + 0
+//another comment end needs to change to this format
+BiasX = SwitchBiasX * 1 + 0
+BiasY = SwitchBiasY * 1 + 0
+BiasZ = SwitchBiasZ * 1 + 0

@@ -1,0 +1,4 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by Control.rc
+//
+#define HIDC_APPLY                      0x819a03e9    // IDD_EASYDIALOG [English (U.S.)]

@@ -1,0 +1,78 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Getting started}{3}
+\contentsline {section}{\numberline {2.1}Code navigation}{3}
+\contentsline {section}{\numberline {2.2}Installation}{3}
+\contentsline {chapter}{\numberline {3}Configuring the system}{5}
+\contentsline {chapter}{\numberline {4}Inputs and outputs}{10}
+\contentsline {section}{\numberline {4.1}Analog outputs}{10}
+\contentsline {section}{\numberline {4.2}Digital outputs}{11}
+\contentsline {section}{\numberline {4.3}DDS outputs}{12}
+\contentsline {subsection}{\numberline {4.3.1}Adding a AD9852 DDS}{12}
+\contentsline {subsection}{\numberline {4.3.2}AD9852 DDS configuration}{15}
+\contentsline {subsection}{\numberline {4.3.3}AD9852 DDS internal frequency ramps}{16}
+\contentsline {subsection}{\numberline {4.3.4}Adding a AD9858 DDS}{18}
+\contentsline {subsection}{\numberline {4.3.5}AD9858 DDS configuration}{18}
+\contentsline {section}{\numberline {4.4}Servo motors}{18}
+\contentsline {section}{\numberline {4.5}Duplicating an output signal}{20}
+\contentsline {section}{\numberline {4.6}Inputs}{21}
+\contentsline {subsection}{\numberline {4.6.1}Digital inputs}{21}
+\contentsline {subsection}{\numberline {4.6.2}Analog inputs}{21}
+\contentsline {subsubsection}{Connecting a comparator analog input card}{22}
+\contentsline {subsubsection}{Adding and using an analog input}{22}
+\contentsline {section}{\numberline {4.7}Serial and GPIB devices}{23}
+\contentsline {subsection}{\numberline {4.7.1}Serial port multiplexer}{23}
+\contentsline {subsection}{\numberline {4.7.2}Serial port devices}{24}
+\contentsline {subsection}{\numberline {4.7.3}GPIB devices}{24}
+\contentsline {subsection}{\numberline {4.7.4}Creating the class describing a serial port or GPIB device}{25}
+\contentsline {section}{\numberline {4.8}TCP/IP devices}{26}
+\contentsline {section}{\numberline {4.9}Disabling access to a subsystem}{26}
+\contentsline {chapter}{\numberline {5}Parameters}{28}
+\contentsline {section}{\numberline {5.1}Adding a parameter}{28}
+\contentsline {section}{\numberline {5.2}long}{29}
+\contentsline {section}{\numberline {5.3}double}{29}
+\contentsline {section}{\numberline {5.4}bool}{29}
+\contentsline {section}{\numberline {5.5}CString}{30}
+\contentsline {chapter}{\numberline {6}Menus}{31}
+\contentsline {section}{\numberline {6.1}NewMenu}{31}
+\contentsline {section}{\numberline {6.2}NewColumn}{31}
+\contentsline {section}{\numberline {6.3}Static text}{31}
+\contentsline {section}{\numberline {6.4}Linking experimental sequences to buttons on the user interface}{32}
+\contentsline {section}{\numberline {6.5}Submenus}{33}
+\contentsline {chapter}{\numberline {7}Programming sequences of input/output commands}{34}
+\contentsline {section}{\numberline {7.1}Modes of command execution}{34}
+\contentsline {section}{\numberline {7.2}Programming simple sequences}{35}
+\contentsline {section}{\numberline {7.3}Timing commands}{36}
+\contentsline {subsection}{\numberline {7.3.1}Time reordering}{37}
+\contentsline {subsection}{\numberline {7.3.2}Timing accuracy}{38}
+\contentsline {section}{\numberline {7.4}Storing and retrieving output values}{39}
+\contentsline {section}{\numberline {7.5}Software waveforms}{40}
+\contentsline {section}{\numberline {7.6}Serial port device and GPIB device programming}{43}
+\contentsline {section}{\numberline {7.7}Code example "Position Servo"}{45}
+\contentsline {section}{\numberline {7.8}Loops}{46}
+\contentsline {section}{\numberline {7.9}Idle and WakeUp function}{48}
+\contentsline {chapter}{\numberline {8}Main experimental sequence}{50}
+\contentsline {section}{\numberline {8.1}Experimental sequence code blocks}{50}
+\contentsline {section}{\numberline {8.2}Utilities}{53}
+\contentsline {section}{\numberline {8.3}Triggering the experimental sequence}{54}
+\contentsline {section}{\numberline {8.4}The DoExperimentalSequence procedure}{55}
+\contentsline {section}{\numberline {8.5}Communication with the data acquisition program "Vision"}{57}
+\contentsline {chapter}{\numberline {9}User interface}{58}
+\contentsline {section}{\numberline {9.1}Set of measurements}{59}
+\contentsline {section}{\numberline {9.2}Measurement queue}{59}
+\contentsline {section}{\numberline {9.3}Cyclic operation}{59}
+\contentsline {section}{\numberline {9.4}The system configuration menu}{59}
+\contentsline {chapter}{\numberline {10}Debugging}{61}
+\contentsline {section}{\numberline {10.1}Sequence debugging}{61}
+\contentsline {subsection}{\numberline {10.1.1}Sequence list}{61}
+\contentsline {subsection}{\numberline {10.1.2}MultiIO dump}{61}
+\contentsline {section}{\numberline {10.2}Hardware debugging}{61}
+\contentsline {subsection}{\numberline {10.2.1}Checking address decoding}{62}
+\contentsline {subsection}{\numberline {10.2.2}Checking a digital output card}{62}
+\contentsline {subsection}{\numberline {10.2.3}Checking the digital inputs}{62}
+\contentsline {subsection}{\numberline {10.2.4}Checking an analog input card}{62}
+\contentsline {subsection}{\numberline {10.2.5}Checking an analog output card}{62}
+\contentsline {subsection}{\numberline {10.2.6}Checking a DDS}{62}
+\contentsline {chapter}{\numberline {11}Simple extensions}{63}
+\contentsline {section}{\numberline {11.1}Different parallel out card for MultiIO system}{63}
+\contentsline {section}{\numberline {11.2}Connecting new types of devices to the MultiIO bus system}{63}

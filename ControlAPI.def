@@ -1,0 +1,13 @@
+LIBRARY "ControlAPI"
+EXPORTS
+    ControlAPI_GetInstance
+    ControlAPI_Configure
+    ControlAPI_StoreSequenceInMemory
+    ControlAPI_SwitchToDirectOutputMode
+    ControlAPI_StartSequence
+    ControlAPI_IsSequenceRunning
+    ControlAPI_WaitTillSequenceEnds
+    ControlAPI_Command
+    ControlAPI_GetLastCommandLineNumber
+    ControlAPI_DidCommandErrorOccur
+    ControlAPI_GetLastError
