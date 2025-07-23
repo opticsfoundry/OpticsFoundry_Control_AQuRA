@@ -277,7 +277,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AD9852.cpp">
+    <ClCompile Include="Source\AD9852.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -291,10 +291,10 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="AD9858.cpp" />
-    <ClCompile Include="AD9958.cpp" />
-    <ClCompile Include="ADF4351.cpp" />
-    <ClCompile Include="Agilent33250A.cpp">
+    <ClCompile Include="Source\AD9858.cpp" />
+    <ClCompile Include="Source\AD9958.cpp" />
+    <ClCompile Include="Source\ADF4351.cpp" />
+    <ClCompile Include="Source\Agilent33250A.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -308,7 +308,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Agilent33250ASerial.cpp">
+    <ClCompile Include="Source\Agilent33250ASerial.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -322,7 +322,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="AnaIn.cpp">
+    <ClCompile Include="Source\AnaIn.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -336,7 +336,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="AnalogOut.cpp">
+    <ClCompile Include="Source\AnalogOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -350,7 +350,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="AnaOut.cpp">
+    <ClCompile Include="Source\AnaOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -364,13 +364,13 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="CHardwareConfig.cpp" />
-    <ClCompile Include="CoilDriverTorun100A.cpp" />
-    <ClCompile Include="CoilDriverTorun3x3A.cpp" />
-    <ClCompile Include="ControlAPI.cpp" />
-    <ClCompile Include="BlackmanPulse.cpp" />
-    <ClCompile Include="burleighWA1000.cpp" />
-    <ClCompile Include="Calibration.cpp">
+    <ClCompile Include="Source\CHardwareConfig.cpp" />
+    <ClCompile Include="Source\CoilDriverTorun100A.cpp" />
+    <ClCompile Include="Source\CoilDriverTorun3x3A.cpp" />
+    <ClCompile Include="Source\ControlAPI.cpp" />
+    <ClCompile Include="Source\BlackmanPulse.cpp" />
+    <ClCompile Include="Source\burleighWA1000.cpp" />
+    <ClCompile Include="Source\Calibration.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -384,9 +384,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ChannelReservationList.cpp" />
-    <ClCompile Include="ChannelReservationListPoint.cpp" />
-    <ClCompile Include="ClientSocketUser.cpp">
+    <ClCompile Include="Source\ChannelReservationList.cpp" />
+    <ClCompile Include="Source\ChannelReservationListPoint.cpp" />
+    <ClCompile Include="Source\ClientSocketUser.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -400,7 +400,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="clntsock.cpp">
+    <ClCompile Include="Source\clntsock.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -414,9 +414,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="color.cpp" />
-    <ClCompile Include="ColorControl.cpp" />
-    <ClCompile Include="ConsecutiveCalibration.cpp">
+    <ClCompile Include="Source\color.cpp" />
+    <ClCompile Include="Source\ColorControl.cpp" />
+    <ClCompile Include="Source\ConsecutiveCalibration.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -430,7 +430,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Control.cpp">
+    <ClCompile Include="Source\Control.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -444,19 +444,19 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="CosineSquareRamp.cpp" />
-    <ClCompile Include="CTimestamp.cpp" />
-    <ClCompile Include="CUserIOConfig.cpp" />
-    <ClCompile Include="IOList_shortcuts_auto_created.cpp" />
-    <ClCompile Include="LaserLock.cpp" />
-    <ClCompile Include="MultiWriteDeviceSPI.cpp" />
-    <ClCompile Include="ParamList_shortcuts_auto_created.cpp" />
-    <ClCompile Include="RemoteResetServer.cpp" />
-    <ClCompile Include="SequenceImaging.cpp" />
-    <ClCompile Include="SequenceListLambdaFunction.cpp" />
-    <ClCompile Include="SequenceListSequencerCommand.cpp" />
-    <ClCompile Include="DDSCalibration.cpp" />
-    <ClCompile Include="DelayedWaveform.cpp">
+    <ClCompile Include="Source\CosineSquareRamp.cpp" />
+    <ClCompile Include="Source\CTimestamp.cpp" />
+    <ClCompile Include="Source\CUserIOConfig.cpp" />
+    <ClCompile Include="Source\IOList_shortcuts_auto_created.cpp" />
+    <ClCompile Include="Source\LaserLock.cpp" />
+    <ClCompile Include="Source\MultiWriteDeviceSPI.cpp" />
+    <ClCompile Include="Source\ParamList_shortcuts_auto_created.cpp" />
+    <ClCompile Include="Source\RemoteResetServer.cpp" />
+    <ClCompile Include="Source\SequenceImaging.cpp" />
+    <ClCompile Include="Source\SequenceListLambdaFunction.cpp" />
+    <ClCompile Include="Source\SequenceListSequencerCommand.cpp" />
+    <ClCompile Include="Source\DDSCalibration.cpp" />
+    <ClCompile Include="Source\DelayedWaveform.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -470,7 +470,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="DialogElement.cpp">
+    <ClCompile Include="Source\DialogElement.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -484,7 +484,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="DigIn.cpp">
+    <ClCompile Include="Source\DigIn.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -498,7 +498,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="DigitalOut.cpp">
+    <ClCompile Include="Source\DigitalOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -512,7 +512,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="DigOut.cpp">
+    <ClCompile Include="Source\DigOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -526,7 +526,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="DoublePoint.cpp">
+    <ClCompile Include="Source\DoublePoint.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -540,7 +540,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="EasyDialog.cpp">
+    <ClCompile Include="Source\EasyDialog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -554,7 +554,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="EIP548A.cpp">
+    <ClCompile Include="Source\EIP548A.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -568,7 +568,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementAnalogOut.cpp">
+    <ClCompile Include="Source\ElementAnalogOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -582,7 +582,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementBool.cpp">
+    <ClCompile Include="Source\ElementBool.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -596,7 +596,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementButton.cpp">
+    <ClCompile Include="Source\ElementButton.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -610,7 +610,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementDigitalOut.cpp">
+    <ClCompile Include="Source\ElementDigitalOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -624,7 +624,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementDouble.cpp">
+    <ClCompile Include="Source\ElementDouble.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -638,8 +638,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementGroupBox.cpp" />
-    <ClCompile Include="ElementInt.cpp">
+    <ClCompile Include="Source\ElementGroupBox.cpp" />
+    <ClCompile Include="Source\ElementInt.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -653,7 +653,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementStatic.cpp">
+    <ClCompile Include="Source\ElementStatic.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -667,7 +667,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementString.cpp">
+    <ClCompile Include="Source\ElementString.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -681,7 +681,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ElementStringComboBox.cpp">
+    <ClCompile Include="Source\ElementStringComboBox.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -695,8 +695,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="EthernetMultiIOControllerOpticsFoundry.cpp" />
-    <ClCompile Include="EvaporationSweep.cpp">
+    <ClCompile Include="Source\EthernetMultiIOControllerOpticsFoundry.cpp" />
+    <ClCompile Include="Source\EvaporationSweep.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -710,7 +710,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ExecuteMeasurementDlg.cpp">
+    <ClCompile Include="Source\ExecuteMeasurementDlg.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -724,7 +724,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ExecuteMeasurementDlgContainer.cpp">
+    <ClCompile Include="Source\ExecuteMeasurementDlgContainer.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -738,8 +738,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ExpRamp.cpp" />
-    <ClCompile Include="FiberLaser.cpp">
+    <ClCompile Include="Source\ExpRamp.cpp" />
+    <ClCompile Include="Source\FiberLaser.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -753,9 +753,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="FlatToolTipCtrl.cpp" />
-    <ClCompile Include="FluoLoadingDialog.cpp" />
-    <ClCompile Include="GPIB.cpp">
+    <ClCompile Include="Source\FlatToolTipCtrl.cpp" />
+    <ClCompile Include="Source\FluoLoadingDialog.cpp" />
+    <ClCompile Include="Source\GPIB.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -769,7 +769,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="GPIBDevice.cpp">
+    <ClCompile Include="Source\GPIBDevice.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -783,8 +783,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Grid2DWaveform.cpp" />
-    <ClCompile Include="HP5334A.cpp">
+    <ClCompile Include="Source\Grid2DWaveform.cpp" />
+    <ClCompile Include="Source\HP5334A.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -798,7 +798,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="IO.cpp">
+    <ClCompile Include="Source\IO.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -812,7 +812,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="IOList.cpp">
+    <ClCompile Include="Source\IOList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -826,7 +826,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="IORegister.cpp">
+    <ClCompile Include="Source\IORegister.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -840,9 +840,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="IPGLaser.cpp" />
-    <ClCompile Include="Keithley2000.cpp" />
-    <ClCompile Include="Linear.cpp">
+    <ClCompile Include="Source\IPGLaser.cpp" />
+    <ClCompile Include="Source\Keithley2000.cpp" />
+    <ClCompile Include="Source\Linear.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -856,7 +856,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="lstnsock.cpp">
+    <ClCompile Include="Source\lstnsock.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -870,7 +870,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MainDialog.cpp">
+    <ClCompile Include="Source\MainDialog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -884,7 +884,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Measurement.cpp">
+    <ClCompile Include="Source\Measurement.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -898,7 +898,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MeasurementList.cpp">
+    <ClCompile Include="Source\MeasurementList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -912,7 +912,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MeasurementPoint.cpp">
+    <ClCompile Include="Source\MeasurementPoint.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -926,7 +926,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MeasurementQueue.cpp">
+    <ClCompile Include="Source\MeasurementQueue.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -940,7 +940,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
+    <ClCompile Include="Source\MenuButton.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -954,8 +954,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MenuGroupBox.cpp" />
-    <ClCompile Include="MenuObList.cpp">
+    <ClCompile Include="Source\MenuGroupBox.cpp" />
+    <ClCompile Include="Source\MenuObList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -969,7 +969,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MenuObListElement.cpp">
+    <ClCompile Include="Source\MenuObListElement.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -983,7 +983,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MenuStatic.cpp">
+    <ClCompile Include="Source\MenuStatic.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -997,7 +997,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MenuTitle.cpp">
+    <ClCompile Include="Source\MenuTitle.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1011,8 +1011,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Mesh3D.cpp" />
-    <ClCompile Include="MessageReceiver.cpp">
+    <ClCompile Include="Source\Mesh3D.cpp" />
+    <ClCompile Include="Source\MessageReceiver.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1026,7 +1026,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MultiIO.cpp">
+    <ClCompile Include="Source\MultiIO.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1040,8 +1040,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="MultiWriteDevice.cpp" />
-    <ClCompile Include="NetIO.cpp">
+    <ClCompile Include="Source\MultiWriteDevice.cpp" />
+    <ClCompile Include="Source\NetIO.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1055,7 +1055,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
+    <ClCompile Include="Source\Network.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1069,7 +1069,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="NetworkClient.cpp">
+    <ClCompile Include="Source\NetworkClient.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1083,7 +1083,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="NetworkServer.cpp">
+    <ClCompile Include="Source\NetworkServer.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1097,7 +1097,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="NI6024E.cpp">
+    <ClCompile Include="Source\NI6024E.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1111,7 +1111,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="NI653x.cpp">
+    <ClCompile Include="Source\NI653x.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1125,9 +1125,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceManualUserIO.cpp" />
-    <ClCompile Include="SequencerAbstract.cpp" />
-    <ClCompile Include="NI67x3.cpp">
+    <ClCompile Include="Source\SequenceManualUserIO.cpp" />
+    <ClCompile Include="Source\SequencerAbstract.cpp" />
+    <ClCompile Include="Source\NI67x3.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1141,7 +1141,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="OmegaiSeries.cpp">
+    <ClCompile Include="Source\OmegaiSeries.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1155,7 +1155,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Output.cpp">
+    <ClCompile Include="Source\Output.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1169,8 +1169,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="OvenControl.cpp" />
-    <ClCompile Include="ParabolicRamp.cpp">
+    <ClCompile Include="Source\OvenControl.cpp" />
+    <ClCompile Include="Source\ParabolicRamp.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1184,8 +1184,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParallelPort.cpp" />
-    <ClCompile Include="Param.cpp">
+    <ClCompile Include="Source\ParallelPort.cpp" />
+    <ClCompile Include="Source\Param.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1199,7 +1199,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamBool.cpp">
+    <ClCompile Include="Source\ParamBool.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1213,7 +1213,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamDouble.cpp">
+    <ClCompile Include="Source\ParamDouble.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1227,7 +1227,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParameterDialog.cpp">
+    <ClCompile Include="Source\ParameterDialog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1241,7 +1241,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamInt.cpp">
+    <ClCompile Include="Source\ParamInt.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1255,7 +1255,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamList.cpp">
+    <ClCompile Include="Source\ParamList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1269,7 +1269,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamRegister.cpp">
+    <ClCompile Include="Source\ParamRegister.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1283,7 +1283,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamString.cpp">
+    <ClCompile Include="Source\ParamString.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1297,7 +1297,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="ParamStringComboBox.cpp">
+    <ClCompile Include="Source\ParamStringComboBox.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1311,8 +1311,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="PixelFont.cpp" />
-    <ClCompile Include="Polynom.cpp">
+    <ClCompile Include="Source\PixelFont.cpp" />
+    <ClCompile Include="Source\Polynom.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1326,8 +1326,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Pulse.cpp" />
-    <ClCompile Include="Ramp.cpp">
+    <ClCompile Include="Source\Pulse.cpp" />
+    <ClCompile Include="Source\Ramp.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1341,7 +1341,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="RampdBLinear.cpp">
+    <ClCompile Include="Source\RampdBLinear.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1355,7 +1355,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="RangeCheck.cpp">
+    <ClCompile Include="Source\RangeCheck.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1369,7 +1369,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
+    <ClCompile Include="Source\Rectangle.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1383,9 +1383,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="RemoteControl.cpp" />
-    <ClCompile Include="RSSML0x.cpp" />
-    <ClCompile Include="RunProgressDlg.cpp">
+    <ClCompile Include="Source\RemoteControl.cpp" />
+    <ClCompile Include="Source\RSSML0x.cpp" />
+    <ClCompile Include="Source\RunProgressDlg.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1399,7 +1399,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Sequence.cpp">
+    <ClCompile Include="Source\Sequence.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1413,7 +1413,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceLib.cpp">
+    <ClCompile Include="Source\SequenceLib.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1427,8 +1427,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceList.cpp" />
-    <ClCompile Include="SequenceListAnalogOut.cpp">
+    <ClCompile Include="Source\SequenceList.cpp" />
+    <ClCompile Include="Source\SequenceListAnalogOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1442,8 +1442,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceListComment.cpp" />
-    <ClCompile Include="SequenceListDigitalOut.cpp">
+    <ClCompile Include="Source\SequenceListComment.cpp" />
+    <ClCompile Include="Source\SequenceListDigitalOut.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1457,8 +1457,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceListMultiWriteDeviceValue.cpp" />
-    <ClCompile Include="SequenceListPoint.cpp">
+    <ClCompile Include="Source\SequenceListMultiWriteDeviceValue.cpp" />
+    <ClCompile Include="Source\SequenceListPoint.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1472,11 +1472,11 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceListRemoveWaveformGroup.cpp" />
-    <ClCompile Include="SequenceListStoreOrRecallValue.cpp" />
-    <ClCompile Include="SequenceListSyncCommand.cpp" />
-    <ClCompile Include="SequenceListWaitTillEndOfWaveformGroup.cpp" />
-    <ClCompile Include="SequenceListWaveform.cpp">
+    <ClCompile Include="Source\SequenceListRemoveWaveformGroup.cpp" />
+    <ClCompile Include="Source\SequenceListStoreOrRecallValue.cpp" />
+    <ClCompile Include="Source\SequenceListSyncCommand.cpp" />
+    <ClCompile Include="Source\SequenceListWaitTillEndOfWaveformGroup.cpp" />
+    <ClCompile Include="Source\SequenceListWaveform.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1490,11 +1490,11 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SequenceListWaveformData.cpp" />
-    <ClCompile Include="SequencerEthernetOpticsFoundry.cpp" />
-    <ClCompile Include="SequenceStandardUtilities.cpp" />
-    <ClCompile Include="SequenceUtilities.cpp" />
-    <ClCompile Include="Serial.cpp">
+    <ClCompile Include="Source\SequenceListWaveformData.cpp" />
+    <ClCompile Include="Source\SequencerEthernetOpticsFoundry.cpp" />
+    <ClCompile Include="Source\SequenceStandardUtilities.cpp" />
+    <ClCompile Include="Source\SequenceUtilities.cpp" />
+    <ClCompile Include="Source\Serial.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1508,7 +1508,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SerialDevice.cpp">
+    <ClCompile Include="Source\SerialDevice.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1522,8 +1522,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SimpleColorButton.cpp" />
-    <ClCompile Include="Sin.cpp">
+    <ClCompile Include="Source\SimpleColorButton.cpp" />
+    <ClCompile Include="Source\Sin.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1537,7 +1537,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SineRamp.cpp">
+    <ClCompile Include="Source\SineRamp.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1551,7 +1551,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SingleWaveform.cpp">
+    <ClCompile Include="Source\SingleWaveform.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1565,7 +1565,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SlaveIO.cpp">
+    <ClCompile Include="Source\SlaveIO.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1579,7 +1579,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SlaveIOList.cpp">
+    <ClCompile Include="Source\SlaveIOList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1593,7 +1593,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SlaveMainDialog.cpp">
+    <ClCompile Include="Source\SlaveMainDialog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1607,7 +1607,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SlaveServer.cpp">
+    <ClCompile Include="Source\SlaveServer.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1621,7 +1621,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
+    <ClCompile Include="Source\Square.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1635,7 +1635,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SRS345.cpp">
+    <ClCompile Include="Source\SRS345.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1649,8 +1649,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="StaticHelp.cpp" />
-    <ClCompile Include="StdAfx.cpp">
+    <ClCompile Include="Source\StaticHelp.cpp" />
+    <ClCompile Include="Source\StdAfx.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1668,8 +1668,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StepwiseLinearCalibration.cpp" />
-    <ClCompile Include="StepwiseLinearRamp.cpp">
+    <ClCompile Include="Source\StepwiseLinearCalibration.cpp" />
+    <ClCompile Include="Source\StepwiseLinearRamp.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1683,7 +1683,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SyncCommand.cpp">
+    <ClCompile Include="Source\SyncCommand.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1697,7 +1697,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SystemParamList.cpp">
+    <ClCompile Include="Source\SystemParamList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1711,7 +1711,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="TektronixAWG5105.cpp">
+    <ClCompile Include="Source\TektronixAWG5105.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1725,9 +1725,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="TektronixTDS524A.cpp" />
-    <ClCompile Include="theme.cpp" />
-    <ClCompile Include="TimeStretch.cpp">
+    <ClCompile Include="Source\TektronixTDS524A.cpp" />
+    <ClCompile Include="Source\theme.cpp" />
+    <ClCompile Include="Source\TimeStretch.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1741,7 +1741,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="TweezerRamp.cpp">
+    <ClCompile Include="Source\TweezerRamp.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1755,7 +1755,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="UniMess.cpp">
+    <ClCompile Include="Source\UniMess.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1769,7 +1769,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="UniMessList.cpp">
+    <ClCompile Include="Source\UniMessList.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1783,7 +1783,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="USBMultiIO.cpp">
+    <ClCompile Include="Source\USBMultiIO.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1797,9 +1797,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="utilities.cpp" />
-    <ClCompile Include="UtilityDialog.cpp" />
-    <ClCompile Include="VCOCalibration.cpp">
+    <ClCompile Include="Source\utilities.cpp" />
+    <ClCompile Include="Source\UtilityDialog.cpp" />
+    <ClCompile Include="Source\VCOCalibration.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1813,7 +1813,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="VerdiLaser.cpp">
+    <ClCompile Include="Source\VerdiLaser.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1827,7 +1827,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Vision.cpp">
+    <ClCompile Include="Source\Vision.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1841,7 +1841,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Waveform.cpp">
+    <ClCompile Include="Source\Waveform.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1855,7 +1855,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="WaveformGenerator.cpp">
+    <ClCompile Include="Source\WaveformGenerator.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1869,194 +1869,194 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="SlaveWaveform.cpp" />
-    <ClCompile Include="CosineRamp.cpp" />
-    <ClCompile Include="SequenceListWaitTillBusBufferEmpty.cpp" />
+    <ClCompile Include="Source\SlaveWaveform.cpp" />
+    <ClCompile Include="Source\CosineRamp.cpp" />
+    <ClCompile Include="Source\SequenceListWaitTillBusBufferEmpty.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Control.rc" />
+    <ResourceCompile Include="Source\Control.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AD9852.h" />
-    <ClInclude Include="AD9858.h" />
-    <ClInclude Include="AD9958.h" />
-    <ClInclude Include="ADF4351.h" />
-    <ClInclude Include="Agilent33250A.h" />
-    <ClInclude Include="Agilent33250ASerial.h" />
-    <ClInclude Include="AnaIn.h" />
-    <ClInclude Include="AnalogOut.h" />
-    <ClInclude Include="AnaOut.h" />
-    <ClInclude Include="CHardwareConfig.h" />
-    <ClInclude Include="CoilDriverTorun100A.h" />
-    <ClInclude Include="CoilDriverTorun3x3A.h" />
-    <ClInclude Include="ControlAPI.h" />
-    <ClInclude Include="BlackmanPulse.h" />
-    <ClInclude Include="burleighWA1000.h" />
-    <ClInclude Include="Calibration.h" />
-    <ClInclude Include="ChannelReservationList.h" />
-    <ClInclude Include="ChannelReservationListPoint.h" />
-    <ClInclude Include="ClientSocketUser.h" />
-    <ClInclude Include="clntsock.h" />
-    <ClInclude Include="color.h" />
-    <ClInclude Include="ColorControl.h" />
-    <ClInclude Include="ConsecutiveCalibration.h" />
-    <ClInclude Include="Control.h" />
-    <ClInclude Include="CosineRamp.h" />
-    <ClInclude Include="CosineSquareRamp.h" />
-    <ClInclude Include="CTimestamp.h" />
-    <ClInclude Include="CUserIOConfig.h" />
-    <ClInclude Include="DDSCalibration.h" />
-    <ClInclude Include="DelayedWaveform.h" />
-    <ClInclude Include="DialogElement.h" />
-    <ClInclude Include="DigIn.h" />
-    <ClInclude Include="DigitalOut.h" />
-    <ClInclude Include="DigOut.h" />
-    <ClInclude Include="DoublePoint.h" />
-    <ClInclude Include="EasyDialog.h" />
-    <ClInclude Include="EIP548A.h" />
-    <ClInclude Include="ElementAnalogOut.h" />
-    <ClInclude Include="ElementBool.h" />
-    <ClInclude Include="ElementButton.h" />
-    <ClInclude Include="ElementDigitalOut.h" />
-    <ClInclude Include="ElementDouble.h" />
-    <ClInclude Include="ElementGroupBox.h" />
-    <ClInclude Include="ElementInt.h" />
-    <ClInclude Include="ElementStatic.h" />
-    <ClInclude Include="ElementString.h" />
-    <ClInclude Include="ElementStringComboBox.h" />
-    <ClInclude Include="EthernetMultiIOController.h" />
-    <ClInclude Include="EthernetMultiIOControllerOpticsFoundry.h" />
-    <ClInclude Include="EvaporationSweep.h" />
-    <ClInclude Include="ExecuteMeasurementDlg.h" />
-    <ClInclude Include="ExecuteMeasurementDlgContainer.h" />
-    <ClInclude Include="FiberLaser.h" />
-    <ClInclude Include="FlatToolTipCtrl.h" />
-    <ClInclude Include="FluoLoadingDialog.h" />
-    <ClInclude Include="FTD2XX.H" />
-    <ClInclude Include="GPIB.h" />
-    <ClInclude Include="GPIBDevice.h" />
-    <ClInclude Include="Grid2DWaveform.h" />
-    <ClInclude Include="HP5334A.h" />
-    <ClInclude Include="include\pybind11\pybind11.h" />
-    <ClInclude Include="IO.h" />
-    <ClInclude Include="IOList.h" />
-    <ClInclude Include="IOList_shortcuts_auto_created.h" />
-    <ClInclude Include="IORegister.h" />
-    <ClInclude Include="IPGLaser.h" />
-    <ClInclude Include="json.hpp" />
-    <ClInclude Include="Keithley2000.h" />
-    <ClInclude Include="LaserLock.h" />
-    <ClInclude Include="Linear.h" />
-    <ClInclude Include="lstnsock.h" />
-    <ClInclude Include="MainDialog.h" />
-    <ClInclude Include="Measurement.h" />
-    <ClInclude Include="MeasurementList.h" />
-    <ClInclude Include="MeasurementPoint.h" />
-    <ClInclude Include="MeasurementQueue.h" />
-    <ClInclude Include="MenuButton.h" />
-    <ClInclude Include="MenuGroupBox.h" />
-    <ClInclude Include="MenuObList.h" />
-    <ClInclude Include="MenuObListElement.h" />
-    <ClInclude Include="MenuStatic.h" />
-    <ClInclude Include="MenuTitle.h" />
-    <ClInclude Include="Mesh3D.h" />
-    <ClInclude Include="MessageReceiver.h" />
-    <ClInclude Include="MultiIO.h" />
-    <ClInclude Include="MultiWriteDevice.h" />
-    <ClInclude Include="MultiWriteDeviceSPI.h" />
-    <ClInclude Include="NetIO.h" />
-    <ClInclude Include="network.h" />
-    <ClInclude Include="NetworkClient.h" />
-    <ClInclude Include="NetworkServer.h" />
-    <ClInclude Include="NI6024E.h" />
-    <ClInclude Include="NI653x.h" />
-    <ClInclude Include="ParamList_shortcuts_auto_created.h" />
-    <ClInclude Include="SequenceListLambdaFunction.h" />
-    <ClInclude Include="SequencerAbstract.h" />
-    <ClInclude Include="SequencerEthernetFirefly.h" />
-    <ClInclude Include="NI67x3.h" />
-    <ClInclude Include="nidaq.h" />
-    <ClInclude Include="nidaqmx.h" />
-    <ClInclude Include="OmegaiSeries.h" />
-    <ClInclude Include="Output.h" />
-    <ClInclude Include="OvenControl.h" />
-    <ClInclude Include="ParabolicRamp.h" />
-    <ClInclude Include="ParallelPort.h" />
-    <ClInclude Include="Param.h" />
-    <ClInclude Include="ParamBool.h" />
-    <ClInclude Include="ParamDouble.h" />
-    <ClInclude Include="ParameterDialog.h" />
-    <ClInclude Include="Parameters.h" />
-    <ClInclude Include="ParamInt.h" />
-    <ClInclude Include="ParamList.h" />
-    <ClInclude Include="ParamRegister.h" />
-    <ClInclude Include="ParamString.h" />
-    <ClInclude Include="ParamStringComboBox.h" />
-    <ClInclude Include="PixelFont.h" />
-    <ClInclude Include="Polynom.h" />
-    <ClInclude Include="Pulse.h" />
-    <ClInclude Include="Ramp.h" />
-    <ClInclude Include="RampdBLinear.h" />
-    <ClInclude Include="RangeCheck.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RemoteControl.h" />
-    <ClInclude Include="RemoteResetServer.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="RSSML0x.h" />
-    <ClInclude Include="RunProgressDlg.h" />
-    <ClInclude Include="Sequence.h" />
-    <ClInclude Include="SequenceLib.h" />
-    <ClInclude Include="SequenceList.h" />
-    <ClInclude Include="SequenceListAnalogOut.h" />
-    <ClInclude Include="SequenceListComment.h" />
-    <ClInclude Include="SequenceListDigitalOut.h" />
-    <ClInclude Include="SequenceListMultiWriteDeviceValue.h" />
-    <ClInclude Include="SequenceListPoint.h" />
-    <ClInclude Include="SequenceListRemoveWaveformGroup.h" />
-    <ClInclude Include="SequenceListSequencerCommand.h" />
-    <ClInclude Include="SequenceListStoreOrRecallValue.h" />
-    <ClInclude Include="SequenceListSyncCommand.h" />
-    <ClInclude Include="SequenceListWaitTillBusBufferEmpty.h" />
-    <ClInclude Include="SequenceListWaitTillEndOfWaveformGroup.h" />
-    <ClInclude Include="SequenceListWaveform.h" />
-    <ClInclude Include="SequenceListWaveformData.h" />
-    <ClInclude Include="SequencerEthernetOpticsFoundry.h" />
-    <ClInclude Include="Serial.h" />
-    <ClInclude Include="SerialDevice.h" />
-    <ClInclude Include="SimpleColorButton.h" />
-    <ClInclude Include="Sin.h" />
-    <ClInclude Include="SineRamp.h" />
-    <ClInclude Include="SingleWaveform.h" />
-    <ClInclude Include="SlaveIO.h" />
-    <ClInclude Include="SlaveIOList.h" />
-    <ClInclude Include="SlaveMainDialog.h" />
-    <ClInclude Include="SlaveServer.h" />
-    <ClInclude Include="SlaveWaveform.h" />
-    <ClInclude Include="spline.h" />
-    <ClInclude Include="Square.h" />
-    <ClInclude Include="SRS345.h" />
-    <ClInclude Include="StaticHelp.h" />
-    <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="StepwiseLinearCalibration.h" />
-    <ClInclude Include="StepwiseLinearRamp.h" />
-    <ClInclude Include="SyncCommand.h" />
-    <ClInclude Include="SystemParamList.h" />
-    <ClInclude Include="TektronixAWG5105.h" />
-    <ClInclude Include="TektronixTDS524A.h" />
-    <ClInclude Include="TimeStretch.h" />
-    <ClInclude Include="TweezerRamp.h" />
-    <ClInclude Include="typedefs.h" />
-    <ClInclude Include="UniMess.h" />
-    <ClInclude Include="UniMessList.h" />
-    <ClInclude Include="USBMultiIO.h" />
-    <ClInclude Include="utilities.h" />
-    <ClInclude Include="UtilityDialog.h" />
-    <ClInclude Include="VCOCalibration.h" />
-    <ClInclude Include="VerdiLaser.h" />
-    <ClInclude Include="Vision.h" />
-    <ClInclude Include="Waveform.h" />
-    <ClInclude Include="WaveformGenerator.h" />
-    <ClInclude Include="theme.h" />
+    <ClInclude Include="Source\AD9852.h" />
+    <ClInclude Include="Source\AD9858.h" />
+    <ClInclude Include="Source\AD9958.h" />
+    <ClInclude Include="Source\ADF4351.h" />
+    <ClInclude Include="Source\Agilent33250A.h" />
+    <ClInclude Include="Source\Agilent33250ASerial.h" />
+    <ClInclude Include="Source\AnaIn.h" />
+    <ClInclude Include="Source\AnalogOut.h" />
+    <ClInclude Include="Source\AnaOut.h" />
+    <ClInclude Include="Source\CHardwareConfig.h" />
+    <ClInclude Include="Source\CoilDriverTorun100A.h" />
+    <ClInclude Include="Source\CoilDriverTorun3x3A.h" />
+    <ClInclude Include="Source\ControlAPI.h" />
+    <ClInclude Include="Source\BlackmanPulse.h" />
+    <ClInclude Include="Source\burleighWA1000.h" />
+    <ClInclude Include="Source\Calibration.h" />
+    <ClInclude Include="Source\ChannelReservationList.h" />
+    <ClInclude Include="Source\ChannelReservationListPoint.h" />
+    <ClInclude Include="Source\ClientSocketUser.h" />
+    <ClInclude Include="Source\clntsock.h" />
+    <ClInclude Include="Source\color.h" />
+    <ClInclude Include="Source\ColorControl.h" />
+    <ClInclude Include="Source\ConsecutiveCalibration.h" />
+    <ClInclude Include="Source\Control.h" />
+    <ClInclude Include="Source\CosineRamp.h" />
+    <ClInclude Include="Source\CosineSquareRamp.h" />
+    <ClInclude Include="Source\CTimestamp.h" />
+    <ClInclude Include="Source\CUserIOConfig.h" />
+    <ClInclude Include="Source\DDSCalibration.h" />
+    <ClInclude Include="Source\DelayedWaveform.h" />
+    <ClInclude Include="Source\DialogElement.h" />
+    <ClInclude Include="Source\DigIn.h" />
+    <ClInclude Include="Source\DigitalOut.h" />
+    <ClInclude Include="Source\DigOut.h" />
+    <ClInclude Include="Source\DoublePoint.h" />
+    <ClInclude Include="Source\EasyDialog.h" />
+    <ClInclude Include="Source\EIP548A.h" />
+    <ClInclude Include="Source\ElementAnalogOut.h" />
+    <ClInclude Include="Source\ElementBool.h" />
+    <ClInclude Include="Source\ElementButton.h" />
+    <ClInclude Include="Source\ElementDigitalOut.h" />
+    <ClInclude Include="Source\ElementDouble.h" />
+    <ClInclude Include="Source\ElementGroupBox.h" />
+    <ClInclude Include="Source\ElementInt.h" />
+    <ClInclude Include="Source\ElementStatic.h" />
+    <ClInclude Include="Source\ElementString.h" />
+    <ClInclude Include="Source\ElementStringComboBox.h" />
+    <ClInclude Include="Source\EthernetMultiIOController.h" />
+    <ClInclude Include="Source\EthernetMultiIOControllerOpticsFoundry.h" />
+    <ClInclude Include="Source\EvaporationSweep.h" />
+    <ClInclude Include="Source\ExecuteMeasurementDlg.h" />
+    <ClInclude Include="Source\ExecuteMeasurementDlgContainer.h" />
+    <ClInclude Include="Source\FiberLaser.h" />
+    <ClInclude Include="Source\FlatToolTipCtrl.h" />
+    <ClInclude Include="Source\FluoLoadingDialog.h" />
+    <ClInclude Include="Source\FTD2XX.H" />
+    <ClInclude Include="Source\GPIB.h" />
+    <ClInclude Include="Source\GPIBDevice.h" />
+    <ClInclude Include="Source\Grid2DWaveform.h" />
+    <ClInclude Include="Source\HP5334A.h" />
+    <ClInclude Include="Source\include\pybind11\pybind11.h" />
+    <ClInclude Include="Source\IO.h" />
+    <ClInclude Include="Source\IOList.h" />
+    <ClInclude Include="Source\IOList_shortcuts_auto_created.h" />
+    <ClInclude Include="Source\IORegister.h" />
+    <ClInclude Include="Source\IPGLaser.h" />
+    <ClInclude Include="Source\json.hpp" />
+    <ClInclude Include="Source\Keithley2000.h" />
+    <ClInclude Include="Source\LaserLock.h" />
+    <ClInclude Include="Source\Linear.h" />
+    <ClInclude Include="Source\lstnsock.h" />
+    <ClInclude Include="Source\MainDialog.h" />
+    <ClInclude Include="Source\Measurement.h" />
+    <ClInclude Include="Source\MeasurementList.h" />
+    <ClInclude Include="Source\MeasurementPoint.h" />
+    <ClInclude Include="Source\MeasurementQueue.h" />
+    <ClInclude Include="Source\MenuButton.h" />
+    <ClInclude Include="Source\MenuGroupBox.h" />
+    <ClInclude Include="Source\MenuObList.h" />
+    <ClInclude Include="Source\MenuObListElement.h" />
+    <ClInclude Include="Source\MenuStatic.h" />
+    <ClInclude Include="Source\MenuTitle.h" />
+    <ClInclude Include="Source\Mesh3D.h" />
+    <ClInclude Include="Source\MessageReceiver.h" />
+    <ClInclude Include="Source\MultiIO.h" />
+    <ClInclude Include="Source\MultiWriteDevice.h" />
+    <ClInclude Include="Source\MultiWriteDeviceSPI.h" />
+    <ClInclude Include="Source\NetIO.h" />
+    <ClInclude Include="Source\network.h" />
+    <ClInclude Include="Source\NetworkClient.h" />
+    <ClInclude Include="Source\NetworkServer.h" />
+    <ClInclude Include="Source\NI6024E.h" />
+    <ClInclude Include="Source\NI653x.h" />
+    <ClInclude Include="Source\ParamList_shortcuts_auto_created.h" />
+    <ClInclude Include="Source\SequenceListLambdaFunction.h" />
+    <ClInclude Include="Source\SequencerAbstract.h" />
+    <ClInclude Include="Source\SequencerEthernetFirefly.h" />
+    <ClInclude Include="Source\NI67x3.h" />
+    <ClInclude Include="Source\nidaq.h" />
+    <ClInclude Include="Source\nidaqmx.h" />
+    <ClInclude Include="Source\OmegaiSeries.h" />
+    <ClInclude Include="Source\Output.h" />
+    <ClInclude Include="Source\OvenControl.h" />
+    <ClInclude Include="Source\ParabolicRamp.h" />
+    <ClInclude Include="Source\ParallelPort.h" />
+    <ClInclude Include="Source\Param.h" />
+    <ClInclude Include="Source\ParamBool.h" />
+    <ClInclude Include="Source\ParamDouble.h" />
+    <ClInclude Include="Source\ParameterDialog.h" />
+    <ClInclude Include="Source\Parameters.h" />
+    <ClInclude Include="Source\ParamInt.h" />
+    <ClInclude Include="Source\ParamList.h" />
+    <ClInclude Include="Source\ParamRegister.h" />
+    <ClInclude Include="Source\ParamString.h" />
+    <ClInclude Include="Source\ParamStringComboBox.h" />
+    <ClInclude Include="Source\PixelFont.h" />
+    <ClInclude Include="Source\Polynom.h" />
+    <ClInclude Include="Source\Pulse.h" />
+    <ClInclude Include="Source\Ramp.h" />
+    <ClInclude Include="Source\RampdBLinear.h" />
+    <ClInclude Include="Source\RangeCheck.h" />
+    <ClInclude Include="Source\Rectangle.h" />
+    <ClInclude Include="Source\RemoteControl.h" />
+    <ClInclude Include="Source\RemoteResetServer.h" />
+    <ClInclude Include="Source\Resource.h" />
+    <ClInclude Include="Source\RSSML0x.h" />
+    <ClInclude Include="Source\RunProgressDlg.h" />
+    <ClInclude Include="Source\Sequence.h" />
+    <ClInclude Include="Source\SequenceLib.h" />
+    <ClInclude Include="Source\SequenceList.h" />
+    <ClInclude Include="Source\SequenceListAnalogOut.h" />
+    <ClInclude Include="Source\SequenceListComment.h" />
+    <ClInclude Include="Source\SequenceListDigitalOut.h" />
+    <ClInclude Include="Source\SequenceListMultiWriteDeviceValue.h" />
+    <ClInclude Include="Source\SequenceListPoint.h" />
+    <ClInclude Include="Source\SequenceListRemoveWaveformGroup.h" />
+    <ClInclude Include="Source\SequenceListSequencerCommand.h" />
+    <ClInclude Include="Source\SequenceListStoreOrRecallValue.h" />
+    <ClInclude Include="Source\SequenceListSyncCommand.h" />
+    <ClInclude Include="Source\SequenceListWaitTillBusBufferEmpty.h" />
+    <ClInclude Include="Source\SequenceListWaitTillEndOfWaveformGroup.h" />
+    <ClInclude Include="Source\SequenceListWaveform.h" />
+    <ClInclude Include="Source\SequenceListWaveformData.h" />
+    <ClInclude Include="Source\SequencerEthernetOpticsFoundry.h" />
+    <ClInclude Include="Source\Serial.h" />
+    <ClInclude Include="Source\SerialDevice.h" />
+    <ClInclude Include="Source\SimpleColorButton.h" />
+    <ClInclude Include="Source\Sin.h" />
+    <ClInclude Include="Source\SineRamp.h" />
+    <ClInclude Include="Source\SingleWaveform.h" />
+    <ClInclude Include="Source\SlaveIO.h" />
+    <ClInclude Include="Source\SlaveIOList.h" />
+    <ClInclude Include="Source\SlaveMainDialog.h" />
+    <ClInclude Include="Source\SlaveServer.h" />
+    <ClInclude Include="Source\SlaveWaveform.h" />
+    <ClInclude Include="Source\spline.h" />
+    <ClInclude Include="Source\Square.h" />
+    <ClInclude Include="Source\SRS345.h" />
+    <ClInclude Include="Source\StaticHelp.h" />
+    <ClInclude Include="Source\StdAfx.h" />
+    <ClInclude Include="Source\StepwiseLinearCalibration.h" />
+    <ClInclude Include="Source\StepwiseLinearRamp.h" />
+    <ClInclude Include="Source\SyncCommand.h" />
+    <ClInclude Include="Source\SystemParamList.h" />
+    <ClInclude Include="Source\TektronixAWG5105.h" />
+    <ClInclude Include="Source\TektronixTDS524A.h" />
+    <ClInclude Include="Source\TimeStretch.h" />
+    <ClInclude Include="Source\TweezerRamp.h" />
+    <ClInclude Include="Source\typedefs.h" />
+    <ClInclude Include="Source\UniMess.h" />
+    <ClInclude Include="Source\UniMessList.h" />
+    <ClInclude Include="Source\USBMultiIO.h" />
+    <ClInclude Include="Source\utilities.h" />
+    <ClInclude Include="Source\UtilityDialog.h" />
+    <ClInclude Include="Source\VCOCalibration.h" />
+    <ClInclude Include="Source\VerdiLaser.h" />
+    <ClInclude Include="Source\Vision.h" />
+    <ClInclude Include="Source\Waveform.h" />
+    <ClInclude Include="Source\WaveformGenerator.h" />
+    <ClInclude Include="Source\theme.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
