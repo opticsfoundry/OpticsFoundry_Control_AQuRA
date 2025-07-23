@@ -2083,10 +2083,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="inpout32.lib" />
-    <Library Include="NIDAQmx.lib" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
     <Text Include="ControlParam_ParamList.txt" />

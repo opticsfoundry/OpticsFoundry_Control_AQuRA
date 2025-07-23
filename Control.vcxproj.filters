@@ -1140,14 +1140,6 @@
     <None Include="ConfigParams\ControlHardwareConfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="inpout32.lib">
-      <Filter>Libraries</Filter>
-    </Library>
-    <Library Include="NIDAQmx.lib">
-      <Filter>Libraries</Filter>
-    </Library>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
     <Text Include="ControlParam_ParamList.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
