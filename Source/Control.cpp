@@ -339,7 +339,7 @@ extern "C" {
 	}
 
 
-	bool CControlApp::Initialize(const char* _ParamFileName, bool AfxInit, bool _AfxSocketInit, bool displayErrors) {
+	bool CControlApp::Initialize(const char* _ParamFileDirectory, bool AfxInit, bool _AfxSocketInit, bool displayErrors) {
 		
 		if (AfxInit) {
 			// This must be called once per process before any other MFC code
@@ -360,8 +360,9 @@ extern "C" {
 			}
 		}
 
-		if (_ParamFileName == "") ParamFileName = new CString("C:\\OpticsFoundry\\OpticsFoundryControl\\ControlParam");
-		else ParamFileName = new CString(_ParamFileName);
+		std::string ParamFileDirectory = _ParamFileDirectory;
+		if (_ParamFileDirectory == "") ParamFileDirectory = "C:\\OpticsFoundry\\OpticsFoundryControl\\";
+		ParamFileName = new CString((ParamFileDirectory + "ControlParam").c_str());
 		
 
 		m_hInstance = 0;
@@ -413,7 +414,7 @@ extern "C" {
 			}
 		}
 		if (*WorkingDirectory != "") {
-			if (*WorkingDirectory == ".") SetCurrentDirectory(*ParamFileDirectory);
+			if (*WorkingDirectory == ".") SetCurrentDirectory(ParamFileDirectory.c_str());
 			else SetCurrentDirectory(*WorkingDirectory);
 		}
 		
@@ -476,26 +477,26 @@ extern "C" {
 
 bool ControlAPI_initialized = false;
 
-	API_EXPORT bool ControlAPI_Create(const char* ParamFileName, bool AfxInit, bool AfxSocketInit, bool displayErrors) {
+	API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, bool AfxSocketInit, bool displayErrors) {
 		std::lock_guard<std::mutex> lock(apiMutex);
 		isBusy = true;
-		std::string myParamFileName = ParamFileName;
-		if (ParamFileName == "") {
+		std::string myParamFileDirectory = ParamFileDirectory;
+		if (myParamFileDirectory == "") {
 			std::wstring exeDir;
-			if (ReadLocalConfigFile(exeDir, myParamFileName)) {
+			if (ReadLocalConfigFile(exeDir, myParamFileDirectory)) {
 			}
 			else {
 				std::wstring widePath = exeDir + L"\\";
 				// Convert to UTF-8 using WideCharToMultiByte
 				int size_needed = WideCharToMultiByte(CP_UTF8, 0, widePath.c_str(), -1, nullptr, 0, nullptr, nullptr);
-				myParamFileName.resize(size_needed - 1, 0);  // -1 to exclude null terminator
-				WideCharToMultiByte(CP_UTF8, 0, widePath.c_str(), -1, &myParamFileName[0], size_needed, nullptr, nullptr);
+				myParamFileDirectory.resize(size_needed - 1, 0);  // -1 to exclude null terminator
+				WideCharToMultiByte(CP_UTF8, 0, widePath.c_str(), -1, &myParamFileDirectory[0], size_needed, nullptr, nullptr);
 			}
 		}
 		//ControlMessageBox(myParamFileName.c_str());
-		const char* helpParamFileName = (myParamFileName + "ControlParam").c_str();
+		const char* helpParamFileDirectory = myParamFileDirectory.c_str();
 		if (!ControlAPI_initialized) {
-			ControlAPI_initialized = ControlApp.Initialize(helpParamFileName,AfxInit, AfxSocketInit);
+			ControlAPI_initialized = ControlApp.Initialize(helpParamFileDirectory,AfxInit, AfxSocketInit);
 			if (!ControlAPI_initialized) {
 				ControlMessageBox("ControlAPI_Configure: ControlApp::Initialize() failed");
 				isBusy = false;

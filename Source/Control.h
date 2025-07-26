@@ -71,7 +71,7 @@ extern "C" {
 	bool DidCommandErrorOccur(long& ErrorLineNr, std::string& CodeWithError);	
 */
 	API_EXPORT bool ControlAPI_Configure(bool displayErrors);
-	API_EXPORT bool ControlAPI_Create(const char* ParamFileName, bool AfxInit, bool AfxSocketInit, bool displayErrors);
+	API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, bool AfxSocketInit, bool displayErrors);
 	API_EXPORT void ControlAPI_StoreSequenceInMemory(bool store);
 	API_EXPORT void ControlAPI_SwitchToDirectOutputMode();
 	API_EXPORT bool ControlAPI_StartSequence(bool showDialog);
@@ -215,7 +215,7 @@ public:
 	void LoadParamsFromBinary(CString Name= "");
 	void SaveParamsAsBinary(CString Name);
 	void LoadReferenceParams(CString Name);
-	bool Initialize(const char* _ParamFileName = "", bool AfxInit = true, bool AfxSocketInit = true, bool displayErrors = true);
+	bool Initialize(const char* _ParamFileDirectory = "", bool AfxInit = true, bool AfxSocketInit = true, bool displayErrors = true);
 	void OnWakeUp();
 	HINSTANCE m_hInstance;
 	CWnd* m_pMainWnd;
