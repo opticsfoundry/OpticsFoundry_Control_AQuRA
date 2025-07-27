@@ -33,7 +33,7 @@ private:
 	bool MainWindow;
 	int MainDialogStartX;
 	int MainDialogStartY;
-	CMessageReceiver* MessageReceiver;		
+	CMessageReceiver* MessageReceiver;
 // Construction
 public:		
 	BOOL PreTranslateMessage(MSG* pMsg);

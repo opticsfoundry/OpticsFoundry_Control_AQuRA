@@ -1139,10 +1139,55 @@
     <None Include="ConfigFileCreators\ControlUserIOConfigFileCreator.py" />
     <None Include="ConfigParams\ControlHardwareConfig.json" />
     <None Include=".gitignore" />
+    <None Include="Source\FluoLoadingDialog.htm" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
     <Text Include="ControlParam_ParamList.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Source\res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\Control.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\ControlDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapGreen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapBlue.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapWhite.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapLightGray.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapYellow.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapGray.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapBlack.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\BitmapOrange.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\fschrec1\Downloads\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

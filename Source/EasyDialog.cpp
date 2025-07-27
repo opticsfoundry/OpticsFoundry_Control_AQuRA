@@ -629,6 +629,9 @@ void CEasyDialog::UpDownStopHere()
 	if (MaxUpDownMenuNr>0) MaxUpDownMenuNr--;
 }
 
+HICON m_hIconSmall;
+HICON m_hIconLarge;
+
 BOOL CEasyDialog::OnInitDialog() 
 {	
 	((CControlApp*)AfxGetApp())->OnWakeUp();
@@ -665,6 +668,36 @@ BOOL CEasyDialog::OnInitDialog()
 	}
 	CDialog::SetWindowPos(&CWnd::wndTop, rect.left, rect.top, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
 	CDialog::OnInitDialog();
+
+	if (MainWindow) {
+
+		// Load your icon
+		m_hIconSmall = AfxGetApp()->LoadIcon(IDI_ICON2);
+		m_hIconLarge = (HICON)::LoadImage(AfxGetInstanceHandle(),
+			MAKEINTRESOURCE(IDI_ICON2),
+			IMAGE_ICON,
+			GetSystemMetrics(SM_CXICON),
+			GetSystemMetrics(SM_CYICON),
+			0);
+
+		SetIcon(m_hIconLarge, TRUE);   // Set big icon (e.g., Alt+Tab, title bar)
+		SetIcon(m_hIconSmall, FALSE);  // Set small icon (e.g., taskbar button)
+
+		//SetClassLongPtr(m_pMainWnd->m_hWnd, GCLP_HICON, (LONG_PTR)m_hIconLarge);
+		//SetClassLongPtr(m_pMainWnd->m_hWnd, GCLP_HICONSM, (LONG_PTR)m_hIconSmall);
+
+		// Remove owner to allow taskbar button
+		::SetWindowLongPtr(this->GetSafeHwnd(), GWLP_HWNDPARENT, 0);
+
+		// Add WS_EX_APPWINDOW to force taskbar button
+		LONG_PTR exStyle = ::GetWindowLongPtr(this->GetSafeHwnd(), GWL_EXSTYLE);
+		exStyle |= WS_EX_APPWINDOW;
+		::SetWindowLongPtr(this->GetSafeHwnd(), GWL_EXSTYLE, exStyle);
+
+		// Optional: ensure the dialog is considered the main window
+		AfxGetApp()->m_pMainWnd = this;
+	}
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

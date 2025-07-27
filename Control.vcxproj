@@ -2082,11 +2082,30 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="ReadMe.txt" />
+    <None Include="Source\FluoLoadingDialog.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
     <Text Include="ControlParam_ParamList.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\fschrec1\Downloads\icon.ico" />
+    <Image Include="Source\res\bitmap1.bmp" />
+    <Image Include="Source\res\BitmapBlack.bmp" />
+    <Image Include="Source\res\BitmapBlue.bmp" />
+    <Image Include="Source\res\BitmapGray.bmp" />
+    <Image Include="Source\res\BitmapGreen.bmp" />
+    <Image Include="Source\res\BitmapLightGray.bmp" />
+    <Image Include="Source\res\BitmapOrange.bmp" />
+    <Image Include="Source\res\BitmapWhite.bmp" />
+    <Image Include="Source\res\BitmapYellow.bmp" />
+    <Image Include="Source\res\Control.ico" />
+    <Image Include="Source\res\ControlDoc.ico" />
+    <Image Include="Source\res\icon1.ico" />
+    <Image Include="Source\res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
