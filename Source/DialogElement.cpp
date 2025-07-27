@@ -188,8 +188,10 @@ void CDialogElement::Create(unsigned int Line, CEasyDialog* &Dialog, CWnd* aHelp
 			ToolTipText=MyMenuObListElement->Help;						
 		}		
 	}
-	if (HelpWnd) Dialog->ToolTip->AddTool(HelpWnd,ToolTipText);
-	Dialog->ToolTip->AddTool(&HelpButton,ToolTipText);
+	if (Dialog->ToolTip) {
+		if (HelpWnd) Dialog->ToolTip->AddTool(HelpWnd, ToolTipText);
+		Dialog->ToolTip->AddTool(&HelpButton, ToolTipText);
+	}
 	UpdateHelpButtonColor(false);		
 }
 
@@ -207,8 +209,10 @@ void CDialogElement::UpdateHelpButtonColor(bool Redraw) {
 	}
 	if (ButtonColor!=OldButtonColor) {
 		CString buf=GetHelp();
-		MyDialog->ToolTip->UpdateTipText(buf,&HelpButton);		
-		if (HelpWnd) MyDialog->ToolTip->UpdateTipText(buf,HelpWnd);			
+		if (MyDialog->ToolTip) {
+			MyDialog->ToolTip->UpdateTipText(buf, &HelpButton);
+			if (HelpWnd) MyDialog->ToolTip->UpdateTipText(buf, HelpWnd);
+		}
 		switch (ButtonColor) {
 			case 0:HelpButton.SetColor(ColorGreen); break;
 			case 1:HelpButton.SetColor(ColorRed); break;

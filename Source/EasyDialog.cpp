@@ -45,7 +45,7 @@ CEasyDialog::CEasyDialog(CString aCaption, bool aMainWindow,  int _MainDialogSta
 	MinUpDownMenuNr=0;
 	UpDownEnabled=false;
 	UpDownButtonEnabled=false;
-	ToolTip=NULL;
+	ToolTip=nullptr;
 
 	//{{AFX_DATA_INIT(CEasyDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -604,6 +604,7 @@ BEGIN_MESSAGE_MAP(CEasyDialog, CDialog)
 	ON_BN_CLICKED(IDC_RUN_EXPERIMENT, OnBnClickedRunExperiment)
 	ON_BN_CLICKED(IDC_RESETSYSTEM, OnBnClickedResetsystem)
 	ON_BN_CLICKED(IDC_EMERGENCY_SHUTOFF, OnBnClickedEmergencyShutoff)
+		ON_WM_DESTROY()
 	END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -884,9 +885,13 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 	if (ToolTip != nullptr) {
 		//The following check is likely not necessary. 
 		//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));
-		if (AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE))
-			ToolTip->RelayEvent(pMsg);
-		else 	
+		if (AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE)) {
+			if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
+				ToolTip->RelayEvent(pMsg);
+			else
+				ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd not valid");
+		} 
+		else
 			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
 	}
     return CDialog::PreTranslateMessage(pMsg);

@@ -37,7 +37,6 @@ private:
 // Construction
 public:		
 	BOOL PreTranslateMessage(MSG* pMsg);
-	void OnDestroy();
 	bool ContainsEnabledFlowDecidingCheckBox();
 	bool UpDownButtonEnabled;
 	void UpDownStopHere();
@@ -85,6 +84,7 @@ protected:
 	//{{AFX_MSG(CEasyDialog)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnApply();
+	afx_msg void OnDestroy();
 	afx_msg void OnButton0() {OnButton(0);}
 	afx_msg void OnButton1() {OnButton(1);}
 	afx_msg void OnButton2() {OnButton(2);}
