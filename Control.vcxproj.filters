@@ -115,7 +115,7 @@
     <ClCompile Include="Source\RemoteResetServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SequenceImaging.cpp">
+    <ClCompile Include="Source\Sequence_Imaging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SequenceListLambdaFunction.cpp">
@@ -301,7 +301,7 @@
     <ClCompile Include="Source\NI653x.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SequenceManualUserIO.cpp">
+    <ClCompile Include="Source\Sequence_ManualUserIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SequencerAbstract.cpp">
@@ -382,7 +382,7 @@
     <ClCompile Include="Source\RunProgressDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Sequence.cpp">
+    <ClCompile Include="Source\Sequence_Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SequenceLib.cpp">
@@ -427,10 +427,10 @@
     <ClCompile Include="Source\SequencerEthernetOpticsFoundry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SequenceStandardUtilities.cpp">
+    <ClCompile Include="Source\Sequence_StandardUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SequenceUtilities.cpp">
+    <ClCompile Include="Source\Sequence_Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Serial.cpp">

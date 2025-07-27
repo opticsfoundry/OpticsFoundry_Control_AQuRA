@@ -452,7 +452,7 @@
     <ClCompile Include="Source\MultiWriteDeviceSPI.cpp" />
     <ClCompile Include="Source\ParamList_shortcuts_auto_created.cpp" />
     <ClCompile Include="Source\RemoteResetServer.cpp" />
-    <ClCompile Include="Source\SequenceImaging.cpp" />
+    <ClCompile Include="Source\Sequence_Imaging.cpp" />
     <ClCompile Include="Source\SequenceListLambdaFunction.cpp" />
     <ClCompile Include="Source\SequenceListSequencerCommand.cpp" />
     <ClCompile Include="Source\DDSCalibration.cpp" />
@@ -1125,7 +1125,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Source\SequenceManualUserIO.cpp" />
+    <ClCompile Include="Source\Sequence_ManualUserIO.cpp" />
     <ClCompile Include="Source\SequencerAbstract.cpp" />
     <ClCompile Include="Source\NI67x3.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
@@ -1399,7 +1399,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Source\Sequence.cpp">
+    <ClCompile Include="Source\Sequence_Main.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1492,8 +1492,8 @@
     </ClCompile>
     <ClCompile Include="Source\SequenceListWaveformData.cpp" />
     <ClCompile Include="Source\SequencerEthernetOpticsFoundry.cpp" />
-    <ClCompile Include="Source\SequenceStandardUtilities.cpp" />
-    <ClCompile Include="Source\SequenceUtilities.cpp" />
+    <ClCompile Include="Source\Sequence_StandardUtilities.cpp" />
+    <ClCompile Include="Source\Sequence_Utilities.cpp" />
     <ClCompile Include="Source\Serial.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
