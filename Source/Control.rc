@@ -69,7 +69,7 @@ IDR_MAINFRAME           ICON                    "res\\Control.ico"
 
 IDR_CONTROTYPE          ICON                    "res\\ControlDoc.ico"
 
-IDI_ICON2               ICON                    "C:\\Users\\fschrec1\\Downloads\\icon.ico"
+IDI_ICON1               ICON                    "res\\mainicon.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////

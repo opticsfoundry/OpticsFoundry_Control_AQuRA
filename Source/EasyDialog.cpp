@@ -672,9 +672,9 @@ BOOL CEasyDialog::OnInitDialog()
 	if (MainWindow) {
 
 		// Load your icon
-		m_hIconSmall = AfxGetApp()->LoadIcon(IDI_ICON2);
+		m_hIconSmall = AfxGetApp()->LoadIcon(IDI_ICON1);
 		m_hIconLarge = (HICON)::LoadImage(AfxGetInstanceHandle(),
-			MAKEINTRESOURCE(IDI_ICON2),
+			MAKEINTRESOURCE(IDI_ICON1),
 			IMAGE_ICON,
 			GetSystemMetrics(SM_CXICON),
 			GetSystemMetrics(SM_CYICON),

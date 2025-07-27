@@ -1189,5 +1189,11 @@
     <Image Include="C:\Users\fschrec1\Downloads\icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\mainicon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\res\mainicon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

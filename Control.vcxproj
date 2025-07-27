@@ -2093,6 +2093,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\fschrec1\Downloads\icon.ico" />
+    <Image Include="res\mainicon.ico" />
     <Image Include="Source\res\bitmap1.bmp" />
     <Image Include="Source\res\BitmapBlack.bmp" />
     <Image Include="Source\res\BitmapBlue.bmp" />
@@ -2105,6 +2106,7 @@
     <Image Include="Source\res\Control.ico" />
     <Image Include="Source\res\ControlDoc.ico" />
     <Image Include="Source\res\icon1.ico" />
+    <Image Include="Source\res\mainicon.ico" />
     <Image Include="Source\res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -482,7 +482,7 @@
 #define IDB_BITMAPBLACK                 812
 #define IDB_BITMAPORANGE                813
 #define IDM_STOP_EMISSION_IPG           814
-#define IDI_ICON2                       818
+#define IDI_ICON1                       821
 #define IDC_APPLY                       1001
 #define IDC_PROGRESS_BAR                1002
 #define IDC_EMERGENCY_SHUTOFF           1002
@@ -897,7 +897,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        819
+#define _APS_NEXT_RESOURCE_VALUE        822
 #define _APS_NEXT_COMMAND_VALUE         32773
 #define _APS_NEXT_CONTROL_VALUE         1021
 #define _APS_NEXT_SYMED_VALUE           415
