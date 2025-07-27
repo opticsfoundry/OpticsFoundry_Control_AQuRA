@@ -37,6 +37,7 @@ private:
 // Construction
 public:		
 	BOOL PreTranslateMessage(MSG* pMsg);
+	void OnDestroy();
 	bool ContainsEnabledFlowDecidingCheckBox();
 	bool UpDownButtonEnabled;
 	void UpDownStopHere();
@@ -488,6 +489,7 @@ private:
 	void (*UpdateFunction)(unsigned int);  
 	int UpdateFunctionParameter;
 	bool AutoUpdate;
+	bool m_bDialogClosed;
 public:
 	afx_msg void OnBnClickedRunExperiment();
 	afx_msg void OnBnClickedResetsystem();

@@ -29,6 +29,7 @@ CWnd* CallingDialog;
 CEasyDialog::CEasyDialog(CString aCaption, bool aMainWindow,  int _MainDialogStartX,  int _MainDialogStartY, unsigned int aMessage,CMessageReceiver* aMessageReceiver, CWnd* pParent /*=NULL*/)
 	: CDialog(CEasyDialog::IDD, pParent)
 {
+	m_bDialogClosed = false;
 	MainWindow = aMainWindow;
 	MainDialogStartX = _MainDialogStartX;
 	MainDialogStartY = _MainDialogStartY;
@@ -54,6 +55,7 @@ CEasyDialog::CEasyDialog(CString aCaption, bool aMainWindow,  int _MainDialogSta
 
 CEasyDialog::~CEasyDialog()
 {
+	m_bDialogClosed = true;
 	if (ToolTip) {
 		delete ToolTip;
 		ToolTip = nullptr;
@@ -158,6 +160,12 @@ void CEasyDialog::OnDown(int mode) {
 		}
 		EndDialog((mode) ? IDDOWNMOUSE : IDDOWN);	
 	}
+}
+
+void CEasyDialog::OnDestroy()
+{
+	m_bDialogClosed = true;
+	CDialog::OnDestroy();
 }
 
 void CEasyDialog::DoDataExchange(CDataExchange* pDX)
@@ -698,6 +706,15 @@ BOOL CEasyDialog::OnInitDialog()
 		AfxGetApp()->m_pMainWnd = this;
 	}
 
+	// Modify style to include minimize button
+	LONG style = ::GetWindowLong(this->GetSafeHwnd(), GWL_STYLE);
+	style |= WS_MINIMIZEBOX | WS_SYSMENU;
+	::SetWindowLong(this->GetSafeHwnd(), GWL_STYLE, style);
+
+	// Redraw non-client area to apply new style
+	::SetWindowPos(this->GetSafeHwnd(), nullptr, 0, 0, 0, 0,
+		SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -834,6 +851,9 @@ void CEasyDialog::OnBnClickedEmergencyShutoff()
 
 BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 {
+	if (m_bDialogClosed)
+		return FALSE; // Don't process messages if dialog is closed
+
 #ifdef DebugEasyDialog
 	CString buf;
 	buf.Format("PreTranslateMessage(msg=%u)", pMsg->message);
