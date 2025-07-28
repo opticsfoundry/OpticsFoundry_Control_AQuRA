@@ -52,3 +52,5 @@ Data/*
 # But keep the directory itself
 !DebugFiles/.gitkeep
 !Data/.gitkeep
+/Source/Control.aps
+/ConfigParams/ControlParam_UniMessList.dat
