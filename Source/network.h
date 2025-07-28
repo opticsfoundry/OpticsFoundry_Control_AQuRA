@@ -23,7 +23,7 @@ public:
 // Operations
 public:
 	bool ConnectSocket(LPCTSTR lpszAddress, UINT nPort,CString SocketName);
-	bool ResetConnection();
+	bool ResetConnection(unsigned long sleep_time=2000);
 	bool FlushInputBuffer();
 	void SendMsg(CString& strText);
 	bool SendData(const unsigned char* Data, unsigned long Size);

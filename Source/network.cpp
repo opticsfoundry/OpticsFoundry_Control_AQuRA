@@ -78,6 +78,7 @@ void CNetwork::DebugStop() {
 void CNetwork::DisconnectSocket()
 {
 	if (m_pSocket) {
+		StoreLastMessage("Disconnected");
 		m_pSocket->Close();
 		delete m_pSocket;
 		m_pSocket = nullptr;
@@ -185,9 +186,9 @@ bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName
 	return true;
 }
 
-bool CNetwork::ResetConnection() {
+bool CNetwork::ResetConnection(unsigned long sleep_time) {
 	DisconnectSocket();
-	Sleep_ms(2000);
+	if (sleep_time>0) Sleep_ms(sleep_time);
 	return Reconnect(/*ShowErrorMessages*/ false);
 }
 
@@ -290,6 +291,9 @@ bool CNetwork::FlushInputBuffer()
 		bytesRead = ::recv(s, tempBuffer, kBufferSize, 0);
 		if (bytesRead > 0) {
 			// Data read and discarded
+			tempBuffer[bytesRead + 1] = 0;
+			CString buf(tempBuffer);
+			StoreLastMessage("Flushed input buffer ("+buf+")");
 			continue;
 		}
 		else if (bytesRead == 0) {
@@ -436,9 +440,11 @@ bool CNetwork::IsConnected() const {
 bool CNetwork::Reconnect(int maxRetries, unsigned long delay_ms) {
 	DisconnectSocket();
 	int tries = 0;
-	while (tries < maxRetries) {
-		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName))
+	while (tries < (maxRetries + 1)) {
+		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName)) {
+			StoreLastMessage("Reconnected");
 			return true;
+		}
 		tries++;
 		Sleep(delay_ms);
 	}

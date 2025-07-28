@@ -18,6 +18,7 @@ public:
 	bool Connected;
 	double ActCurrent[CoilDriverTorun3x3ANrCoils * CoilDriverTorun3x3ANrSettings];
 	double ActRampTime[CoilDriverTorun3x3ANrSettings];
+	unsigned int ActState;
 public:	
 	bool SetCurrent(unsigned int SettingNr, unsigned int CoilNr, double Current);
 	bool GetCurrent(unsigned int SettingNr, unsigned int CoilNr, double &Current);
