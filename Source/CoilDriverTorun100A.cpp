@@ -13,6 +13,16 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
+#define DoResetConnection
+
+#ifdef DoResetConnection
+#define ResetMyConnection if (!Network) return false;Network->ResetConnection(0);
+#else
+#define ResetMyConnection
+#endif
+
+#define ReadBackValue
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -36,7 +46,7 @@ bool CCoilDriverTorun100A::ConnectSocket(LPCTSTR lpszAddress,UINT port) {
 	}
 	for (int i = 0; i < CoilDriverTorun100ANrSettings; i++) GetRampTime(i, ActRampTime[i]);*/
 	//right now we only switch to "use external analog in" mode. Remaining functions can be programmed if actually needed by AQuRA.
-	SetMode(1);
+	//SetMode(1);
 	return Connected;
 }
 
@@ -59,72 +69,49 @@ etc.
 */
 
 bool CCoilDriverTorun100A::SetMode(unsigned int Mode) {
+	ResetMyConnection
 	if (!Connected) return true;
 	if (Mode >= 3) return false;
 	if (ActMode == Mode) return true;
 	CString buf;
 	buf.Format("MODE %i", Mode);
 	bool ok = Command(buf, /*DontWaitForReady*/ true);
-	return ok;
-}
-
-/*
-bool CCoilDriverTorun100A::SetRampTime(unsigned int SettingNr, double RampTime) {
-	if (!Connected) return true;
-	if (SettingNr >= CoilDriverTorun100ANrSettings) return false;
-	if (ActRampTime[SettingNr] == RampTime) return true;
-	CString buf;
-	buf.Format("S%i:T %.3f", SettingNr, RampTime);
-	bool ok = Command(buf);
-	return ok;
-}
-
-bool CCoilDriverTorun100A::GetRampTime(unsigned int SettingNr, double &RampTime) {
-	if (!Connected) return true;
-	if (SettingNr >= CoilDriverTorun100ANrSettings) return false;
-	CString buf;
-	buf.Format("S%i:T ?", SettingNr, RampTime);
-	bool ok = Command(buf);
+	if (!ok) {
+		ControlMessageBox("CCoilDriverTorun100A::SetMode: Command failed.");
+		return false;
+	}
+#ifdef ReadBackValue
+	unsigned int _ReadMode=999;
+	ok = GetMode(_ReadMode);
 	if (!ok) return false;
-	ReadDouble(RampTime);
-	ActRampTime[SettingNr] = RampTime;
+	if (Mode != _ReadMode) {
+		CString buf;
+		buf.Format("CCoilDriverTorun100A::GetMode: Warning: GetMode did not return the requested value.\n"
+			"Requested: %u, Actual: %u", Mode, _ReadMode);
+		ControlMessageBox(buf);
+		return false;
+	}
+#endif
+	return ok;
+}
+
+bool CCoilDriverTorun100A::GetMode(unsigned int &Mode) {
+	ResetMyConnection
+	if (!Connected) return false;
+	CString buf;
+	buf.Format("MODE ?");
+	bool ok = Command(buf, /*DontWaitForReady*/ true);
+	if (!ok) {
+		ControlMessageBox("CCoilDriverTorun100A::GetMode: Command failed.");
+		return false;
+	}
+	int myMode = -99999;
+	ok = ReadInt(myMode);
+	if (!ok) {
+		ControlMessageBox("CCoilDriverTorun100A::GetMode: Command returned no value.");
+		return false;
+	}
+	Mode = (unsigned int)myMode;
+	ActMode = Mode;
 	return true;
 }
-
-bool CCoilDriverTorun100A::SetCurrent(unsigned int SettingNr, unsigned int CoilNr, double Current) {
-	if (!Connected) return true;
-	CString buf;
-	if (SettingNr >= CoilDriverTorun100ANrSettings) return false;
-	if (CoilNr >= CoilDriverTorun100ANrCoils) return false;
-	if (ActCurrent[SettingNr * CoilDriverTorun100ANrCoils + CoilNr] == Current) return true;
-	buf.Format("S%i:V%i %.3f",SettingNr, CoilNr, Current);
-	bool ok=Command(buf);
-	if (ok) ActCurrent[SettingNr * CoilDriverTorun100ANrCoils + CoilNr] = Current;
-	return ok;
-}
-
-bool CCoilDriverTorun100A::GetCurrent(unsigned int SettingNr, unsigned int CoilNr, double &Current) {
-	if (!Connected) return true;
-	CString buf;
-	if (SettingNr >= CoilDriverTorun100ANrSettings) return false;
-	if (CoilNr >= CoilDriverTorun100ANrCoils) return false;
-	buf.Format("S%i:V%i ?", SettingNr, CoilNr);
-	bool ok = Command(buf);
-	if (!ok) return false;
-	ReadDouble(Current);
-	ActCurrent[SettingNr * CoilDriverTorun100ANrCoils + CoilNr] = Current;
-	return true;
-}
-
-bool CCoilDriverTorun100A::GetState(unsigned int& state) {
-	if (!Connected) return true;
-	bool ok = Command("STATE ?");
-	return ok;
-}
-
-bool CCoilDriverTorun100A::CheckReady() {
-	if (!Connected) return true;
-	unsigned int state;
-	return GetState(state);
-}
-*/

@@ -1152,6 +1152,10 @@ void CSequence::SetTorunCoilDriverState(unsigned char state) {
 	SwitchTorunCoilDriverD0(state & 0x01);
 	SwitchTorunCoilDriverD1(state & 0x02);
 	SwitchTorunCoilDriverD2(state & 0x04);
+	Wait(0.01);
+	SwitchTorunCoilDriverTrigger(On);
+	Wait(0.01);
+	SwitchTorunCoilDriverTrigger(Off);
 }
 
 //Shutter timings: the time it takes each shutter to switch off or on its beam
@@ -2147,7 +2151,7 @@ void CSequence::InitializeSystemFirstTime()
 		CoilDriverTorun3x3A->ConnectSocket(*CoilDriverTorun3x3AIPAdress, CoilDriverTorun3x3APort);
 	}
 	if ((HardwareAccess) && (ConnectToCoilDriverTorun100A)) {
-		if (DebugCoilDriverTorun100A) CoilDriverTorun3x3A->Debug(*DebugFilePath + "CoilDriverTorun100ACommunication.dat");
+		if (DebugCoilDriverTorun100A) CoilDriverTorun100A->Debug(*DebugFilePath + "CoilDriverTorun100ACommunication.dat");
 		CoilDriverTorun100A->ConnectSocket(*CoilDriverTorun100AIPAdress, CoilDriverTorun100APort);
 	}
 	LastFluoStoppedLoadingElementError = false;

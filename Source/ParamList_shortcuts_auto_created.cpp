@@ -39,6 +39,7 @@ bool* InitBiasZ;
 bool* InitTorunCoilDriverD0;
 bool* InitTorunCoilDriverD1;
 bool* InitTorunCoilDriverD2;
+bool* InitTorunCoilDriverTrigger;
 bool* Init10MHzRfSourceSelection;
 bool* InitBlueDetectionShutter;
 bool* InitBlueMOTShutter;
@@ -203,6 +204,7 @@ void CParamRegister::CreateShortcutsToUserIOInitParams() {
 	InitTorunCoilDriverD0 = GetParamBool("InitTorunCoilDriverD0");
 	InitTorunCoilDriverD1 = GetParamBool("InitTorunCoilDriverD1");
 	InitTorunCoilDriverD2 = GetParamBool("InitTorunCoilDriverD2");
+	InitTorunCoilDriverTrigger = GetParamBool("InitTorunCoilDriverTrigger");
 	Init10MHzRfSourceSelection = GetParamBool("Init10MHzRfSourceSelection");
 	InitBlueDetectionShutter = GetParamBool("InitBlueDetectionShutter");
 	InitBlueMOTShutter = GetParamBool("InitBlueMOTShutter");

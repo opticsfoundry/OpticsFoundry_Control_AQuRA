@@ -36,6 +36,7 @@ extern bool* InitBiasZ;
 extern bool* InitTorunCoilDriverD0;
 extern bool* InitTorunCoilDriverD1;
 extern bool* InitTorunCoilDriverD2;
+extern bool* InitTorunCoilDriverTrigger;
 extern bool* Init10MHzRfSourceSelection;
 extern bool* InitBlueDetectionShutter;
 extern bool* InitBlueMOTShutter;

@@ -30,11 +30,11 @@
         },
         {
           "order": 1,
-          "value": 1
+          "value": 0.1
         }
       ],
       "Min": 0.0,
-      "Max": 5.0,
+      "Max": 23.0,
       "Init": 0.0,
       "Hardreset": false,
       "Softreset": true,
@@ -576,13 +576,32 @@
       }
     },
     {
+      "Name": "TorunCoilDriverTrigger",
+      "Description": "Torun Coil Driver Trigger",
+      "Help": "",
+      "Type": "DigitalOut",
+      "Sequencer": 0,
+      "Address": 3,
+      "Bit": 14,
+      "Inverted": false,
+      "Init": false,
+      "Hardreset": false,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
       "Name": "10MHzRfSourceSelection",
       "Description": "10MHz RF source selection",
       "Help": "",
       "Type": "DigitalOut",
       "Sequencer": 0,
       "Address": 3,
-      "Bit": 14,
+      "Bit": 15,
       "Inverted": false,
       "Init": false,
       "Hardreset": false,

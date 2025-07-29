@@ -33,7 +33,10 @@ class UserIOConfigBuilder:
         self.add_entry({"Type": "NewColumn"})
 
     def add_analog_out(self, Name, Description, Address, Units="V", Min=0.0, Max=3.0, Init=1.5,
-                       Sequencer=0, Color={"Red": 1.0, "Green": 1.0, "Blue": 1.0}):
+                       Sequencer=0, Color={"Red": 1.0, "Green": 1.0, "Blue": 1.0}, Calibration = [
+                {"order": 0, "value": 0},
+                {"order": 1, "value": 1}
+            ]):
         self.add_entry({
             "Name": Name,
             "Description": Description,
@@ -42,10 +45,7 @@ class UserIOConfigBuilder:
             "Type": "AnalogOut",
             "Sequencer": Sequencer,
             "Address": Address,
-            "CalibrationPolynom": [
-                {"order": 0, "value": 0},
-                {"order": 1, "value": 1}
-            ],
+            "CalibrationPolynom": Calibration,
             "Min": Min,
             "Max": Max,
             "Init": Init,
@@ -256,7 +256,10 @@ if __name__ == "__main__":
     
     builder.add_new_menu(Text="AQuRA User IO")
     builder.add_static_text(Text="AQuRA Analog Outs")
-    builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=23.0, Init=0.0, Calibration = [
+                {"order": 0, "value": 0},
+                {"order": 1, "value": 0.1}
+            ])
     builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=33, Units="degC", Max=5.0, Init=0.0)    
     builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=34, Units="%", Max=5.0, Init=0.0)
     builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=35, Units="", Max=5.0, Init=0.0)
@@ -286,7 +289,8 @@ if __name__ == "__main__":
     builder.add_digital_out(Name="TorunCoilDriverD0", Description="Torun Coil Driver D0", Address=3, Bit=11)
     builder.add_digital_out(Name="TorunCoilDriverD1", Description="Torun Coil Driver D1", Address=3, Bit=12)
     builder.add_digital_out(Name="TorunCoilDriverD2", Description="Torun Coil Driver D2", Address=3, Bit=13)
-    builder.add_digital_out(Name="10MHzRfSourceSelection", Description="10MHz RF source selection", Address=3, Bit= 14)
+    builder.add_digital_out(Name="TorunCoilDriverTrigger", Description="Torun Coil Driver Trigger", Address=3, Bit=14)    
+    builder.add_digital_out(Name="10MHzRfSourceSelection", Description="10MHz RF source selection", Address=3, Bit= 15)
     builder.add_new_column()
     builder.add_static_text(Text="Shutters")
     builder.add_digital_out(Name="BlueDetectionShutter", Description="Blue Detection Shutter", Address=6, Bit=0)

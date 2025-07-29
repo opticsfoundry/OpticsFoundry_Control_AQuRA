@@ -45,6 +45,7 @@ DigitalOutFuncShortcut SwitchBiasZ;
 DigitalOutFuncShortcut SwitchTorunCoilDriverD0;
 DigitalOutFuncShortcut SwitchTorunCoilDriverD1;
 DigitalOutFuncShortcut SwitchTorunCoilDriverD2;
+DigitalOutFuncShortcut SwitchTorunCoilDriverTrigger;
 DigitalOutFuncShortcut Switch10MHzRfSourceSelection;
 DigitalOutFuncShortcut SwitchBlueDetectionShutter;
 DigitalOutFuncShortcut SwitchBlueMOTShutter;
@@ -209,6 +210,7 @@ void CIORegister::CreateShortcutsToUserIO() {
 	SwitchTorunCoilDriverD0 = GetDigitalOutput("SwitchTorunCoilDriverD0");
 	SwitchTorunCoilDriverD1 = GetDigitalOutput("SwitchTorunCoilDriverD1");
 	SwitchTorunCoilDriverD2 = GetDigitalOutput("SwitchTorunCoilDriverD2");
+	SwitchTorunCoilDriverTrigger = GetDigitalOutput("SwitchTorunCoilDriverTrigger");
 	Switch10MHzRfSourceSelection = GetDigitalOutput("Switch10MHzRfSourceSelection");
 	SwitchBlueDetectionShutter = GetDigitalOutput("SwitchBlueDetectionShutter");
 	SwitchBlueMOTShutter = GetDigitalOutput("SwitchBlueMOTShutter");

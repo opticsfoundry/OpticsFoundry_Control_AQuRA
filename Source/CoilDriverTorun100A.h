@@ -27,6 +27,7 @@ public:
 	bool GetState(unsigned int &state);
 	bool CheckReady();	*/
 	bool SetMode(unsigned int Mode);
+	bool GetMode(unsigned int& Mode);
 	CCoilDriverTorun100A();
 	virtual ~CCoilDriverTorun100A();
 	bool ConnectSocket(LPCTSTR lpszAddress,UINT port);

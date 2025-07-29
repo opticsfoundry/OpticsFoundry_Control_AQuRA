@@ -43,6 +43,7 @@ extern DigitalOutFuncShortcut SwitchBiasZ;
 extern DigitalOutFuncShortcut SwitchTorunCoilDriverD0;
 extern DigitalOutFuncShortcut SwitchTorunCoilDriverD1;
 extern DigitalOutFuncShortcut SwitchTorunCoilDriverD2;
+extern DigitalOutFuncShortcut SwitchTorunCoilDriverTrigger;
 extern DigitalOutFuncShortcut Switch10MHzRfSourceSelection;
 extern DigitalOutFuncShortcut SwitchBlueDetectionShutter;
 extern DigitalOutFuncShortcut SwitchBlueMOTShutter;
