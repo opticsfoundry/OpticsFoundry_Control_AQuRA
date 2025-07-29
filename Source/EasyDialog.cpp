@@ -889,7 +889,8 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 			if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
 				if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
 					if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
-						ToolTip->RelayEvent(pMsg);
+						//ToolTip->RelayEvent(pMsg);
+						;
 					else
 						ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
 				else
