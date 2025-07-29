@@ -254,6 +254,7 @@ public:
 	void MainExperimentalSequenceEndInDirectOutputMode();
 	bool MainExperimentalSequenceStartInDirectOutputMode(CWnd* parent);
 	bool ResetSystemBeforeRun();
+	bool ProgramTorunCoilDriversBeforeRun();
 	void EmptyNIcardFIFO();
 	virtual void Idle(CWnd* parent);	
 	virtual void ExecuteMeasurementQueueFinished(CWnd* parent);

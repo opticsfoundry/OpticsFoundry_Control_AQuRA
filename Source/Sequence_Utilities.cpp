@@ -719,7 +719,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				SwitchAQuRAShutters(OnOff);
 				StopSequence();
 				SetWaveformGenerationMode();
-				ExecuteSequenceList();
+				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
 				OnOff = !OnOff; // toggle shutters on/off
 			}
 		}
@@ -737,7 +737,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		static long CoilDriver3x3AState=0;
 		if (!AssemblingUtilityDialog()) {
 			if (Message == IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A) {
-				InitializeCoilDriverTorun3x3A(/*OnlyFast*/ false, /*setting*/0);
+				InitializeCoilDriverTorun3x3A(/*OnlyFast*/ false);
 				return true;
 			}
 			else if (Message == IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A) {
@@ -747,7 +747,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				SetTorunCoilDriverState(CoilDriver3x3AState);
 				StopSequence();
 				SetWaveformGenerationMode();
-				ExecuteSequenceList();
+				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
 				unsigned int state = 0;
 				CoilDriverTorun3x3A->GetState(state);
 				if (state != CoilDriver3x3AState) {
@@ -755,6 +755,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 					buf.Format("CSequence::UtilityTorunCoilDrivers : Coil Driver 3x3A set to state %u, but requested state is %u", state, CoilDriver3x3AState);
 					ControlMessageBox(buf);
 				}
+				return true;
 			}
 			else if (Message == IDM_ENABLE_TORUN_COIL_DRIVER_100A) {
 				CoilDriverTorun100A->SetMode(1); // 1 = Current controlled through front panel SMA input

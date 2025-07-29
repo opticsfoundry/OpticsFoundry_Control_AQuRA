@@ -180,6 +180,7 @@ StartFPGACycleSequence=FALSE
 PeriodicTriggerPeriod_in_ms=5000
 PeriodicTriggerAllowedWaitTime_in_ms=5000
 StopFPGACycleSequence=FALSE
+DoProgramTorunCoilDriversBeforeRun=FALSE
 DoResetSystemBeforeRun=FALSE
 PreparationTime=0.00000
 StartWithRb=FALSE

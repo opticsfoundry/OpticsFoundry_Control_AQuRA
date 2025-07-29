@@ -2252,6 +2252,18 @@ bool CSequence::ResetSystemBeforeRun(void) {
 	return true;
 }
 
+bool CSequence::ProgramTorunCoilDriversBeforeRun(void) {
+	static bool DoProgramTorunCoilDriversBeforeRun;
+	if (!AssemblingParamList()) {
+		if (!DoProgramTorunCoilDriversBeforeRun) return false;
+		InitializeCoilDriverTorun3x3A(/* OnlyFast*/false);
+	}
+	else {
+		ParamList->RegisterBool(&DoProgramTorunCoilDriversBeforeRun, "DoProgramTorunCoilDriversBeforeRun", "Program Torun coil drivers before run ?", "R");
+	}
+	return true;
+}
+
 void CSequence::InitializeSystemAtBeginningOfRun(bool HardResetSystem) {
 	static bool DoInitializeSystemAtBeginningOfRun;
 	static bool InitializeSystemAtBeginningOfRunOnlyFastOutputs;
@@ -2272,6 +2284,7 @@ bool CSequence::MainExperimentalSequenceStartInDirectOutputMode(CWnd* parent) {
 		bool DoRun = true;
 		DoRun = DoRun && LoadParameterFileBeforeRun(parent);
 	}
+	ProgramTorunCoilDriversBeforeRun();
 	ResetSystemBeforeRun();
 	return DoRun;
 }
@@ -2331,11 +2344,6 @@ void CSequence::ShutDown() {
 
 /*
 Final steps to AQuRA clock code:
-- fix Torun coil driver firmware, make communication work
-- use shutter timings
-- add code for optical pumping to stretched state
-- add clock interrogation code
-- add clock PID (or I only) and clock operation code
 - once all done and working: translate to Qt demo program
 - (optional) pull down menus to select any analog or digital output
 */
