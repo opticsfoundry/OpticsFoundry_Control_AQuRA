@@ -57,6 +57,9 @@ CEasyDialog::~CEasyDialog()
 {
 	m_bDialogClosed = true;
 	if (ToolTip) {
+		if (::IsWindow(ToolTip->GetSafeHwnd())) {
+			ToolTip->DestroyWindow(); // Safely destroys the HWND
+		}
 		delete ToolTip;
 		ToolTip = nullptr;
 	}
@@ -165,6 +168,13 @@ void CEasyDialog::OnDown(int mode) {
 void CEasyDialog::OnDestroy()
 {
 	m_bDialogClosed = true;
+	if (ToolTip) {	
+		if (::IsWindow(ToolTip->GetSafeHwnd())) {
+			ToolTip->DestroyWindow(); // Safely destroys the HWND
+		}
+		delete ToolTip;
+		ToolTip = nullptr;
+	}
 	CDialog::OnDestroy();
 }
 
@@ -882,15 +892,14 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 	if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
 	if (!AfxIsValidAddress(pMsg, sizeof(MSG), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg is not valid");
 	
-	if (ToolTip != nullptr) {
+	if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
 		//The following check is likely not necessary. 
 		//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));
 		if (AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE)) {
 			if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
 				if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
 					if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
-						//ToolTip->RelayEvent(pMsg);
-						;
+						ToolTip->RelayEvent(pMsg);
 					else
 						ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
 				else
