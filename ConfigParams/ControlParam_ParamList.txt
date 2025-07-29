@@ -170,6 +170,7 @@ InitCoilDriverTorun3x3ACurrentState0Coil0=0.11000
 InitCoilDriverTorun3x3ACurrentState0Coil1=0.12000
 InitCoilDriverTorun3x3ACurrentState0Coil2=0.13000
 InitCoilDriverTorun3x3ARampTimeState0=1.00000
+InitMOTCoilDriverEnabled=FALSE
 ***  ***=0
 *** Preparation stage (direct mode) ***=0
 ExperimentalRunName=AQuRA clock

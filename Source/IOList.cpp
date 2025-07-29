@@ -797,6 +797,7 @@ void SetPhaseAD9958TestDDSCh1(double Phase) {
 
 //CoilDriverTorun3x3A
 const unsigned int TorunDriverHelpAnalogOutStart = HelpAnalogOutStartNumber + 5000;
+const unsigned int TorunDriverHelpDigitalOutStart = HelpDigitalOutStartNumber + 5000;
 void SetCurrentState0Coil0(double current) {
 	CoilDriverTorun3x3A->SetCurrent(0, 0, current);
 	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 0, current, current);
@@ -877,3 +878,7 @@ void SetRampTimeState3(double RampTime) {
 	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 15, RampTime, RampTime);
 }
 
+void SwitchMOTCoilDriver(bool OnOff) {
+	CoilDriverTorun100A->SetMode((OnOff) ? 1 : 0);
+	Output->DigitalOutScaled(TorunDriverHelpDigitalOutStart, OnOff, OnOff);
+}

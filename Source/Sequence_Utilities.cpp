@@ -32,6 +32,7 @@ bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
 	Received |= TestSequence(Message, parent);
 	Received |= Test448nmCavityAnalogOut(Message, parent);
 	Received |= BlinkShutters(Message, parent);
+	Received |= UtilityTorunCoilDrivers(Message, parent);
 
 
 	/*
@@ -724,6 +725,37 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		else {
 			UtilityDialog->RegisterLong(&BlinkShutterPeriod, "BlinkShutterPeriod", 0, 100000, "Blink Shutter Wait Time", "ms");
 			UtilityDialog->AddButton(IDM_BLINK_SHUTTERS, Sequence);
+			UtilityDialog->AddStatic("");
+		}
+		return true;
+	}
+
+	//Utility Torun coil drivers
+	bool CSequence::UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent)
+	{
+		static long BlinkShutterPeriod;
+		if (!AssemblingUtilityDialog()) {
+			if (Message == IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A) {
+				InitializeCoilDriverTorun3x3A(/*OnlyFast*/ false, /*setting*/0);
+				return true;
+			}
+			else if (Message == IDM_ENABLE_TORUN_COIL_DRIVER_100A) {
+				CoilDriverTorun100A->SetMode(1); // 1 = Current controlled through front panel SMA input
+				return true;
+			}
+			else if (Message == IDM_DISABLE_TORUN_COIL_DRIVER_100A) {
+				CoilDriverTorun100A->SetMode(0); // 0 = Current off
+				return true;
+			}
+			return false;
+		}
+		else {
+			UtilityDialog->AddStatic("Offset coil driver");
+			UtilityDialog->AddButton(IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A, Sequence);
+			UtilityDialog->AddStatic("");
+			UtilityDialog->AddStatic("MOT coil driver");
+			UtilityDialog->AddButton(IDM_ENABLE_TORUN_COIL_DRIVER_100A, Sequence);
+			UtilityDialog->AddButton(IDM_DISABLE_TORUN_COIL_DRIVER_100A, Sequence);
 			UtilityDialog->AddStatic("");
 		}
 		return true;

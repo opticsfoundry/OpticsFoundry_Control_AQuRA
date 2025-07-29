@@ -136,6 +136,7 @@ public:
 	bool Test448nmCavityAnalogOut(unsigned int Message, CWnd* parent);
 	bool TestSequence(unsigned int Message, CWnd* parent);
 	bool BlinkShutters(unsigned int Message, CWnd* parent);
+	bool UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent);
 	bool RunClock(unsigned int Message, CWnd* parent);
 	void SwitchAQuRAShutters(bool OnOff);
 

@@ -1649,6 +1649,9 @@ BEGIN
     IDM_BLINK_SHUTTERS      "Blink shutters"
     IDC_TEST_VISION         "Test Vision"
     IDM_RUN_CLOCK           "Run AQuRA clock"
+    IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A "Program coil driver 3x3A (offset)"
+    IDM_ENABLE_TORUN_COIL_DRIVER_100A "Enable coil driver 100A (MOT)"
+    IDM_DISABLE_TORUN_COIL_DRIVER_100A "Disable coil driver 100A (MOT)"
 END
 
 #endif    // English (United States) resources

@@ -200,6 +200,7 @@ double InitCoilDriverTorun3x3ARampTimeState0;
 double InitCoilDriverTorun3x3ARampTimeState1;
 double InitCoilDriverTorun3x3ARampTimeState2;
 double InitCoilDriverTorun3x3ARampTimeState3;
+bool InitMOTCoilDriverEnabled;
 void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setting) {
 	if (AssemblingIOList()) {
 		const bool Constant = true;
@@ -226,6 +227,9 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 		IOList->RegisterAnalogOutput(&SetCurrentState3Coil1, "SetCurrentState2Coil1", "Torun state 3 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState3Coil2, "SetCurrentState2Coil2", "Torun state 3 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetRampTimeState3, "SetRampTimeState3", "Torun state 3 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->AddStatic("");
+		IOList->AddStatic("MOT coil driver");
+		IOList->RegisterDigitalOutput(&SwitchMOTCoilDriver, "SwitchMOTCoilDriver", "Enable MOT Coil Driver");
 
 		IOList->AddStatic("");
 	}
@@ -237,7 +241,10 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState0Coil1, "InitCoilDriverTorun3x3ACurrentState0Coil1", -3, 3, "Torun state 0 coil 1 current", "A");
 			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState0Coil2, "InitCoilDriverTorun3x3ACurrentState0Coil2", -3, 3, "Torun state 0 coil 2 current", "A");
 			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState0, "InitCoilDriverTorun3x3ARampTimeState0", 0, 1000, "Torun state 0 ramp time", "ms");
-
+			ParamList->AddStatic("");
+			ParamList->AddStatic("MOT coil driver");
+			ParamList->RegisterBool(&InitMOTCoilDriverEnabled, "InitMOTCoilDriverEnabled", "MOT Coil Driver enabled");
+			ParamList->AddStatic("");
 			break;
 		case 1:
 			ParamList->AddStatic("1: D2=0, D1=0, D0=1: red MOT");
@@ -266,6 +273,8 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 		default:
 			break;
 		}
+		ParamList->AddButton(IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A, Sequence);
+		
 	}
 	else {
 		if (!OnlyFast) {
@@ -285,6 +294,7 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			SetRampTimeState1(InitCoilDriverTorun3x3ARampTimeState1);
 			SetRampTimeState2(InitCoilDriverTorun3x3ARampTimeState2);
 			SetRampTimeState3(InitCoilDriverTorun3x3ARampTimeState3);
+			SwitchMOTCoilDriver(InitMOTCoilDriverEnabled);
 		}
 	}
 }
