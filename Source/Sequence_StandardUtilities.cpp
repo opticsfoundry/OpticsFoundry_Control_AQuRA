@@ -902,7 +902,7 @@ bool CSequence::TestDDS(unsigned int Message, CWnd* parent)
 			StopSequence();
 			SetWaveformGenerationMode();
 			ExecuteSequenceList();
-			//DebugSequenceList(*DebugFilePath + "TestSequenceListAfterExecution.dat",0);
+			//DebugSequenceList(*DebugFilePath + "UtilityTestSequenceListAfterExecution.dat",0);
 			//if (SetMemoryReadoutMode()) ExecuteSequenceList();				
 			EmptyNIcardFIFO();
 			Output->EnableRangeCheck();
@@ -951,7 +951,7 @@ bool CSequence::TestDDS(unsigned int Message, CWnd* parent)
 			StopSequence();
 			SetWaveformGenerationMode();
 			ExecuteSequenceList();
-			//DebugSequenceList(*DebugFilePath + "TestSequenceListAfterExecution.dat",0);
+			//DebugSequenceList(*DebugFilePath + "UtilityTestSequenceListAfterExecution.dat",0);
 			//if (SetMemoryReadoutMode()) ExecuteSequenceList();				
 			EmptyNIcardFIFO();
 			Output->EnableRangeCheck();

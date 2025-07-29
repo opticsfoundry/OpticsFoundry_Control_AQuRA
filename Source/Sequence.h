@@ -133,11 +133,11 @@ public:
 	void InitializeSystemAtBeginningOfRun(bool HardResetSystem=false);
 	void CheckMOTLoading();
 
-	bool Test448nmCavityAnalogOut(unsigned int Message, CWnd* parent);
-	bool TestSequence(unsigned int Message, CWnd* parent);
-	bool BlinkShutters(unsigned int Message, CWnd* parent);
+	bool UtilityTest448nmCavityAnalogOut(unsigned int Message, CWnd* parent);
+	bool UtilityTestSequence(unsigned int Message, CWnd* parent);
+	bool UtilityBlinkShutters(unsigned int Message, CWnd* parent);
 	bool UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent);
-	bool RunClock(unsigned int Message, CWnd* parent);
+	bool UtilityRunClock(unsigned int Message, CWnd* parent);
 	void SwitchAQuRAShutters(bool OnOff);
 
 	// Imaging sequences 
@@ -265,7 +265,7 @@ public:
 	void ResetSystem();
 	void ExecuteMeasurementDlgDone(CDialog *me);
 	void PauseSystem(CWnd* parent);	
-	void DoTestSequence();
+	void DoUtilityTestSequence();
 	virtual void ConfigureAdditionalHardware();
 	void RampAllOutputsToZero();
 	bool DidControlAPICommandErrorOccur();

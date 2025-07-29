@@ -1292,6 +1292,7 @@ BEGIN
     IDO_SERIAL_STORE_IN_SEQUENCELIST_MODE "Serial store in sequence list mode"
     IDM_MENU_0              "Menu 0"
     IDS_STRING330           "#define _WIN32_WINNT 0x0601  // Target Windows 7"
+    IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A "Set 3x3A coil driver state (offset)"
     IDM_TEST_DDS_MODULATION "Test DDS Modulation"
     IDM_ZEEMAN_SLOWER_OFF   "Zeeman slower off"
     IDM_MENU_1              "Menu 1"

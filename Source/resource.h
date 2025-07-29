@@ -206,6 +206,7 @@
 #define IDO_SERIAL_STORE_IN_SEQUENCELIST_MODE 328
 #define IDM_MENU_0                      329
 #define IDS_STRING330                   330
+#define IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A 42652
 #define IDM_TEST_DDS_MODULATION         332
 #define IDM_ZEEMAN_SLOWER_OFF           334
 #define IDM_MENU_1                      335

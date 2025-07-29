@@ -157,11 +157,11 @@ extern double TestRFPulseDuration;
 extern long TestRfPulseNrPulses;
 extern double TestRFPulseWait;
 
-//extern long Test448nmCavityAnalogOutChannel;
-//extern double Test448nmCavityAnalogOutMinVoltage;
-//extern double Test448nmCavityAnalogOutMaxVoltage;
-//extern double Test448nmCavityAnalogOutTime;
-//extern long Test448nmCavityAnalogOutRepetitions;
+//extern long UtilityTest448nmCavityAnalogOutChannel;
+//extern double UtilityTest448nmCavityAnalogOutMinVoltage;
+//extern double UtilityTest448nmCavityAnalogOutMaxVoltage;
+//extern double UtilityTest448nmCavityAnalogOutTime;
+//extern long UtilityTest448nmCavityAnalogOutRepetitions;
 
 
 #endif // !defined(AFX_UtilityDialog_H__EF771FF6_8FF9_446F_A9B6_AF721B573AE0__INCLUDED_)

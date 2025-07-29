@@ -22,17 +22,18 @@ bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
 		UtilityDialog->NewMenu("User utilities");
 		UtilityDialog->AddStatic("Run AQuRA clock");
 	}
-	Received |= RunClock(Message, parent);
+	Received |= UtilityRunClock(Message, parent);
 
 	if (AssemblingUtilityDialog()) {
 		UtilityDialog->NewColumn();
 		UtilityDialog->AddStatic("User utilities");
 		//		UtilityDialog->AddStatic("");
 	}
-	Received |= TestSequence(Message, parent);
-	Received |= Test448nmCavityAnalogOut(Message, parent);
-	Received |= BlinkShutters(Message, parent);
+	Received |= UtilityTestSequence(Message, parent);
+	Received |= UtilityTest448nmCavityAnalogOut(Message, parent);
+	Received |= UtilityBlinkShutters(Message, parent);
 	Received |= UtilityTorunCoilDrivers(Message, parent);
+	
 
 
 	/*
@@ -528,60 +529,60 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 
 
 	//Utility CavityTUningTestAnalogOut
-	long Test448nmCavityAnalogOutChannel;
-	double Test448nmCavityAnalogOutMinVoltage;
-	double Test448nmCavityAnalogOutMaxVoltage;
-	double Test448nmCavityAnalogOutTime;
-	double Test448nmCavityAnalogOutWaitTime;
-	long Test448nmCavityAnalogOutRepetitions;
+	long UtilityTest448nmCavityAnalogOutChannel;
+	double UtilityTest448nmCavityAnalogOutMinVoltage;
+	double UtilityTest448nmCavityAnalogOutMaxVoltage;
+	double UtilityTest448nmCavityAnalogOutTime;
+	double UtilityTest448nmCavityAnalogOutWaitTime;
+	long UtilityTest448nmCavityAnalogOutRepetitions;
 
-	double Test448nmCavityAnalogOutFunctionLastValue = 0;
-	double Test448nmCavityAnalogOutShutterFunctionLastValue = 0;
+	double UtilityTest448nmCavityAnalogOutFunctionLastValue = 0;
+	double UtilityTest448nmCavityAnalogOutShutterFunctionLastValue = 0;
 
-	double Test448nmCavityAnalogOutFunction(double Value, bool GetValue) {
-		if (GetValue) return Test448nmCavityAnalogOutFunctionLastValue;
+	double UtilityTest448nmCavityAnalogOutFunction(double Value, bool GetValue) {
+		if (GetValue) return UtilityTest448nmCavityAnalogOutFunctionLastValue;
 		else {
-			Output->AnalogOutScaled(Test448nmCavityAnalogOutChannel, Value, Value);
-			Test448nmCavityAnalogOutFunctionLastValue = Value;
+			Output->AnalogOutScaled(UtilityTest448nmCavityAnalogOutChannel, Value, Value);
+			UtilityTest448nmCavityAnalogOutFunctionLastValue = Value;
 		}
 		return 0;
 	}
 
-	double Test448nmCavityAnalogOutShutterFunction(double Value, bool GetValue) {
-		if (GetValue) return Test448nmCavityAnalogOutShutterFunctionLastValue;
+	double UtilityTest448nmCavityAnalogOutShutterFunction(double Value, bool GetValue) {
+		if (GetValue) return UtilityTest448nmCavityAnalogOutShutterFunctionLastValue;
 		else {
 			Output->AnalogOutScaled(48, Value, Value);
-			Test448nmCavityAnalogOutShutterFunctionLastValue = Value;
+			UtilityTest448nmCavityAnalogOutShutterFunctionLastValue = Value;
 		}
 		return 0;
 	}
 
 
-	bool CSequence::Test448nmCavityAnalogOut(unsigned int Message, CWnd* parent) {
+	bool CSequence::UtilityTest448nmCavityAnalogOut(unsigned int Message, CWnd* parent) {
 		if (!AssemblingUtilityDialog()) {
 			switch (Message) {
 			case IDC_TEST_448nm_Cavity_ANALOG_OUT:
 				SetAssembleSequenceListMode();
 				StartSequence(NULL, NULL, false);
-				for (int n = 0; n < Test448nmCavityAnalogOutRepetitions; n++) {
+				for (int n = 0; n < UtilityTest448nmCavityAnalogOutRepetitions; n++) {
 					//SwitchAQuRABlueZeemanSlowerUniblitzShutter(On);
 					//SetIntensityAQuRABlueMOTAOM1(100);
-					Waveform(new CRamp(&Test448nmCavityAnalogOutFunction, Test448nmCavityAnalogOutMinVoltage * 0.5 + 5, Test448nmCavityAnalogOutMaxVoltage * 0.5 + 5, Test448nmCavityAnalogOutTime));
-					//					Waveform(new CRamp(&Test448nmCavityAnalogOutShutterFunction,Test448nmCavityAnalogOutMinVoltage*0.5+5,Test448nmCavityAnalogOutMaxVoltage*0.5+5,Test448nmCavityAnalogOutTime));			
+					Waveform(new CRamp(&UtilityTest448nmCavityAnalogOutFunction, UtilityTest448nmCavityAnalogOutMinVoltage * 0.5 + 5, UtilityTest448nmCavityAnalogOutMaxVoltage * 0.5 + 5, UtilityTest448nmCavityAnalogOutTime));
+					//					Waveform(new CRamp(&UtilityTest448nmCavityAnalogOutShutterFunction,UtilityTest448nmCavityAnalogOutMinVoltage*0.5+5,UtilityTest448nmCavityAnalogOutMaxVoltage*0.5+5,UtilityTest448nmCavityAnalogOutTime));			
 
 										//TestAnalogOutFunction(2,false);
-					Wait(Test448nmCavityAnalogOutTime);
-					Waveform(new CRamp(&Test448nmCavityAnalogOutFunction, Test448nmCavityAnalogOutMaxVoltage * 0.5 + 5, Test448nmCavityAnalogOutMinVoltage * 0.5 + 5, Test448nmCavityAnalogOutTime));
-					//					Waveform(new CRamp(&Test448nmCavityAnalogOutShutterFunction,Test448nmCavityAnalogOutMaxVoltage*0.5+5,Test448nmCavityAnalogOutMinVoltage*0.5+5,Test448nmCavityAnalogOutTime));			
+					Wait(UtilityTest448nmCavityAnalogOutTime);
+					Waveform(new CRamp(&UtilityTest448nmCavityAnalogOutFunction, UtilityTest448nmCavityAnalogOutMaxVoltage * 0.5 + 5, UtilityTest448nmCavityAnalogOutMinVoltage * 0.5 + 5, UtilityTest448nmCavityAnalogOutTime));
+					//					Waveform(new CRamp(&UtilityTest448nmCavityAnalogOutShutterFunction,UtilityTest448nmCavityAnalogOutMaxVoltage*0.5+5,UtilityTest448nmCavityAnalogOutMinVoltage*0.5+5,UtilityTest448nmCavityAnalogOutTime));			
 
 										//TestAnalogOutFunction(0,false);
-										//Wait(Test448nmCavityAnalogOutTime);
+										//Wait(UtilityTest448nmCavityAnalogOutTime);
 										//SwitchAQuRABlueZeemanSlowerUniblitzShutter(Off);
 										//SetIntensityAQuRABlueMOTAOM1(0);
-										//Wait(Test448nmCavityAnalogOutWaitTime);
+										//Wait(UtilityTest448nmCavityAnalogOutWaitTime);
 				}
 				Wait(10);
-				Test448nmCavityAnalogOutFunction(0, True);// Boolen: True makes output value stay at last value instead of reset
+				UtilityTest448nmCavityAnalogOutFunction(0, True);// Boolen: True makes output value stay at last value instead of reset
 				Wait(10);
 				StopSequence();
 				SetWaveformGenerationMode();
@@ -592,12 +593,12 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			}
 		}
 		else {
-			UtilityDialog->RegisterLong(&Test448nmCavityAnalogOutChannel, "Test448nmCavityAnalogOutChannel", 0, 10000, "Test448nmCavityAnalogOutChannel");
-			UtilityDialog->RegisterDouble(&Test448nmCavityAnalogOutMinVoltage, "Test448nmCavityAnalogOutMinVoltage", -10, 10, "Min Voltage", "V");
-			UtilityDialog->RegisterDouble(&Test448nmCavityAnalogOutMaxVoltage, "Test448nmCavityAnalogOutMaxVoltage", -10, 10, "Max Voltage", "V");
-			UtilityDialog->RegisterDouble(&Test448nmCavityAnalogOutTime, "Test448nmCavityAnalogOutTime", 0, 60000, "Time", "ms");
-			UtilityDialog->RegisterDouble(&Test448nmCavityAnalogOutWaitTime, "Test448nmCavityAnalogOutWaitTime", 0, 60000, "WaitTime", "ms");
-			UtilityDialog->RegisterLong(&Test448nmCavityAnalogOutRepetitions, "Test448nmCavityAnalogOutRepetitions", 0, 10000, "Repetitions");
+			UtilityDialog->RegisterLong(&UtilityTest448nmCavityAnalogOutChannel, "UtilityTest448nmCavityAnalogOutChannel", 0, 10000, "UtilityTest448nmCavityAnalogOutChannel");
+			UtilityDialog->RegisterDouble(&UtilityTest448nmCavityAnalogOutMinVoltage, "UtilityTest448nmCavityAnalogOutMinVoltage", -10, 10, "Min Voltage", "V");
+			UtilityDialog->RegisterDouble(&UtilityTest448nmCavityAnalogOutMaxVoltage, "UtilityTest448nmCavityAnalogOutMaxVoltage", -10, 10, "Max Voltage", "V");
+			UtilityDialog->RegisterDouble(&UtilityTest448nmCavityAnalogOutTime, "UtilityTest448nmCavityAnalogOutTime", 0, 60000, "Time", "ms");
+			UtilityDialog->RegisterDouble(&UtilityTest448nmCavityAnalogOutWaitTime, "UtilityTest448nmCavityAnalogOutWaitTime", 0, 60000, "WaitTime", "ms");
+			UtilityDialog->RegisterLong(&UtilityTest448nmCavityAnalogOutRepetitions, "UtilityTest448nmCavityAnalogOutRepetitions", 0, 10000, "Repetitions");
 
 
 			UtilityDialog->AddButton(IDC_TEST_448nm_Cavity_ANALOG_OUT, Sequence);
@@ -609,12 +610,12 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 
 
 
-	//Utility TestSequence
+	//Utility UtilityTestSequence
 	bool TestOnlyOnce;
 	double TestFrequency;
 	double TestTime;
 	double TestAmplitude;
-	bool CSequence::TestSequence(unsigned int Message, CWnd* parent)
+	bool CSequence::UtilityTestSequence(unsigned int Message, CWnd* parent)
 	{
 		if (!AssemblingUtilityDialog()) {
 			if (Message != IDM_TEST_SEQUENCE) return false;
@@ -632,10 +633,10 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 					if (!CancelLoopDialog) return true;
 				}
 				SetAssembleSequenceListMode();
-				DoTestSequence();
+				DoUtilityTestSequence();
 				SetWaveformGenerationMode();
 				ExecuteSequenceList();
-				if (DebugSequenceListOn) DebugSequenceList(*DebugFileName + "TestSequenceListAfterExecution.dat", 0);
+				if (DebugSequenceListOn) DebugSequenceList(*DebugFileName + "UtilityTestSequenceListAfterExecution.dat", 0);
 				if (SetMemoryReadoutMode()) ExecuteSequenceList();
 				EmptyNIcardFIFO();
 				if (OnlyOnce) return true;
@@ -653,7 +654,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 	}
 
 
-	void CSequence::DoTestSequence()
+	void CSequence::DoUtilityTestSequence()
 	{
 		SwitchForceWritingMode(On);
 		StartSequence();
@@ -698,8 +699,8 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		SwitchAdditionalShutter7(OnOff);
 	}
 
-	//Utility BlinkShutters
-	bool CSequence::BlinkShutters(unsigned int Message, CWnd* parent)
+	//Utility UtilityBlinkShutters
+	bool CSequence::UtilityBlinkShutters(unsigned int Message, CWnd* parent)
 	{
 		static long BlinkShutterPeriod;
 		if (!AssemblingUtilityDialog()) {
@@ -733,11 +734,27 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 	//Utility Torun coil drivers
 	bool CSequence::UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent)
 	{
-		static long BlinkShutterPeriod;
+		static long CoilDriver3x3AState=0;
 		if (!AssemblingUtilityDialog()) {
 			if (Message == IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A) {
 				InitializeCoilDriverTorun3x3A(/*OnlyFast*/ false, /*setting*/0);
 				return true;
+			}
+			else if (Message == IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A) {
+				//we execute SetTorunCoilDriverState in sequence mode, not manual mode, to replicate the same timing as in the main experimental sequence
+				SetAssembleSequenceListMode();
+				StartSequence(NULL, parent, false);
+				SetTorunCoilDriverState(CoilDriver3x3AState);
+				StopSequence();
+				SetWaveformGenerationMode();
+				ExecuteSequenceList();
+				unsigned int state = 0;
+				CoilDriverTorun3x3A->GetState(state);
+				if (state != CoilDriver3x3AState) {
+					CString buf;
+					buf.Format("CSequence::UtilityTorunCoilDrivers : Coil Driver 3x3A set to state %u, but requested state is %u", state, CoilDriver3x3AState);
+					ControlMessageBox(buf);
+				}
 			}
 			else if (Message == IDM_ENABLE_TORUN_COIL_DRIVER_100A) {
 				CoilDriverTorun100A->SetMode(1); // 1 = Current controlled through front panel SMA input
@@ -752,6 +769,8 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		else {
 			UtilityDialog->AddStatic("Offset coil driver");
 			UtilityDialog->AddButton(IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A, Sequence);
+			UtilityDialog->RegisterLong(&CoilDriver3x3AState, "CoilDriver3x3AState", 0, 3, "Coil Driver 3x3A State", "0..3");
+			UtilityDialog->AddButton(IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A, Sequence);
 			UtilityDialog->AddStatic("");
 			UtilityDialog->AddStatic("MOT coil driver");
 			UtilityDialog->AddButton(IDM_ENABLE_TORUN_COIL_DRIVER_100A, Sequence);
@@ -776,12 +795,12 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 	}
 
 
-	//Utility RunClock
-	bool CSequence::RunClock(unsigned int Message, CWnd* parent)
+	//Utility UtilityRunClock
+	bool CSequence::UtilityRunClock(unsigned int Message, CWnd* parent)
 	{
-		static double RunClockStretchedStateFrequencyDifference;
-		static double RunClockSideOfFringeFrequencyDifference;
-		static double RunClockIntegratorConstant;
+		static double UtilityRunClockStretchedStateFrequencyDifference;
+		static double UtilityRunClockSideOfFringeFrequencyDifference;
+		static double UtilityRunClockIntegratorConstant;
 		unsigned long RunNr = 0;
 		if (!AssemblingUtilityDialog()) {
 			if (Message != IDM_RUN_CLOCK) return false;
@@ -793,7 +812,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			//open file and write header 
 			std::fstream file(*DataFilePath + "Control_AQuRA_Clock_log.dat", std::ios::out);
 			if (!file.is_open()) {
-				ControlMessageBox("CSequence::RunClock : Couldn't open log file for writing");
+				ControlMessageBox("CSequence::UtilityRunClock : Couldn't open log file for writing");
 				return true;
 			}
 			CString buf;
@@ -813,8 +832,8 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				//TypeOfRun = 3: InterrogatePositivemFState = true, InterrogatePositiveSlope = true
 				bool InterrogatePositivemFState = (TypeOfRun & 1) > 0; // 0 = mF = -9/2, 1 = mF = +9/2
 				bool InterrogatePositiveSlope = (TypeOfRun & 2) > 0;   // 0 = negative slope, 1 = positive slope
-				ClockInterrogationFrequency = 80 + Integral + ((InterrogatePositivemFState) ? 1 : -1) * RunClockStretchedStateFrequencyDifference +
-					((InterrogatePositiveSlope) ? 1 : -1) * RunClockSideOfFringeFrequencyDifference;
+				ClockInterrogationFrequency = 80 + Integral + ((InterrogatePositivemFState) ? 1 : -1) * UtilityRunClockStretchedStateFrequencyDifference +
+					((InterrogatePositiveSlope) ? 1 : -1) * UtilityRunClockSideOfFringeFrequencyDifference;
 
 				CString buf;
 				buf.Format("Running clock: RunNr = %u, RunType = %u, mF = %s9/2, Detuning = %s, Frequency = %f\nResult = {%.3f, %.3f, %.3f, %.3f}\nZeeman splitting = %f, Frequency deviation = %f\nIntegral = %f", RunNr, TypeOfRun, (InterrogatePositivemFState) ? "+" : "-", (InterrogatePositiveSlope) ? "+" : "-", ClockInterrogationFrequency-80,
@@ -839,12 +858,12 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 					ZeemanSplitting = (DeviationNegativemFStates - DeviationPositivemFStates) / 2;
 					FrequencyDeviation = (DeviationNegativemFStates + DeviationPositivemFStates) / 2;
 					
-					Integral = FrequencyDeviation * RunClockIntegratorConstant;
+					Integral = FrequencyDeviation * UtilityRunClockIntegratorConstant;
 
 					//open file to append to it
 					std::fstream file(*DataFilePath + "Control_AQuRA_Clock_log.dat", std::ios::out | std::ios::app);
 					if (!file.is_open()) {
-						ControlMessageBox("CSequence::RunClock : Couldn't open log file for writing");
+						ControlMessageBox("CSequence::UtilityRunClock : Couldn't open log file for writing");
 						return true;
 					}
 					CString buf;
@@ -861,9 +880,9 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			}
 		}
 		else {
-			UtilityDialog->RegisterDouble(&RunClockStretchedStateFrequencyDifference, "RunClockStretchedStateFrequencyDifference", 0, 100000, "Zeeman shift mF=+9/2", "MHz");
-			UtilityDialog->RegisterDouble(&RunClockSideOfFringeFrequencyDifference, "RunClockSideOfFringeFrequencyDifference", 0, 100000, "Half width half maximum", "MHz", "Half width half maximum of spectroscopy line of one mF state");
-			UtilityDialog->RegisterDouble(&RunClockIntegratorConstant, "RunClockIntegratorConstant", -100000, 100000, "Integrator Constant", "");
+			UtilityDialog->RegisterDouble(&UtilityRunClockStretchedStateFrequencyDifference, "UtilityRunClockStretchedStateFrequencyDifference", 0, 100000, "Zeeman shift mF=+9/2", "MHz");
+			UtilityDialog->RegisterDouble(&UtilityRunClockSideOfFringeFrequencyDifference, "UtilityRunClockSideOfFringeFrequencyDifference", 0, 100000, "Half width half maximum", "MHz", "Half width half maximum of spectroscopy line of one mF state");
+			UtilityDialog->RegisterDouble(&UtilityRunClockIntegratorConstant, "UtilityRunClockIntegratorConstant", -100000, 100000, "Integrator Constant", "");
 			UtilityDialog->AddButton(IDM_RUN_CLOCK, Sequence);
 			UtilityDialog->AddStatic("");
 		}

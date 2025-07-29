@@ -259,11 +259,11 @@ double TestRFPulseDuration;
 long TestRfPulseNrPulses;
 double TestRFPulseWait;
 
-//long Test448nmCavityAnalogOutChannel;
-//double Test448nmCavityAnalogOutMinVoltage;
-//double Test448nmCavityAnalogOutMaxVoltage;
-//double Test448nmCavityAnalogOutTime;
-//long Test448nmCavityAnalogOutRepetitions;
+//long UtilityTest448nmCavityAnalogOutChannel;
+//double UtilityTest448nmCavityAnalogOutMinVoltage;
+//double UtilityTest448nmCavityAnalogOutMaxVoltage;
+//double UtilityTest448nmCavityAnalogOutTime;
+//long UtilityTest448nmCavityAnalogOutRepetitions;
 
 
 
