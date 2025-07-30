@@ -43,7 +43,6 @@ extern bool* InitBlueMOTShutter;
 extern bool* InitZSShutter;
 extern bool* InitRedMOTShutter;
 extern bool* InitRedPumpShutter;
-extern bool* InitRepumpShutter;
 extern bool* InitPumpPolarization1Shutter;
 extern bool* InitPumpPolarization2Shutter;
 extern bool* InitCoarseSpectroscopyShutter;

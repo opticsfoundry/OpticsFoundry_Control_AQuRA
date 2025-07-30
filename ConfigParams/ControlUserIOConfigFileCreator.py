@@ -294,14 +294,14 @@ if __name__ == "__main__":
     builder.add_new_column()
     builder.add_static_text(Text="Shutters")
     builder.add_digital_out(Name="BlueDetectionShutter", Description="Blue Detection Shutter", Address=6, Bit=0)
-    builder.add_digital_out(Name="BlueMOTShutter", Description="Blue MOT Shutter", Address=6, Bit=1)
+    builder.add_digital_out(Name="BlueMOTShutter", Description="Blue MOT Shutter", Address=6, Bit=8)
     builder.add_digital_out(Name="ZSShutter", Description="ZS Shutter", Address=6, Bit=2)    
     builder.add_digital_out(Name="RedMOTShutter", Description="Red MOT Shutter", Address=6, Bit=3)
     builder.add_digital_out(Name="RedPumpShutter", Description="Red Pump Shutter", Address=6, Bit=4)
-    builder.add_digital_out(Name="RepumpShutter", Description="Repump Shutter", Address=6, Bit=5)
-    builder.add_digital_out(Name="PumpPolarization1Shutter", Description="Pump Polarization 1 Shutter", Address=6, Bit=6)
-    builder.add_digital_out(Name="PumpPolarization2Shutter", Description="Pump Polarization 2 Shutter", Address=6, Bit=7)
-    builder.add_digital_out(Name="CoarseSpectroscopyShutter", Description="Coarse Spectroscopy Shutter", Address=6, Bit=8)
+    #builder.add_digital_out(Name="RepumpShutter", Description="Repump Shutter", Address=6, Bit=5)
+    builder.add_digital_out(Name="PumpPolarization1Shutter", Description="Pump Polarization 1 Shutter", Address=6, Bit=5)
+    builder.add_digital_out(Name="PumpPolarization2Shutter", Description="Pump Polarization 2 Shutter", Address=6, Bit=6)
+    builder.add_digital_out(Name="CoarseSpectroscopyShutter", Description="Coarse Spectroscopy Shutter", Address=6, Bit=9)
 
     builder.add_new_menu(Text="AQuRA AD9854 DDS")
     builder.add_static_text(Text="AQuRA AD9854 DDS")
@@ -342,8 +342,8 @@ if __name__ == "__main__":
         builder.add_digital_out(Name=f"SpareDigitalOut{i}", Description=f"Spare Digital Output {i}", Address=7, Bit = i)
     builder.add_new_column()
     builder.add_static_text(Text="Spare Shutter Outs")
-    for i in range(6):
-        builder.add_digital_out(Name=f"ExtraClockShutter{i}", Description=f"Extra Clock Shutter {i}", Address=6, Bit = i + 9)
+    for i in range(5):
+        builder.add_digital_out(Name=f"ExtraClockShutter{i}", Description=f"Extra Clock Shutter {i}", Address=6, Bit = i + 10)
     for i in range(8):
         builder.add_digital_out(Name=f"AdditionalShutter{i}", Description=f"Additional Shutter {i}", Address=4, Bit = i)
     

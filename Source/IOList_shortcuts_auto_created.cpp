@@ -52,7 +52,6 @@ DigitalOutFuncShortcut SwitchBlueMOTShutter;
 DigitalOutFuncShortcut SwitchZSShutter;
 DigitalOutFuncShortcut SwitchRedMOTShutter;
 DigitalOutFuncShortcut SwitchRedPumpShutter;
-DigitalOutFuncShortcut SwitchRepumpShutter;
 DigitalOutFuncShortcut SwitchPumpPolarization1Shutter;
 DigitalOutFuncShortcut SwitchPumpPolarization2Shutter;
 DigitalOutFuncShortcut SwitchCoarseSpectroscopyShutter;
@@ -217,7 +216,6 @@ void CIORegister::CreateShortcutsToUserIO() {
 	SwitchZSShutter = GetDigitalOutput("SwitchZSShutter");
 	SwitchRedMOTShutter = GetDigitalOutput("SwitchRedMOTShutter");
 	SwitchRedPumpShutter = GetDigitalOutput("SwitchRedPumpShutter");
-	SwitchRepumpShutter = GetDigitalOutput("SwitchRepumpShutter");
 	SwitchPumpPolarization1Shutter = GetDigitalOutput("SwitchPumpPolarization1Shutter");
 	SwitchPumpPolarization2Shutter = GetDigitalOutput("SwitchPumpPolarization2Shutter");
 	SwitchCoarseSpectroscopyShutter = GetDigitalOutput("SwitchCoarseSpectroscopyShutter");

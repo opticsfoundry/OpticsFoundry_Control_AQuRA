@@ -46,7 +46,6 @@ bool* InitBlueMOTShutter;
 bool* InitZSShutter;
 bool* InitRedMOTShutter;
 bool* InitRedPumpShutter;
-bool* InitRepumpShutter;
 bool* InitPumpPolarization1Shutter;
 bool* InitPumpPolarization2Shutter;
 bool* InitCoarseSpectroscopyShutter;
@@ -211,7 +210,6 @@ void CParamRegister::CreateShortcutsToUserIOInitParams() {
 	InitZSShutter = GetParamBool("InitZSShutter");
 	InitRedMOTShutter = GetParamBool("InitRedMOTShutter");
 	InitRedPumpShutter = GetParamBool("InitRedPumpShutter");
-	InitRepumpShutter = GetParamBool("InitRepumpShutter");
 	InitPumpPolarization1Shutter = GetParamBool("InitPumpPolarization1Shutter");
 	InitPumpPolarization2Shutter = GetParamBool("InitPumpPolarization2Shutter");
 	InitCoarseSpectroscopyShutter = GetParamBool("InitCoarseSpectroscopyShutter");

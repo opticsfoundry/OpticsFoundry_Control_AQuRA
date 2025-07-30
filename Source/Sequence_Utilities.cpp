@@ -679,7 +679,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		SwitchZSShutter(OnOff);
 		SwitchRedMOTShutter(OnOff);
 		SwitchRedPumpShutter(OnOff);
-		SwitchRepumpShutter(OnOff);
+		//SwitchRepumpShutter(OnOff);
 		SwitchPumpPolarization1Shutter(OnOff);
 		SwitchPumpPolarization2Shutter(OnOff);
 		SwitchCoarseSpectroscopyShutter(OnOff);

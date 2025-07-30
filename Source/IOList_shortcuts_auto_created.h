@@ -50,7 +50,6 @@ extern DigitalOutFuncShortcut SwitchBlueMOTShutter;
 extern DigitalOutFuncShortcut SwitchZSShutter;
 extern DigitalOutFuncShortcut SwitchRedMOTShutter;
 extern DigitalOutFuncShortcut SwitchRedPumpShutter;
-extern DigitalOutFuncShortcut SwitchRepumpShutter;
 extern DigitalOutFuncShortcut SwitchPumpPolarization1Shutter;
 extern DigitalOutFuncShortcut SwitchPumpPolarization2Shutter;
 extern DigitalOutFuncShortcut SwitchCoarseSpectroscopyShutter;

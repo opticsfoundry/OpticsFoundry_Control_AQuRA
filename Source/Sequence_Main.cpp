@@ -1261,7 +1261,7 @@ void CSequence::SwitchBlueMOTOff() {
 		//An error of a few ms should not matter.
 		StartTime = GetTime();
 		GoBackInTime(RepumpShutterOnDelay);
-		SwitchRepumpShutter(On);
+		//SwitchRepumpShutter(On);
 		GoToTime(StartTime);
 		//ToDo: do we want parameters that are different from init params here?
 		//ToDo: make init values available by name, just like now already the commands through IOList_shortcuts...
@@ -1295,7 +1295,7 @@ void CSequence::SwitchBlueMOTOff() {
 			//switch repumping off. This is controlled by shutter, as there are no AOMs for repumpers.
 			double StartTime = GetTime();
 			GoBackInTime(RepumpShutterOffPreTrigger);
-			SwitchRepumpShutter(Off);
+			//SwitchRepumpShutter(Off);
 			GoToTime(StartTime);
 		}
 		//Go back to start of bb red MOT, i.e. we start ramping red MOT while doing repumping. Do we want that?
@@ -1680,7 +1680,7 @@ void CSequence::ClockReadout() {
 			//repumpers are controlled by shutters only, not AOMs, so pay attention to shutter timing
 			double Start = GetTime();
 			GoBackInTime(RepumpShutterOnDelay);
-			SwitchRepumpShutter(On);
+			//SwitchRepumpShutter(On);
 			GoToTime(Start);
 			GoBackInTime(PumpPolarizationShutterOnDelay);
 			SwitchPumpPolarization1Shutter(On);
@@ -1758,7 +1758,7 @@ void CSequence::SwitchBlueFluorescenceDetectionMOTOn() {
 				//repumpers are controlled by shutters only, not AOMs, so pay attention to shutter timing
 				Start = GetTime();
 				GoBackInTime(RepumpShutterOnDelay);
-				SwitchRepumpShutter(On);
+				//SwitchRepumpShutter(On);
 				GoToTime(Start);
 				GoBackInTime(PumpPolarizationShutterOnDelay);
 				SwitchPumpPolarization1Shutter(On);
@@ -1808,7 +1808,7 @@ void CSequence::SwitchRedFluorescenceDetectionMOTOn() {
 				//repumpers are controlled by shutters only, not AOMs, so pay attention to shutter timing
 				Start = GetTime();
 				GoBackInTime(RepumpShutterOnDelay);
-				SwitchRepumpShutter(On);
+				//SwitchRepumpShutter(On);
 				GoToTime(Start);
 				GoBackInTime(PumpPolarizationShutterOnDelay);
 				SwitchPumpPolarization1Shutter(On);
@@ -1860,7 +1860,7 @@ void CSequence::SwitchBlueFluorescenceProbeBeamOn() {
 				//repumpers are controlled by shutters only, not AOMs, so pay attention to shutter timing
 				Start = GetTime();
 				GoBackInTime(RepumpShutterOnDelay);
-				SwitchRepumpShutter(On);
+				//SwitchRepumpShutter(On);
 				GoToTime(Start);
 				GoBackInTime(PumpPolarizationShutterOnDelay);
 				SwitchPumpPolarization1Shutter(On);
