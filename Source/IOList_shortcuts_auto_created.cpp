@@ -176,7 +176,6 @@ DigitalOutFuncShortcut SwitchExtraClockShutter1;
 DigitalOutFuncShortcut SwitchExtraClockShutter2;
 DigitalOutFuncShortcut SwitchExtraClockShutter3;
 DigitalOutFuncShortcut SwitchExtraClockShutter4;
-DigitalOutFuncShortcut SwitchExtraClockShutter5;
 DigitalOutFuncShortcut SwitchAdditionalShutter0;
 DigitalOutFuncShortcut SwitchAdditionalShutter1;
 DigitalOutFuncShortcut SwitchAdditionalShutter2;
@@ -340,7 +339,6 @@ void CIORegister::CreateShortcutsToUserIO() {
 	SwitchExtraClockShutter2 = GetDigitalOutput("SwitchExtraClockShutter2");
 	SwitchExtraClockShutter3 = GetDigitalOutput("SwitchExtraClockShutter3");
 	SwitchExtraClockShutter4 = GetDigitalOutput("SwitchExtraClockShutter4");
-	SwitchExtraClockShutter5 = GetDigitalOutput("SwitchExtraClockShutter5");
 	SwitchAdditionalShutter0 = GetDigitalOutput("SwitchAdditionalShutter0");
 	SwitchAdditionalShutter1 = GetDigitalOutput("SwitchAdditionalShutter1");
 	SwitchAdditionalShutter2 = GetDigitalOutput("SwitchAdditionalShutter2");

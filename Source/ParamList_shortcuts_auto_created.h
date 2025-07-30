@@ -167,7 +167,6 @@ extern bool* InitExtraClockShutter1;
 extern bool* InitExtraClockShutter2;
 extern bool* InitExtraClockShutter3;
 extern bool* InitExtraClockShutter4;
-extern bool* InitExtraClockShutter5;
 extern bool* InitAdditionalShutter0;
 extern bool* InitAdditionalShutter1;
 extern bool* InitAdditionalShutter2;

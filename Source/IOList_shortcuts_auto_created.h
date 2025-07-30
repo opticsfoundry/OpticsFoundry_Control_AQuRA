@@ -174,7 +174,6 @@ extern DigitalOutFuncShortcut SwitchExtraClockShutter1;
 extern DigitalOutFuncShortcut SwitchExtraClockShutter2;
 extern DigitalOutFuncShortcut SwitchExtraClockShutter3;
 extern DigitalOutFuncShortcut SwitchExtraClockShutter4;
-extern DigitalOutFuncShortcut SwitchExtraClockShutter5;
 extern DigitalOutFuncShortcut SwitchAdditionalShutter0;
 extern DigitalOutFuncShortcut SwitchAdditionalShutter1;
 extern DigitalOutFuncShortcut SwitchAdditionalShutter2;

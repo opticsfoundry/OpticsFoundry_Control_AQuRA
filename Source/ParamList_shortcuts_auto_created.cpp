@@ -170,7 +170,6 @@ bool* InitExtraClockShutter1;
 bool* InitExtraClockShutter2;
 bool* InitExtraClockShutter3;
 bool* InitExtraClockShutter4;
-bool* InitExtraClockShutter5;
 bool* InitAdditionalShutter0;
 bool* InitAdditionalShutter1;
 bool* InitAdditionalShutter2;
@@ -334,7 +333,6 @@ void CParamRegister::CreateShortcutsToUserIOInitParams() {
 	InitExtraClockShutter2 = GetParamBool("InitExtraClockShutter2");
 	InitExtraClockShutter3 = GetParamBool("InitExtraClockShutter3");
 	InitExtraClockShutter4 = GetParamBool("InitExtraClockShutter4");
-	InitExtraClockShutter5 = GetParamBool("InitExtraClockShutter5");
 	InitAdditionalShutter0 = GetParamBool("InitAdditionalShutter0");
 	InitAdditionalShutter1 = GetParamBool("InitAdditionalShutter1");
 	InitAdditionalShutter2 = GetParamBool("InitAdditionalShutter2");
