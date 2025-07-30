@@ -887,6 +887,7 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 		ControlMessageBox("CEasyDialog::PreTranslateMessage: error : pMsg not valid");
 	}*/
 	//Here we code the equivalent of the ASSERTs, so that they are executed even in Release mode.
+	/*
 	if (this == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this == nullptr");
 	if (!AfxIsValidAddress(this, sizeof(CEasyDialog), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this is not valid");
 	if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
@@ -899,7 +900,8 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 			if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
 				if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
 					if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
-						ToolTip->RelayEvent(pMsg);
+						//ToolTip->RelayEvent(pMsg);
+						;
 					else
 						ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
 				else
@@ -911,5 +913,6 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 		else
 			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
 	}
+	*/
     return CDialog::PreTranslateMessage(pMsg);
 }
