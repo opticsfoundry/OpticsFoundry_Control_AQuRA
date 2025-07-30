@@ -41,20 +41,12 @@
       "StartAddress": 32,
       "NumberChannels": 4,
       "Signed": true,
-      "MinVoltage": 0,
-      "MaxVoltage": 10
-    },
-    {
-      "Sequencer": 0,
-      "StartAddress": 36,
-      "NumberChannels": 4,
-      "Signed": true,
       "MinVoltage": -10,
       "MaxVoltage": 10
     },
     {
       "Sequencer": 0,
-      "StartAddress": 40,
+      "StartAddress": 36,
       "NumberChannels": 4,
       "Signed": true,
       "MinVoltage": -10,

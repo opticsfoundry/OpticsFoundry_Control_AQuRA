@@ -22,7 +22,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 32,
+      "Address": 31,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -52,7 +52,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 33,
+      "Address": 30,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -82,7 +82,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 34,
+      "Address": 29,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -112,7 +112,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 35,
+      "Address": 28,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -142,7 +142,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 36,
+      "Address": 27,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -172,7 +172,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 37,
+      "Address": 26,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -202,7 +202,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 38,
+      "Address": 25,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -232,7 +232,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 39,
+      "Address": 24,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1405,7 +1405,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 24,
+      "Address": 32,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1435,7 +1435,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 25,
+      "Address": 33,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1465,7 +1465,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 26,
+      "Address": 34,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1495,7 +1495,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 27,
+      "Address": 35,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1525,7 +1525,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 28,
+      "Address": 36,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1555,7 +1555,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 29,
+      "Address": 37,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1585,7 +1585,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 30,
+      "Address": 38,
       "CalibrationPolynom": [
         {
           "order": 0,
@@ -1615,7 +1615,7 @@
       "Help": "",
       "Type": "AnalogOut",
       "Sequencer": 0,
-      "Address": 31,
+      "Address": 39,
       "CalibrationPolynom": [
         {
           "order": 0,

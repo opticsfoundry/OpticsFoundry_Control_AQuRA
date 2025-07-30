@@ -256,17 +256,17 @@ if __name__ == "__main__":
     
     builder.add_new_menu(Text="AQuRA User IO")
     builder.add_static_text(Text="AQuRA Analog Outs")
-    builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=23.0, Init=0.0, Calibration = [
+    builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=31, Units="A", Max=23.0, Init=0.0, Calibration = [
                 {"order": 0, "value": 0},
                 {"order": 1, "value": 0.1}
             ])
-    builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=33, Units="degC", Max=5.0, Init=0.0)    
-    builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=34, Units="%", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=35, Units="", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="ElectrodeAVoltage", Description="Voltage on Electrode A", Address=36, Units="V", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="ElectrodeBVoltage", Description="Voltage on Electrode B", Address=37, Units="V", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="ElectrodeCVoltage", Description="Voltage on Electrode C", Address=38, Units="V", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="OvenVoltage", Description="Voltage on oven", Address=39, Units="V", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=30, Units="degC", Max=5.0, Init=0.0)    
+    builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=29, Units="%", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=28, Units="", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="ElectrodeAVoltage", Description="Voltage on Electrode A", Address=27, Units="V", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="ElectrodeBVoltage", Description="Voltage on Electrode B", Address=26, Units="V", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="ElectrodeCVoltage", Description="Voltage on Electrode C", Address=25, Units="V", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="OvenVoltage", Description="Voltage on oven", Address=24, Units="V", Max=5.0, Init=0.0)
 
     builder.add_static_text("")
     builder.add_static_text(Text="AQuRA Digital Out")
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     builder.add_new_menu(Text="Spare User IO")
     builder.add_static_text(Text="Spare Analog Outs")
     for i in range(8):
-        builder.add_analog_out(Name=f"SpareAnalogOut{i}", Description=f"Spare Analog Output {i}", Address=24+i)
+        builder.add_analog_out(Name=f"SpareAnalogOut{i}", Description=f"Spare Analog Output {i}", Address=32+i)
     builder.add_static_text("")
     builder.add_static_text(Text="Spare Digital Outs")
     for i in range(16):

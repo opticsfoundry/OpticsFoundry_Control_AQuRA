@@ -141,11 +141,10 @@ if __name__ == "__main__":
     builder.RegisterSequencer(IP="192.168.1.10", Port=57978, ClockFrequencyinMHz=100, BusFrequencyinMHz=2, DebugOn = False) #0.104 #90.108
 
     analog_out_configs = [
-        (24, True, -10, 10),
+        (24, True, -10, 10), #each of these lines configures 4 analog outputs in consecutive order of addresses
         (28, True, -10, 10),
-        (32, True, 0, 10),
-        (36, True, -10, 10),
-        (40, True, -10, 10)
+        (32, True, -10, 10),
+        (36, True, -10, 10)
     ]
     for addr, signed, minv, maxv in analog_out_configs:
         builder.RegisterAnalogOutBoard16bit(StartAddress=addr, Signed=signed, MinVoltage=minv, MaxVoltage=maxv)
