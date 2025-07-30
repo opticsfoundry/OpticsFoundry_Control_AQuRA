@@ -1352,7 +1352,7 @@ void CSequence::RampRedMOT(unsigned char Nr, bool BroadbandRedMOT) {
 		if (BroadbandRedMOT) ParamList->RegisterDouble(&RampRedMOTAOMStopFrequency[Nr], "RampRedMOTAOMStopFrequency" + itos(Nr), 0, 2000, "Stop Frequency", "MHz");
 		ParamList->RegisterDouble(&RampRedMOTAOMIntensity[Nr], "RampRedMOTAOMIntensity" + itos(Nr), 0, 100, "Intensity", "%");
 		ParamList->RegisterDouble(&RampRedMOTQPCurrent[Nr], "RampRedMOTQPCurrent" + itos(Nr), 0, 100, "Red capture MOT QP current", "A");
-		if (Nr==3) InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 3);
+		if (Nr == 3) InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 3);
 		ParamList->RegisterDouble(&RampRedMOTRampTime[Nr], "RampRedMOTRampTime" + itos(Nr), 0, 2000, "Ramp Time", "ms");
 		ParamList->RegisterDouble(&RampRedMOTFraction[Nr], "RampRedMOTFraction" + itos(Nr), 0, 100, "Ramp Fraction", "%");
 		ParamList->RegisterDouble(&RampRedMOTWait[Nr], "RampRedMOTWait" + itos(Nr), 0, 2000, "Wait", "ms");

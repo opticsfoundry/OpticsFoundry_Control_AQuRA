@@ -113,7 +113,6 @@
 #include <atlconv.h> // Required for CT2A
 
 
-
 class CExecuteMeasurementDlg;
 class CStepwiseLinearCalibration;
 class CLaserLock;

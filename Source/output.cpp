@@ -2907,6 +2907,27 @@ void COutput::TestMultiIOBusBlinkBit(unsigned int TestBitNr, unsigned long Perio
 
 void COutput::TestMultiIOBusBlinkEachBit()
 {
+	//transmit data at maximum speed, so that we can see the strobe bit 
+	const unsigned long Stepsize1 = 1024 * 512;
+	unsigned long BufferSize1 = Stepsize1;
+	unsigned short* Buffer1 = new unsigned short[(2 + BufferSize1) * 2];
+	Buffer1[0] = 0;
+	Buffer1[1] = 0;
+	unsigned long TestBit1 = 1;
+	for (unsigned long i = 1; i < (1 + BufferSize1); i++) {
+		TestBit1 = TestBit1 << 1;
+		if (TestBit1 == 0) TestBit1 = 1;
+		Buffer1[2 * i] = TestBit1 & 0xFFFF;
+		Buffer1[2 * i + 1] = (TestBit1 >> 16) & 0xFFFF | DirectionOutBit;
+	}
+	Buffer1[2 * (1 + BufferSize1 ) + 0] = 0;
+	Buffer1[2 * (1 + BufferSize1 ) + 1] = DirectionOutBit;
+	for (unsigned int n = 0; n < MaxMultiIO; n++) {
+		DigOutBoard[MultiIONI653xBoardNr[n]]->DigitalBlockOut((short*)Buffer1, BufferSize1 + 2, Frequency);
+	}
+	delete Buffer1;
+	
+	//now blink each bit in turn, with a period of 4*Stepsize
 	const unsigned long Stepsize=1024*512;
 	unsigned long BufferSize=Stepsize*32;
 	unsigned long BufferSize2=Stepsize*16;
