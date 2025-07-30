@@ -688,7 +688,6 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		SwitchExtraClockShutter2(OnOff);
 		SwitchExtraClockShutter3(OnOff);
 		SwitchExtraClockShutter4(OnOff);
-		SwitchExtraClockShutter5(OnOff);
 		SwitchAdditionalShutter0(OnOff);
 		SwitchAdditionalShutter1(OnOff);
 		SwitchAdditionalShutter2(OnOff);
