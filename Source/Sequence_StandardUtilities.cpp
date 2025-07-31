@@ -402,7 +402,20 @@ bool CSequence::TestVision(unsigned int Message, CWnd* parent) {
 	else {
 		switch (Message) {
 		case IDM_TRIGGER_CAMERAS: {
-			TriggerCameras();
+
+			SetAssembleSequenceListMode();
+			StartSequence(NULL, NULL, false);
+			StartNewWaveformGroup();
+			Wait(100);
+			for (int n = 0; n < 1; n++) {
+				TriggerCameras();
+				Wait(100);
+			}
+			StopSequence();
+			SetWaveformGenerationMode();
+			ExecuteSequenceList();
+
+			//TriggerCameras();
 		}
 								break;
 		case IDC_TEST_VISION: {
@@ -410,6 +423,7 @@ bool CSequence::TestVision(unsigned int Message, CWnd* parent) {
 				ControlMessageBox("CSequence::TestVision : Vision not ready");
 				return true;
 			}
+			LastExperimentalRunTime = 0;
 			for (int i = 0; i < NrCameras; i++) {
 				if (CameraFKSDataImages[i] < CameraFKSReferenceImages[i]) CameraFKSDataImages[i] = CameraFKSReferenceImages[i];
 				double ExposureTime = CameraExposureTimeFluo;
@@ -445,14 +459,20 @@ bool CSequence::TestVision(unsigned int Message, CWnd* parent) {
 				return true;
 			}
 			//wait for the software trigger to be processed, then trigger cameras sufficiently often for all pictures
+			
+			SetAssembleSequenceListMode();
+			StartSequence(NULL, NULL, false);
+			StartNewWaveformGroup();
 			Wait(200);
-			TriggerCameras();
-			Wait(500);
-			TriggerCameras();
-			Wait(500);
-			TriggerCameras();
-			Wait(500);
-			TriggerCameras();
+			for (int n=0;n<5;n++) {
+				TriggerCameras();
+				Wait(500);
+			}
+			StopSequence();
+			SetWaveformGenerationMode();
+			ExecuteSequenceList();
+			//EmptyNIcardFIFO();
+			
 			const unsigned int LastDataArrayPoints = 50;
 			double LastDataArray[LastDataArrayPoints];
 			CString LastDataArrayName[LastDataArrayPoints];

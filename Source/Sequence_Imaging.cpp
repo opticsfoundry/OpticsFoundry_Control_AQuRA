@@ -30,8 +30,8 @@ bool CSequence::TriggerVision(bool LastChance) {
 	}
 	else {
 		if ((DoTakeAbsorptionPicture || DoTakeFKSAbsorptionPicture || DoTakeFluorescencePicture)) {
-			/*double help=TriggerDelay;
-			if (TriggerDelay<0) TriggerDelay=0;*/
+			/*double help=TriggerDelay;*/
+			if (TriggerDelay<0) TriggerDelay=0;
 			if (!Vision->TakeAbsorptionPicture(TriggerDelay)) {
 				ControlMessageBox("CSequence::DoExperimentalSequence : Vision not ready");
 				return false;
