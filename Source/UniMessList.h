@@ -14,7 +14,7 @@
 class CUniMess;
 class CParameterDialog;
 
-const unsigned int MaxNrUniMess=135;
+const unsigned int MaxNrUniMess=76;
 
 class CUniMessList : public CMenuObList  
 {

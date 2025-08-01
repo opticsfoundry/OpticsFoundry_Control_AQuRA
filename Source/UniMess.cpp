@@ -32,30 +32,28 @@ IMPLEMENT_SERIAL(CUniMess, CMessageReceiver,1)
 //////////////////////////////////////////////////////////////////////
 
 CUniMess::CUniMess() {
-	MyNumber=0;
-	NrPoints[MaxNrUniMessParams]=1;
-	MyParamRegister=NULL;
-	Name=NULL;
-	MyNumber=0;
-	StartMeasurementPoint=1;
-	Repetitions=1;
-	ContinueSerie=false;
-	Randomize=true;
-	Link=false;
-	ReferencePeriod=0;
-	VisionCommandStringList=NULL;
-	MakeVisionCommandStringList();
-	ConstructParamRegister();	
+	CUniMess(0);
 }
+
 
 
 CUniMess::CUniMess(unsigned int aMyNumber)
 {
-	NrPoints[MaxNrUniMessParams]=1;
-	Randomize=true;
+	for (int n = 0; n < MaxNrUniMessParams; n++) {
+		ParamName[n] = nullptr;
+		ParamValueListFileName[n] = nullptr;
+		Start[n] = 0;
+		Stop[n] = 1;
+		Reference[n] = 0;
+		NrPoints[n] = 1;
+	}
+	NrPoints[MaxNrUniMessParams] = 0;
+	VisionCommand=nullptr;
+	VisionCommandStringList=nullptr;
+	Name=nullptr;
+	Randomize=false;
 	Link=false;
 	ReferencePeriod=0;
-	Name=NULL;
 	MyParamRegister=NULL;	
 	MyNumber=aMyNumber;
 	StartMeasurementPoint=1;
@@ -68,8 +66,14 @@ CUniMess::CUniMess(unsigned int aMyNumber)
 
 CUniMess::~CUniMess()
 {	
-	if (VisionCommandStringList) delete VisionCommandStringList;
-	if (MyParamRegister) delete MyParamRegister;
+	if (VisionCommandStringList) {
+		delete VisionCommandStringList;
+		VisionCommandStringList = nullptr;
+	}
+	if (MyParamRegister) {
+		delete MyParamRegister;
+		MyParamRegister = nullptr;
+	}
 }
 
 void CUniMess::MakeVisionCommandStringList() {
@@ -111,38 +115,38 @@ void CUniMess::ConstructParamRegister() {
 	buf.Format("MeasurementName%i",MyNumber);
 	MyParamRegister->RegisterString(Name,buf,"",200,"Measurement name");
 	for (int i=0;i<MaxNrUniMessParams;i++) {
-		buf.Format("%sParamName%i",Name,i);
+		buf.Format("%sParamName%i",*Name,i);
 		buf2.Format("Parameter %i",i);		
 		MyParamRegister->RegisterStringComboBox(ParamName[i],buf,"",600,buf2,ParamList->GetUniMessParamNameList());
-		buf.Format("%sStart%i",Name,i);
+		buf.Format("%sStart%i",*Name,i);
 		buf2.Format("Start Value %i",i);
 		MyParamRegister->RegisterDouble(&Start[i],buf,-10000000,10000000,buf2,"");
-		buf.Format("%sStop%i",Name,i);
+		buf.Format("%sStop%i",*Name,i);
 		buf2.Format("Stop Value %i",i);
 		MyParamRegister->RegisterDouble(&Stop[i],buf,-10000000,10000000,buf2,"");
-		buf.Format("%sReference%i",Name,i);
+		buf.Format("%sReference%i",*Name,i);
 		buf2.Format("Reference Value %i",i);
 		MyParamRegister->RegisterDouble(&Reference[i],buf,-10000000,10000000,buf2,"");
-		buf.Format("%sNr%i",Name,i);
+		buf.Format("%sNr%i",*Name,i);
 		buf2.Format("Number of points %i",i);
 		MyParamRegister->RegisterLong(&NrPoints[i],buf,1,10000000,buf2,"");
-		buf.Format("%sFileName%i",Name,i);
+		buf.Format("%sFileName%i",*Name,i);
 		buf2.Format("Value List File Name %i",i);
 		MyParamRegister->RegisterString(ParamValueListFileName[i],buf,"",30,buf2,"If a filename to an ASCII list of values is given here,\nthe values from this file are used.\nOne value is given per line. End of file at end of last line, no newline at last line.");
 	}	
-	buf.Format("%sVisionCommand",Name);	
+	buf.Format("%sVisionCommand",*Name);	
 	MyParamRegister->RegisterStringComboBox(VisionCommand,buf,"",200,"Vision command",VisionCommandStringList);
-	buf.Format("%sRepetitions",Name);
+	buf.Format("%sRepetitions",*Name);
 	MyParamRegister->RegisterLong(&Repetitions,buf,1,10000000,"Repetitions","");
-	buf.Format("%sStartMeasurmentPoint",Name);
+	buf.Format("%sStartMeasurmentPoint",*Name);
 	MyParamRegister->RegisterLong(&StartMeasurementPoint,buf,1,10000000,"Start measurement point","");	
-	buf.Format("%sReferencePeriod",Name);	
+	buf.Format("%sReferencePeriod",*Name);	
 	MyParamRegister->RegisterLong(&ReferencePeriod,buf,0,10000000,"Reference period","");	
-	buf.Format("%sLink",Name);	
+	buf.Format("%sLink",*Name);	
 	MyParamRegister->RegisterBool(&Link,buf,"Link");	
-	buf.Format("%sRandomize",Name);	
+	buf.Format("%sRandomize",*Name);	
 	MyParamRegister->RegisterBool(&Randomize,buf,"Randomize");	
-	buf.Format("%sContinueSerie",Name);	
+	buf.Format("%sContinueSerie",*Name);	
 	MyParamRegister->RegisterBool(&ContinueSerie,buf,"ContinueSerie");	
 	MyParamRegister->NewMenu("End of Menu",0,2);
 }

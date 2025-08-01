@@ -653,6 +653,7 @@ HICON m_hIconLarge;
 
 BOOL CEasyDialog::OnInitDialog() 
 {	
+	m_bDialogClosed = false;
 	((CControlApp*)AfxGetApp())->OnWakeUp();
 	//RECT rec={10,600,1000,620};
 	//StatusBar.Create("Status", SS_SIMPLE + WS_CHILD + WS_VISIBLE, rec, this);
@@ -751,6 +752,8 @@ void CEasyDialog::OnApply()
 
 void CEasyDialog::OnButton(unsigned int Nr)
 {	
+	if (m_bDialogClosed || !::IsWindow(this->GetSafeHwnd())) return;
+	
 	((CControlApp*)AfxGetApp())->OnWakeUp();
 	POSITION pos=ElementList.GetHeadPosition();
 	while (pos!=NULL) {
@@ -862,14 +865,14 @@ void CEasyDialog::OnBnClickedEmergencyShutoff()
 
 BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 {
-	if (m_bDialogClosed)
-		return FALSE; // Don't process messages if dialog is closed
+	if (m_bDialogClosed)		return FALSE; // Don't process messages if dialog is closed
 
 #ifdef DebugEasyDialog
 	CString buf;
 	buf.Format("PreTranslateMessage(msg=%u)", pMsg->message);
 	DebugProtocol(buf);
 #endif
+
 	//We had a bug somewhere here, with the debugger not pointing out the problem.
 	//Now we check the validity of all relevant pointers.
 	//Later it was found that when ToolTip was deleted when a dialog was closed, it was not set to nullptr.
@@ -892,6 +895,10 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 	if (!AfxIsValidAddress(this, sizeof(CEasyDialog), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this is not valid");
 	if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
 	if (!AfxIsValidAddress(pMsg, sizeof(MSG), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg is not valid");
+	if (!::IsWindow(this->GetSafeHwnd())) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this not a window");
+	if (!::IsWindow(pMsg->hwnd))
+		return FALSE; // Ignore messages for invalid windows
+
 	/*
 	if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
 		//The following check is likely not necessary. 
@@ -914,5 +921,20 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
 	}
 	*/
-    return CDialog::PreTranslateMessage(pMsg);
+
+	//if (ToolTip != NULL)
+	//	ToolTip->RelayEvent(pMsg);
+
+	BOOL ret = FALSE;
+	try {
+		ret = CDialog::PreTranslateMessage(pMsg);
+	}
+	catch (CException* e) {
+		CString errorMsg;
+		e->GetErrorMessage(errorMsg.GetBuffer(256), 256);
+		errorMsg.ReleaseBuffer();
+		e->Delete();
+		ControlMessageBox("CEasyDialog::PreTranslateMessage: CException caught: " + errorMsg);
+		ret = FALSE; // Return FALSE to indicate that the message was not processed
+	}
 }

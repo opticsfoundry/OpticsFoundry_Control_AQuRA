@@ -202,6 +202,7 @@ class CControlApp : public CObject
 {
 private:
 	HANDLE Mutex;
+	CString* ParamFileName;
 public:
 	void LoadParams(CFile& f);
 	void SaveParams(CFile& f);

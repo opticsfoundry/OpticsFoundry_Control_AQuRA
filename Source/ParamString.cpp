@@ -21,12 +21,12 @@ IMPLEMENT_SERIAL(CParamString, CParam,1)
 
 CParamString::CParamString(CString* &d,CString aName,CString aInit,unsigned int aMaxLength, CString aQuestion,bool aConstant, CString aHelp,const COLORREF aColor)
 :CParam(aName,aQuestion,"", aConstant,aHelp,aColor) {	
-	Value=new CString("");
+	Value=new CString(aInit);
 	d=Value;
 	ReferenceValue=*Value;
 	MaxLength=aMaxLength;
-	CString help=aInit;
-	*Value=help;
+	//CString help=aInit;
+	//*Value=help;
 }
 
 CParamString::~CParamString()

@@ -60,7 +60,7 @@ bool HardwareAccess;
 
 CControlApp::CControlApp()
 {
-	//ParamFileName = NULL;// "D:\\Florian\\OpticsFoundry\\OpticsFoundryControl\\Control_OpticsFoundry_AQuRA\\ControlParam";
+	ParamFileName = NULL;// "D:\\Florian\\OpticsFoundry\\OpticsFoundryControl\\Control_OpticsFoundry_AQuRA\\ControlParam";
 	HardwareAccess = false;
 	Output = NULL;
 	ActiveDialog = NULL;
