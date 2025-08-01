@@ -72,7 +72,7 @@ private:
 	void AddCommandWait(unsigned long Wait_in_FPGA_clock_cycles);
 	void AddCommandSetPLToPSCommand(unsigned int PLToPSCommand);
 	bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible;
-	bool AttemptNetworkCommand(tBoolFunction fCommand);
+	//bool AttemptNetworkCommand(tBoolFunction fCommand);
 public:	
 	CEthernetMultiIOControllerOpticsFoundry(unsigned int aMyMultiIO, COutput* amyOutput);
 	virtual ~CEthernetMultiIOControllerOpticsFoundry();

@@ -179,7 +179,11 @@ bool CSequenceLib::MessageMap(unsigned int Message,CWnd* parent)
 		case IDM_RUN_EXPERIMENT: DoExperimentalSequence(parent); break;
 		case IDM_SAVE_PARAMETERS: ((CControlApp*)AfxGetApp())->SaveParameterDialog(); break;
 		case IDM_LOAD_PARAMETERS: ((CControlApp*)AfxGetApp())->LoadParameterDialog(); break;
-		case IDM_QUEUE_EXPERIMENT: MeasurementQueue->Add(new CMeasurement(true, GetExperimentalRunName())); if (!HardwareAccess) SendCyclicOperationCommand(2, 0); break;
+		case IDM_QUEUE_EXPERIMENT: {
+			MeasurementQueue->Add(new CMeasurement(true, GetExperimentalRunName())); 
+			if (!HardwareAccess) SendCyclicOperationCommand(2, 0); 
+			break;
+		}
 		case IDM_REFERENCE_QUEUE_EXPERIMENT: ReferenceMeasurementQueue->Add(new CMeasurement(true, GetExperimentalRunName())); if (!HardwareAccess) SendCyclicOperationCommand(8, 0); break;
 		case IDM_SELECT_REFERENCE_PARAMETER_FILE: SelectReferenceParameterFile(); break;
 		case IDM_CLEAR_MEASUREMENT_QUEUE: MeasurementQueue->Clear(); if (!HardwareAccess) SendCyclicOperationCommand(4, 0); break;

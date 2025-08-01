@@ -57,6 +57,7 @@ double LastRunMOTIntensityWasStabilized=false;
 
 CSequence::CSequence()
 {
+	MeasurementDialog = NULL;
 	MasterLock = NULL;
 	AktTrap=IDT_NO_TRAP;
 	CancelLoopDialog=NULL;

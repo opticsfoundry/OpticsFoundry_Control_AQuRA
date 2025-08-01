@@ -460,7 +460,7 @@ void CParamList::AddCameras() {
 			RegisterDouble(&CameraCalY[i],"CameraCalY"+itos(i),0,1024,"Y calibration","µm/pix","calibrates the cursor information on Vision program");
 
 			if (Andor) {
-				RegisterDouble(&CameraTemperature[i],"CameraTemperature"+itos(i),-40,25,"Temperature","°C");
+				RegisterDouble(&CameraTemperature[i],"CameraTemperature"+itos(i),-40,48,"Temperature","°C");
 				RegisterLong(&CamerahSpeed[i],"CamerahSpeed"+itos(i),0,64,"X speed","1,2,16,32 µs");
 				RegisterLong(&CameraFKSDataImages[i],"CameraFKSDataImages"+itos(i),1,1,"FKS Data Images","1");
 				RegisterLong(&CameraFKSReferenceImages[i],"CameraFKSReferenceImages"+itos(i),1,1,"FKS Reference Images","1");

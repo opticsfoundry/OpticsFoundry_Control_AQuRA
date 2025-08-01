@@ -1434,16 +1434,16 @@ bool CEthernetMultiIOControllerOpticsFoundry::AttemptGetAktWaveformPoint(unsigne
 	return true;	
 }
 
-bool CEthernetMultiIOControllerOpticsFoundry::AttemptNetworkCommand(tBoolFunction fCommand) {
-	if (!Connected) return true;
-	unsigned int attempts = 0;
-	while ((attempts < MaxReconnectAttempts) && (!fCommand())) {
-		Network->ResetConnection();
-		Sleep_ms(100);
-		attempts++;
-	}
-	return (attempts < MaxReconnectAttempts);
-}
+//bool CEthernetMultiIOControllerOpticsFoundry::AttemptNetworkCommand(tBoolFunction fCommand) {
+//	if (!Connected) return true;
+//	unsigned int attempts = 0;
+//	while ((attempts < MaxReconnectAttempts) && (!fCommand())) {
+//		Network->ResetConnection();
+//		Sleep_ms(100);
+//		attempts++;
+//	}
+//	return (attempts < MaxReconnectAttempts);
+//}
 
 bool CEthernetMultiIOControllerOpticsFoundry::GetNextCycleNumber(long& NextCycleNumber) {
 	if (!Connected) return true;
@@ -1464,33 +1464,41 @@ bool CEthernetMultiIOControllerOpticsFoundry::AttemptGetNextCycleNumber(long& Ne
 
 bool CEthernetMultiIOControllerOpticsFoundry::SwitchDebugMode(bool OnOff) {
 	DebugModeOn = OnOff;
-	if (OnOff) return AttemptNetworkCommand([this]() {return Command("switch_debug_mode_on"); });
-	else return AttemptNetworkCommand([this]() {return Command("switch_debug_mode_off"); }); 
+	if (OnOff) return Command("switch_debug_mode_on");
+	else return Command("switch_debug_mode_off");
+	/*if (OnOff) return AttemptNetworkCommand([this]() {return Command("switch_debug_mode_on"); });
+	else return AttemptNetworkCommand([this]() {return Command("switch_debug_mode_off"); }); */
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::ResetCycleNumber() {
-	return AttemptNetworkCommand([this]() {return Command("reset_sequence_number"); });
+	return Command("reset_sequence_number");
+	//return AttemptNetworkCommand([this]() {return Command("reset_sequence_number"); });
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::CloseConnection() {
 	Connected = false;
-	return AttemptNetworkCommand([this]() {return Command("close"); });
+	return Command("close");
+//	return AttemptNetworkCommand([this]() {return Command("close"); });
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::Reset() {
 	//this commands resets the whole FPGA core. It should only be used if an error occured
-	return AttemptNetworkCommand([this]() {return Command("reset"); });
+	return Command("reset");
+//	return AttemptNetworkCommand([this]() {return Command("reset"); });
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::WaitTillFinished() {
-	return AttemptNetworkCommand([this]() {return Command("wait_till_finished"); });
+	return Command("wait_till_finished");
+//	return AttemptNetworkCommand([this]() {return Command("wait_till_finished"); });
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::Start() {
 	if (!Connected) return true;
+	Network->Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/1000); //2025 01 30: reset connection before starting in an attempt to avoid st
 	StartTickCounts = GetTickCount();
 	////Timestamp.Mark("CEthernetMultiIOControllerOpticsFoundry::Start");
-	return AttemptNetworkCommand([this]() {return Command("start"); });
+	return Command("start");
+//	return AttemptNetworkCommand([this]() {return Command("start"); });
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::Stop() {
@@ -1528,12 +1536,21 @@ bool CEthernetMultiIOControllerOpticsFoundry::SetExternalClock(bool aExternalClo
 	if (!Connected) return true;
 	if (changed) {
 		if (ExternalClock0) {
+			return Command("select_external_clock_0");
+		}
+		else if (ExternalClock1) {
+			return Command("select_external_clock_1");
+		}
+		else {
+			return Command("select_internal_clock");
+		}
+		/*if (ExternalClock0) {
 			return AttemptNetworkCommand([this]() {return Command("select_external_clock_0"); });
 		} else if (ExternalClock1) {
 			return AttemptNetworkCommand([this]() {return Command("select_external_clock_1"); });
 		} else {
 			return AttemptNetworkCommand([this]() {return Command("select_internal_clock"); });
-		}
+		}*/
 	} 
 	return true;
 }
@@ -1579,7 +1596,8 @@ bool CEthernetMultiIOControllerOpticsFoundry::AttemptGetPeriodicTriggerError(boo
 
 
 bool CEthernetMultiIOControllerOpticsFoundry::CheckReady(double timeout_in_seconds) {
-	return AttemptNetworkCommand([this]() {return Command("check_ready"); }); //Do not use OptimizedCommand here. The whole point is to get a "Ready" back.
+	return Command("check_ready");  //Do not use OptimizedCommand here. The whole point is to get a "Ready" back.
+	//return AttemptNetworkCommand([this]() {return Command("check_ready"); }); //Do not use OptimizedCommand here. The whole point is to get a "Ready" back.
 }
 
 bool CEthernetMultiIOControllerOpticsFoundry::WaitTillEndOfSequenceThenGetInputData(unsigned char*& buffer, unsigned long& buffer_length, DWORD& EndTimeOfCycle, double timeout_in_s, bool auto_delete_buffer) {

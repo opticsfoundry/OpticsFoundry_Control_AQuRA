@@ -887,12 +887,12 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 		ControlMessageBox("CEasyDialog::PreTranslateMessage: error : pMsg not valid");
 	}*/
 	//Here we code the equivalent of the ASSERTs, so that they are executed even in Release mode.
-	/*
+	
 	if (this == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this == nullptr");
 	if (!AfxIsValidAddress(this, sizeof(CEasyDialog), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this is not valid");
 	if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
 	if (!AfxIsValidAddress(pMsg, sizeof(MSG), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg is not valid");
-	
+	/*
 	if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
 		//The following check is likely not necessary. 
 		//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));

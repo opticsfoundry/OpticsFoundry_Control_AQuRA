@@ -64,6 +64,8 @@ CControlApp::CControlApp()
 	HardwareAccess = false;
 	Output = NULL;
 	ActiveDialog = NULL;
+	m_hInstance = 0;
+	m_pMainWnd = NULL;
 }
 
 CControlApp::~CControlApp() {

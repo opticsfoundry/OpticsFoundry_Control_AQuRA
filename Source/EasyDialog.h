@@ -486,8 +486,8 @@ protected:
 private:
 	CString Caption;
 	CObList ElementList;
-	void (*UpdateFunction)(unsigned int);  
-	int UpdateFunctionParameter;
+	//void (*UpdateFunction)(unsigned int);  
+	//int UpdateFunctionParameter;
 	bool AutoUpdate;
 	bool m_bDialogClosed;
 public:

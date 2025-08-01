@@ -224,7 +224,7 @@ bool CNetworkClient::AttemptCommand(CString comand, bool DontWaitForReady) {
 	SendCommand(comand);
 	if ((FastWrite) || (DontWaitForReady)) return true;
 	if ((!Ready()) && (Network)) {
-		ControlMessageBox("CNetworkClient not Ready!\n(Command: "+comand+")");
+		//ControlMessageBox("CNetworkClient not Ready!\n(Command: "+comand+")");
 		return false;
 	} else return true;
 }

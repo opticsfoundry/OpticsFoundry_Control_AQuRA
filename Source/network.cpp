@@ -28,7 +28,7 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 void Sleep_ms(unsigned long ms) {
 	DWORD start = GetTickCount();
 	while (GetTickCount() - start < ms) {
-		AfxGetApp()->PumpMessage();
+		if (ControlApp.m_pMainWnd) AfxGetApp()->PumpMessage();
 		Sleep(1); // to avoid spinning
 	}
 }
@@ -189,7 +189,7 @@ bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName
 bool CNetwork::ResetConnection(unsigned long sleep_time) {
 	DisconnectSocket();
 	if (sleep_time>0) Sleep_ms(sleep_time);
-	return Reconnect(/*ShowErrorMessages*/ false);
+	return Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/0);
 }
 
 void CNetwork::SendMsg(CString& strText)
