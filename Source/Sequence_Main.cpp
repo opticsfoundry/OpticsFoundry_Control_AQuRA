@@ -1902,7 +1902,7 @@ void CSequence::SaveInputDataToFile(const CString& filename, unsigned int* buffe
 			unsigned long buf_low = buffer[i] & 0xFFFF;
 			char out_buf[100];
 			unsigned long data = buf_low & 0xFFF;
-			sprintf(out_buf, "%u %u %u %u    %x %x\n", i, data, buf_high, buf_low, buf_high, buf_low);
+			snprintf(out_buf,100, "%u %u %u %u    %x %x\n", i, data, buf_high, buf_low, buf_high, buf_low);
 			file << out_buf;
 			*/
 
@@ -1988,8 +1988,8 @@ void CSequence::ReadoutFPGAMemory() {
 				ControlMessageBox("CSequence::ReadoutFPGAMemory : Couldn't open log file for writing");
 				return;
 			}
-			char out_buf[100];
-			sprintf(out_buf, "%u %u %u %.3f %.5f %.5f %.5f %.5f\n", RunNumber, buffer_length/4, EndTimeOfCycle, timeout_in_s, GroundStateFluo, ExcitatedStateFluo, TotalFluo, ClockStateExcitation);
+			char out_buf[200];
+			snprintf(out_buf,200, "%u %u %u %.3f %.5f %.5f %.5f %.5f\n", RunNumber, buffer_length/4, EndTimeOfCycle, timeout_in_s, GroundStateFluo, ExcitatedStateFluo, TotalFluo, ClockStateExcitation);
 			file << out_buf;
 			file.close();
 

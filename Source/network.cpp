@@ -102,14 +102,14 @@ void CNetwork::DisconnectSocket()
 #include <winsock2.h> // For select, timeval, etc.
 #include <ws2tcpip.h> // For inet_pton
 
-bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool reconnect, int timeoutSec = 2)
+bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool reconnect, bool showError = true, int timeoutSec = 2)
 {
 	// 1. WSAStartup (only needed once per app, but harmless if called repeatedly)
 	static bool wsaInitialized = false;
 	if (!wsaInitialized) {
 		WSADATA wsaData;
 		if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-			AfxMessageBox(_T("WSAStartup failed. IP = " + ipAddress));
+			if (showError) AfxMessageBox(_T("WSAStartup failed. IP = " + ipAddress));
 			return false;
 		}
 		wsaInitialized = true;
@@ -117,7 +117,7 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool
 
 	// 2. Create socket
 	if (!sock.Create()) {
-		AfxMessageBox(_T("Failed to create socket. IP = " + ipAddress));
+		if (showError) AfxMessageBox(_T("Failed to create socket. IP = " + ipAddress));
 		return false;
 	}
 
@@ -125,7 +125,7 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool
 	u_long nonBlocking = 1;
 	if (ioctlsocket(sock, FIONBIO, &nonBlocking) != 0) {
 		sock.Close();
-		AfxMessageBox(_T("Failed to set non-blocking mode. IP = " + ipAddress));
+		if (showError) AfxMessageBox(_T("Failed to set non-blocking mode. IP = " + ipAddress));
 		return false;
 	}
 
@@ -141,7 +141,7 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool
 		int err = WSAGetLastError();
 		if (err != WSAEWOULDBLOCK && err != WSAEINPROGRESS) {
 			sock.Close();
-			AfxMessageBox(_T("Immediate connection error. IP = " + ipAddress));
+			if (showError) AfxMessageBox(_T("Immediate connection error. IP = " + ipAddress));
 			return false;
 		}
 
@@ -158,7 +158,7 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool
 			sock.Close();
 			CString buf;
 			buf.Format("%u", port);
-			AfxMessageBox(_T("Connection timed out or failed. IP = " + ipAddress + ", port = " + buf + ".\n\nIf this is wrong, check the IP address given in ControlHardwareConfigFileCreator.py and run that script again.\n\nIf you don't use ControlHardwareConfig.json to configure control, check the IP given in ControlParam_SystemParamList.txt."));
+			if (showError) AfxMessageBox(_T("Connection timed out or failed. IP = " + ipAddress + ", port = " + buf + ".\n\nIf this is wrong, check the IP address given in ControlHardwareConfigFileCreator.py and run that script again.\n\nIf you don't use ControlHardwareConfig.json to configure control, check the IP given in ControlParam_SystemParamList.txt."));
 			return false;
 		}
 	}
@@ -192,7 +192,7 @@ bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName
 	//	m_pSocket = nullptr;
 	//	return false;
 	//}
-	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort, reconnect)) {
+	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort, reconnect, (reconnect) ? false : true, (reconnect) ? 10 : 2)) {
 		//if (!m_pSocket->Connect(m_lpszAddress, m_nPort)) {  //Standard CSocket::connect, which has a ~20s timeout
 		delete m_pSocket;
 		m_pSocket = nullptr;

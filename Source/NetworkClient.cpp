@@ -122,11 +122,11 @@ bool CNetworkClient::ReadDouble(double &Value)
 	char* endptr = nullptr;
 	Value = std::strtod(str, &endptr);
 	if (endptr == str) {
-		ControlMessageBox("CNetworkClient::ReadDouble : Conversion error: no digits found in ("+buf+").");
+		//ControlMessageBox("CNetworkClient::ReadDouble : Conversion error: no digits found in ("+buf+").");
 		return false;
 	}
 	else if (*endptr != '\0') {
-		ControlMessageBox("CNetworkClient::ReadDouble : Conversion error: leftover characters after number in (" + buf + ").");
+		//ControlMessageBox("CNetworkClient::ReadDouble : Conversion error: leftover characters after number in (" + buf + ").");
 		return false;
 	}
 	return ok;
@@ -153,11 +153,11 @@ bool CNetworkClient::ReadInt(int& Value, double timeout_in_seconds)
 	char* endptr = nullptr;
 	Value = std::strtol(str, &endptr, 10);
 	if (endptr == str) {
-		ControlMessageBox("CNetworkClient::ReadInt : Conversion error: no digits found in (" + buf + ").");
+		//ControlMessageBox("CNetworkClient::ReadInt : Conversion error: no digits found in (" + buf + ").");
 		return false;
 	}
 	else if (*endptr != '\0') {
-		ControlMessageBox("CNetworkClient::ReadInt : Conversion error: leftover characters after number in (" + buf + ").");
+		//ControlMessageBox("CNetworkClient::ReadInt : Conversion error: leftover characters after number in (" + buf + ").");
 		return false;
 	}
 	return ok;
@@ -175,11 +175,11 @@ bool CNetworkClient::ReadLong( long& Value)
 	char* endptr = nullptr;
 	Value = std::strtol(str, &endptr, 10);
 	if (endptr == str) {
-		ControlMessageBox("CNetworkClient::ReadLong : Conversion error: no digits found.");
+		//ControlMessageBox("CNetworkClient::ReadLong : Conversion error: no digits found.");
 		return false;
 	}
 	else if (*endptr != '\0') {
-		ControlMessageBox("CNetworkClient::ReadLong : Conversion error: leftover characters after number.");
+		//ControlMessageBox("CNetworkClient::ReadLong : Conversion error: leftover characters after number.");
 		return false;
 	}
 	return ok;
@@ -198,11 +198,11 @@ bool CNetworkClient::ReadInt64( unsigned long long& Value)
 	char* endptr = nullptr;
 	Value = std::strtoull(str, &endptr, 10);
 	if (endptr == str) {
-		ControlMessageBox("CNetworkClient::ReadInt64 : Conversion error: no digits found.");
+		//ControlMessageBox("CNetworkClient::ReadInt64 : Conversion error: no digits found.");
 		return false;
 	}
 	else if (*endptr != '\0') {
-		ControlMessageBox("CNetworkClient::ReadInt64 : Conversion error: leftover characters after number.");
+		//ControlMessageBox("CNetworkClient::ReadInt64 : Conversion error: leftover characters after number.");
 		return false;
 	}
 	return ok;
@@ -216,6 +216,7 @@ bool CNetworkClient::Command(CString CommandString, bool DontWaitForReady) {
 		Sleep_ms(100);
 		attempts++;
 	}
+	if (attempts == MaxReconnectAttempts) ControlMessageBox("CNetworkClient::Command : Maximum reconnect attempts reached. Command failed: " + CommandString);
 	return (attempts < MaxReconnectAttempts);
 }
 

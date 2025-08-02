@@ -871,7 +871,7 @@ bool CControlAPI::ResetCycleNumber() {
 void CControlAPI::StartXADCAnalogInAcquisition(unsigned int channel_number, unsigned int number_of_datapoints, double delay_between_datapoints_in_ms) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "StartXADCAnalogInAcquisition(%d, %d, %f)", channel_number, number_of_datapoints, delay_between_datapoints_in_ms);
+	snprintf(command,100, "StartXADCAnalogInAcquisition(%d, %d, %f)", channel_number, number_of_datapoints, delay_between_datapoints_in_ms);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -896,7 +896,7 @@ void CControlAPI::StartAnalogInAcquisition(unsigned char Sequencer, unsigned cha
 	unsigned int _Sequencer = Sequencer;
 	unsigned int _SPI_port = SPI_port;
 	unsigned int _SPI_CS = SPI_CS;
-	sprintf(command, "StartAnalogInAcquisition(%d, %d, %d, %d, %d, %f)", _Sequencer, _SPI_port, _SPI_CS, channel_number, number_of_datapoints, delay_between_datapoints_in_ms);
+	snprintf(command,100, "StartAnalogInAcquisition(%d, %d, %d, %d, %d, %f)", _Sequencer, _SPI_port, _SPI_CS, channel_number, number_of_datapoints, delay_between_datapoints_in_ms);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -935,7 +935,7 @@ void CControlAPI::StartAnalogInAcquisition(CString argunents) {
 void CControlAPI::WriteReadSPI(unsigned int chip_select, unsigned int number_of_bits_out, unsigned __int64 data_high, unsigned __int64 data_low, unsigned int number_of_bits_in) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "WriteReadSPI(%u, %u, %I64u, %I64u, %u)", chip_select, number_of_bits_out, data_high, data_low, number_of_bits_in);
+	snprintf(command,100, "WriteReadSPI(%u, %u, %I64u, %I64u, %u)", chip_select, number_of_bits_out, data_high, data_low, number_of_bits_in);
 	Command(command);
 	//ControlAPI_Sequencer->WriteReadSPI(chip_select, number_of_bits_out, data_high, data_low, number_of_bits_in);
 	//ProcessingMessage = false;
@@ -970,7 +970,7 @@ void CControlAPI::_WriteSystemTimeToInputMemory() {
 void CControlAPI::WriteInputMemory(unsigned long input_buf_mem_data, bool write_next_address, unsigned long input_buf_mem_address) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "WriteInputMemory(%u, %s, %u)", input_buf_mem_data,  (write_next_address) ? "1": "0", input_buf_mem_address);
+	snprintf(command,100, "WriteInputMemory(%u, %s, %u)", input_buf_mem_data,  (write_next_address) ? "1": "0", input_buf_mem_address);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1009,7 +1009,7 @@ void CControlAPI::SwitchDebugLED(CString argunents) {
 void CControlAPI::SwitchDebugLED(unsigned int OnOff) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "SwitchDebugLED(%s)", (OnOff) ? "1" : "0");
+	snprintf(command,100, "SwitchDebugLED(%s)", (OnOff) ? "1" : "0");
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1017,7 +1017,7 @@ void CControlAPI::SwitchDebugLED(unsigned int OnOff) {
 void CControlAPI::IgnoreTCPIP(bool OnOff) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "IgnoreTCPIP(%s)", (OnOff) ? "1" : "0");
+	snprintf(command,100, "IgnoreTCPIP(%s)", (OnOff) ? "1" : "0");
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1049,7 +1049,7 @@ void CControlAPI::AddMarker(CString argunents) {
 void CControlAPI::AddMarker(unsigned char marker) {
 	//ProcessingMessage = true;
 	char command[300];
-	sprintf(command, "AddMarker(%u)", marker);
+	snprintf(command,100, "AddMarker(%u)", marker);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1110,7 +1110,7 @@ bool CControlAPI::ResetFPGA() {
 void CControlAPI::GoBackInTime(double aTimeJump_in_ms, unsigned int ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "GoBackInTime(%f, %d)", aTimeJump_in_ms, ID);
+	snprintf(command,100, "GoBackInTime(%f, %d)", aTimeJump_in_ms, ID);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1118,7 +1118,7 @@ void CControlAPI::GoBackInTime(double aTimeJump_in_ms, unsigned int ID) {
 void CControlAPI::GoToTime(double aTime_in_ms, unsigned int ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "GoToTime(%f, %d)", aTime_in_ms, ID);
+	snprintf(command,100, "GoToTime(%f, %d)", aTime_in_ms, ID);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1134,15 +1134,15 @@ void CControlAPI::ReturnToCurrentTime(unsigned int ID) {
 void CControlAPI::FinishLastGoBackInTime(unsigned int ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "FinishLastGoBackInTime(%d)", ID);
+	snprintf(command,100, "FinishLastGoBackInTime(%d)", ID);
 	Command(command);
 	//ProcessingMessage = false;
 }
 
 void CControlAPI::Ramp(const std::string& output_name, double start_value /* use LastValue for last value */, double end_value, double ramp_time_in_ms, double timestep_in_ms) {
 	//ProcessingMessage = true;
-	char command[100];
-	sprintf(command, "Ramp(\"%s\", %f, %f, %f, %f)", output_name.c_str(), start_value, end_value, ramp_time_in_ms, timestep_in_ms);
+	char command[300];
+	snprintf(command,300, "Ramp(\"%s\", %f, %f, %f, %f)", output_name.c_str(), start_value, end_value, ramp_time_in_ms, timestep_in_ms);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1150,7 +1150,7 @@ void CControlAPI::Ramp(const std::string& output_name, double start_value /* use
 void CControlAPI::Wait(double time_in_ms, unsigned long ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "Wait(%f, %d)", time_in_ms, ID);
+	snprintf(command, 100,"Wait(%f, %d)", time_in_ms, ID);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1158,7 +1158,7 @@ void CControlAPI::Wait(double time_in_ms, unsigned long ID) {
 void CControlAPI::WaitTillBusBufferEmpty(unsigned long ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "WaitTillBusBufferEmpty(%d)", ID);
+	snprintf(command,100, "WaitTillBusBufferEmpty(%d)", ID);
 	Command(command);
 	//ProcessingMessage = false;
 }
@@ -1166,7 +1166,7 @@ void CControlAPI::WaitTillBusBufferEmpty(unsigned long ID) {
 void CControlAPI::WaitTillRampsEnd(unsigned long ID) {
 	//ProcessingMessage = true;
 	char command[100];
-	sprintf(command, "WaitTillRampsEnd(%d)", ID);
+	snprintf(command,100, "WaitTillRampsEnd(%d)", ID);
 	Command(command);
 	//ProcessingMessage = false;
 }

@@ -315,7 +315,7 @@ void CSerial::SetParameters(int aAddress,unsigned char aSubPort, unsigned long a
 
 	if (aAddress >= MaxSerialPort) {
 		char message[90];
-		sprintf(message, "aAddress: %d", aAddress);
+		snprintf(message,90, "aAddress: %d", aAddress);
 	//ControlMessageBox("CSerial::SetParameters : please increase MaxSerialPort in serial.h. ");
 	ControlMessageBox(message);
 	aAddress = SerialNotConnected;
