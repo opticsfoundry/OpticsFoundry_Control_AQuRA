@@ -1494,7 +1494,7 @@ bool CEthernetMultiIOControllerOpticsFoundry::WaitTillFinished() {
 
 bool CEthernetMultiIOControllerOpticsFoundry::Start() {
 	if (!Connected) return true;
-	Network->Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/1000); //2025 01 30: reset connection before starting in an attempt to avoid st
+	//Network->Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/1000); //2025 01 30: reset connection before starting in an attempt to avoid st
 	StartTickCounts = GetTickCount();
 	////Timestamp.Mark("CEthernetMultiIOControllerOpticsFoundry::Start");
 	return Command("start");

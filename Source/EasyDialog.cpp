@@ -899,7 +899,7 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 	if (!::IsWindow(pMsg->hwnd))
 		return FALSE; // Ignore messages for invalid windows
 
-	/*
+	
 	if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
 		//The following check is likely not necessary. 
 		//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));
@@ -907,8 +907,7 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 			if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
 				if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
 					if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
-						//ToolTip->RelayEvent(pMsg);
-						;
+						ToolTip->RelayEvent(pMsg);
 					else
 						ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
 				else
@@ -920,7 +919,7 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 		else
 			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
 	}
-	*/
+	
 
 	//if (ToolTip != NULL)
 	//	ToolTip->RelayEvent(pMsg);

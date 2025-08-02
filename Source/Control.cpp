@@ -360,6 +360,10 @@ extern "C" {
 				if (displayErrors) ControlMessageBox(_T("Failed to initialize Windows Sockets."));
 				return false;
 			}
+			// Force creation of MFC's hidden socket window
+			CAsyncSocket s;
+			s.Create(); // triggers pState->m_hSocketWindow creation
+			s.Close();  // clean up immediately
 		}
 
 		std::string ParamFileDirectory = _ParamFileDirectory;

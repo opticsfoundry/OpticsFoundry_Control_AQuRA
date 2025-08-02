@@ -22,7 +22,7 @@ public:
 	CString m_SocketName;
 // Operations
 public:
-	bool ConnectSocket(LPCTSTR lpszAddress, UINT nPort,CString SocketName);
+	bool ConnectSocket(LPCTSTR lpszAddress, UINT nPort,CString SocketName, bool reconnect = false);
 	bool ResetConnection(unsigned long sleep_time=2000);
 	bool FlushInputBuffer();
 	void SendMsg(CString& strText);

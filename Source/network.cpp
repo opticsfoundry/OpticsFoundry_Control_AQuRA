@@ -78,8 +78,16 @@ void CNetwork::DebugStop() {
 void CNetwork::DisconnectSocket()
 {
 	if (m_pSocket) {
+		//ControlMessageBox("CNetwork::DisconnectSocket : Disconnecting socket ");
+		
 		StoreLastMessage("Disconnected");
-		m_pSocket->Close();
+		if (CAsyncSocket::LookupHandle(m_pSocket->m_hSocket, FALSE) == NULL) {
+			// Avoid ASSERT by skipping Close and just invalidating the handle
+			m_pSocket->m_hSocket = INVALID_SOCKET;
+		}
+		else {
+			m_pSocket->Close();
+		}
 		delete m_pSocket;
 		m_pSocket = nullptr;
 	}
@@ -94,7 +102,7 @@ void CNetwork::DisconnectSocket()
 #include <winsock2.h> // For select, timeval, etc.
 #include <ws2tcpip.h> // For inet_pton
 
-bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, int timeoutSec = 2)
+bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool reconnect, int timeoutSec = 2)
 {
 	// 1. WSAStartup (only needed once per app, but harmless if called repeatedly)
 	static bool wsaInitialized = false;
@@ -159,11 +167,21 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, int 
 	u_long blocking = 0;
 	ioctlsocket(sock, FIONBIO, &blocking);
 
+	//if (reconnect) {
+	//	ControlMessageBox("CNetwork::ConnectWithTimeout : Reconnecting socket " + sock.m_hSocket);
+	//	//  Re-attach socket to MFC for message handling
+	//	sock.Attach(sock.m_hSocket); // rebinds socket to MFC message system
+	//	sock.AsyncSelect(FD_READ | FD_WRITE | FD_CONNECT | FD_CLOSE);
+	//}
+
+
 	return true;
 }
 
 
-bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName)
+
+
+bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName, bool reconnect)
 {
 	m_lpszAddress = lpszAddress;
 	m_nPort = nPort;
@@ -174,22 +192,26 @@ bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName
 	//	m_pSocket = nullptr;
 	//	return false;
 	//}
-	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort)) {
+	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort, reconnect)) {
 		//if (!m_pSocket->Connect(m_lpszAddress, m_nPort)) {  //Standard CSocket::connect, which has a ~20s timeout
 		delete m_pSocket;
 		m_pSocket = nullptr;
 		return false;
 	}
-	m_lpszAddress = m_lpszAddress;
-	m_nPort = m_nPort;
-	m_SocketName = m_SocketName;
+	
 	return true;
 }
 
 bool CNetwork::ResetConnection(unsigned long sleep_time) {
+	// Keep socket infrastructure alive
+	CAsyncSocket dummy;
+	BOOL bDummyCreated = dummy.Create();
 	DisconnectSocket();
 	if (sleep_time>0) Sleep_ms(sleep_time);
 	return Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/0);
+	if (bDummyCreated)
+		dummy.Close();
+
 }
 
 void CNetwork::SendMsg(CString& strText)
@@ -438,16 +460,24 @@ bool CNetwork::IsConnected() const {
 }
 
 bool CNetwork::Reconnect(int maxRetries, unsigned long delay_ms) {
+
+	// Keep socket infrastructure alive
+	CAsyncSocket dummy;
+	BOOL bDummyCreated = dummy.Create();
 	DisconnectSocket();
 	int tries = 0;
 	while (tries < (maxRetries + 1)) {
-		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName)) {
+		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName, /*reconnect*/true)) {
 			StoreLastMessage("Reconnected");
+			if (bDummyCreated)
+				dummy.Close(); // Close dummy socket if it was created
 			return true;
 		}
 		tries++;
 		Sleep(delay_ms);
 	}
+	if (bDummyCreated)
+		dummy.Close(); // Close dummy socket if it was created
 	return false;
 }
 
