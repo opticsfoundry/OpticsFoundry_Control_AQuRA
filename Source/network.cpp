@@ -181,7 +181,7 @@ bool ConnectWithTimeout(CSocket& sock, const CString& ipAddress, UINT port, bool
 
 
 
-bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName, bool reconnect)
+bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName, bool reconnect, int timeout_s)
 {
 	m_lpszAddress = lpszAddress;
 	m_nPort = nPort;
@@ -192,7 +192,7 @@ bool CNetwork::ConnectSocket(LPCTSTR lpszAddress, UINT nPort, CString SocketName
 	//	m_pSocket = nullptr;
 	//	return false;
 	//}
-	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort, reconnect, (reconnect) ? false : true, (reconnect) ? 10 : 2)) {
+	if (!ConnectWithTimeout(*m_pSocket, m_lpszAddress, m_nPort, reconnect, (reconnect) ? false : true, timeout_s)) {
 		//if (!m_pSocket->Connect(m_lpszAddress, m_nPort)) {  //Standard CSocket::connect, which has a ~20s timeout
 		delete m_pSocket;
 		m_pSocket = nullptr;
@@ -208,10 +208,10 @@ bool CNetwork::ResetConnection(unsigned long sleep_time) {
 	BOOL bDummyCreated = dummy.Create();
 	DisconnectSocket();
 	if (sleep_time>0) Sleep_ms(sleep_time);
-	return Reconnect(/*ShowErrorMessages*/ false,/*delay_ms*/0);
+	bool ret= Reconnect(/*maxRetries*/ 4,/*timeout_s*/0,/*delay_ms*/100);
 	if (bDummyCreated)
 		dummy.Close();
-
+	return ret;
 }
 
 void CNetwork::SendMsg(CString& strText)
@@ -223,6 +223,7 @@ void CNetwork::SendMsg(CString& strText)
 
 bool CNetwork::SendData(const unsigned char* Data, unsigned long Size)
 {
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
 	if (!m_pSocket) return false;
 	CString Message;
 	Message.Format(">> SendData %u", Size);
@@ -242,6 +243,7 @@ bool CNetwork::SendData(const unsigned char* Data, unsigned long Size)
 }
 
 bool CNetwork::SendString(const CString& str) {
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
 	if (!m_pSocket) return false;
 	CT2A conv(str);
 	const char* psz = conv;
@@ -296,9 +298,8 @@ bool CNetwork::SendString(const CString& str) {
 
 bool CNetwork::FlushInputBuffer()
 {
-	if (!m_pSocket)
-		return false;
-
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
+	if (!m_pSocket) return false;
 	const int kBufferSize = 4096;
 	char tempBuffer[kBufferSize];
 
@@ -330,8 +331,10 @@ bool CNetwork::FlushInputBuffer()
 			}
 			else {
 				CString buf;
-				buf.Format(_T("CNetwork::FlushInputBuffer :: recv() error %d"), err);
-				ControlMessageBox(buf);
+				//buf.Format(_T("CNetwork::FlushInputBuffer :: recv() error %d"), err);
+				Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
+				return true;
+				//ControlMessageBox(buf);
 				break;
 			}
 		}
@@ -346,6 +349,7 @@ bool CNetwork::FlushInputBuffer()
 
 
 bool CNetwork::WaitForRead(unsigned long timeout_ms) {
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
 	if (!m_pSocket) return false;
 	fd_set readSet;
 	FD_ZERO(&readSet);
@@ -393,6 +397,7 @@ bool CNetwork::ReceiveMsg(char end_character, bool WaitForStartCharacter, char s
 
 bool CNetwork::ReceiveString(CString& outStr, double timeout_in_seconds, char endChar)
 {
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/100);
 	if (!m_pSocket) return false;
 	outStr.Empty();
 	char ch = 0;
@@ -429,6 +434,7 @@ bool CNetwork::GetMessage(CString& Message, double timeout_in_seconds, int mode)
 
 bool CNetwork::ReceiveData(unsigned char* buffer, unsigned long size, unsigned long timeout_ms)
 {
+	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
 	if (!m_pSocket) return false;
 	unsigned long totalRead = 0;
 	DWORD start = GetTickCount();
@@ -459,7 +465,7 @@ bool CNetwork::IsConnected() const {
 	return (m_pSocket && m_pSocket->m_hSocket != INVALID_SOCKET);
 }
 
-bool CNetwork::Reconnect(int maxRetries, unsigned long delay_ms) {
+bool CNetwork::Reconnect(int maxRetries, int timeout_s, unsigned long delay_ms) {
 
 	// Keep socket infrastructure alive
 	CAsyncSocket dummy;
@@ -467,7 +473,7 @@ bool CNetwork::Reconnect(int maxRetries, unsigned long delay_ms) {
 	DisconnectSocket();
 	int tries = 0;
 	while (tries < (maxRetries + 1)) {
-		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName, /*reconnect*/true)) {
+		if (ConnectSocket(m_lpszAddress, m_nPort, m_SocketName, /*reconnect*/true,/*timeout_s*/timeout_s)) {
 			StoreLastMessage("Reconnected");
 			if (bDummyCreated)
 				dummy.Close(); // Close dummy socket if it was created
@@ -495,7 +501,7 @@ bool CNetwork::SendDataWithRetry(const unsigned char* data, unsigned long size, 
 		}
 		END_CATCH
 			tries++;
-		if (!Reconnect(maxRetries, delay_ms))
+		if (!Reconnect(maxRetries, timeout_s, delay_ms))
 			break; // Could not reconnect
 		Sleep(delay_ms);
 	}

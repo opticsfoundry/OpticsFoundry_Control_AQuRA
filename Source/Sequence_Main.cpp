@@ -885,7 +885,7 @@ void CSequence::DoExperimentalSequence(CWnd* parent)
 	ThisDataArray=ThisDataArray+NrKeithleyMultimeter;
 
 	if ((DoTakeAbsorptionPicture || DoTakeFKSAbsorptionPicture || DoTakeFluorescencePicture) && (!DebugOn)) {
-		Vision->Ready();		
+		Vision->Ready();
 		Vision->SendPictureData(0/*FluoEndLevel*/,0/*RecaptureFluorescence*/,
 			/*FinalQuadrupoleCurrent*/0,/*FinalIoffeCurrent*/0,/*FinalOffsetCurrent*/0,/*FinalBias*/0,/*FinalGradiant*/0,
 			/*FinalCurvature*/0,LastLoadingTime,0,LastDataArray,LastDataArrayName,LastDataArrayPoints);

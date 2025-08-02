@@ -22,7 +22,7 @@ public:
 	CString m_SocketName;
 // Operations
 public:
-	bool ConnectSocket(LPCTSTR lpszAddress, UINT nPort,CString SocketName, bool reconnect = false);
+	bool ConnectSocket(LPCTSTR lpszAddress, UINT nPort,CString SocketName, bool reconnect = false, int timeout_s = 2);
 	bool ResetConnection(unsigned long sleep_time=2000);
 	bool FlushInputBuffer();
 	void SendMsg(CString& strText);
@@ -49,7 +49,7 @@ private:
 public:
 	// New reconnect/retry helpers:
 	bool IsConnected() const;
-	bool Reconnect(int maxRetries = 3, unsigned long delay_ms = 1000);
+	bool Reconnect(int maxRetries = 3, int timeout_s = 2, unsigned long delay_ms = 1000);
 	//bool SendDataWithRetry(const unsigned char* data, unsigned long size, int maxRetries = 3, unsigned long delay_ms = 1000);
 	//bool ReceiveDataWithRetry(unsigned char* buffer, unsigned long size, unsigned long timeout_ms = 5000, int maxRetries = 3, unsigned long delay_ms = 1000);
 

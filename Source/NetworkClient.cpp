@@ -46,6 +46,7 @@ bool CNetworkClient::ConnectSocket(LPCTSTR lpszAddress,UINT port,CString SocketN
 	Network=new CNetwork();
 	if (DebugOn) Network->DebugStart(DebugFileName);
 	bool Connected=Network->ConnectSocket(lpszAddress,port,SocketName);
+	//we insist that a server is present on program start. If it isn't we ignore that server, gaining speed. The alternative would be to try to reconnect every time, which takes a second or so, if the sever is not present.
 	if (!Connected) {
 		delete Network;
 		Network=NULL;
