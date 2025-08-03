@@ -52,5 +52,8 @@ Data/*
 # But keep the directory itself
 !DebugFiles/.gitkeep
 !Data/.gitkeep
+!Data/DataVisualizer.py
 /Source/Control.aps
 
+/enc_temp_folder/9ab85198375ded61c8d1aa2c91bdaed7
+/ConfigParams/MeasurementQueue.txt
