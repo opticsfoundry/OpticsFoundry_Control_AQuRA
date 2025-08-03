@@ -2061,9 +2061,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ConfigFileCreators\ControlHardwareConfigFileCreator.py" />
-    <None Include="ConfigFileCreators\ControlUserIOConfigFileCreator.py" />
     <None Include="ConfigParams\ControlHardwareConfig.json" />
+    <None Include="ConfigParams\ControlHardwareConfigFileCreator.py" />
+    <None Include="ConfigParams\ControlUserIOConfigFileCreator.py" />
     <None Include="resource.hm" />
     <None Include="res\bitmap1.bmp" />
     <None Include="res\BitmapBlack.bmp" />
@@ -2089,7 +2089,6 @@
   <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
-    <Text Include="ControlParam_ParamList.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\fschrec1\Downloads\icon.ico" />

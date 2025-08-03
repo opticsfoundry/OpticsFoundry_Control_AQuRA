@@ -1580,6 +1580,16 @@ void CSequence::AnalogIn() {
 //		ControlAPI.WriteInputMemory(2);
 //		ControlAPI.SwitchDebugLED(1);
 //		ControlAPI.AddMarker(1); //for debug: displays marker (here "1") on ZYNQ USB port output (use Termite or similar to see it)
+		
+#define TestAnalogIn
+
+#ifdef TestAnalogIn
+		//Test: initialize analog output connected to analog input for testing
+		SetOvenVoltage(10);
+		Wait(10);
+		//end Test
+#endif //TestAnalogIn
+
 		StartAnalogInAcquisition(0,SPI_port, SPI_CS, AnalogInChannelNumber, AnalogInNumberOfPoints, AnalogInPeriod);// StartAnalogInAcquisition(Sequencer, SPI_port, CS, /*channel_number*/ 2, /* number_of_datapoints */ 100, /* delay_between_datapoints_in_ms*/ 1)
 
 		/*for (int i = 0; i < 50; i++) {
@@ -1588,6 +1598,20 @@ void CSequence::AnalogIn() {
 			SwitchSpareDigitalOut0(Off);
 			Wait(1);
 		}*/
+
+#ifdef TestAnalogIn
+		//Test
+		Wait(10);
+		const double RampStepTime = 0.1;
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetOvenVoltage", LastValue, -10, 100, RampStepTime));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetOvenVoltage", LastValue, 10, 100, RampStepTime));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		SetOvenVoltage(0);
+		//end test
+#endif
 
 //		Wait(100);
 //		ControlAPI.WriteInputMemory(3);

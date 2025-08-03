@@ -489,7 +489,7 @@ private:
 	//void (*UpdateFunction)(unsigned int);  
 	//int UpdateFunctionParameter;
 	bool AutoUpdate;
-	bool m_bDialogClosed;
+	//bool m_bDialogClosed;
 public:
 	afx_msg void OnBnClickedRunExperiment();
 	afx_msg void OnBnClickedResetsystem();

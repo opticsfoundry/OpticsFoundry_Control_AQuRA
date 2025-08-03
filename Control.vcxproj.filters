@@ -1135,15 +1135,14 @@
     <None Include="FluoLoadingDialog.htm" />
     <None Include="ReadMe.txt" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ConfigFileCreators\ControlHardwareConfigFileCreator.py" />
-    <None Include="ConfigFileCreators\ControlUserIOConfigFileCreator.py" />
     <None Include="ConfigParams\ControlHardwareConfig.json" />
     <None Include=".gitignore" />
     <None Include="Source\FluoLoadingDialog.htm" />
+    <None Include="ConfigParams\ControlUserIOConfigFileCreator.py" />
+    <None Include="ConfigParams\ControlHardwareConfigFileCreator.py" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="AddressUsageTable.txt" />
-    <Text Include="ControlParam_ParamList.txt" />
     <Text Include="ConfigParams\ControlParam_SystemParamList.txt" />
   </ItemGroup>
   <ItemGroup>
