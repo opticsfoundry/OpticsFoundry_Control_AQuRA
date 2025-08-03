@@ -29,7 +29,7 @@ CWnd* CallingDialog;
 CEasyDialog::CEasyDialog(CString aCaption, bool aMainWindow,  int _MainDialogStartX,  int _MainDialogStartY, unsigned int aMessage,CMessageReceiver* aMessageReceiver, CWnd* pParent /*=NULL*/)
 	: CDialog(CEasyDialog::IDD, pParent)
 {
-	//m_bDialogClosed = false;
+	m_bDialogClosed = false;
 	MainWindow = aMainWindow;
 	MainDialogStartX = _MainDialogStartX;
 	MainDialogStartY = _MainDialogStartY;
@@ -55,7 +55,7 @@ CEasyDialog::CEasyDialog(CString aCaption, bool aMainWindow,  int _MainDialogSta
 
 CEasyDialog::~CEasyDialog()
 {
-	//m_bDialogClosed = true;
+	m_bDialogClosed = true;
 	if (ToolTip) {
 		if (::IsWindow(ToolTip->GetSafeHwnd())) {
 			ToolTip->DestroyWindow(); // Safely destroys the HWND
@@ -167,7 +167,7 @@ void CEasyDialog::OnDown(int mode) {
 
 void CEasyDialog::OnDestroy()
 {
-	//m_bDialogClosed = true;
+	m_bDialogClosed = true;
 	if (ToolTip) {	
 		if (::IsWindow(ToolTip->GetSafeHwnd())) {
 			ToolTip->DestroyWindow(); // Safely destroys the HWND
@@ -653,7 +653,7 @@ HICON m_hIconLarge;
 
 BOOL CEasyDialog::OnInitDialog() 
 {	
-	//m_bDialogClosed = false;
+	m_bDialogClosed = false;
 	((CControlApp*)AfxGetApp())->OnWakeUp();
 	//RECT rec={10,600,1000,620};
 	//StatusBar.Create("Status", SS_SIMPLE + WS_CHILD + WS_VISIBLE, rec, this);
@@ -752,7 +752,7 @@ void CEasyDialog::OnApply()
 
 void CEasyDialog::OnButton(unsigned int Nr)
 {	
-	//if (m_bDialogClosed || !::IsWindow(this->GetSafeHwnd())) return;
+	if (m_bDialogClosed || !::IsWindow(this->GetSafeHwnd())) return;
 	
 	((CControlApp*)AfxGetApp())->OnWakeUp();
 	POSITION pos=ElementList.GetHeadPosition();
@@ -865,7 +865,7 @@ void CEasyDialog::OnBnClickedEmergencyShutoff()
 
 BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 {
-	//if (m_bDialogClosed) return FALSE; // Don't process messages if dialog is closed
+	if (m_bDialogClosed) return FALSE; // Don't process messages if dialog is closed
 
 #ifdef DebugEasyDialog
 	CString buf;
@@ -891,55 +891,55 @@ BOOL CEasyDialog::PreTranslateMessage(MSG* pMsg)
 	}*/
 	//Here we code the equivalent of the ASSERTs, so that they are executed even in Release mode.
 	
-	//if (this == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this == nullptr");
-	//if (!AfxIsValidAddress(this, sizeof(CEasyDialog), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this is not valid");
-	//if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
-	//if (!AfxIsValidAddress(pMsg, sizeof(MSG), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg is not valid");
-	//if (!::IsWindow(this->GetSafeHwnd())) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this not a window");
-	//if (!::IsWindow(pMsg->hwnd))
-	//	return FALSE; // Ignore messages for invalid windows
+	if (this == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this == nullptr");
+	if (!AfxIsValidAddress(this, sizeof(CEasyDialog), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this is not valid");
+	if (pMsg == nullptr) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg == nullptr");
+	if (!AfxIsValidAddress(pMsg, sizeof(MSG), FALSE)) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : pMsg is not valid");
+	if (!::IsWindow(this->GetSafeHwnd())) ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : this not a window");
+	if (!::IsWindow(pMsg->hwnd))
+		return FALSE; // Ignore messages for invalid windows
 
-	//
-	//if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
-	//	//The following check is likely not necessary. 
-	//	//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));
-	//	if (AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE)) {
-	//		if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
-	//			if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
-	//				if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
-	//					ToolTip->RelayEvent(pMsg);
-	//				else
-	//					ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
-	//			else
-	//				ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd not valid");
-	//		}
-	//		else
-	//			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
-	//	} 
-	//	else
-	//		ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
-	//}
+	
+	if (ToolTip && ::IsWindow(ToolTip->GetSafeHwnd())) {
+		//The following check is likely not necessary. 
+		//ASSERT(AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE));
+		if (AfxIsValidAddress(ToolTip, sizeof(*ToolTip), FALSE)) {
+			if (ToolTip->m_hWnd != nullptr && ::IsWindow(ToolTip->m_hWnd)) {
+				if (AfxIsValidAddress(ToolTip->m_hWnd, sizeof(*ToolTip->m_hWnd), FALSE))
+					if (ToolTip->m_hWnd != INVALID_HANDLE_VALUE)
+						ToolTip->RelayEvent(pMsg);
+					else
+						ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
+				else
+					ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd not valid");
+			}
+			else
+				ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip->m_hWnd contains INVALID_HANDLE_VALUE");
+		} 
+		else
+			ControlMessageBox("CEasyDialog::PreTranslateMessage: strange error : ToolTip not valid");
+	}
 	
 
 	
 
-	//BOOL ret = FALSE;
-	//try {
-	//	ret = CDialog::PreTranslateMessage(pMsg);
-	//}
-	//catch (CException* e) {
-	//	CString errorMsg;
-	//	e->GetErrorMessage(errorMsg.GetBuffer(256), 256);
-	//	errorMsg.ReleaseBuffer();
-	//	e->Delete();
-	//	ControlMessageBox("CEasyDialog::PreTranslateMessage: CException caught: " + errorMsg);
-	//	ret = FALSE; // Return FALSE to indicate that the message was not processed
-	//}
-	//return ret;
+	BOOL ret = FALSE;
+	try {
+		ret = CDialog::PreTranslateMessage(pMsg);
+	}
+	catch (CException* e) {
+		CString errorMsg;
+		e->GetErrorMessage(errorMsg.GetBuffer(256), 256);
+		errorMsg.ReleaseBuffer();
+		e->Delete();
+		ControlMessageBox("CEasyDialog::PreTranslateMessage: CException caught: " + errorMsg);
+		ret = FALSE; // Return FALSE to indicate that the message was not processed
+	}
+	return ret;
 
-	if (ToolTip != NULL)
-		ToolTip->RelayEvent(pMsg);
-	return CDialog::PreTranslateMessage(pMsg);
+	//if (ToolTip != NULL)
+	//	ToolTip->RelayEvent(pMsg);
+	//return CDialog::PreTranslateMessage(pMsg);
 	// Note: if an error occurs here, it is likely due to memory corruption from another part of the code.
 	/*
   To debug memory corruption (e.g. heap overruns, use-after-free), use:

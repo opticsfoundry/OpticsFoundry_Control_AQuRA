@@ -1585,8 +1585,8 @@ void CSequence::AnalogIn() {
 
 #ifdef TestAnalogIn
 		//Test: initialize analog output connected to analog input for testing
-		SetOvenVoltage(10);
-		Wait(10);
+		SetOvenVoltage(4);
+		Wait(50);
 		//end Test
 #endif //TestAnalogIn
 
@@ -1601,14 +1601,15 @@ void CSequence::AnalogIn() {
 
 #ifdef TestAnalogIn
 		//Test
-		Wait(10);
+		Wait(50);
 		const double RampStepTime = 0.1;
 		StartNewWaveformGroup();
-		Waveform(new CRamp("SetOvenVoltage", LastValue, -10, 100, RampStepTime));
+		Waveform(new CRamp("SetOvenVoltage", LastValue, 0, 100, RampStepTime));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		StartNewWaveformGroup();
-		Waveform(new CRamp("SetOvenVoltage", LastValue, 10, 100, RampStepTime));
+		Waveform(new CRamp("SetOvenVoltage", LastValue, 4, 100, RampStepTime));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		Wait(10);
 		SetOvenVoltage(0);
 		//end test
 #endif
@@ -1633,7 +1634,7 @@ void CSequence::AnalogIn() {
 		ParamList->RegisterLong(&SPI_CS, "SPI_CS", 0, 3, "SPI Chip Select", "0..3");
 		ParamList->RegisterLong(&AnalogInChannelNumber, "AnalogInChannelNumber", 0, 7, "Analog In Channel Number", "0..7");
 		ParamList->RegisterLong(&AnalogInNumberOfPoints, "AnalogInNumberOfPoints", 1, 10000, "Number of points", "1..10000");
-		ParamList->RegisterDouble(&AnalogInPeriod, "AnalogInPeriod", 0.001, 10, "Period between points", "s");
+		ParamList->RegisterDouble(&AnalogInPeriod, "AnalogInPeriod", 0.001, 10, "Period between points", "ms");
 		ParamList->RegisterDouble(&AnalogInWait, "AnalogInWait", 0, 2000, "Wait", "ms");
 	}
 }
