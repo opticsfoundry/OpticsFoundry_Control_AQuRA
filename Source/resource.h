@@ -3,7 +3,7 @@
 // Used by Control.rc
 //
 #define IDD_ABOUTBOX                    100
-#define IDR_MAINFRAME                   128
+#define IDR_MAINFRAME                   1
 #define IDR_CONTROTYPE                  129
 #define IDS_BUTTON0                     130
 #define IDS_BUTTON1                     131
