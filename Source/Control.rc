@@ -244,14 +244,14 @@ IDD_EASYDIALOG DIALOGEX 0, 500, 687, 601
 STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,207,580,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,278,580,50,14
-    PUSHBUTTON      "Apply",IDC_APPLY,136,580,50,14
-    PUSHBUTTON      "Up",IDC_UP,349,580,29,14
-    PUSHBUTTON      "Down",IDC_DOWN,388,580,29,14
-    PUSHBUTTON      "Run Experiment",IDC_RUN_EXPERIMENT,428,580,104,14
-    PUSHBUTTON      "Reset System",IDC_RESETSYSTEM,547,580,80,14
-    PUSHBUTTON      "Emergency shutoff",IDC_EMERGENCY_SHUTOFF,7,567,116,27
+    DEFPUSHBUTTON   "OK",IDOK,232,580,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,303,580,50,14
+    PUSHBUTTON      "Apply",IDC_APPLY,161,580,50,14
+    PUSHBUTTON      "Up",IDC_UP,374,580,29,14
+    PUSHBUTTON      "Down",IDC_DOWN,413,580,29,14
+    PUSHBUTTON      "Run Experiment",IDC_RUN_EXPERIMENT,460,580,104,14
+    PUSHBUTTON      "Reset System",IDC_RESETSYSTEM,579,580,80,14
+    PUSHBUTTON      "Emergency shutoff",IDC_EMERGENCY_SHUTOFF,26,567,116,27
 END
 
 IDD_EXECUTE_MEASUREMENT_DIALOG DIALOGEX 0, 0, 430, 126
@@ -1292,10 +1292,29 @@ BEGIN
     IDO_SERIAL_STORE_IN_SEQUENCELIST_MODE "Serial store in sequence list mode"
     IDM_MENU_0              "Menu 0"
     IDS_STRING330           "#define _WIN32_WINNT 0x0601  // Target Windows 7"
-    IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A "Set 3x3A coil driver state (offset)"
     IDM_TEST_DDS_MODULATION "Test DDS Modulation"
     IDM_ZEEMAN_SLOWER_OFF   "Zeeman slower off"
     IDM_MENU_1              "Menu 1"
+END
+
+STRINGTABLE
+BEGIN
+    IDM_AQuRA_SWITCHMOTTYPE__CAPTURE_87 "AQuRA switch capture MOT 87"
+    IDM_AQuRA_SWITCHMOTTYPE__CAPTURE_BOSON 
+                            "AQuRA switch capture MOT for boson"
+    IDM_AQuRA_SWITCHMOTTYPE__AL_MOT_OPTIMIZED 
+                            "AQuRA switch for AL MOT optimized"
+    IDM_START_REMOTE_CONTROL_SERVER 
+                            "Spy on remote control server (start if needed)"
+    IDM_TEST_AD9985_PROGRAMMING "Test AD9858 programming"
+    IDC_TEST_ANALOG_IN      "Test analog input"
+    IDM_BLINK_SHUTTERS      "Blink shutters"
+    IDC_TEST_VISION         "Test Vision"
+    IDM_RUN_CLOCK           "Run AQuRA clock"
+    IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A "Program coil driver 3x3A (offset)"
+    IDM_ENABLE_TORUN_COIL_DRIVER_100A "Enable coil driver 100A (MOT)"
+    IDM_DISABLE_TORUN_COIL_DRIVER_100A "Disable coil driver 100A (MOT)"
+    IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A "Set 3x3A coil driver state (offset)"
 END
 
 STRINGTABLE
@@ -1634,25 +1653,6 @@ BEGIN
     IDM_AQuRA_Switch_2Dred  "Switch AQuRA 2D red MOlasses"
     IDM_AQuRA_Switch_2Dred_withPhase 
                             "Switch AQuRA 2D red MOlasses with Phase control"
-END
-
-STRINGTABLE
-BEGIN
-    IDM_AQuRA_SWITCHMOTTYPE__CAPTURE_87 "AQuRA switch capture MOT 87"
-    IDM_AQuRA_SWITCHMOTTYPE__CAPTURE_BOSON 
-                            "AQuRA switch capture MOT for boson"
-    IDM_AQuRA_SWITCHMOTTYPE__AL_MOT_OPTIMIZED 
-                            "AQuRA switch for AL MOT optimized"
-    IDM_START_REMOTE_CONTROL_SERVER 
-                            "Spy on remote control server (start if needed)"
-    IDM_TEST_AD9985_PROGRAMMING "Test AD9858 programming"
-    IDC_TEST_ANALOG_IN      "Test analog input"
-    IDM_BLINK_SHUTTERS      "Blink shutters"
-    IDC_TEST_VISION         "Test Vision"
-    IDM_RUN_CLOCK           "Run AQuRA clock"
-    IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A "Program coil driver 3x3A (offset)"
-    IDM_ENABLE_TORUN_COIL_DRIVER_100A "Enable coil driver 100A (MOT)"
-    IDM_DISABLE_TORUN_COIL_DRIVER_100A "Disable coil driver 100A (MOT)"
 END
 
 #endif    // English (United States) resources
