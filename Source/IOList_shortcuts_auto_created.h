@@ -28,7 +28,7 @@ extern AnalogOutFuncShortcut SetPMTGain;
 extern AnalogOutFuncShortcut SetElectrodeAVoltage;
 extern AnalogOutFuncShortcut SetElectrodeBVoltage;
 extern AnalogOutFuncShortcut SetElectrodeCVoltage;
-extern AnalogOutFuncShortcut SetOvenVoltage;
+extern AnalogOutFuncShortcut SetTestAnalogOut;
 extern DigitalOutFuncShortcut SwitchOscilloscopeTrigger;
 extern DigitalOutFuncShortcut SwitchCameraTrigger0;
 extern DigitalOutFuncShortcut SwitchCameraTrigger1;

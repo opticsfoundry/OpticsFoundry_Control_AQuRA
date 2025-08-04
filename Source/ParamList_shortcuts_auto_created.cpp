@@ -24,7 +24,7 @@ double* InitPMTGain;
 double* InitElectrodeAVoltage;
 double* InitElectrodeBVoltage;
 double* InitElectrodeCVoltage;
-double* InitOvenVoltage;
+double* InitTestAnalogOut;
 bool* InitOscilloscopeTrigger;
 bool* InitCameraTrigger0;
 bool* InitCameraTrigger1;
@@ -187,7 +187,7 @@ void CParamRegister::CreateShortcutsToUserIOInitParams() {
 	InitElectrodeAVoltage = GetParamDouble("InitElectrodeAVoltage");
 	InitElectrodeBVoltage = GetParamDouble("InitElectrodeBVoltage");
 	InitElectrodeCVoltage = GetParamDouble("InitElectrodeCVoltage");
-	InitOvenVoltage = GetParamDouble("InitOvenVoltage");
+	InitTestAnalogOut = GetParamDouble("InitTestAnalogOut");
 	InitOscilloscopeTrigger = GetParamBool("InitOscilloscopeTrigger");
 	InitCameraTrigger0 = GetParamBool("InitCameraTrigger0");
 	InitCameraTrigger1 = GetParamBool("InitCameraTrigger1");

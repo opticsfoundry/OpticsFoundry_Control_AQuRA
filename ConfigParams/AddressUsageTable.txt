@@ -116,7 +116,7 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          21         13         DigitalOutBoards               -                             
 0          21         14         DigitalOutBoards               -                             
 0          21         15         DigitalOutBoards               -                             
-0          24         0          AnalogOutBoards16bit           OvenVoltage                   
+0          24         0          AnalogOutBoards16bit           TestAnalogOut                 
 0          25         0          AnalogOutBoards16bit           ElectrodeCVoltage             
 0          26         0          AnalogOutBoards16bit           ElectrodeBVoltage             
 0          27         0          AnalogOutBoards16bit           ElectrodeAVoltage             

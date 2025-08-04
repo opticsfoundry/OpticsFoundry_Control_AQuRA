@@ -226,7 +226,7 @@
       }
     },
     {
-      "Name": "OvenVoltage",
+      "Name": "TestAnalogOut",
       "Description": "Voltage on oven",
       "Units": "V",
       "Help": "",

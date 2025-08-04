@@ -1585,7 +1585,7 @@ void CSequence::AnalogIn() {
 
 #ifdef TestAnalogIn
 		//Test: initialize analog output connected to analog input for testing
-		SetOvenVoltage(4);
+		SetTestAnalogOut(4);
 		Wait(50);
 		//end Test
 #endif //TestAnalogIn
@@ -1604,13 +1604,13 @@ void CSequence::AnalogIn() {
 		Wait(50);
 		const double RampStepTime = 0.1;
 		StartNewWaveformGroup();
-		Waveform(new CRamp("SetOvenVoltage", LastValue, 0, 100, RampStepTime));
+		Waveform(new CRamp("SetTestAnalogOut", LastValue, 0, 100, RampStepTime));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		StartNewWaveformGroup();
-		Waveform(new CRamp("SetOvenVoltage", LastValue, 4, 100, RampStepTime));
+		Waveform(new CRamp("SetTestAnalogOut", LastValue, 4, 100, RampStepTime));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		Wait(10);
-		SetOvenVoltage(0);
+		SetTestAnalogOut(0);
 		//end test
 #endif
 

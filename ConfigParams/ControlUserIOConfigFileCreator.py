@@ -266,7 +266,7 @@ if __name__ == "__main__":
     builder.add_analog_out(Name="ElectrodeAVoltage", Description="Voltage on Electrode A", Address=27, Units="V", Max=5.0, Init=0.0)
     builder.add_analog_out(Name="ElectrodeBVoltage", Description="Voltage on Electrode B", Address=26, Units="V", Max=5.0, Init=0.0)
     builder.add_analog_out(Name="ElectrodeCVoltage", Description="Voltage on Electrode C", Address=25, Units="V", Max=5.0, Init=0.0)
-    builder.add_analog_out(Name="OvenVoltage", Description="Voltage on oven", Address=24, Units="V", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="TestAnalogOut", Description="Voltage on oven", Address=24, Units="V", Max=5.0, Init=0.0)
 
     builder.add_static_text("")
     builder.add_static_text(Text="AQuRA Digital Out")

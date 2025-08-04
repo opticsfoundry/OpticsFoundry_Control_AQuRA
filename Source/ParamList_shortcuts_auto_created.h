@@ -21,7 +21,7 @@ extern double* InitPMTGain;
 extern double* InitElectrodeAVoltage;
 extern double* InitElectrodeBVoltage;
 extern double* InitElectrodeCVoltage;
-extern double* InitOvenVoltage;
+extern double* InitTestAnalogOut;
 extern bool* InitOscilloscopeTrigger;
 extern bool* InitCameraTrigger0;
 extern bool* InitCameraTrigger1;

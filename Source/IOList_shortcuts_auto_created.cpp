@@ -30,7 +30,7 @@ AnalogOutFuncShortcut SetPMTGain;
 AnalogOutFuncShortcut SetElectrodeAVoltage;
 AnalogOutFuncShortcut SetElectrodeBVoltage;
 AnalogOutFuncShortcut SetElectrodeCVoltage;
-AnalogOutFuncShortcut SetOvenVoltage;
+AnalogOutFuncShortcut SetTestAnalogOut;
 DigitalOutFuncShortcut SwitchOscilloscopeTrigger;
 DigitalOutFuncShortcut SwitchCameraTrigger0;
 DigitalOutFuncShortcut SwitchCameraTrigger1;
@@ -193,7 +193,7 @@ void CIORegister::CreateShortcutsToUserIO() {
 	SetElectrodeAVoltage = GetAnalogOutput("SetElectrodeAVoltage");
 	SetElectrodeBVoltage = GetAnalogOutput("SetElectrodeBVoltage");
 	SetElectrodeCVoltage = GetAnalogOutput("SetElectrodeCVoltage");
-	SetOvenVoltage = GetAnalogOutput("SetOvenVoltage");
+	SetTestAnalogOut = GetAnalogOutput("SetTestAnalogOut");
 	SwitchOscilloscopeTrigger = GetDigitalOutput("SwitchOscilloscopeTrigger");
 	SwitchCameraTrigger0 = GetDigitalOutput("SwitchCameraTrigger0");
 	SwitchCameraTrigger1 = GetDigitalOutput("SwitchCameraTrigger1");
