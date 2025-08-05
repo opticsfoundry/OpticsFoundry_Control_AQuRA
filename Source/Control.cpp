@@ -1039,6 +1039,13 @@ extern char** __argv;
 
 BOOL CControlApp::InitInstance()
 {
+
+#ifdef _DEBUG
+	// Enable detailed memory checks in debug mode. This debug option slows down the program a lot (> x100 times slower or so)
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF);
+	//_CrtSetBreakAlloc(2172);//optional, if ther e is an error like "{2172} normal block at 0x00B3A7C0, 128 bytes long." then put 2172 into this function to find out more.
+#endif
+
 	/*for (int i = 0; i < __argc; ++i) {
 		CString arg(__argv[i]);
 		ControlMessageBox(arg);

@@ -191,6 +191,7 @@ void CDialogElement::Create(unsigned int Line, CEasyDialog* &Dialog, CWnd* aHelp
 	if (Dialog->ToolTip) {
 		if (HelpWnd) Dialog->ToolTip->AddTool(HelpWnd, ToolTipText);
 		Dialog->ToolTip->AddTool(&HelpButton, ToolTipText);
+		Dialog->ToolTip->Activate(TRUE);
 	}
 	UpdateHelpButtonColor(false);		
 }

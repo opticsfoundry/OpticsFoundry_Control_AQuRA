@@ -81,14 +81,19 @@ void CEasyDialog::DebugProtocol(CString message) {
 
 void CEasyDialog::DeleteElements()
 {
-	POSITION pos=ElementList.GetHeadPosition();
+	while (!ElementList.IsEmpty()) {
+		CParam* p = (CParam*)ElementList.RemoveHead();
+		delete p;
+	}
+
+	/*POSITION pos=ElementList.GetHeadPosition();
 	while (pos!=NULL) {
 		CParam* help=((CParam*)ElementList.GetAt(pos));			
 		ElementList.RemoveAt(pos);			
 		if (help) delete help;		
 		pos=ElementList.GetHeadPosition();
 	}
-	ElementList.RemoveAll();
+	ElementList.RemoveAll();*/
 }
 
 void CEasyDialog::OnOK()
