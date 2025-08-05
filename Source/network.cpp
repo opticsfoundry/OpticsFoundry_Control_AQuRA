@@ -250,52 +250,6 @@ bool CNetwork::SendString(const CString& str) {
 	return SendData(reinterpret_cast<const unsigned char*>(psz), (unsigned long)strlen(psz));
 }
 
-//bool CNetwork::FlushInputBuffer()
-//{
-//	if (!m_pSocket)
-//		return false;
-//
-//	const int kBufferSize = 4096;
-//	char tempBuffer[kBufferSize];
-//
-//	// Set the socket temporarily to non-blocking mode
-//	u_long nonBlocking = 1;
-//	ioctlsocket(m_pSocket->m_hSocket, FIONBIO, &nonBlocking);
-//
-//	int bytesRead = 0;
-//	do {
-//		bytesRead = m_pSocket->Receive(tempBuffer, kBufferSize);
-//		if (bytesRead > 0) {
-//			// Data was read and discarded
-//			continue;
-//		}
-//		else if (bytesRead == 0) {
-//			// Connection closed
-//			break;
-//		}
-//		else {
-//			int err = m_pSocket->GetLastError();
-//			if (err == WSAEWOULDBLOCK) {
-//				// No more data to read
-//				break;
-//			}
-//			else {
-//				CString buf;
-//				buf.Format(_T("CNetwork::FlushInputBuffer :: Receive error %d"), err);
-//				ControlMessageBox(buf);
-//				break;
-//			}
-//		}
-//	} while (bytesRead > 0);
-//
-//	// Restore socket to blocking mode
-//	nonBlocking = 0;
-//	ioctlsocket(m_pSocket->m_hSocket, FIONBIO, &nonBlocking);
-//
-//	return true;
-//}
-
-
 bool CNetwork::FlushInputBuffer()
 {
 	if (!m_pSocket)	Reconnect(/*maxRetries*/ 0,/*timeout_s*/1,/*delay_ms*/0);
