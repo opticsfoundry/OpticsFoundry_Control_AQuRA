@@ -1,5 +1,12 @@
 // CoilDriverTorun3x3A.cpp: implementation of the CCoilDriverTorun3x3A class.
 //
+/*
+*
+* Please use the folowing website for more info :
+https://github.com/KLFAMO/current3x3A_Artiq/tree/aqura
+*
+*/
+//////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,5 +1,25 @@
 // CoilDriverTorun100A.cpp: implementation of the CCoilDriverTorun100A class.
 //
+// 
+// 
+/*
+*
+* Please use the folowing websites for more info :
+https://github.com/KLFAMO/current100A_Artiq/tree/aqura
+*
+Commands
+For basic control
+MODE 0 - switch off current
+MODE 1 - current control via voltage input(SMA input on front panel)
+MODE 2 - current control via ethernet user interface(CUR command)
+CUR 10.2 - set current 10.2 A(only in mode 2)
+Advanced settings
+I - 0.04 - set gain - 0.04 (this is bese gain for 50A - it is rescaled by uC for lower current due to udjust transistor characteristics)
+
+read back :
+MODE ?
+etc.
+*/
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -22,6 +42,8 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 #define ReadBackValue
+
+
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -49,24 +71,6 @@ bool CCoilDriverTorun100A::ConnectSocket(LPCTSTR lpszAddress,UINT port) {
 	//SetMode(1);
 	return Connected;
 }
-
-
-
-
-/*
-Commands
-For basic control
-MODE 0 - switch off current
-MODE 1 - current control via voltage input (SMA input on front panel)
-MODE 2 - current control via ethernet user interface (CUR command)
-CUR 10.2 - set current 10.2 A (only in mode 2)
-Advanced settings
-I -0.04 - set gain -0.04 (this is bese gain for 50A - it is rescaled by uC for lower current due to udjust transistor characteristics)
-
-read back:
-MODE ?
-etc.
-*/
 
 bool CCoilDriverTorun100A::SetMode(unsigned int Mode) {
 	ResetMyConnection
