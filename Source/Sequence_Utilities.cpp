@@ -720,6 +720,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				SetWaveformGenerationMode();
 				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
 				OnOff = !OnOff; // toggle shutters on/off
+				Wait(BlinkShutterPeriod);
 			}
 		}
 		else {
