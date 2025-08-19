@@ -1133,7 +1133,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="FluoLoadingDialog.htm" />
-    <None Include="ReadMe.txt" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ConfigParams\ControlHardwareConfig.json" />
     <None Include=".gitignore" />

@@ -2081,7 +2081,6 @@
     <None Include="FluoLoadingDialog.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="ReadMe.txt" />
     <None Include="Source\FluoLoadingDialog.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
