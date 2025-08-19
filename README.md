@@ -187,49 +187,30 @@ Here an example hardware configuration file generator Python script:
 
 &nbsp;
 
-if \__name__ == "\__main_\_":
-
-&nbsp;   builder = ConfigBuilder()
-
-&nbsp;   builder.RegisterSequencer(IP="192.168.0.109", Port=7, ClockFrequency=100000000, BusFrequency=2000000, DebugOn = False)
-
-&nbsp;   analog_out_configs = \[
-
-&nbsp;       (24, False, 0, 10),
-
-&nbsp;       (28, True, -10, 10),
-
-&nbsp;       (32, True, 0, 10),
-
-&nbsp;       (36, True, -10, 10),
-
-&nbsp;       (40, True, -10, 10)
-
-&nbsp;   \]
-
-&nbsp;   for addr, signed, minv, maxv in analog_out_configs:
-
-&nbsp;       builder.RegisterAnalogOutBoard16bit(StartAddress=addr, Signed=signed, MinVoltage=minv, MaxVoltage=maxv)
-
-&nbsp;   for addr in \[1, 2, 3, 4, 5, 6\]:
-
-&nbsp;       builder.RegisterDigitalOutBoard(Address=addr)
-
-&nbsp;   for addr in range(132, 172, 4):
-
-&nbsp;       builder.RegisterDDSAD9854Board(Address=addr)
-
-&nbsp;  
-
-&nbsp;   for addr in range(52, 84, 4):
-
-&nbsp;       builder.RegisterDDSAD9858Board(Address=addr)
-
-&nbsp;  
-
-&nbsp;   builder.RegisterDDSAD9958Board(Address=21)
-
-&nbsp;   builder.Save()
+```py
+if __name__ == "__main__":
+   builder = ConfigBuilder()
+   builder.RegisterSequencer(IP="192.168.0.109", Port=7, ClockFrequency=100000000, BusFrequency=2000000, DebugOn = False)
+   analog_out_configs = [
+       (24, False, 0, 10),
+       (28, True, -10, 10),
+       (32, True, 0, 10),
+       (36, True, -10, 10),
+       (40, True, -10, 10)
+   ]
+   for addr, signed, minv, maxv in analog_out_configs:
+       builder.RegisterAnalogOutBoard16bit(StartAddress=addr, Signed=signed, MinVoltage=minv, MaxVoltage=maxv)
+   for addr in [1, 2, 3, 4, 5, 6]:
+       builder.RegisterDigitalOutBoard(Address=addr)
+   for addr in range(132, 172, 4):
+       builder.RegisterDDSAD9854Board(Address=addr)
+  
+   for addr in range(52, 84, 4):
+       builder.RegisterDDSAD9858Board(Address=addr)
+  
+   builder.RegisterDDSAD9958Board(Address=21)
+   builder.Save()
+```
 
 &nbsp;
 
@@ -241,55 +222,33 @@ You can specify ranges for analog outputs and DDS frequency outputs. Control wil
 
 &nbsp;
 
-if \__name__ == "\__main_\_":
-
-&nbsp;   builder = UserIOConfigBuilder()
-
-&nbsp;   builder.add_new_menu(Name="User IO Analog Out")
-
-&nbsp;   builder.add_static_text(Name="Spare Analog Outs")
-
-&nbsp;   for i in range(8):
-
-&nbsp;       builder.add_analog_out(Name=f"SpareAnalogOut{i}", Description=f"Spare Analog Output {i}", Address=24+i)
-
-&nbsp;   builder.add_new_column()
-
-&nbsp;   builder.add_static_text(Name="AQuRA Analog Outs")
-
-&nbsp;   builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=5.0, Init=0.0)
-
-&nbsp;   builder.add_new_column()
-
-&nbsp;   builder.add_new_menu(Name="User IO Digital Out")
-
-&nbsp;   for i in range(8):
-
-&nbsp;       builder.add_digital_out(Name=f"SwitchSpareDigitalOut{i}", Description=f"Spare Digital Output {i}", Address=4, Bit = i)
-
-&nbsp;   builder.add_digital_out(Name=f"SwitchOscilloscopeTrigger", Description=f"Oscilloscope Trigger", Address=5, Bit = 0)
-
-&nbsp;   builder.add_digital_out(Name="SwitchCameraTrigger0", Description="Camera Trigger 0", Address=5, Bit=1)
-
-&nbsp;   builder.add_digital_out(Name="SwitchCameraTrigger1", Description="Camera Trigger 1", Address=5, Bit=2)
-
-&nbsp;   builder.add_digital_out(Name="SwitchPMTTrigger", Description="PMT Trigger", Address=5, Bit=3)
-
-&nbsp;   builder.add_new_menu(Name="User IO DDS Out Menu")
-
-&nbsp;   builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=132, FrequencyControl= "FrequencyAsBinary")
-
-&nbsp;   builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
-
-&nbsp;   builder.add_dds_ad9958(Name="UserIOTestDDSAD9958_0", Description="Test DDS AD9958 0", Address=21)
-
-&nbsp;   builder.add_new_column()
-
-&nbsp;   builder.add_static_text(Name="AQuRA AD9854 DDS")
-
-&nbsp;   builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=136)
-
-&nbsp;   builder.save()
+```py
+if __name__ == "__main__":
+   builder = UserIOConfigBuilder()
+   builder.add_new_menu(Name="User IO Analog Out")
+   builder.add_static_text(Name="Spare Analog Outs")
+   for i in range(8):
+       builder.add_analog_out(Name=f"SpareAnalogOut{i}", Description=f"Spare Analog Output {i}", Address=24+i)
+   builder.add_new_column()
+   builder.add_static_text(Name="AQuRA Analog Outs")
+   builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=5.0, Init=0.0)
+   builder.add_new_column()
+   builder.add_new_menu(Name="User IO Digital Out")
+   for i in range(8):
+       builder.add_digital_out(Name=f"SwitchSpareDigitalOut{i}", Description=f"Spare Digital Output {i}", Address=4, Bit = i)
+   builder.add_digital_out(Name=f"SwitchOscilloscopeTrigger", Description=f"Oscilloscope Trigger", Address=5, Bit = 0)
+   builder.add_digital_out(Name="SwitchCameraTrigger0", Description="Camera Trigger 0", Address=5, Bit=1)
+   builder.add_digital_out(Name="SwitchCameraTrigger1", Description="Camera Trigger 1", Address=5, Bit=2)
+   builder.add_digital_out(Name="SwitchPMTTrigger", Description="PMT Trigger", Address=5, Bit=3)
+   builder.add_new_menu(Name="User IO DDS Out Menu")
+   builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=132, FrequencyControl= "FrequencyAsBinary")
+   builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
+   builder.add_dds_ad9958(Name="UserIOTestDDSAD9958_0", Description="Test DDS AD9958 0", Address=21)
+   builder.add_new_column()
+   builder.add_static_text(Name="AQuRA AD9854 DDS")
+   builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=136)
+   builder.save()
+```
 
 &nbsp;
 
