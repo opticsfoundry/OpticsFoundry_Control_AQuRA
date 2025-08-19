@@ -373,15 +373,18 @@ extern "C" {
 
 		m_hInstance = 0;
 		m_pMainWnd = NULL;
-
-		Mutex = CreateOneAppMutex("Mutex");
-		if (Mutex == NULL) {
-			//another copy of Control is already running
-			//->disable hardware access
-			//ControlMessageBox("CControlApp::InitInstance: Another instance of Control is running. Disabling hardware access. ");
-			HardwareAccess = false;
+		Mutex = NULL;
+		HardwareAccess = true;
+		if (!AllowMultipleInstancesOfControl) {
+			Mutex = CreateOneAppMutex("Mutex");
+			if (Mutex == NULL) {
+				//another copy of Control is already running
+				//->disable hardware access
+				ControlMessageBox("CControlApp::InitInstance: Another instance of Control is in use. Disabling hardware access.\n\nIf you want to run multiple instances, accessing different hardware, then set\nAllowMultipleInstancesOfControl = TRUE\nin ConfigParams\\ControlParam_SystemParamList.txt.Make sure to initialize the different instances with hardware configuration files accessing different FPGAs.");
+				HardwareAccess = false;
+			}
+			else HardwareAccess = true;
 		}
-		else HardwareAccess = true;
 
 
 		//HardwareAccess=false;
@@ -1062,14 +1065,21 @@ BOOL CControlApp::InitInstance()
 	}
 	//SetProcessDPIAware(); // for system DPI awareness, if you don't want to have blurry windows in x64. Disadvantage: windows currently scale incorrectly.
 	//SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE); // for per-monitor, needs Windows 8.1+  //solves x64 window blurriness
-	LoadString(m_hInstance, IDC_MUTEX, szMutexName, MAX_LOADSTRING);
-	Mutex=CreateOneAppMutex(szMutexName);
-	if (Mutex==NULL) {
-		//another copy of Control is already running
-		//->disable hardware access
-		ControlMessageBox("CControlApp::InitInstance: Another instance of Control is running. Disabling hardware access. ");
-		HardwareAccess=false;
-	} else HardwareAccess=true;	
+	Mutex = NULL;
+	HardwareAccess = true;
+	if (!AllowMultipleInstancesOfControl) {
+		LoadString(m_hInstance, IDC_MUTEX, szMutexName, MAX_LOADSTRING);
+		Mutex = CreateOneAppMutex(szMutexName);
+		if (Mutex == NULL) {
+			//another copy of Control is already running
+			//->disable hardware access
+			ControlMessageBox("CControlApp::InitInstance: Another instance of Control is in use. Disabling hardware access.\n\nIf you want to run multiple instances, accessing different hardware, then set\nAllowMultipleInstancesOfControl = TRUE\nin ConfigParams\\ControlParam_SystemParamList.txt.Make sure to initialize the different instances with hardware configuration files accessing different FPGAs.");
+			HardwareAccess = false;
+		}
+		else HardwareAccess = true;
+	}
+
+
 	
 	//HardwareAccess=false;
 	

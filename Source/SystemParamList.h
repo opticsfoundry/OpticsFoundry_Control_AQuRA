@@ -63,6 +63,8 @@ extern bool ConnectToVision;
 extern CString* VisionComputerIPAdress;
 extern long VisionPort;
 
+extern bool AllowMultipleInstancesOfControl;
+
 extern bool ConnectToCoilDriverTorun3x3A;
 extern CString* CoilDriverTorun3x3AIPAdress;
 extern long CoilDriverTorun3x3APort;

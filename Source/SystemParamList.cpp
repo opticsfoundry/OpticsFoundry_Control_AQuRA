@@ -49,6 +49,8 @@ void CSystemParamList::Initialize() {
 	RegisterLong(&MainDialogStartX, "MainDialogStartX", -10000, 10000, "Main Dialog Start X windows cooords");
 	RegisterLong(&MainDialogStartY, "MainDialogStartY", -10000, 10000, "Main Dialog Start Y windows cooords");
 	RegisterBool(&StartRemoteServer, "StartRemoteServer", "Start remote server?", "S");
+	AllowMultipleInstancesOfControl = false;
+	RegisterBool(&AllowMultipleInstancesOfControl, "AllowMultipleInstancesOfControl", "Allow multiple instances of Control DLL?");
 	AddButton(IDM_START_REMOTE_CONTROL_SERVER, Sequence);
 	RegisterBool(&ExternalTrigger, "ExternalTrigger", "External Trigger 0?", "T");
 	RegisterBool(&ExternalTrigger1, "ExternalTrigger1", "External Trigger 1?", "T");
@@ -133,6 +135,7 @@ CSystemParamList::~CSystemParamList()
 
 double Pi;
 bool StartRemoteServer;
+bool AllowMultipleInstancesOfControl;
 
 CString* WorkingDirectory;
 CString* HardwareConfigFilename;
