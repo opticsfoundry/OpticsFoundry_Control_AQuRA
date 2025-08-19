@@ -80,13 +80,10 @@ Control.exe configures itself from configuration files. It searches for "config.
 
 &nbsp;
 
-The main configuration files are_  
+The main configuration files are:  
 ControlParam_ParamList.txt_
-
 _ControlParam_SystemParamList.txt_
-
 _ControlParam_UniMessList.dat_
-
 _ControlParam_UtilityDialog.txt_
 
 and are typically contained in the folder
@@ -102,31 +99,18 @@ _ControlParam_SystemParamList.txt_ (not _ControlParam_ParamList.txt_)
 e.g.
 
 _WorkingDirectory=._
-
 _HardwareConfigFilename=ControlHardwareConfig.json_
-
 _UserIOConfigFilename=ControlUserIOConfig.json_
-
 _UserIOAlternativeCommandNames=AlternativeCommandNames.txt_
-
 _DebugFilePath=..\\DebugFiles\\_
-
 _VirtualOsciFilePath=..\\OpticsFoundry_Control_AQuRA\\VirtualOsci\\_
-
 _DataFilePath=..\\Data\\_
-
 _SourceFilePath=..\\OpticsFoundry_Control_AQuRA\\_
-
 _CalibrationFilePath=..\\OpticsFoundry_Control_AQuRA\\Calibrations\\_
-
 _ParameterReferenceFileName=ReferenceParam_
-
 _UserParameterASCIIFileName=..\\DebugFiles\\OutputList.txt_
-
 _UserParameterFileName=ReferenceParam.dat_
-
 _OutputListFilename=..\\DebugFiles\\OutputList.dat_
-
 _OutputListFilenameComputerReadable=..\\DebugFiles\\OutputListCR.dat_
 
 and more (further down in the file).
@@ -140,7 +124,6 @@ If the _WorkingDirectory_ is empty (i.e. "WorkingDirectory=" (no dot) instead of
 Make sure the screen coordinates at which the Control window appears is on your screen, e.g.
 
 _MainDialogStartX=0_
-
 _MainDialogStartY=0_
 
 It's convenient to set this to appropriate values in multi-screen setups, but it can lead to a hidden window when switching screen setups.
