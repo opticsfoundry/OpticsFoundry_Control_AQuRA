@@ -32,6 +32,7 @@ bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
 	Received |= UtilityTestSequence(Message, parent);
 	Received |= UtilityTest448nmCavityAnalogOut(Message, parent);
 	Received |= UtilityBlinkShutters(Message, parent);
+	Received |= UtilityBlinkMOT(Message, parent);
 	Received |= UtilityTorunCoilDrivers(Message, parent);
 	
 
@@ -726,6 +727,43 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		else {
 			UtilityDialog->RegisterLong(&BlinkShutterPeriod, "BlinkShutterPeriod", 0, 100000, "Blink Shutter Wait Time", "ms");
 			UtilityDialog->AddButton(IDM_BLINK_SHUTTERS, Sequence);
+			UtilityDialog->AddStatic("");
+		}
+		return true;
+	}
+
+
+	//Utility UtilityBlinkMOT
+	bool CSequence::UtilityBlinkMOT(unsigned int Message, CWnd* parent)
+	{
+		static double BlinkMOTCurrent;
+		static long BlinkMOTPeriod;
+		
+		if (!AssemblingUtilityDialog()) {
+			if (Message != IDM_BLINK_MOT) return false;
+			if ((CancelLoopDialog == NULL) && (parent)) {
+				CancelLoopDialog = new CExecuteMeasurementDlg(parent, this);
+				CancelLoopDialog->Create();
+				CancelLoopDialog->SetWindowPos(&CWnd::wndTop, 100, 200, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
+			}
+			bool OnOff = On;
+			while (CancelLoopDialog) {
+				if (CancelLoopDialog) CancelLoopDialog->SetData((OnOff) ? "MOT On" : "MOT Off", (OnOff) ? 1 : 0, 1);
+				if (!CancelLoopDialog) return true;
+				//SetAssembleSequenceListMode();
+				//StartSequence(NULL, parent, false);
+				SetMOTCoilCurrent((OnOff) ? BlinkMOTCurrent : 0);
+				//StopSequence();
+				//SetWaveformGenerationMode();
+				//ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				OnOff = !OnOff; // toggle shutters on/off
+				Wait(BlinkMOTPeriod);
+			}
+		}
+		else {
+			UtilityDialog->RegisterDouble(&BlinkMOTCurrent, "BlinkMOTCurrent", 0, 20, "Blink MOT current", "A");
+			UtilityDialog->RegisterLong(&BlinkMOTPeriod, "BlinkMOTPeriod", 0, 100000, "Blink MOT Wait Time", "ms");
+			UtilityDialog->AddButton(IDM_BLINK_MOT, Sequence);
 			UtilityDialog->AddStatic("");
 		}
 		return true;

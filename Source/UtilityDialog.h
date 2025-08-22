@@ -32,9 +32,9 @@ public:
 //extern long BlinkDDSNr;
 //extern bool BlinkDDSType;
 
-extern double BlinkMOTOnTime;
-extern double BlinkMOTFluoTime;
-extern double BlinkMOTOffTime;
+//extern double BlinkMOTOnTime;
+//extern double BlinkMOTFluoTime;
+//extern double BlinkMOTOffTime;
 extern double BlinkMolassesOnTime;
 extern double BlinkMolassesOffTime;
 
