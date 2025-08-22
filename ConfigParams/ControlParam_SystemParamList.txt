@@ -16,6 +16,7 @@ OutputListFilenameComputerReadable=..\DebugFiles\OutputListCR.dat
 MainDialogStartX=0
 MainDialogStartY=0
 StartRemoteServer=FALSE
+AllowMultipleInstancesOfControl=FALSE
 ExternalTrigger=FALSE
 ExternalTrigger1=FALSE
 ExternalClock=FALSE

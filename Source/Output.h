@@ -280,7 +280,9 @@ public:
 				buf.Format("COutput::RangeCheck : "+SName+" : out of range : %.3f not in [%.3f...%.3f]",Value,Min,Max);
 				ControlMessageBox(buf);
 			}
-			Value=(Min+Max)/2.0;
+			if (Value < Min) Value = Min;
+			else if (Value > Max) Value = Max;
+			//Value=(Min+Max)/2.0;
 		}
 	};
 	void DisableRangeCheck() {RangeCheckEnabled=false;}

@@ -390,10 +390,10 @@ double EvaluatePolynomial(double X, const std::shared_ptr<std::vector<CalibTerm>
 
 void CUserIOItemAnalogOut::SetAnalogOut(double Voltage) {
 	if (!MyChannelFound) return;
-	Output->RangeCheck(Voltage, -10, 10, Name.c_str());
 	double OutVoltage = EvaluatePolynomial(Voltage, calibrationTerms);
-	if (OutVoltage > Max) OutVoltage = Max;
-	if (OutVoltage < Min) OutVoltage = Min;
+	Output->RangeCheck(Voltage, Min, Max, Name.c_str());
+	//if (OutVoltage > Max) OutVoltage = Max;
+	//if (OutVoltage < Min) OutVoltage = Min;
 	Output->AnalogOutScaled(MyChannelNr, Voltage, OutVoltage);
 }
 
