@@ -43,6 +43,7 @@ public:
 	void StartSequence();
 	void ProgramInterlockSequence(); //);
 	void SwitchToDirectOutputMode();
+	void OnIdle(); //);
 	void ReplaceCommand(); //unsigned long cycle_number, unsigned int command_line_nr, unsigned char* new_command);
 	void StartCycling(); //);
 	void StopCycling(); 

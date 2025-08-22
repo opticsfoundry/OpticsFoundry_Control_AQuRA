@@ -50,6 +50,7 @@ void CRemoteControl::ProcessMessage(CString aMessage) {
 	else if (aMessage == "ProgramSequence") ProgramSequence(); //ok
 	else if (aMessage == "StartSequence") StartSequence(); //ok
 	else if (aMessage == "SwitchToDirectOutputMode") SwitchToDirectOutputMode(); //ok
+	else if (aMessage == "OnIdle") OnIdle(); //ok
 	else if (aMessage == "StartCycling") StartCycling(); //ok
 	else if (aMessage == "StopCycling") StopCycling(); //ok
 	else if (aMessage == "IsCycling") IsCycling(); //ok
@@ -193,6 +194,12 @@ void CRemoteControl::SwitchToDirectOutputMode()
 {
 	ControlAPI->SwitchToDirectOutputMode();
 	Display("SwitchToDirectOutputMode", false);
+}
+
+void CRemoteControl::OnIdle()
+{
+	Sequence->Idle(ActiveDialog);
+	Display("OnIdle", false);
 }
 
 void RCErrorNotYetImplemented() {

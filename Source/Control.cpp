@@ -245,7 +245,17 @@ bool ReadLocalConfigFile(std::wstring& exeDir, std::string& filecontent) {
 #ifdef _WINDLL
 // DllMain implementation and API exports
 
+//#define USE_DLL_TIMER
+
 #include "ControlAPI.h"
+
+
+//For automatic cycling, we need to call Sequence->Idle() periodically.
+//We have two options:
+//1) The host application calls ControlAPI_OnIdle() periodically from its main loop
+//2) We create a separate thread that calls Sequence->Idle() periodically
+//I am not sure if option 2 is the reason why randomly, every 50k cycles or so, the cycling stops. Therefore I try option 1 now.
+#ifdef USE_DLL_TIMER
 #include <thread>
 #include <atomic>
 #include <chrono>
@@ -268,6 +278,7 @@ std::mutex apiMutex;
 	std::lock_guard<std::mutex> lock(apiMutex);
 	// Do idle processing here
 }*/
+
 
 void OnIdle() {
 	if (isBusy.load()) return;
@@ -302,6 +313,12 @@ void StopIdleThread()
 	if (idleThread.joinable())
 		idleThread.join();
 }
+
+#else
+#define API_LOCK_GUARD
+#define API_UNLOCK
+#endif
+
 
 // Wrap your API entry points like this:
 /*
@@ -478,7 +495,9 @@ extern "C" {
 		Sequence->AddAlternativeCommandNames();
 		Sequence->InitializeSystemFirstTime();
 		//UniMessList->ConstructUniMessList(); \\FS 2025 05 29: this seems to be unnecessary and provoke memory errors when closing Control.dll in Qt
+#ifdef USE_DLL_TIMER
 		StartIdleThread();
+#endif
 		return true;
 	}
 
@@ -486,9 +505,10 @@ extern "C" {
 
 bool ControlAPI_initialized = false;
 
-	API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, bool AfxSocketInit, bool displayErrors) {
-		std::lock_guard<std::mutex> lock(apiMutex);
-		isBusy = true;
+API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, bool AfxSocketInit, bool displayErrors) {
+	API_LOCK_GUARD;	
+//		std::lock_guard<std::mutex> lock(apiMutex);
+	//	isBusy = true;
 		std::string myParamFileDirectory = ParamFileDirectory;
 		if (myParamFileDirectory == "") {
 			std::wstring exeDir;
@@ -508,27 +528,33 @@ bool ControlAPI_initialized = false;
 			ControlAPI_initialized = ControlApp.Initialize(helpParamFileDirectory,AfxInit, AfxSocketInit);
 			if (!ControlAPI_initialized) {
 				ControlMessageBox("ControlAPI_Configure: ControlApp::Initialize() failed");
-				isBusy = false;
+				//isBusy = false;
+				API_UNLOCK;
 				return false;
 			}
 		}
 		ControlAPI.ConfigureControlAPI(displayErrors);
-		isBusy = false;
+		//isBusy = false;
+		API_UNLOCK;
 		return true;
 	}
 
 	API_EXPORT bool ControlAPI_Configure(bool displayErrors) {
-		std::lock_guard<std::mutex> lock(apiMutex);
-		isBusy = true;
+		API_LOCK_GUARD;
+		//std::lock_guard<std::mutex> lock(apiMutex);
+		//isBusy = true;
 		ControlAPI.ConfigureControlAPI(displayErrors);
-		isBusy = false;
+		//isBusy = false;
+		API_UNLOCK;
 		return true;
 	}
 
 	extern "C" __declspec(dllexport) void ControlAPI_Cleanup()
 	{
 		// Close sockets, free objects, delete singletons, etc.
+#ifdef USE_DLL_TIMER
 		StopIdleThread();
+#endif
 		Sequence->ShutDown();
 		//ParamList->~CParamList();
 		//SystemParamList->~CSystemParamList();
@@ -593,22 +619,26 @@ bool ControlAPI_initialized = false;
 	static std::string last_error;
 
 	API_EXPORT bool ControlAPI_DidCommandErrorOccur(long* lineNumber, const char** commandWithError) {
-		std::lock_guard<std::mutex> lock(apiMutex);
-		isBusy = true;
+		//std::lock_guard<std::mutex> lock(apiMutex);
+		//isBusy = true;
+		API_LOCK_GUARD;
 		std::string cmd;
 		bool error = ControlAPI.DidCommandErrorOccur(*lineNumber, cmd);
 		last_error = cmd;
 		*commandWithError = last_error.c_str();
-		isBusy = false;
+		API_UNLOCK;
+		//isBusy = false;
 		return error;
 	}
 
 	API_EXPORT const char* ControlAPI_GetLastError() {
-		std::lock_guard<std::mutex> lock(apiMutex);
-		isBusy = true;
+		//std::lock_guard<std::mutex> lock(apiMutex);
+		//isBusy = true;
+		API_LOCK_GUARD;
 		//std::string last_error = ControlAPI.getLastError(); // ensure this function exists
 		const char* ret = last_error.c_str();
-		isBusy = false;
+		API_UNLOCK;
+		//isBusy = false;
 		return ret;
 	}
 
@@ -671,6 +701,13 @@ bool ControlAPI_initialized = false;
 	void IgnoreTCPIP(bool OnOff);
 	void AddMarker(unsigned char marker);
 */
+
+
+	API_EXPORT void ControlAPI_OnIdle() {
+		API_LOCK_GUARD;
+		Sequence->Idle(ActiveDialog);
+		API_UNLOCK;
+	}
 
 	API_EXPORT void ControlAPI_StoreSequenceInMemory(bool store) { API_LOCK_GUARD;
 		ControlAPI.StoreSequenceInMemory(store);
