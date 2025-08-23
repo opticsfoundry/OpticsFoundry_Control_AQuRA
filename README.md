@@ -80,55 +80,33 @@ Control.exe configures itself from configuration files. It searches for "config.
 
 &nbsp;
 
-The main configuration files are_  
-ControlParam_ParamList.txt_
-
-_ControlParam_SystemParamList.txt_
-
-_ControlParam_UniMessList.dat_
-
-_ControlParam_UtilityDialog.txt_
-
-and are typically contained in the folder
-
+The main configuration files are  
+_ControlParam_ParamList.txt_  
+_ControlParam_SystemParamList.txt_  
+_ControlParam_UniMessList.dat_  
+_ControlParam_UtilityDialog.txt_  
+and are typically contained in the folder  
 _\[Installation path\]\\Control_Firefly_AQuRA\\ConfigParams\\_
 
 &nbsp;
 
-All other paths and files are set in the configuration file
-
-_ControlParam_SystemParamList.txt_ (not _ControlParam_ParamList.txt_)
-
-e.g.
-
-_WorkingDirectory=._
-
-_HardwareConfigFilename=ControlHardwareConfig.json_
-
-_UserIOConfigFilename=ControlUserIOConfig.json_
-
-_UserIOAlternativeCommandNames=AlternativeCommandNames.txt_
-
-_DebugFilePath=..\\DebugFiles\\_
-
-_VirtualOsciFilePath=..\\OpticsFoundry_Control_AQuRA\\VirtualOsci\\_
-
-_DataFilePath=..\\Data\\_
-
-_SourceFilePath=..\\OpticsFoundry_Control_AQuRA\\_
-
-_CalibrationFilePath=..\\OpticsFoundry_Control_AQuRA\\Calibrations\\_
-
-_ParameterReferenceFileName=ReferenceParam_
-
-_UserParameterASCIIFileName=..\\DebugFiles\\OutputList.txt_
-
-_UserParameterFileName=ReferenceParam.dat_
-
-_OutputListFilename=..\\DebugFiles\\OutputList.dat_
-
-_OutputListFilenameComputerReadable=..\\DebugFiles\\OutputListCR.dat_
-
+All other paths and files are set in the configuration file  
+_ControlParam_SystemParamList.txt_ (not _ControlParam_ParamList.txt_)  
+e.g.  
+_WorkingDirectory=._  
+_HardwareConfigFilename=ControlHardwareConfig.json_  
+_UserIOConfigFilename=ControlUserIOConfig.json_  
+_UserIOAlternativeCommandNames=AlternativeCommandNames.txt_  
+_DebugFilePath=..\\DebugFiles\\_  
+_VirtualOsciFilePath=..\\OpticsFoundry_Control_AQuRA\\VirtualOsci\\_  
+_DataFilePath=..\\Data\\_  
+_SourceFilePath=..\\OpticsFoundry_Control_AQuRA\\_  
+_CalibrationFilePath=..\\OpticsFoundry_Control_AQuRA\\Calibrations\\_  
+_ParameterReferenceFileName=ReferenceParam_  
+_UserParameterASCIIFileName=..\\DebugFiles\\OutputList.txt_  
+_UserParameterFileName=ReferenceParam.dat_  
+_OutputListFilename=..\\DebugFiles\\OutputList.dat_  
+_OutputListFilenameComputerReadable=..\\DebugFiles\\OutputListCR.dat_  
 and more (further down in the file).
 
 &nbsp;
@@ -137,25 +115,19 @@ If the _WorkingDirectory_ is empty (i.e. "WorkingDirectory=" (no dot) instead of
 
 &nbsp;
 
-Make sure the screen coordinates at which the Control window appears is on your screen, e.g.
-
-_MainDialogStartX=0_
-
-_MainDialogStartY=0_
-
+Make sure the screen coordinates at which the Control window appears is on your screen, e.g.  
+_MainDialogStartX=0_  
+_MainDialogStartY=0_  
 It's convenient to set this to appropriate values in multi-screen setups, but it can lead to a hidden window when switching screen setups.
 
 &nbsp;
 
-The hardware configuration file _ControlHardwareConfig.json_ is created by opening the _Control_Firefly_AQuRA_ folder (not the _Control_Firefly_AQuRA\\ConfigParams_ folder!) in Visual Studio code and running the Python script
-
-_ConfigParams\\ControlHardwareConfigFileCreator.py._ The json file is then created in the _ConfigParams_ folder (verify that, if something doesn't work).  
-After this json file has been successfully generated, the IO configuration file _ControlUserIOConfig.json_ is created by running
-
-_ConfigParams\\ControlUserIOConfigFileCreator.py_
-
-For convenience this Python script also provides an overview of your address usage in the file_  
-ConfigParams\\AddressUsageTable.txt_
+The hardware configuration file _ControlHardwareConfig.json_ is created by opening the _Control_Firefly_AQuRA_ folder (not the _Control_Firefly_AQuRA\\ConfigParams_ folder!) in Visual Studio code and running the Python script  
+_ConfigParams\\ControlHardwareConfigFileCreator.py._  
+The json file is then created in the _ConfigParams_ folder (verify that, if something doesn't work). After this json file has been successfully generated, the IO configuration file _ControlUserIOConfig.json_ is created by running  
+_ConfigParams\\ControlUserIOConfigFileCreator.py_  
+For convenience this Python script also provides an overview of your address usage in the file  
+_ConfigParams\\AddressUsageTable.txt_  
 
 Take a look at the _\__main___ function in the two Python files below to understand how one can define hardware and UserIO configurations.
 
@@ -167,10 +139,8 @@ The Python scripts check that all provided data is consistent, e.g. that a desir
 
 After running _Control.exe_ for the first time, you can adjust the size of the dialog window to your screen. You do this by opening _Control.rc2_ using the Solution Explorer in Visual Studio C++, opening _Dialog -> IDD_EASYDIALOG_ and dragging the dialog window to a suitable size. If your screen is very small or large, you might want to adjust the number of elements displayed in each menu column by editing _DialogElement.cpp_ and setting _MaxLines_ to what you need. (Btw, you can also edit the size of all other GUI components in the table of constants in this file.)
 
-In _UniMessList.h_ you can adjust the maximum number of UniMess entries in the Measurement Menu to make them fit the screen:
-
-_const unsigned int MaxNrUniMess=76;_
-
+In _UniMessList.h_ you can adjust the maximum number of UniMess entries in the Measurement Menu to make them fit the screen:  
+_const unsigned int MaxNrUniMess=76;_  
 If you find menus with more columns then you can display, insert _NewMenu_ commands as appropriate, see manual below.
 
 &nbsp;
