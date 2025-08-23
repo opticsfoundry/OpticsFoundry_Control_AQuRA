@@ -119,30 +119,32 @@ You can specify ranges for analog outputs and DDS frequency outputs. Control wil
 
 ```py
 if __name__ == "__main__":
-   builder = UserIOConfigBuilder()
-   builder.add_new_menu(Name="User IO Analog Out")
-   builder.add_static_text(Name="Spare Analog Outs")
-   for i in range(8):
-       builder.add_analog_out(Name=f"SpareAnalogOut{i}", Description=f"Spare Analog Output {i}", Address=24+i)
-   builder.add_new_column()
-   builder.add_static_text(Name="AQuRA Analog Outs")
-   builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=32, Units="A", Max=5.0, Init=0.0)
-   builder.add_new_column()
-   builder.add_new_menu(Name="User IO Digital Out")
-   for i in range(8):
-       builder.add_digital_out(Name=f"SwitchSpareDigitalOut{i}", Description=f"Spare Digital Output {i}", Address=4, Bit = i)
-   builder.add_digital_out(Name=f"SwitchOscilloscopeTrigger", Description=f"Oscilloscope Trigger", Address=5, Bit = 0)
-   builder.add_digital_out(Name="SwitchCameraTrigger0", Description="Camera Trigger 0", Address=5, Bit=1)
-   builder.add_digital_out(Name="SwitchCameraTrigger1", Description="Camera Trigger 1", Address=5, Bit=2)
-   builder.add_digital_out(Name="SwitchPMTTrigger", Description="PMT Trigger", Address=5, Bit=3)
-   builder.add_new_menu(Name="User IO DDS Out Menu")
-   builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=132, FrequencyControl= "FrequencyAsBinary")
-   builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
-   builder.add_dds_ad9958(Name="UserIOTestDDSAD9958_0", Description="Test DDS AD9958 0", Address=21)
-   builder.add_new_column()
-   builder.add_static_text(Name="AQuRA AD9854 DDS")
-   builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=136)
-   builder.save()
+    builder = UserIOConfigBuilder()
+    
+    builder.add_new_menu(Text="AQuRA User IO")
+    builder.add_static_text(Text="AQuRA Analog Outs")
+    builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils", Address=31, Units="A", Max=23.0, Init=0.0, Calibration = [
+                {"order": 0, "value": 0},
+                {"order": 1, "value": 0.1}
+            ])
+    builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=30, Units="degC", Max=5.0, Init=0.0)    
+    builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=29, Units="%", Max=5.0, Init=0.0)
+    builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=28, Units="", Max=5.0, Init=0.0)
+    builder.add_static_text("")
+
+    builder.add_static_text(Text="AQuRA Digital Out")
+    builder.add_digital_out(Name=f"OscilloscopeTrigger", Description=f"Oscilloscope Trigger", Address=3, Bit = 0)
+    builder.add_digital_out(Name="CameraTrigger0", Description="Camera Trigger 0", Address=3, Bit=1)
+    builder.add_digital_out(Name="CameraTrigger1", Description="Camera Trigger 1", Address=3, Bit=2)
+    builder.add_digital_out(Name="SwitchPMTTrigger", Description="PMT Trigger", Address=5, Bit=3)
+    builder.add_new_menu(Name="User IO DDS Out Menu")
+    builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=132, FrequencyControl= "FrequencyAsBinary")
+    builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
+    builder.add_dds_ad9958(Name="UserIOTestDDSAD9958_0", Description="Test DDS AD9958 0", Address=21)
+    builder.add_new_column()
+    builder.add_static_text(Name="AQuRA AD9854 DDS")
+    builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=136)
+    builder.save()
 ```
 
 
