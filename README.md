@@ -1,8 +1,8 @@
 # Overview
 
-OpticsFoudry's control system can be accessed through three types of software, listed below. This repository contains ControlAPI and Control.exe. 
+OpticsFoudry's control system is suitable for many ultracold atom experiments and supports digial and analog IO and direct digital synthesizers (AD9858, AD9854, AD9958). It is a modernized version of the one presented on [StrontiumBEC.com](https://www.strontiumbec.com/) -> Control. The electronics can be accessed through three types of software, listed below. This repository contains ControlAPI and Control.exe. 
 
-1. **ControlLightAPI**  
+1. **ControlLightAPI**    
     A simple API giving the most direct access to the hardware. Tested with Python, Visual Studio C++ and Qt Creator (with MinGW).  
     ControlLightAPI can be configured through commands or through a json file. See repository [ControlLightAPI](https://github.com/opticsfoundry/OpticsFoundry_ControlLight) contains the ControlLightAPI.
 
@@ -12,34 +12,24 @@ OpticsFoudry's control system can be accessed through three types of software, l
     (If you need this API directly from Python, then tell us and we can create such a version within a few days.)  
     ControlAPI can be configured through ASCII files, a simple directory setting txt file, a hardware device configuration json file and a user output definition json file.
 
-3. **Control.exe**
-
-This is a fully featured experiment control system, based on ControlAPI.
-
-Control.exe can be configured through code and/or through configuration files (the latter in the same manner as ControlAPI, on which Control.exe is based).
-
-A somewhat outdated introduction and manual is available on [www.strontiumBEC.com](http://www.strontiumBEC.com) -> Control.
-
-See Section "Installing Visual Studio 2022" below. Pay attention to always **use the same x64/Win32 Debug/Release settin**g for the DLL compiler and for the compiler that compiles the program that uses the DLL.
-
-- **_x64_ or _Win32_** (i.e. 32bit or 64bit AMD/Intel code). For most situations x64 is better. The one situation in which Win32 is better is when editing the Control.exe software, as the compilation of Control.exe is vastly faster in Win32 than x64 mode.
-- **_Debug_ or _Release_**: Release is quite a bit faster than Debug, both when compiling and when executing the program. Debug enables one to see Visual Studio debug information (even when using the DLL in Qt with MinGW).
-- **_DLL or EXE:_** for ControlLightAPI you choose by modifying CMakeList.txt as explained in that file. For Control.dll vs Control.exe, in the Solution Explorer (in the Visual Studio GUI) you right click on "Control" (not " Solution Control" ) and select it under Configuration Properties -> General-> Configuration Type.
+3. **Control.exe**  
+This is a fully featured experiment control system, based on ControlAPI. Control.exe can be configured through code and/or through configuration files (the latter in the same manner as ControlAPI, on which Control.exe is based). A somewhat outdated introduction and manual is [ControlManual](http://www.strontiumbec.com/Schreck/downloads/ControlManual.pdf).
 
 Control uses Microsoft Foundation Classes (MFC, or also called Afx). When installing Visual Studio C++, you need to select it as an extra option, otherwise it won't be installed.
 
-To install the Python library control_light_api systemwide via pip, use a command prompt, navigate to ControlLight_DLL_Test_Python_for_pip and run "pip install .". The DLL and PYD file need to be in the subdirectory "control_light_api" and the pyd file needs to be renamed \__init_\_pyd.
+Note for using ControlAPI:  
+Pay attention to always **use the same x64/Win32 Debug/Release setting** for the DLL compiler and for the compiler that compiles the program that uses the DLL.  
+- **_x64_ or _Win32_** (i.e. 32bit or 64bit AMD/Intel code). For most situations x64 is better. The one situation in which Win32 is better is when editing the Control.exe software, as the compilation of Control.exe is vastly faster in Win32 than x64 mode.  
+- **_Debug_ or _Release_**: Release is quite a bit faster than Debug, both when compiling and when executing the program. Debug enables one to see Visual Studio debug information (even when using the DLL in Qt with MinGW).  
+- **_DLL or EXE:_** for ControlLightAPI you choose by modifying CMakeList.txt as explained in that file. For Control.dll vs Control.exe, in the Solution Explorer (in the Visual Studio GUI) you right click on "Control" (not " Solution Control" ) and select it under Configuration Properties -> General-> Configuration Type.  
 
 ## **Control.exe**
 
-This is a full-fledged experiment control system. It's also the basis of ControlAPI.
-
-The code is in  
+This is a full-fledged experiment control system. It's also the basis of ControlAPI. The code is in  
 _Control_Firefly_AQuRA_  
 and you load it into Visual Studio C++ 2022 by double clicking on _Control.sln_.
 
-To compile Control.exe and not Control.dll in Visual Studio, go to Solution Explorer (Ctrl+Alt+L), right click on "Control" (not " Solution Control" ) and select EXE under Configuration Properties -> General-> Configuration Type.
-
+To compile _Control.exe_ and not _Control.dll_ in Visual Studio, go to Solution Explorer (Ctrl+Alt+L), right click on "Control" (not " Solution Control" ) and select EXE under Configuration Properties -> General-> Configuration Type.  
 You can select Win32 or x64 and debug or release in Visual Studio's dropdown menus. I recommend Win32 debug, as it compiles much faster in debug mode then x64. It's thereby easier to change CSequence.cpp and quickly resume operating the experiment when needing to make changes to CSequence code blocks (which is usually not all that often). If you came from DLL and switched to EXE, you might have to select exe in the dropdown menu marked below as "Local Windows Debugger", see little white downwards arrow.
 
 Control.exe configures itself from configuration files. It searches for "config.txt" in the folder that contains the executable, in the three folder levels closer to the root folder, and in any "ConfigParams" folder relative to those folders. If it finds a "_config.txt_" file that is empty, it will look for all other configuration files in the folder in which the empty "config.txt" file was found. If the _config.txt_ file is not empty, its first line (terminated by new line) will be used as config file path. If no _config.txt_ is found, the first argument passed to control.exe is used as configuration file path.
