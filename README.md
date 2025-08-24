@@ -10,10 +10,10 @@ OpticsFoudry's control system is suitable for many ultracold atom experiments an
     A fully featured API, having functions such as complex sequence assembly with "GoBackInTime", "Wavefunctions", and sequence cycling with individual command updates in the background. This is for example used for the [AQuRA clock](https://www.aquraclock.eu/).  
     This API's DLL has been tested with Visual Studio C++ and Qt Creator (with MinGW, see repository [OpticsFoundry_Control_Qt](https://github.com/opticsfoundry/OpticsFoundry_Control_Qt)). The API can also be accessed through TCP/IP, and we provide a Python and a Qt Creator example for that.  
     (If you need this API directly from Python, then tell us and we can create such a version within a few days.)  
-    ControlAPI can be configured through ASCII files, a simple directory setting txt file, a hardware device configuration json file and a user output definition json file.
+    ControlAPI can be configured through ASCII files, a simple directory setting txt file, a hardware device configuration json file and a user output definition json file.  
 
 3. **Control.exe**  
-This is a fully featured experiment control system, based on ControlAPI. Control.exe can be configured through code and/or through configuration files (the latter in the same manner as ControlAPI, on which Control.exe is based). A somewhat outdated introduction and manual is [ControlManual](http://www.strontiumbec.com/Schreck/downloads/ControlManual.pdf).
+    This is a fully featured experiment control system, based on ControlAPI. Control.exe can be configured through code and/or through configuration files (the latter in the same manner as ControlAPI, on which Control.exe is based). A somewhat outdated introduction and manual is [ControlManual](http://www.strontiumbec.com/Schreck/downloads/ControlManual.pdf).
 
 Control uses Microsoft Foundation Classes (MFC, or also called Afx). When installing Visual Studio C++, you need to select it as an extra option, otherwise it won't be installed.
 
@@ -23,7 +23,11 @@ Pay attention to always **use the same x64/Win32 Debug/Release setting** for the
 - **_Debug_ or _Release_**: Release is quite a bit faster than Debug, both when compiling and when executing the program. Debug enables one to see Visual Studio debug information (even when using the DLL in Qt with MinGW).  
 - **_DLL or EXE:_** for ControlLightAPI you choose by modifying CMakeList.txt as explained in that file. For Control.dll vs Control.exe, in the Solution Explorer (in the Visual Studio GUI) you right click on "Control" (not " Solution Control" ) and select it under Configuration Properties -> General-> Configuration Type.  
 
-## **Control.exe**
+
+&nbsp;
+
+
+## Control.exe
 
 This is a full-fledged experiment control system. It's also the basis of ControlAPI. The code is in  
 _Control_Firefly_AQuRA_  
@@ -147,7 +151,7 @@ if __name__ == "__main__":
     builder.save()
 ```
 
-
+&nbsp;
 
 **Option for cleaner looking, 3x faster C code**
 
@@ -188,6 +192,68 @@ Similarly,
 _\[DebugFolder\]\\ParamList_shortcuts_auto_create.h_ and _.cpp_  
 need to be copied into source folder and give access to the initialization parameters of all outputs selected by the user in the initial parameter menus, by providing pointers to those parameters. These parameters can be useful if one wants to intermittently set an output back to its initial value, e.g. for the heating of AOMs.
 
-**Data acquisition using Vision**
+&nbsp;
+
+## Data acquisition using Vision
 
 Control.exe directly supports the [Vision](https://github.com/opticsfoundry/Vision_AQuRA) data acquisition system and can easily be adapted to others.
+
+&nbsp;
+
+
+
+
+
+## ControlAPI
+
+
+The large version of the ControlAPI interface can be accessed over TCP/IP (when running Control.exe), or be used as a DLL from Visual Studio 2022 C++, Qt Creator, or Python (can quickly be implemented if needed).
+
+
+The list of functions is described in [this Google Sheet](https://docs.google.com/spreadsheets/d/1ACSwebKKuk_bsI_3-E2YGZ4p2IvL3By_wfjo8vWTsmc/edit?usp=sharing).
+
+The best way to get to know this API is to study the demo code in Control_Firefly_AQuRA_Qt.
+
+
+The ControlAPI is basically Control.exe, just running without showing the GUI, as a DLL. This means it is configured like Control.exe. One difference is how one points the DLL to the folder in which the configuration files are. For ControlAPI, you specify this folder when you call "ConnectToLowLevelSoftware", see the definition of ParamFileDirectory in TestSequence.cpp. For example  
+_const char\* ParamFileDirectory = "D:\\\\Florian\\\\Firefly\\\\FireflyControl\\\\Control_Firefly_AQuRA\\\\ConfigParams\\\\ControlParam";_  
+points to the configuration files  
+_ControlParam_ParamList.txt_  
+_ControlParam_SystemParamList.txt_  
+_ControlParam_UniMessList.dat_  
+_ControlParam_UtilityDialog.txt_  
+in the folder  
+_D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_AQuRA\\ConfigParams\\_  
+Note that ParamFileDirectory includes the folder name and the beginning of the configuration file names.
+
+At the same location, you should also specify a folder in which debug files will be stored, e.g.  
+_const QString DebugFileDirectory = "D:\\\\Florian\\\\Firefly\\\\FireflyControl\\\\DebugFiles";_  
+
+You can switch debug on or off in this codeline:  
+_if (!CA.ConnectToLowLevelSoftware(atelnet, ParamFileDirectory, /\*IP\*/ "192.168.0.103", /\*Debug\*/ true, DebugFileDirectory)) {_  
+
+
+You can use the API in TCPIP mode or in DLL mode. The TCPIP mode is useful for debugging, but otherwise the DLL mode is preferred. You can switch between TCPIP mode and DLL mode in  
+_ControlAPI.h_  
+By defining or not defining  
+_#define USE_CA_DLL_  
+If you use the TCPIP mode, search for "192.168." and adjust the IP adress to the one of the computer on which Control.exe is running. Make sure that Control.exe starts the ControlAPI sever, by enabling that option in the system parameter menus.  
+
+In either mode, you need to select the IP address of the FPGA. You do this using a Python hardware configuration script, which is described in Section 3) Control.exe.  
+
+To recompile Control.dll, open Control.sln in Visual Studio 2022. Select Debug, x64 in the toolbar. 
+
+To select "DLL", right-click on "Control" in the Solution explorer (not "Solution Control"). Select Properties. Select DLL under "General Properties -> Configuration Type".  
+Build the solution. Look at the linker output. It tells you in which folder the DLL was created, e.g.  
+_D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_AQuRA\\x64\\Template_  
+
+Copy _Control.dll_ to the folder in which Qt creates your executable, e.g.  
+_D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_Qt\\build\\Desktop_Qt_6_7_2_MinGW_64_bit-Debug\\debug_  
+
+If you want to change the hardware configuration, do it by modifying the Configuration Python scripts and running them to create configuration json files, see Sec. 3) Control.exe.  
+
+If you need a second name for an output, do that in the file _ConfigFiles\AlternativeCommandNames.txt_, which contains alternative names for user IO outputs and their calibration.  
+_MOTCurrent = SetMOTCoilCurrent * 2 + 0_  
+_ChillerSetpoint = SetChillerSetpoint * 1 + 0_  
+_LatticePowerSetpoint = SetLatticePowerSetpoint * 1 + 0_  
+(This option was needed for the AQuRA clock project, as the higher level software by LTE accessed the lower level software using command names that just contained the number of an output. Using those names would have led to barely readable code in Control.exe, the code that was used to commission the clock.)
