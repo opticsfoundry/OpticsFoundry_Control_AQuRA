@@ -738,6 +738,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 	bool CSequence::UtilityBlinkMOT(unsigned int Message, CWnd* parent)
 	{
 		static double BlinkMOTCurrent;
+		static double BlinkMOTRampTime;
 		static long BlinkMOTPeriod;
 		
 		if (!AssemblingUtilityDialog()) {
@@ -751,18 +752,21 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			while (CancelLoopDialog) {
 				if (CancelLoopDialog) CancelLoopDialog->SetData((OnOff) ? "MOT On" : "MOT Off", (OnOff) ? 1 : 0, 1);
 				if (!CancelLoopDialog) return true;
-				//SetAssembleSequenceListMode();
-				//StartSequence(NULL, parent, false);
-				SetMOTCoilCurrent((OnOff) ? BlinkMOTCurrent : 0);
-				//StopSequence();
-				//SetWaveformGenerationMode();
-				//ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				SetAssembleSequenceListMode();
+				StartSequence(NULL, parent, false);
+				StartNewWaveformGroup();
+				Waveform(new CRamp("SetMOTCoilCurrent", LastValue, (OnOff) ? BlinkMOTCurrent : 0, BlinkMOTRampTime, 0.02));
+				WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+				StopSequence();
+				SetWaveformGenerationMode();
+				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
 				OnOff = !OnOff; // toggle shutters on/off
 				Wait(BlinkMOTPeriod);
 			}
 		}
 		else {
 			UtilityDialog->RegisterDouble(&BlinkMOTCurrent, "BlinkMOTCurrent", 0, 20, "Blink MOT current", "A");
+			UtilityDialog->RegisterDouble(&BlinkMOTRampTime, "BlinkMOTRampTime", 0, 1000, "Blink MOT ramp time", "ms");
 			UtilityDialog->RegisterLong(&BlinkMOTPeriod, "BlinkMOTPeriod", 0, 100000, "Blink MOT Wait Time", "ms");
 			UtilityDialog->AddButton(IDM_BLINK_MOT, Sequence);
 			UtilityDialog->AddStatic("");
