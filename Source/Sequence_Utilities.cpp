@@ -676,6 +676,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 
 
 	void CSequence::SwitchAQuRAShutters(bool OnOff) {
+		SwitchBlueDetectionShutter(OnOff);
 		SwitchBlueMOTShutter(OnOff);
 		SwitchZSShutter(OnOff);
 		SwitchRedMOTShutter(OnOff);
