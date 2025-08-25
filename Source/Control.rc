@@ -422,6 +422,10 @@ END
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "Control"
+END
+
+STRINGTABLE
+BEGIN
     IDR_CONTROTYPE          "\nContro\nContro\n\n\nControl.Document\nContro Document"
     IDS_BUTTON0             "EasyDialog Button"
     IDS_BUTTON1             "EasyDialogButton"
@@ -1315,6 +1319,7 @@ BEGIN
     IDM_ENABLE_TORUN_COIL_DRIVER_100A "Enable coil driver 100A (MOT)"
     IDM_DISABLE_TORUN_COIL_DRIVER_100A "Disable coil driver 100A (MOT)"
     IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A "Set 3x3A coil driver state (offset)"
+    IDM_SWEEP_MOT_FREQUENCY "Sweep MOT Frequency"
 END
 
 STRINGTABLE

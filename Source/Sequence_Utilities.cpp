@@ -33,6 +33,7 @@ bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
 	Received |= UtilityTest448nmCavityAnalogOut(Message, parent);
 	Received |= UtilityBlinkShutters(Message, parent);
 	Received |= UtilityBlinkMOT(Message, parent);
+	Received |= UtilitySweepMOTFrequency(Message, parent);
 	Received |= UtilityTorunCoilDrivers(Message, parent);
 	
 
@@ -769,6 +770,60 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			UtilityDialog->RegisterDouble(&BlinkMOTRampTime, "BlinkMOTRampTime", 0, 1000, "Blink MOT ramp time", "ms");
 			UtilityDialog->RegisterLong(&BlinkMOTPeriod, "BlinkMOTPeriod", 0, 100000, "Blink MOT Wait Time", "ms");
 			UtilityDialog->AddButton(IDM_BLINK_MOT, Sequence);
+			UtilityDialog->AddStatic("");
+		}
+		return true;
+	}
+
+
+	//Utility UtilitySweepMOTFrequency
+	bool CSequence::UtilitySweepMOTFrequency(unsigned int Message, CWnd* parent)
+	{
+		static double SweepMOTFrequencyFrequencyStart;
+		static double SweepMOTFrequencyFrequencyStop;
+		static double SweepMOTFrequencyStepSize;
+
+		if (!AssemblingUtilityDialog()) {
+			if (Message != IDM_SWEEP_MOT_FREQUENCY) return false;
+			if ((CancelLoopDialog == NULL) && (parent)) {
+				CancelLoopDialog = new CExecuteMeasurementDlg(parent, this);
+				CancelLoopDialog->Create();
+				CancelLoopDialog->SetWindowPos(&CWnd::wndTop, 100, 200, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
+			}
+			bool DirectionUp = true;
+			double MOTFrequency = SweepMOTFrequencyFrequencyStart;
+			while (CancelLoopDialog) {
+				CString buf;
+				buf.Format("MOT Frequency %.2f MHz", MOTFrequency);
+				if (CancelLoopDialog) CancelLoopDialog->SetData(buf, 100 * (MOTFrequency - SweepMOTFrequencyFrequencyStart)/(SweepMOTFrequencyFrequencyStop - SweepMOTFrequencyFrequencyStart), 100);
+				if (!CancelLoopDialog) return true;
+				SetAssembleSequenceListMode();
+				StartSequence(NULL, parent, false);
+				SetFrequencyBlueMOTDPAOM(MOTFrequency);
+				StopSequence();
+				SetWaveformGenerationMode();
+				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				if (DirectionUp) {
+					MOTFrequency += SweepMOTFrequencyStepSize;
+					if (MOTFrequency >= SweepMOTFrequencyFrequencyStop) {
+						MOTFrequency = SweepMOTFrequencyFrequencyStop;
+						DirectionUp = false;
+					}
+				}
+				else {
+					MOTFrequency -= SweepMOTFrequencyStepSize;
+					if (MOTFrequency <= SweepMOTFrequencyFrequencyStart) {
+						MOTFrequency = SweepMOTFrequencyFrequencyStart;
+						DirectionUp = true;
+					}
+				}
+			}
+		}
+		else {
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyFrequencyStart, "SweepMOTFrequencyFrequencyStart", 160, 240, "MOT DP AOM frequency start", "MHz");
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyFrequencyStop, "SweepMOTFrequencyFrequencyStop", 160, 240, "MOT DP AOM frequency stop", "MHz");
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyStepSize, "SweepMOTFrequencyStepSize", 0, 10, "Frequency step", "MHz");
+			UtilityDialog->AddButton(IDM_SWEEP_MOT_FREQUENCY, Sequence);
 			UtilityDialog->AddStatic("");
 		}
 		return true;

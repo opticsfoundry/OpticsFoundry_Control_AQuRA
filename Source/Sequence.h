@@ -136,6 +136,7 @@ public:
 	bool UtilityTestSequence(unsigned int Message, CWnd* parent);
 	bool UtilityBlinkShutters(unsigned int Message, CWnd* parent);
 	bool UtilityBlinkMOT(unsigned int Message, CWnd* parent);
+	bool UtilitySweepMOTFrequency(unsigned int Message, CWnd* parent);
 	bool UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent);
 	bool UtilityRunClock(unsigned int Message, CWnd* parent);
 	void SwitchAQuRAShutters(bool OnOff);

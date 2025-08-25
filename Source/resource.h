@@ -2,8 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by Control.rc
 //
-#define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   1
+#define IDD_ABOUTBOX                    100
 #define IDR_CONTROTYPE                  129
 #define IDS_BUTTON0                     130
 #define IDS_BUTTON1                     131
@@ -206,7 +206,6 @@
 #define IDO_SERIAL_STORE_IN_SEQUENCELIST_MODE 328
 #define IDM_MENU_0                      329
 #define IDS_STRING330                   330
-#define IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A 42652
 #define IDM_TEST_DDS_MODULATION         332
 #define IDM_ZEEMAN_SLOWER_OFF           334
 #define IDM_MENU_1                      335
@@ -872,6 +871,8 @@
 #define IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A 42649
 #define IDM_ENABLE_TORUN_COIL_DRIVER_100A 42650
 #define IDM_DISABLE_TORUN_COIL_DRIVER_100A 42651
+#define IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A 42652
+#define IDM_SWEEP_MOT_FREQUENCY         42653
 #define IDC_GPIB_ERROR                  61476
 #define IDC_RUN_EXPERIMENT              61476
 #define IDM_SWITCH_PROBE_BEAM_ON        61494
