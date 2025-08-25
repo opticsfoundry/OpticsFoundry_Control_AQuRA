@@ -329,7 +329,9 @@ bool CNetwork::ReceiveMsg(char end_character, bool WaitForStartCharacter, char s
 			if (!WaitForRead(timeLeft)) break;
 			int nRead = m_pSocket->Receive(&in, 1);
 			if (nRead != 1) {
+#ifndef _AFXDLL 
 				ControlMessageBox("CNetwork::ReceiveMsg : error receiving data");
+#endif
 				return false;
 			}
 			if (in != start_character) {
@@ -362,7 +364,9 @@ bool CNetwork::ReceiveString(CString& outStr, double timeout_in_seconds, char en
 		if (!WaitForRead(timeLeft)) break;
 		int nRead = m_pSocket->Receive(&ch, 1);
 		if (nRead != 1) {
+#ifndef _AFXDLL
 			ControlMessageBox("CNetwork::ReceiveString : error receiving data");
+#endif			
 			return false;
 		}
 		if (ch == endChar) break;
@@ -402,12 +406,16 @@ bool CNetwork::ReceiveData(unsigned char* buffer, unsigned long size, unsigned l
 		}
 			CATCH(CFileException, e)
 		{
+#ifndef _AFXDLL
 			ControlMessageBox("CNetwork::ReceiveData : error receiving data 1");
+#endif			
 			return false;
 		}
 		END_CATCH
 		if (nRead <= 0) {
+#ifndef _AFXDLL
 			ControlMessageBox("CNetwork::ReceiveData : error receiving data 2");
+#endif
 			return false; // Disconnected or error
 		}
 		totalRead += nRead;
