@@ -813,12 +813,12 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				buf.Format("MOT Frequency %.2f MHz", MOTFrequency);
 				if (CancelLoopDialog) CancelLoopDialog->SetData(buf, 100 * (MOTFrequency - SweepMOTFrequencyFrequencyStart)/(SweepMOTFrequencyFrequencyStop - SweepMOTFrequencyFrequencyStart), 100);
 				if (!CancelLoopDialog) return true;
-				SetAssembleSequenceListMode();
-				StartSequence(NULL, parent, false);
+				//SetAssembleSequenceListMode();
+				//StartSequence(NULL, parent, false);
 				SetFrequencyBlueMOTDPAOM(MOTFrequency);
-				StopSequence();
-				SetWaveformGenerationMode();
-				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				//StopSequence();
+				//SetWaveformGenerationMode();
+				//ExecuteSequenceList(/*ShowRunProgressDialog*/false);
 				if (DirectionUp) {
 					MOTFrequency += SweepMOTFrequencyStepSize;
 					if (MOTFrequency >= SweepMOTFrequencyFrequencyStop) {
