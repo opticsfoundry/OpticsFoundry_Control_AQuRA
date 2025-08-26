@@ -303,15 +303,20 @@ if __name__ == "__main__":
     builder.add_digital_out(Name="PumpPolarization2Shutter", Description="Pump Polarization 2 Shutter", Inverted = False, Address=6, Bit=4)
     builder.add_digital_out(Name="CoarseSpectroscopyShutter", Description="Coarse Spectroscopy Shutter", Inverted = True, Address=6, Bit=10)
 
-    builder.add_new_menu(Text="AQuRA AD9854 DDS")
+    builder.add_new_menu(Text="AQuRA AD9854 DDS 1")
     builder.add_static_text(Text="AQuRA AD9854 DDS")
     builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=140, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSteeringAOM", Description="Clock Steering AOM", Address=128, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSpectroscopyDDS", Description="Clock Spectroscopy DDS", Address=136, ScanningDDS=False, InitFrequency=80,MinFrequency=60,MaxFrequency=100)
     builder.add_dds_ad9854(Name="ClockSpectroscopyDDSfixed40MHz", Description="Clock Spectroscopy DDS fixed 40MHz", Address=132, ScanningDDS=False, InitFrequency=40,MinFrequency=40,MaxFrequency=40)
+    builder.add_dds_ad9854(Name="ClockFNCOutputAlignmentDDS", Description="Clock FNC Out Alignment DDS", Address=160, ScanningDDS=False, InitFrequency=75,MinFrequency=60,MaxFrequency=100)
+    builder.add_dds_ad9854(Name="ClockExtraFNCOutputAlignmentDDS", Description="Clock Extra FNC Out Alignment DDS", Address=164, ScanningDDS=False, InitFrequency=85,MinFrequency=60,MaxFrequency=100)
+    
+    builder.add_new_menu(Text="AQuRA AD9854 DDS 2")
     builder.add_dds_ad9854(Name="RedMOTAOM", Description="Red MOT AOM", Address=144,MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="RedPumpAOM", Description="Red Pump AOM", Address=148, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="PumpDPAOM", Description="Pump DP AOM", Address=152, MinFrequency=60.0, MaxFrequency=100.0)
+    
     builder.add_new_menu(Text="AQuRA AD9858 and AD9958 DDS")
     builder.add_static_text(Text="AQuRA AD9858 DDS")
     builder.add_dds_ad9858(Name="BlueMOTDPAOM", Description="Blue MOT DP AOM", Address=64, MinFrequency=160.0, MaxFrequency=240.0, InitFrequency=200.0)

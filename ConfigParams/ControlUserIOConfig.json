@@ -778,7 +778,7 @@
       }
     },
     {
-      "Text": "AQuRA AD9854 DDS",
+      "Text": "AQuRA AD9854 DDS 1",
       "Type": "NewMenu"
     },
     {
@@ -933,6 +933,82 @@
         "Green": 1.0,
         "Blue": 1.0
       }
+    },
+    {
+      "Name": "ClockFNCOutputAlignmentDDS",
+      "Description": "Clock FNC Out Alignment DDS",
+      "Help": "",
+      "Type": "DDSAD9854",
+      "Sequencer": 0,
+      "Address": 160,
+      "FrequencyControl": "FrequencyInMHz",
+      "PowerControl": "PowerInPercent",
+      "PowerCalibrationPolynom": [
+        {
+          "order": 0,
+          "value": 0
+        },
+        {
+          "order": 1,
+          "value": 1
+        }
+      ],
+      "MinFrequency": 60,
+      "MaxFrequency": 100,
+      "InitFrequency": 75,
+      "InitPower": 100,
+      "ScanningDDS": false,
+      "StopFrequencyInit": 80.0,
+      "ModulationFrequencyInit": 0.02,
+      "StartScanning": false,
+      "Hardreset": true,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
+      "Name": "ClockExtraFNCOutputAlignmentDDS",
+      "Description": "Clock Extra FNC Out Alignment DDS",
+      "Help": "",
+      "Type": "DDSAD9854",
+      "Sequencer": 0,
+      "Address": 164,
+      "FrequencyControl": "FrequencyInMHz",
+      "PowerControl": "PowerInPercent",
+      "PowerCalibrationPolynom": [
+        {
+          "order": 0,
+          "value": 0
+        },
+        {
+          "order": 1,
+          "value": 1
+        }
+      ],
+      "MinFrequency": 60,
+      "MaxFrequency": 100,
+      "InitFrequency": 85,
+      "InitPower": 100,
+      "ScanningDDS": false,
+      "StopFrequencyInit": 80.0,
+      "ModulationFrequencyInit": 0.02,
+      "StartScanning": false,
+      "Hardreset": true,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
+      "Text": "AQuRA AD9854 DDS 2",
+      "Type": "NewMenu"
     },
     {
       "Name": "RedMOTAOM",

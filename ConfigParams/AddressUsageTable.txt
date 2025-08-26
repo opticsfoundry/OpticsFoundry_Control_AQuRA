@@ -200,11 +200,11 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          157        0          DDSAD9854Boards                -                             
 0          158        0          DDSAD9854Boards                -                             
 0          159        0          DDSAD9854Boards                -                             
-0          160        0          DDSAD9854Boards                -                             
+0          160        0          DDSAD9854Boards                ClockFNCOutputAlignmentDDS    
 0          161        0          DDSAD9854Boards                -                             
 0          162        0          DDSAD9854Boards                -                             
 0          163        0          DDSAD9854Boards                -                             
-0          164        0          DDSAD9854Boards                -                             
+0          164        0          DDSAD9854Boards                ClockExtraFNCOutputAlignmentDDS
 0          165        0          DDSAD9854Boards                -                             
 0          166        0          DDSAD9854Boards                -                             
 0          167        0          DDSAD9854Boards                -                             
