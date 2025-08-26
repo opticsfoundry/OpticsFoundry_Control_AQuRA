@@ -1431,7 +1431,10 @@ void CSequence::OpticalPumping() {
 		SwitchPumpPolarization1Shutter(OpticalPumpingToPositivemFstate);
 		SwitchPumpPolarization2Shutter(!OpticalPumpingToPositivemFstate);
 		GoToTime(StartTime);
-		SetMOTCoilCurrent(OpticalPumpingQPCurrent);
+		//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, OpticalPumpingQPCurrent, 1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		//ToDo: do we want parameters that are different from init params here (probably not)?
 		SetIntensityRedPumpAOM(*InitIntensityRedPumpAOM);
 		SetIntensityPumpDPAOM(*InitIntensityPumpDPAOM);
@@ -1674,8 +1677,11 @@ void CSequence::ClockReadout() {
 			}
 			SetTorunCoilDriverState(0);//State 0 is the blue MOT state
 			SetFrequencyBlueDetectionDPAOM(ClockReadoutBlueMOTDPAOMFrequency);
-			SetIntensityBlueDetectionDPAOM(ClockReadoutBlueMOTDPAOMIntensity);
-			SetMOTCoilCurrent(ClockReadoutBlueMOTQPCurrent);
+			SetIntensityBlueDetectionDPAOM(ClockReadoutBlueMOTDPAOMIntensity);			
+			//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+			StartNewWaveformGroup();
+			Waveform(new CRamp("SetMOTCoilCurrent", LastValue, ClockReadoutBlueMOTQPCurrent, 1, 0.02));
+			WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		} else {
 			if (ClockReadoutOpenShutters) {
 				double Start = GetTime();
@@ -1687,7 +1693,10 @@ void CSequence::ClockReadout() {
 			SetTorunCoilDriverState(ClockReadoutTorunCoilDriverState);
 			SetFrequencyBlueDetectionDPAOM(ClockReadoutBlueDetectionDPAOMFrequency);
 			SetIntensityBlueDetectionDPAOM(ClockReadoutBlueDetectionDPAOMIntensity);
-			SetMOTCoilCurrent(ClockReadoutBlueDetectionQPCurrent);
+			//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+			StartNewWaveformGroup();
+			Waveform(new CRamp("SetMOTCoilCurrent", LastValue, ClockReadoutBlueDetectionQPCurrent, 1, 0.02));
+			WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		}
 		Wait(ClockReadoutSettleTime);
 		ClockReadoutAnalogInNumberOfPoints = ClockReadoutAnalogInTime / ClockReadoutAnalogInPeriod;
@@ -1795,7 +1804,10 @@ void CSequence::SwitchBlueFluorescenceDetectionMOTOn() {
 		SetTorunCoilDriverState(SwitchBlueFluoDetectionMOTOnTorunCoilDriverState);	
 		SetFrequencyBlueMOTDPAOM(SwitchBlueFluoDetectionMOTOnAOMFrequency);
 		SetIntensityBlueMOTDPAOM(SwitchBlueFluoDetectionMOTOnAOMIntensity);
-		SetMOTCoilCurrent(SwitchBlueFluoDetectionMOTOnQPCurrent);
+		//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueFluoDetectionMOTOnQPCurrent, 1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		//ToDo SetTorun Coil Driver to correct value
 		Wait(SwitchBlueFluoDetectionMOTOnWait, 2301);
 	}
@@ -1847,7 +1859,10 @@ void CSequence::SwitchRedFluorescenceDetectionMOTOn() {
 		SetStartFrequencyRedMOTAOM(SwitchRedFluoDetectionMOTOnAOMStartFrequency);
 		SetStopFrequencyRedMOTAOM(SwitchRedFluoDetectionMOTOnAOMStopFrequency);
 		SetIntensityRedMOTAOM(SwitchRedFluoDetectionMOTOnAOMIntensity);
-		SetMOTCoilCurrent(SwitchRedFluoDetectionMOTOnQPCurrent);
+		//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchRedFluoDetectionMOTOnQPCurrent, 1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		//ToDo SetTorun Coil Driver to correct value
 		Wait(SwitchRedFluoDetectionMOTOnWait, 2301);
 	}
@@ -1897,7 +1912,10 @@ void CSequence::SwitchBlueFluorescenceProbeBeamOn() {
 		SetTorunCoilDriverState(SwitchBlueFluoDetectionProbeOnTorunCoilDriverState);
 		SetFrequencyBlueDetectionDPAOM(SwitchBlueFluoDetectionProbeOnAOMFrequency);
 		SetIntensityBlueDetectionDPAOM(SwitchBlueFluoDetectionProbeOnAOMIntensity);
-		SetMOTCoilCurrent(SwitchBlueFluoDetectionProbeOnQPCurrent);
+		//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueFluoDetectionProbeOnQPCurrent, 1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		//ToDo SetTorun Coil Driver to correct value
 		Wait(SwitchBlueFluoDetectionProbeOnWait, 2301);
 	}

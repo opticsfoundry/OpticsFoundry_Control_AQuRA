@@ -743,26 +743,41 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		static long BlinkMOTPeriod;
 		
 		if (!AssemblingUtilityDialog()) {
-			if (Message != IDM_BLINK_MOT) return false;
-			if ((CancelLoopDialog == NULL) && (parent)) {
-				CancelLoopDialog = new CExecuteMeasurementDlg(parent, this);
-				CancelLoopDialog->Create();
-				CancelLoopDialog->SetWindowPos(&CWnd::wndTop, 100, 200, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
-			}
-			bool OnOff = On;
-			while (CancelLoopDialog) {
-				if (CancelLoopDialog) CancelLoopDialog->SetData((OnOff) ? "MOT On" : "MOT Off", (OnOff) ? 1 : 0, 1);
-				if (!CancelLoopDialog) return true;
+			if (Message == IDM_RAMP_MOT) {
+				//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp to switch them on
 				SetAssembleSequenceListMode();
 				StartSequence(NULL, parent, false);
 				StartNewWaveformGroup();
-				Waveform(new CRamp("SetMOTCoilCurrent", LastValue, (OnOff) ? BlinkMOTCurrent : 0, BlinkMOTRampTime, 0.02));
+				Waveform(new CRamp("SetMOTCoilCurrent", BlinkMOTCurrent, 1, 0.02));
 				WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 				StopSequence();
 				SetWaveformGenerationMode();
 				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
-				OnOff = !OnOff; // toggle shutters on/off
-				Wait(BlinkMOTPeriod);
+				return true;
+			}
+			if (Message == IDM_BLINK_MOT) {
+				if ((CancelLoopDialog == NULL) && (parent)) {
+					CancelLoopDialog = new CExecuteMeasurementDlg(parent, this);
+					CancelLoopDialog->Create();
+					CancelLoopDialog->SetWindowPos(&CWnd::wndTop, 100, 200, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
+				}
+				bool OnOff = On;
+				while (CancelLoopDialog) {
+					if (CancelLoopDialog) CancelLoopDialog->SetData((OnOff) ? "MOT On" : "MOT Off", (OnOff) ? 1 : 0, 1);
+					if (!CancelLoopDialog) return true;
+					SetAssembleSequenceListMode();
+					StartSequence(NULL, parent, false);
+					//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp
+					StartNewWaveformGroup();
+					Waveform(new CRamp("SetMOTCoilCurrent", LastValue, (OnOff) ? BlinkMOTCurrent : 0, BlinkMOTRampTime, 0.02));
+					WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+					StopSequence();
+					SetWaveformGenerationMode();
+					ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+					OnOff = !OnOff; // toggle shutters on/off
+					Wait(BlinkMOTPeriod);
+				}
+				return true;
 			}
 		}
 		else {
@@ -770,6 +785,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			UtilityDialog->RegisterDouble(&BlinkMOTRampTime, "BlinkMOTRampTime", 0, 1000, "Blink MOT ramp time", "ms");
 			UtilityDialog->RegisterLong(&BlinkMOTPeriod, "BlinkMOTPeriod", 0, 100000, "Blink MOT Wait Time", "ms");
 			UtilityDialog->AddButton(IDM_BLINK_MOT, Sequence);
+			UtilityDialog->AddButton(IDM_RAMP_MOT, Sequence);
 			UtilityDialog->AddStatic("");
 		}
 		return true;

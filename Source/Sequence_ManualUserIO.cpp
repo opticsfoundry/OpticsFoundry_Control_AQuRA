@@ -301,7 +301,7 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 
 bool UserIOConfigLoadedSuccessfully = false;
 void CSequence::InitializeSystem(bool OnlyFastOutputs, bool HardResetSystem) {
-	
+	//first initialize all hardware and outputs defined in the UserIOConfiguration.json file	
 	InitializeSystemDefinedInUserIOConfigFile(OnlyFastOutputs, HardResetSystem);
 	//now we can optionally define more outputs in addition to the ones described in the UserIOConfiguration.json file.
 	CMenuObList* CurrentList = (AssemblingIOList()) ? (CMenuObList*)IOList : (CMenuObList*)ParamList;
