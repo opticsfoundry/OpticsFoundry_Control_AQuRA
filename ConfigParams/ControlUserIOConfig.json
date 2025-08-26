@@ -17,7 +17,7 @@
     },
     {
       "Name": "MOTCoilCurrent",
-      "Description": "Current in MOT Coils",
+      "Description": "Current in MOT Coils, use User Utility to ramp to desired value",
       "Units": "A",
       "Help": "",
       "Type": "AnalogOut",
@@ -37,8 +37,8 @@
       "Max": 23.0,
       "Init": 0.0,
       "Hardreset": false,
-      "Softreset": true,
-      "BlockManualControl": false,
+      "Softreset": false,
+      "BlockManualControl": true,
       "Color": {
         "Red": 1.0,
         "Green": 1.0,

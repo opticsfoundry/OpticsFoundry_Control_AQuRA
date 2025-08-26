@@ -179,14 +179,13 @@ long AnalogInBox;
 
 long BeamIntensityBalance;
 
-double VerdiOffTime;
-double IPG100WLaserOffTime;
-double OvenShutterOffTime;
-double PowerSupplyOffTime;
-double ElevatorPositionSensorOffTime;
-double CloseValveOffTime;
-double VerdiLaserPower;
-bool VerdiLaserShutter;
+//double VerdiOffTime;
+//double IPG100WLaserOffTime;
+//double OvenShutterOffTime;
+//double ElevatorPositionSensorOffTime;
+//double CloseValveOffTime;
+//double VerdiLaserPower;
+//bool VerdiLaserShutter;
 
 long IPG5WLaser1Current;
 long IPG5WLaser2Current;

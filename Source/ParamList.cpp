@@ -45,6 +45,7 @@ void CParamList::Initialize() {
 	Pi=2.0*asin(1.0);
 
 	Sequence->InitializeSystem();
+	Sequence->Idle(NULL);
 
 
 NewMenu("", IDM_MENU_0);

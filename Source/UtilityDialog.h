@@ -77,12 +77,11 @@ extern long BeamIntensityBalance;
 extern CString* DigitalInFileName;
 extern double DigitalInPeriod;
 
-extern double VerdiOffTime;
-extern double IPG100WLaserOffTime;
-extern double OvenShutterOffTime;
-extern double PowerSupplyOffTime;
-extern double ElevatorPositionSensorOffTime;
-extern double CloseValveOffTime;
+//extern double VerdiOffTime;
+//extern double IPG100WLaserOffTime;
+//extern double OvenShutterOffTime;
+//extern double ElevatorPositionSensorOffTime;
+//extern double CloseValveOffTime;
 
 extern double VerdiLaserPower;
 extern bool VerdiLaserShutter;

@@ -64,12 +64,12 @@ CSequence::CSequence()
 	PauseSystemCancelLoopDialog=NULL;
 	IdleDialog=NULL;
 	LockSrRepumpDialog=NULL;
-	VerdiSaveMode=Off;
+	/*VerdiSaveMode=Off;
 	IPG100WLaserSaveMode=Off;
 	OvenShutterSaveMode=Off;
 	PowerSupplySaveMode=Off;	
 	ElevatorPositionSensorSaveMode=Off;
-	CloseValveSaveMode=Off;
+	CloseValveSaveMode=Off;*/
 	SaveMode=Off;
 	LastWakeUpTime=GetSystemTime();
 }
@@ -368,6 +368,7 @@ void CSequence::SwitchPowerSuppliesOff() {
 	SetSpareAnalogOut3(0);
 	SetSpareAnalogOut4(0);
 	SetTorunCoilDriverState(0);
+	RampMOTCoilCurrent(0);
 }
 
 
@@ -428,48 +429,56 @@ void CSequence::PauseSystem(CWnd* parent)
 
 
 bool InIdle=false;
-
+bool PowerSupplySaveMode = Off;
 void CSequence::Idle(CWnd* parent)
 {
+	static double PowerSupplyOffTime = 600;
+	
+	if (AssemblingParamList()) {	
+		ParamList->AddStatic("");
+		ParamList->AddStatic("Idle mode settings :");
+		ParamList->RegisterDouble(&PowerSupplyOffTime, "PowerSupplyOffTime", 0,600000, "Power supply off time ?", "s");
+		return;
+	}
+
+
 	if (InIdle) return;
 	InIdle=true;	
 	ControlAPI.OnIdle(parent);
-
-	/*
 	bool CreateCancelDialog=!SaveMode;
-	double TimeSinceLastBoot=GetSystemTime();//in seconds
-	double ElapsedTime=TimeSinceLastBoot-LastWakeUpTime;
+	const double TimeSinceLastBoot=GetSystemTime();//in seconds
+	double ElapsedTime = TimeSinceLastBoot - LastWakeUpTime;
 	//while (ElapsedTime<0) ElapsedTime+=(24.0*60.0*60.0); //day overflow
 	//if (((TimeSinceLastBoot-LockSrRepumpLastLockTime)>LockSrRepumpPeriod) && (LockSrRepumpPeriod>0) && (LockSrRepumpAutoLockOn)) SrRepumpLock(parent);
 	
-	if ((IPG100WLaserOffTime>0) && (ElapsedTime>IPG100WLaserOffTime) && (!IPG100WLaserSaveMode)) {				
-		//Set100WIRLaserPower(0);
-		Wait(500);
-		//Set100WIRLaserCurrent(0);				
-		Wait(500);
-		//Set100WIRLaserPower(0);
-		Wait(500);
-		//Set100WIRNewLaserCurrent(0);
-		Wait(500);
-		// switch also 5W lasers off
-		IPGLaser[1]->SetOutputPower(0);
-		IPGLaser[2]->SetOutputPower(0);
-		SaveMode=true;
-		IPG100WLaserSaveMode=true;
-		PlaySound(*SourceFilePath + "Sound\\C819.WAV",NULL,SND_FILENAME);
-	}
-	if ((VerdiOffTime>0) && (ElapsedTime>VerdiOffTime) && (!VerdiSaveMode)) {
-		VerdiSaveMode=true;
-		SaveMode=true;
-		VerdiLaser->SwitchShutter(Off);	
-	}
-	if ((OvenShutterOffTime>0) && (ElapsedTime>OvenShutterOffTime) && (!OvenShutterSaveMode)) {
-		OvenShutterSaveMode=true;
-		SaveMode=true;
-		SwitchOvenShutter(Off);
-		PlaySound(*SourceFilePath + "Sound\\C818.WAV",NULL,SND_FILENAME);
-	}
-	if ((PowerSupplyOffTime>0) && (ElapsedTime>PowerSupplyOffTime) && (!PowerSupplySaveMode)) {
+	//if ((IPG100WLaserOffTime>0) && (ElapsedTime>IPG100WLaserOffTime) && (!IPG100WLaserSaveMode)) {				
+	//	//Set100WIRLaserPower(0);
+	//	Wait(500);
+	//	//Set100WIRLaserCurrent(0);				
+	//	Wait(500);
+	//	//Set100WIRLaserPower(0);
+	//	Wait(500);
+	//	//Set100WIRNewLaserCurrent(0);
+	//	Wait(500);
+	//	// switch also 5W lasers off
+	//	IPGLaser[1]->SetOutputPower(0);
+	//	IPGLaser[2]->SetOutputPower(0);
+	//	SaveMode=true;
+	//	IPG100WLaserSaveMode=true;
+	//	PlaySound(*SourceFilePath + "Sound\\C819.WAV",NULL,SND_FILENAME);
+	//}
+	//if ((VerdiOffTime>0) && (ElapsedTime>VerdiOffTime) && (!VerdiSaveMode)) {
+	//	VerdiSaveMode=true;
+	//	SaveMode=true;
+	//	VerdiLaser->SwitchShutter(Off);	
+	//}
+	//if ((OvenShutterOffTime>0) && (ElapsedTime>OvenShutterOffTime) && (!OvenShutterSaveMode)) {
+	//	OvenShutterSaveMode=true;
+	//	SaveMode=true;
+	//	SwitchOvenShutter(Off);
+	//	PlaySound(*SourceFilePath + "Sound\\C818.WAV",NULL,SND_FILENAME);
+	//}
+	if ((PowerSupplyOffTime>0) && (ElapsedTime > PowerSupplyOffTime) && (!PowerSupplySaveMode)) {
 		PowerSupplySaveMode=true;
 		SaveMode=true;
 		SwitchPowerSuppliesOff();	
@@ -477,7 +486,7 @@ void CSequence::Idle(CWnd* parent)
 		//RbSystemOff();
 		PlaySound(*SourceFilePath + "Sound\\C822.WAV",NULL,SND_FILENAME);
 	}
-	if ((ElevatorPositionSensorOffTime>0) && (ElapsedTime>ElevatorPositionSensorOffTime) && (!ElevatorPositionSensorSaveMode)) {
+	/*if ((ElevatorPositionSensorOffTime>0) && (ElapsedTime>ElevatorPositionSensorOffTime) && (!ElevatorPositionSensorSaveMode)) {
 		ElevatorPositionSensorSaveMode=true;
 		SaveMode=true;
 		SwitchElevatorSensors(Off);
@@ -488,7 +497,7 @@ void CSequence::Idle(CWnd* parent)
 		SaveMode=true;
 		SwitchCloseValve(Off);
 		PlaySound(*SourceFilePath + "Sound\\C821.WAV",NULL,SND_FILENAME);
-	}
+	}*/
 
 	if (SaveMode) {
 		if (CreateCancelDialog && (IdleDialog == NULL) && (parent)) {
@@ -498,54 +507,56 @@ void CSequence::Idle(CWnd* parent)
 		} 
 		if (IdleDialog) {
 			CString buf;
-			buf.Format("Save mode activated\n\nVerdi : %s\nIPG 100W : %s\nOven shutter : %s\nPower supplies : %s\nElevator position sensor : %s\nValve : %s",(VerdiSaveMode) ? "Off" : "On",(IPG100WLaserSaveMode) ? "Off" : "On",(OvenShutterSaveMode) ? "Off" : "On",(PowerSupplySaveMode) ? "Off" : "On",(ElevatorPositionSensorSaveMode) ? "Off" : "On",(CloseValveSaveMode) ? "Off" : "On");
+			//buf.Format("Save mode activated\n\nVerdi : %s\nIPG 100W : %s\nOven shutter : %s\nPower supplies : %s\nElevator position sensor : %s\nValve : %s",(VerdiSaveMode) ? "Off" : "On",(IPG100WLaserSaveMode) ? "Off" : "On",(OvenShutterSaveMode) ? "Off" : "On",(PowerSupplySaveMode) ? "Off" : "On",(ElevatorPositionSensorSaveMode) ? "Off" : "On",(CloseValveSaveMode) ? "Off" : "On");
+			buf.Format("Save mode activated\n\nPower supplies : %s\n", (PowerSupplySaveMode) ? "Off" : "On");
 			unsigned long ElapsedTimeInt=(unsigned long)ElapsedTime;
 			IdleDialog->SetData(buf,ElapsedTimeInt%2,1,false);		
 		} else WakeUp();
+	} else if (IdleDialog) {
+		IdleDialog->DestroyWindow();		
+		IdleDialog=NULL;
 	}
 
-	if (CheckLaserSecuritySign) {		
-		if ((GetSystemTime()-StartTimeOfLastLaserSecurityCheck)>10) {
-			CheckLaserSecuritySign=false;
-			UpdateLaserSecuritySignSetting();
-		}
-	}
-	*/
+	//if (CheckLaserSecuritySign) {		
+	//	if ((GetSystemTime()-StartTimeOfLastLaserSecurityCheck)>10) {
+	//		CheckLaserSecuritySign=false;
+	//		UpdateLaserSecuritySignSetting();
+	//	}
+	//}
+	//
 
 	InIdle=false;
 }
 
 void CSequence::WakeUp() {
 	LastWakeUpTime=GetSystemTime();
-	if (VerdiSaveMode) {
-		VerdiSaveMode=false;
-		//VerdiLaser->SwitchShutter(VerdiLaserShutter);		
-	}
-	if (OvenShutterSaveMode) {		
-		OvenShutterSaveMode=false;
-		//SwitchOvenShutter(!DoProtectEndWindow);
-	}
-	if ((PowerSupplySaveMode) || (ElevatorPositionSensorSaveMode)) {		
+	//if (VerdiSaveMode) {
+	//	VerdiSaveMode=false;
+	//	//VerdiLaser->SwitchShutter(VerdiLaserShutter);		
+	//}
+	//if (OvenShutterSaveMode) {		
+	//	OvenShutterSaveMode=false;
+	//	//SwitchOvenShutter(!DoProtectEndWindow);
+	//}
+	if (PowerSupplySaveMode) {		
 		PowerSupplySaveMode=false;	
-		ElevatorPositionSensorSaveMode=false;	
-		/*ResetSystem();
-		ResetSystem();*/
+		ResetSystem();
 	}
-	if (ElevatorPositionSensorSaveMode) {		
-		ElevatorPositionSensorSaveMode=false;
-		//SwitchElevatorSensors(On);
-	}
-	if (CloseValveSaveMode) {		
-		CloseValveSaveMode=false;
-		//SwitchCloseValve(On);
-	}
-	if (IdleDialog) {
-		IdleDialog->DestroyWindow();		
-		IdleDialog=NULL;
-	}
-	if (IPG100WLaserSaveMode) {
-		IPG100WLaserSaveMode=false;
-	}
+	//if (ElevatorPositionSensorSaveMode) {		
+	//	ElevatorPositionSensorSaveMode=false;
+	//	//SwitchElevatorSensors(On);
+	//}
+	//if (CloseValveSaveMode) {		
+	//	CloseValveSaveMode=false;
+	//	//SwitchCloseValve(On);
+	//}
+	//if (IdleDialog) {
+	//	IdleDialog->DestroyWindow();		
+	//	IdleDialog=NULL;
+	//}
+	//if (IPG100WLaserSaveMode) {
+	//	IPG100WLaserSaveMode=false;
+	//}
 	SaveMode=false;
 }
 
@@ -2380,6 +2391,7 @@ void CSequence::ShutDown() {
 	SwitchOvenShutter(Off);	
 	//SwitchOpticalDipoleTrapAOMsOff();
 	SwitchElevatorSensors(Off);
+	RampMOTCoilCurrent(0);
 }
 
 //

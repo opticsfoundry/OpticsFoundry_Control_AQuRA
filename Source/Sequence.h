@@ -135,6 +135,7 @@ public:
 	bool UtilityTest448nmCavityAnalogOut(unsigned int Message, CWnd* parent);
 	bool UtilityTestSequence(unsigned int Message, CWnd* parent);
 	bool UtilityBlinkShutters(unsigned int Message, CWnd* parent);
+	bool RampMOTCoilCurrent(double TargetCurrent, double RampTime = 1);
 	bool UtilityBlinkMOT(unsigned int Message, CWnd* parent);
 	bool UtilitySweepMOTFrequency(unsigned int Message, CWnd* parent);
 	bool UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent);
@@ -313,12 +314,12 @@ public:
 
 
 	CExecuteMeasurementDlg *MeasurementDialog;
-	bool VerdiSaveMode;
+	/*bool VerdiSaveMode;
 	bool IPG100WLaserSaveMode;
 	bool OvenShutterSaveMode;	
 	bool PowerSupplySaveMode;	
 	bool ElevatorPositionSensorSaveMode;
-	bool CloseValveSaveMode;
+	bool CloseValveSaveMode;*/
 	bool SaveMode;
 	double LastWakeUpTime;
 	int AktTrap;
@@ -326,6 +327,7 @@ public:
 	void TestCameras(CWnd *parent);
 	//special AQuRA code
 	void InitializeCoilDriverTorun3x3A(bool OnlyFast = false, unsigned char setting = 255);
+	void InitializeCoilDriverTorun100A();
 #ifdef AddDemoCode
 	// Demo output initializations, without using ControlUserIOCreator.py / ControlUserIO.json
 	void InitializeSpareAD9854DDS0();

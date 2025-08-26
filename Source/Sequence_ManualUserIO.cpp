@@ -299,6 +299,22 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 	}
 }
 
+double MOTCoilCurrentRampRate=50;
+void CSequence::InitializeCoilDriverTorun100A() {
+	if (AssemblingIOList()) {
+	}
+	else if (AssemblingParamList()) {
+		ParamList->AddStatic("");
+		ParamList->RegisterDouble(&MOTCoilCurrentRampRate, "MOTCoilCurrentRampRate", 0, 50, "MOTCoilCurrentRampRate", "A/ms");
+		ParamList->AddStatic("");
+	}
+	else {
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, *InitMOTCoilCurrent, (*InitMOTCoilCurrent)/MOTCoilCurrentRampRate, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+	}
+}
+
 bool UserIOConfigLoadedSuccessfully = false;
 void CSequence::InitializeSystem(bool OnlyFastOutputs, bool HardResetSystem) {
 	//first initialize all hardware and outputs defined in the UserIOConfiguration.json file	
@@ -325,6 +341,7 @@ void CSequence::InitializeSystem(bool OnlyFastOutputs, bool HardResetSystem) {
 #endif
 	CurrentList->NewMenu("Torun coil" + EndText);
 	InitializeCoilDriverTorun3x3A(OnlyFastOutputs, 0);
+	InitializeCoilDriverTorun100A();
 }
 
 

@@ -159,7 +159,7 @@ void CSequence::SetIPGLaserCurrent(int IPGLaserNumber)
 		} //else PlaySound(*SourceFilePath + "Sound\\lifeover.wav",NULL,SND_FILENAME);		
 //		Set100WIRLaserCurrent(IPG100WLaserCurrent);		
 		AktIPG100WLaserCurrent = IPG100WLaserCurrent;
-		IPG100WLaserSaveMode = false;
+		//IPG100WLaserSaveMode = false;
 	}
 	else if (IPGLaserNumber == 1) {
 		if (!AskLaserPowerIncrease(IPGLaserNumber)) return;
@@ -194,7 +194,7 @@ void CSequence::SetIPGLaserPower(int IPGLaserNumber)
 			}
 		} //else PlaySound(*SourceFilePath + "Sound\\lifeover.wav",NULL,SND_FILENAME) */;				
 		//Set100WIRLaserPower(IPG100WLaserPower);
-		IPG100WLaserSaveMode = false;
+		//IPG100WLaserSaveMode = false;
 		AktIPG100WLaserPower = IPG100WLaserPower;
 		Wait(5000, 2050);
 		UpdateLaserSecuritySignSetting();
@@ -734,6 +734,18 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		return true;
 	}
 
+	bool CSequence::RampMOTCoilCurrent(double TargetCurrent, double RampTime)
+	{
+		SetAssembleSequenceListMode();
+		StartSequence();
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, TargetCurrent, RampTime, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		StopSequence();
+		SetWaveformGenerationMode();
+		ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+		return true;
+	}
 
 	//Utility UtilityBlinkMOT
 	bool CSequence::UtilityBlinkMOT(unsigned int Message, CWnd* parent)
@@ -745,14 +757,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		if (!AssemblingUtilityDialog()) {
 			if (Message == IDM_RAMP_MOT) {
 				//Torun coil drivers set MOT coil current to zero when changing too fast, therefore we must ramp to switch them on
-				SetAssembleSequenceListMode();
-				StartSequence(NULL, parent, false);
-				StartNewWaveformGroup();
-				Waveform(new CRamp("SetMOTCoilCurrent", LastValue, BlinkMOTCurrent, 1, 0.02));
-				WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
-				StopSequence();
-				SetWaveformGenerationMode();
-				ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				RampMOTCoilCurrent(BlinkMOTCurrent);
 				return true;
 			}
 			if (Message == IDM_BLINK_MOT) {
@@ -788,7 +793,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 			UtilityDialog->AddButton(IDM_RAMP_MOT, Sequence);
 			UtilityDialog->AddStatic("");
 		}
-		return true;
+		return false;
 	}
 
 
