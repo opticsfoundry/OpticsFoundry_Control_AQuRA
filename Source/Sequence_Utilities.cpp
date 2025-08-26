@@ -748,7 +748,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 				SetAssembleSequenceListMode();
 				StartSequence(NULL, parent, false);
 				StartNewWaveformGroup();
-				Waveform(new CRamp("SetMOTCoilCurrent", BlinkMOTCurrent, 1, 0.02));
+				Waveform(new CRamp("SetMOTCoilCurrent", LastValue, BlinkMOTCurrent, 1, 0.02));
 				WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 				StopSequence();
 				SetWaveformGenerationMode();
