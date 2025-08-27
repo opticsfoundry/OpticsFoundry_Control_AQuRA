@@ -673,9 +673,11 @@ void CControlAPI::ReplaceCommandsForNextCycle() {
 			ReplaceCommandForNextCycle(ReplaceCommandLineNumber[n], ReplaceCommandCode[n]);
 		}
 		else if (ReplaceCommandCycleNr[n] < NextCycleNumber) {
+#ifndef _WINDLL
 			CString buf;
 			buf.Format("ControlAPI.cpp: ReplaceCommandsForNextCycle() missed replacement of command for cycle %i as requested cycle has already passed (next cycle = %i)", ReplaceCommandCycleNr[n], NextCycleNumber);
 			ControlMessageBox(buf);
+#endif
 			ReplaceCommandCycleNr[n] = -1;
 		}
 	}
