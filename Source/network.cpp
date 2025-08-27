@@ -208,7 +208,7 @@ bool CNetwork::ResetConnection(unsigned long sleep_time) {
 	BOOL bDummyCreated = dummy.Create();
 	DisconnectSocket();
 	if (sleep_time>0) Sleep_ms(sleep_time);
-	bool ret= Reconnect(/*maxRetries*/ 4,/*timeout_s*/0,/*delay_ms*/100);
+	bool ret= Reconnect(/*maxRetries*/ 10,/*timeout_s*/0,/*delay_ms*/100);
 	if (bDummyCreated)
 		dummy.Close();
 	return ret;
@@ -443,9 +443,11 @@ bool CNetwork::Reconnect(int maxRetries, int timeout_s, unsigned long delay_ms) 
 		}
 		tries++;
 		Sleep(delay_ms);
+		StoreLastMessage("Could not reconnect");
 	}
 	if (bDummyCreated)
 		dummy.Close(); // Close dummy socket if it was created
+	StoreLastMessage("Could not reconnect, giving up");
 	return false;
 }
 

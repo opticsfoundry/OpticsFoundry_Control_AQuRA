@@ -78,6 +78,7 @@ bool CCoilDriverTorun100A::SetMode(unsigned int Mode) {
 	if (!Connected) return true;
 	if (Mode >= 3) return false;
 	if (ActMode == Mode) return true;
+	//Sleep(100);
 	CString buf;
 	buf.Format("MODE %i", Mode);
 	bool ok = Command(buf, /*DontWaitForReady*/ true);
@@ -103,6 +104,7 @@ bool CCoilDriverTorun100A::SetMode(unsigned int Mode) {
 bool CCoilDriverTorun100A::GetMode(unsigned int &Mode) {
 	ResetMyConnection
 	if (!Connected) return false;
+	//Sleep(100);
 	CString buf;
 	buf.Format("MODE ?");
 	bool ok = Command(buf, /*DontWaitForReady*/ true);
@@ -110,6 +112,7 @@ bool CCoilDriverTorun100A::GetMode(unsigned int &Mode) {
 		ControlMessageBox("CCoilDriverTorun100A::GetMode: Command failed.");
 		return false;
 	}
+	//Sleep(100);
 	int myMode = -99999;
 	ok = ReadInt(myMode);
 	if (!ok) {
@@ -158,6 +161,7 @@ bool CCoilDriverTorun100A::GetRampRate(double& RampRate) {
 		ControlMessageBox("CCoilDriverTorun100A::GetRampRate: Command failed.");
 		return false;
 	}
+	//Sleep(10);
 	double myRate = -99999;
 	ok = ReadDouble(myRate);
 	if (!ok) {

@@ -20,10 +20,10 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-#define DoResetConnection
+//#define DoResetConnection
 
 #ifdef DoResetConnection
-#define ResetMyConnection if (!Network) return false;Network->ResetConnection(0);
+#define ResetMyConnection if (!Network) return false;Network->ResetConnection(10);
 #else
 #define ResetMyConnection
 #endif
