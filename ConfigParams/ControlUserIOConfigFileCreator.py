@@ -259,7 +259,7 @@ if __name__ == "__main__":
     builder.add_analog_out(Name="MOTCoilCurrent", Description="Current in MOT Coils, use User Utility to ramp to desired value", Address=31, Units="A", Max=23.0, Init=0.0, Calibration = [
                 {"order": 0, "value": 0},
                 {"order": 1, "value": 0.1}
-            ], BlockManualControl = True, Softreset = False)
+            ], BlockManualControl = False, Softreset = False)
     builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=30, Units="degC", Max=5.0, Init=0.0)    
     builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=29, Units="%", Max=5.0, Init=0.0)
     builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=28, Units="", Max=5.0, Init=0.0)

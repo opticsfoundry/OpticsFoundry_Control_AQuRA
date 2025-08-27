@@ -38,7 +38,7 @@
       "Init": 0.0,
       "Hardreset": false,
       "Softreset": false,
-      "BlockManualControl": true,
+      "BlockManualControl": false,
       "Color": {
         "Red": 1.0,
         "Green": 1.0,

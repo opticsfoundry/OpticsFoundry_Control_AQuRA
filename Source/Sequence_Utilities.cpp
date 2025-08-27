@@ -25,7 +25,7 @@ bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
 	Received |= UtilityRunClock(Message, parent);
 
 	if (AssemblingUtilityDialog()) {
-		UtilityDialog->NewColumn();
+		//UtilityDialog->NewColumn();
 		UtilityDialog->AddStatic("User utilities");
 		//		UtilityDialog->AddStatic("");
 	}

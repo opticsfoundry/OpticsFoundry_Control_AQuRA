@@ -407,7 +407,8 @@ void CParamList::AddFlashTypes()
 	//AddSrFlashType(6,/*blue AQuRA AOM 1*/false,/*blue AQuRA AOM 2*/false,/*blue AQuRA AOM 3*/false,/*blue AOM 1*/true,/*blue AOM 2*/false,/*red AOM*/false,/*dipTrapAOM*/false);
 	AddRbFlashType(0);
 	//AddRbFlashType(1);
-	NewColumn();
+	//NewColumn();
+	AddStatic("");
 	AddBlowAwayFlash(0);
 }
 
@@ -461,7 +462,7 @@ void CParamList::AddCameras() {
 			RegisterDouble(&CameraCalY[i],"CameraCalY"+itos(i),0,1024,"Y calibration","µm/pix","calibrates the cursor information on Vision program");
 
 			if (Andor) {
-				RegisterDouble(&CameraTemperature[i],"CameraTemperature"+itos(i),-40,48,"Temperature","°C");
+				RegisterDouble(&CameraTemperature[i],"CameraTemperature"+itos(i),0,48,"Gain","");
 				RegisterLong(&CamerahSpeed[i],"CamerahSpeed"+itos(i),0,64,"X speed","1,2,16,32 µs");
 				RegisterLong(&CameraFKSDataImages[i],"CameraFKSDataImages"+itos(i),1,1,"FKS Data Images","1");
 				RegisterLong(&CameraFKSReferenceImages[i],"CameraFKSReferenceImages"+itos(i),1,1,"FKS Reference Images","1");

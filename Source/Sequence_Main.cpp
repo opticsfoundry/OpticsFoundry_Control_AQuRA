@@ -1287,6 +1287,9 @@ void CSequence::SwitchBlueMOTOff() {
 		//there is no blue ZS AOM. ZS light is switched off by shutter only. If timing is important, code it such that ZS shutter trigger is sent at correct time.
 		//switch offset fields to bb red MOT offset fields
 		SetTorunCoilDriverState(1);
+		SetMOTCoilCurrent(SwitchBlueMOTOffQPCurrent);
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueMOTOffQPCurrent, 1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 		if (DoSwitchBlueMOTOffCloseShutter) {
 			//SZ shutter
 			GoBackInTime(ZSShutterOffPreTrigger);
@@ -1323,7 +1326,7 @@ void CSequence::SwitchBlueMOTOff() {
 		ParamList->RegisterDouble(&SwitchBlueMOTOffQPCurrent, "SwitchBlueMOTOffQPCurrent", 0, 2000, "Red capture MOT QP current", "A");
 		ParamList->RegisterBool(&DoSwitchBlueMOTOffCloseShutter, "DoSwitchBlueMOTOffCloseShutter", "Close blue MOT shutter?");
 		InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 1);
-		ParamList->RegisterDouble(&SwitchBlueMOTOffWait, "SwitchBlueMOTOffWait", 0, 2000, "Wait", "ms");
+		ParamList->RegisterDouble(&SwitchBlueMOTOffWait, "SwitchBlueMOTOffWait", 0, 20000, "Wait", "ms");
 		
 	}
 }
@@ -2055,7 +2058,7 @@ void CSequence::ReadoutFPGAMemory() {
 		ParamList->RegisterDouble(&Clock1S0Fluo, "Clock1S0Fluo", 0, 100000000, "1S0 fluorescence","");
 		ParamList->RegisterDouble(&ClockTotalFluo, "ClockTotalFluo", 0, 100000000, "Total fluorescence","");
 		ParamList->RegisterDouble(&ClockBackground, "ClockBackground", 0, 100000000, "Background fluorescence","");
-		ParamList->RegisterDouble(&ClockStateExcitation, "ClockStateExcitation", 0, 1, "State excitation","");
+		ParamList->RegisterDouble(&ClockStateExcitation, "ClockStateExcitation", -10000, 100000, "State excitation","");
 	}
 }
 
@@ -2358,9 +2361,9 @@ void CSequence::MainExperimentalSequence() {
 	RampRedMOT(/* Nr */ 1, /* BroadbandRedMOT */ true);
 	SwitchToSingleFrequencyRedMOT();
 	RampRedMOT(/* Nr */ 2, /* BroadbandRedMOT */ false);
+	if (AssemblingParamList()) ParamList->NewMenu("Clock interrogation", IDM_MENU_0);
 	RampRedMOT(/* Nr */ 3, /* BroadbandRedMOT */ false);
 	SwitchRedMOTOff();
-	if (AssemblingParamList()) ParamList->NewMenu("Clock interrogation", IDM_MENU_0);
 	OpticalPumping();
 	//if (AssemblingParamList()) ParamList->NewMenu("Interrogation stage", IDM_MENU_0);
 	RampToInterrogationConditions();

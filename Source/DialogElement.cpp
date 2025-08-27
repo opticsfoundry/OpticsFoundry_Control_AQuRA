@@ -40,7 +40,7 @@ CDialogElement::~CDialogElement()
 {	
 }
 
-const unsigned int MaxLines=38;
+const unsigned int MaxLines=35;
 
 const unsigned int TopBorder=10;
 const unsigned int HorizontalDistance=4;
