@@ -60,9 +60,17 @@ void CExecuteMeasurementDlg::OnCancel()
 	DestroyWindow();
 }
 
-BOOL CExecuteMeasurementDlg::Create() 
+BOOL CExecuteMeasurementDlg::Create(long dx, long dy) 
 {
-	return CDialog::Create(m_nID, m_pParent);
+	BOOL ret = CDialog::Create(m_nID, m_pParent);
+	RECT rect;
+	if (!ActiveDialog) {
+		rect.left = 0;
+		rect.top = 0;
+	}
+	else ActiveDialog->GetWindowRect(&rect);
+	SetWindowPos(&CWnd::wndTop, rect.left + dx, rect.top + dy, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
+	return ret;
 }
 
 void CExecuteMeasurementDlg::SetData(CString text, int ProgressPosition,int ProgressMax, bool DoPumpMessages)

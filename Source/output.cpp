@@ -220,6 +220,7 @@ COutput::~COutput() {
 #ifndef NO_INPOUT
 	delete ParallelPort;
 #endif
+	EmptySyncCommandLists();
 	for (unsigned int i=0;i<MaxAnaOutBoards;i++) {		
 		if (AnaOutBoard[i]) delete AnaOutBoard[i];		
 		if (AnaOutBuffer[i]) delete AnaOutBuffer[i];		

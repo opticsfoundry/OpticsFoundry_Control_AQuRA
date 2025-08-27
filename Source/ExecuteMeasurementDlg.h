@@ -32,7 +32,7 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CExecuteMeasurementDlg)
 	public:
-	virtual BOOL Create();
+	virtual BOOL Create(long dx = 0, long dy = 0);
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual void PostNcDestroy();

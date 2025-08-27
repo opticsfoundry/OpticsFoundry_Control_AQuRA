@@ -1271,10 +1271,11 @@ void CSequence::SwitchBlueMOTOff() {
 		//Here we activate 3P0,2 repumping by switching the shutter on. 
 		//Ideally the user will measure the RepumpShutterOnDelay and put it correctly in here, such that the repump laser beam is available at precisely this moment.
 		//An error of a few ms should not matter.
-		StartTime = GetTime();
-		GoBackInTime(RepumpShutterOnDelay);
+		//StartTime = GetTime();
+		//GoBackInTime(RepumpShutterOnDelay);
 		//SwitchRepumpShutter(On);
-		GoToTime(StartTime);
+		//GoToTime(StartTime);
+		
 		//ToDo: do we want parameters that are different from init params here?
 		//ToDo: make init values available by name, just like now already the commands through IOList_shortcuts...
 		//UserIOConfig->ResetUserIOOutput("PumpDPAOM");
@@ -1283,13 +1284,17 @@ void CSequence::SwitchBlueMOTOff() {
 		//switch blue MOT off
 		//for AD9858, we use frequency command to switch rf off, as it doesn't have digital intensity control (for AD9854 DDS we can use intensity)
 		SetFrequencyBlueMOTDPAOM(0);
-		double StartTimeBlueOff = GetTime();
+		
 		//there is no blue ZS AOM. ZS light is switched off by shutter only. If timing is important, code it such that ZS shutter trigger is sent at correct time.
 		//switch offset fields to bb red MOT offset fields
 		SetTorunCoilDriverState(1);
-		SetMOTCoilCurrent(SwitchBlueMOTOffQPCurrent);
+		
+		//Ramp MOT QP current off
+		StartNewWaveformGroup();
 		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueMOTOffQPCurrent, 1, 0.02));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		
+		double StartTimeBlueOff = GetTime();
 		if (DoSwitchBlueMOTOffCloseShutter) {
 			//SZ shutter
 			GoBackInTime(ZSShutterOffPreTrigger);
@@ -1297,12 +1302,13 @@ void CSequence::SwitchBlueMOTOff() {
 			//there is no ZS AOM, therefore we don't have to wait and switch AOM heating on
 			GoToTime(StartTimeBlueOff);
 
+			GoBackInTime(BlueMOTShutterOffDelay);
 			SwitchBlueMOTShutter(Off);
-			Wait(BlueMOTShutterOffDelay);
+			GoToTime(StartTimeBlueOff);
+
 			//now shutters are blocking beams -> we can heat AOMs
 			//UserIOConfig->ResetUserIOOutput("BlueMOTDPAOM");  //One style of programming: resets this DDS entirely
 			SetFrequencyBlueMOTDPAOM(*InitFrequencyBlueMOTDPAOM); //Another style of programming: only resets DDS frequency, which is the only thing we changed to switch DDS off.
-			GoToTime(StartTimeBlueOff);
 		}
 		//optical pumping in red bb MOT
 		Wait(SwitchBlueMOTOffRepumpTime);
@@ -1318,8 +1324,7 @@ void CSequence::SwitchBlueMOTOff() {
 		Wait(SwitchBlueMOTOffWait, 1300);
 	}
 	else {
-		ParamList->RegisterBool(&DoSwitchBlueMOTOff, "DoSwitchBlueMOTOff", "Switch Blue MOT Off", "O");
-
+		ParamList->RegisterBool(&DoSwitchBlueMOTOff, "DoSwitchBlueMOTOff", "Switch Blue MOT Off" , "O");
 		ParamList->RegisterDouble(&SwitchBlueMOTOffInitialWait, "SwitchBlueMOTOffInitialWait", 0, 2000, "Initial Wait", "ms");
 		ParamList->RegisterDouble(&SwitchBlueMOTOffRepumpTimeWithBlueMOT, "", 0, 2000, "Repump Time with blue MOT on", "ms");
 		ParamList->RegisterDouble(&SwitchBlueMOTOffRepumpTime, "SwitchBlueMOTOffRepumpTime", 0, 2000, "Repump Time w/o blue MOT", "ms");
