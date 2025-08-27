@@ -19,7 +19,6 @@ public:
 	//double ActCurrent[CoilDriverTorun100ANrCoils * CoilDriverTorun100ANrSettings];
 	//double ActRampTime[CoilDriverTorun100ANrSettings];
 	unsigned int ActMode;
-	unsigned int ActRate;
 public:	
 	/*bool SetCurrent(unsigned int SettingNr, unsigned int CoilNr, double Current);
 	bool GetCurrent(unsigned int SettingNr, unsigned int CoilNr, double &Current);
@@ -29,8 +28,6 @@ public:
 	bool CheckReady();	*/
 	bool SetMode(unsigned int Mode);
 	bool GetMode(unsigned int& Mode);
-	bool SetRate(unsigned int Rate);
-	bool GetRate(unsigned int& Rate);
 	CCoilDriverTorun100A();
 	virtual ~CCoilDriverTorun100A();
 	bool ConnectSocket(LPCTSTR lpszAddress,UINT port);

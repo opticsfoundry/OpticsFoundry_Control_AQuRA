@@ -55,7 +55,6 @@ CNetworkClient(3) {
 	//for (int i = 0; i< CoilDriverTorun100ANrCoils* CoilDriverTorun100ANrSettings; i++) ActCurrent[i] = -999; 
 	//for (int i = 0; i < CoilDriverTorun100ANrSettings; i++) ActRampTime[i] = -999;
 	ActMode = 99;
-	ActRate = 99;
 }
 
 CCoilDriverTorun100A::~CCoilDriverTorun100A()
@@ -118,53 +117,5 @@ bool CCoilDriverTorun100A::GetMode(unsigned int &Mode) {
 	}
 	Mode = (unsigned int)myMode;
 	ActMode = Mode;
-	return true;
-}
-
-bool CCoilDriverTorun100A::SetRampRate(unsigned int Rate) {
-	ResetMyConnection
-		if (!Connected) return true;
-	if (Rate >= 3) return false;
-	if (ActRate == Rate) return true;
-	CString buf;
-	buf.Format("Rate %i", Rate);
-	bool ok = Command(buf, /*DontWaitForReady*/ true);
-	if (!ok) {
-		ControlMessageBox("CCoilDriverTorun100A::SetRampRate: Command failed.");
-		return false;
-	}
-#ifdef ReadBackValue
-	unsigned int _ReadRate = 999;
-	ok = GetRate(_ReadRate);
-	if (!ok) return false;
-	if (Rate != _ReadRate) {
-		CString buf;
-		buf.Format("CCoilDriverTorun100A::SetRampRate: Warning: GetRampRate did not return the requested value.\n"
-			"Requested: %u, Actual: %u", Rate, _ReadRate);
-		ControlMessageBox(buf);
-		return false;
-	}
-#endif
-	return ok;
-}
-
-bool CCoilDriverTorun100A::GetRampRate(unsigned int& Rate) {
-	ResetMyConnection
-		if (!Connected) return false;
-	CString buf;
-	buf.Format("Rate ?");
-	bool ok = Command(buf, /*DontWaitForReady*/ true);
-	if (!ok) {
-		ControlMessageBox("CCoilDriverTorun100A::GetRampRate: Command failed.");
-		return false;
-	}
-	int myRate = -99999;
-	ok = ReadInt(myRate);
-	if (!ok) {
-		ControlMessageBox("CCoilDriverTorun100A::GetRampRate: Command returned no value.");
-		return false;
-	}
-	Rate = (unsigned int)myRate;
-	ActRate = Rate;
 	return true;
 }
