@@ -154,7 +154,7 @@ extern void SetRampTimeState2(double RampTime);
 extern void SetRampTimeState3(double RampTime);
 
 extern void SwitchMOTCoilDriver(bool OnOff);
-
+extern void SetMOTCoilDriverRampRate(double RampRate);
 
 
 extern void SetSerialPortSubPort(int Port, unsigned char SubPort);

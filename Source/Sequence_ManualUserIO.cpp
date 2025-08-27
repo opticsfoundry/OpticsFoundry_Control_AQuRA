@@ -200,7 +200,8 @@ double InitCoilDriverTorun3x3ARampTimeState0;
 double InitCoilDriverTorun3x3ARampTimeState1;
 double InitCoilDriverTorun3x3ARampTimeState2;
 double InitCoilDriverTorun3x3ARampTimeState3;
-bool InitMOTCoilDriverEnabled;
+bool InitMOTCoilDriverEnabled=False;
+double InitCoilDriverTorun100ARampRate=50;
 void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setting) {
 	if (AssemblingIOList()) {
 		const bool Constant = true;
@@ -230,6 +231,7 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 		IOList->AddStatic("");
 		IOList->AddStatic("MOT coil driver");
 		IOList->RegisterDigitalOutput(&SwitchMOTCoilDriver, "SwitchMOTCoilDriver", "Enable MOT Coil Driver");
+		IOList->RegisterAnalogOutput(&SetMOTCoilDriverRampRate, "SetMOTCoilDriverRampRate", "MOT Coil Driver ramp rate", "A/ms", "", 1, 50, Constant);
 
 		IOList->AddStatic("");
 	}
@@ -244,6 +246,8 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			ParamList->AddStatic("");
 			ParamList->AddStatic("MOT coil driver");
 			ParamList->RegisterBool(&InitMOTCoilDriverEnabled, "InitMOTCoilDriverEnabled", "MOT Coil Driver enabled");
+			ParamList->RegisterDouble(&InitCoilDriverTorun100ARampRate, "InitCoilDriverTorun100ARampRate", 1, 50, "MOT coil ramp rate", "A/ms");
+
 			ParamList->AddStatic("");
 			break;
 		case 1:
@@ -295,6 +299,7 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			SetRampTimeState2(InitCoilDriverTorun3x3ARampTimeState2);
 			SetRampTimeState3(InitCoilDriverTorun3x3ARampTimeState3);
 			SwitchMOTCoilDriver(InitMOTCoilDriverEnabled);
+			SetMOTCoilDriverRampRate(InitCoilDriverTorun100ARampRate);
 		}
 	}
 }

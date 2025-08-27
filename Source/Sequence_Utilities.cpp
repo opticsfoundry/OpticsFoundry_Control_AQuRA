@@ -854,6 +854,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 	bool CSequence::UtilityTorunCoilDrivers(unsigned int Message, CWnd* parent)
 	{
 		static long CoilDriver3x3AState=0;
+		
 		if (!AssemblingUtilityDialog()) {
 			if (Message == IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A) {
 				InitializeCoilDriverTorun3x3A(/*OnlyFast*/ false);

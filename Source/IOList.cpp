@@ -882,3 +882,8 @@ void SwitchMOTCoilDriver(bool OnOff) {
 	CoilDriverTorun100A->SetMode((OnOff) ? 1 : 0);
 	Output->DigitalOutScaled(TorunDriverHelpDigitalOutStart, OnOff, OnOff);
 }
+
+void SetMOTCoilDriverRampRate(double RampRate) {
+	CoilDriverTorun100A->SetRampRate(RampRate);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart+16, RampRate, RampRate);
+}

@@ -55,7 +55,7 @@ CNetworkClient(3) {
 	//for (int i = 0; i< CoilDriverTorun100ANrCoils* CoilDriverTorun100ANrSettings; i++) ActCurrent[i] = -999; 
 	//for (int i = 0; i < CoilDriverTorun100ANrSettings; i++) ActRampTime[i] = -999;
 	ActMode = 99;
-	ActRate = 99;
+	ActRampRate = 99;
 }
 
 CCoilDriverTorun100A::~CCoilDriverTorun100A()
@@ -121,26 +121,26 @@ bool CCoilDriverTorun100A::GetMode(unsigned int &Mode) {
 	return true;
 }
 
-bool CCoilDriverTorun100A::SetRampRate(unsigned int Rate) {
+bool CCoilDriverTorun100A::SetRampRate(double RampRate) { //RampRate in A/ms
 	ResetMyConnection
 		if (!Connected) return true;
-	if (Rate >= 3) return false;
-	if (ActRate == Rate) return true;
+	if (RampRate >= 3) return false;
+	if (fabs(ActRampRate - RampRate) < 0.01) return true;
 	CString buf;
-	buf.Format("Rate %i", Rate);
+	buf.Format("ERMAX %.2f", RampRate / 10); //convert to A per 0.1ms
 	bool ok = Command(buf, /*DontWaitForReady*/ true);
 	if (!ok) {
 		ControlMessageBox("CCoilDriverTorun100A::SetRampRate: Command failed.");
 		return false;
 	}
 #ifdef ReadBackValue
-	unsigned int _ReadRate = 999;
-	ok = GetRate(_ReadRate);
+	double _ReadRate = 999;
+	ok = GetRampRate(_ReadRate);
 	if (!ok) return false;
-	if (Rate != _ReadRate) {
+	if (fabs(RampRate - _ReadRate) > 0.1) {
 		CString buf;
 		buf.Format("CCoilDriverTorun100A::SetRampRate: Warning: GetRampRate did not return the requested value.\n"
-			"Requested: %u, Actual: %u", Rate, _ReadRate);
+			"Requested: %u, Actual: %u", RampRate, _ReadRate);
 		ControlMessageBox(buf);
 		return false;
 	}
@@ -148,23 +148,23 @@ bool CCoilDriverTorun100A::SetRampRate(unsigned int Rate) {
 	return ok;
 }
 
-bool CCoilDriverTorun100A::GetRampRate(unsigned int& Rate) {
+bool CCoilDriverTorun100A::GetRampRate(double& RampRate) {
 	ResetMyConnection
 		if (!Connected) return false;
 	CString buf;
-	buf.Format("Rate ?");
+	buf.Format("ERMAX ?"); //gives back value in A per 0.1ms
 	bool ok = Command(buf, /*DontWaitForReady*/ true);
 	if (!ok) {
 		ControlMessageBox("CCoilDriverTorun100A::GetRampRate: Command failed.");
 		return false;
 	}
-	int myRate = -99999;
-	ok = ReadInt(myRate);
+	double myRate = -99999;
+	ok = ReadDouble(myRate);
 	if (!ok) {
 		ControlMessageBox("CCoilDriverTorun100A::GetRampRate: Command returned no value.");
 		return false;
 	}
-	Rate = (unsigned int)myRate;
-	ActRate = Rate;
+	RampRate = myRate * 10; //convert to A/ms
+	ActRampRate = RampRate;
 	return true;
 }
