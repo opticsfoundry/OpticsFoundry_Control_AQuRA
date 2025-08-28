@@ -360,12 +360,14 @@ CUserIOItemAnalogOut::CUserIOItemAnalogOut(const json& user_io_item_json) {
 }
 
 bool CUserIOItemAnalogOut::AssembleIOList() {
+	CString ChannelNumberString;
+	ChannelNumberString.Format(" (Analog out software channel %u)", MyChannelNr);
 	IOList->RegisterAnalogOutputStdFunction(
 		std::bind(&CUserIOItemAnalogOut::SetAnalogOut, this, std::placeholders::_1),
 		("Set" + Name).c_str(),
 		Description.c_str(),
 		Units.c_str(),
-		Help.c_str(), Min, Max, BlockManualControl, Color);
+		Help.c_str() + ChannelNumberString, Min, Max, BlockManualControl, Color);
 	return true;
 }
 
@@ -454,11 +456,13 @@ CUserIOItemDigitalOut::CUserIOItemDigitalOut(const json& user_io_item_json) {
 }
 
 bool CUserIOItemDigitalOut::AssembleIOList() {
+	CString ChannelNumberString;
+	ChannelNumberString.Format(" (Digital out software channel %u)", MyChannelNr);
 	IOList->RegisterDigitalOutputStdFunction(
 		std::bind(&CUserIOItemDigitalOut::SetDigitalOut, this, std::placeholders::_1),
 		("Switch" + Name).c_str(),
 		Description.c_str(),
-		Help.c_str(), BlockManualControl, Color);
+		Help.c_str()+ ChannelNumberString, BlockManualControl, Color);
 	return true;
 }
 
@@ -583,13 +587,15 @@ CUserIOItemAD9854::CUserIOItemAD9854(const json& user_io_item_json) {
 }
 
 bool CUserIOItemAD9854::AssembleIOList() {
+	CString ChannelNumberString;
+	ChannelNumberString.Format(" (AD9854 software channel %u)", MyChannelNr);
 	if (PowerControl == "PowerIndB") {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9854::SetAttenuation, this, std::placeholders::_1),
 			("SetAttenuation" + Name).c_str(),
 			(Description + " Attenuation").c_str(),
 			"-42..0dB",
-			Help.c_str(), DDSAD9852AttenuationMax, 0, BlockManualControl, Color);
+			Help.c_str() + ChannelNumberString, DDSAD9852AttenuationMax, 0, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -597,7 +603,7 @@ bool CUserIOItemAD9854::AssembleIOList() {
 			("SetIntensity" + Name).c_str(),
 			(Description + " Intensity").c_str(),
 			"%",
-			Help.c_str(), 0, 100, BlockManualControl, Color);
+			Help.c_str() + ChannelNumberString, 0, 100, BlockManualControl, Color);
 	}
 	if (FrequencyControl == "FrequencyInMHz") {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -605,13 +611,13 @@ bool CUserIOItemAD9854::AssembleIOList() {
 			("SetStartFrequency" + Name).c_str(),
 			(Description + " Start Frequency").c_str(),
 			"MHz",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str() + ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9854::SetStopFrequency, this, std::placeholders::_1),
 			("SetStopFrequency" + Name).c_str(),
 			(Description + " Stop Frequency").c_str(),
 			"MHz",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str() + ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -861,12 +867,14 @@ CUserIOItemAD9858::CUserIOItemAD9858(const json& user_io_item_json) {
 }
 
 bool CUserIOItemAD9858::AssembleIOList() {
+	CString ChannelNumberString;
+	ChannelNumberString.Format(" (AD9858 software channel %u)", MyChannelNr);
 	IOList->RegisterAnalogOutputStdFunction(
 		std::bind(&CUserIOItemAD9858::SetFrequency, this, std::placeholders::_1),
 		("SetFrequency"+ Name).c_str(),
 		(Description + " Frequency").c_str(),
 		"MHz",
-		Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+		Help.c_str()+ ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 
 	if (PowerControl == "PowerIndB") {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -874,7 +882,7 @@ bool CUserIOItemAD9858::AssembleIOList() {
 			("SetAttenuation"+ Name).c_str(),
 			(Description + " Attenuation"+ Name).c_str(),
 			"-32..0dB",
-			Help.c_str(), DDSAD9858AttenuationMax, 0, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, DDSAD9858AttenuationMax, 0, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -882,7 +890,7 @@ bool CUserIOItemAD9858::AssembleIOList() {
 			("SetIntensity"+ Name).c_str(),
 			(Description + " Intensity").c_str(),
 			"%",
-			Help.c_str(), 0, 100, BlockManualControl, Color);	
+			Help.c_str()+ ChannelNumberString, 0, 100, BlockManualControl, Color);
 	}
 	IOList->AddStatic("");
 	return true;
@@ -990,13 +998,15 @@ CUserIOItemAD9958::CUserIOItemAD9958(const json& user_io_item_json) {
 }
 
 bool CUserIOItemAD9958::AssembleIOList() {
+	CString ChannelNumberString;
+	ChannelNumberString.Format(" (AD9958 software channel %u)", MyChannelNr);
 	if (FrequencyControl == "FrequencyInMHz") {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetFrequencyCh0, this, std::placeholders::_1),
 			("SetFrequencyCh0" + Name).c_str(),
 			(Description + " Frequency Ch0").c_str(),
 			"MHz",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -1004,7 +1014,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetFrequencyTuningWordCh0" + Name).c_str(),
 			(Description + " Frequency Tuning Word Ch0").c_str(),
 			"",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
 	if (PowerControl == "PowerIndB") {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -1012,7 +1022,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetAttenuationCh0" + Name).c_str(),
 			(Description + " Attenuation Ch0").c_str(),
 			"-32..0dB",
-			Help.c_str(), DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -1020,7 +1030,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetIntensityCh0" + Name).c_str(),
 			(Description + " Intensity Ch0").c_str(),
 			"%",
-			Help.c_str(), 0, 100, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, 0, 100, BlockManualControl, Color);
 		
 	}
 	/*IOList->RegisterAnalogOutputStdFunction(
@@ -1036,7 +1046,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetFrequencyCh1" + Name).c_str(),
 			(Description + " Frequency Ch1").c_str(),
 			"MHz",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -1044,7 +1054,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetFrequencyTuningWordCh1" + Name).c_str(),
 			(Description + " Frequency Tuning Word Ch1").c_str(),
 			"",
-			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
 
 	if (PowerControl == "PowerIndB") {
@@ -1053,7 +1063,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 			("SetAttenuationCh1" + Name).c_str(),
 			(Description + " Attenuation Ch1").c_str(),
 			"-32..0dB",
-			Help.c_str(), DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
+			Help.c_str()+ ChannelNumberString, DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
 	}
 	else {
 		IOList->RegisterAnalogOutputStdFunction(
@@ -1068,7 +1078,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		("SetPhaseCh1" + Name).c_str(),
 		(Description + " Phase Ch1").c_str(),
 		"",
-		Help.c_str(), 0, 360, BlockManualControl, Color);
+		Help.c_str()+ ChannelNumberString, 0, 360, BlockManualControl, Color);
 	IOList->AddStatic("");
 
 	return true;

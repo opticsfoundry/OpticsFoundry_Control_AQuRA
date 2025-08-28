@@ -114,6 +114,113 @@ void CSequence::ExecuteMeasurementDlgDone(CDialog *me)
 	// don't delete ExecuteMeasurementDialog; !
 }
 
+void CSequence::InitializeAD9852(unsigned int DDSNumber, double StartFrequency, double StopFrequency, double ModulationFrequency, double FSKMode) {
+	CString buf;
+
+	if (DDSNumber == NotConnected) return;
+	if (DDSNumber >= NrAD9852) {
+		AfxMessageBox("COutput::SetAD9852Value  : unknown channel");
+		return;
+	}
+	if ((FSKMode < 0) || (FSKMode > 4)) {
+		AfxMessageBox("COutput::SetAD9852Value  : unknown FSK MODE type");
+		return;
+	}
+
+	switch ((int)FSKMode) {
+	case 0:
+		AD9852[DDSNumber]->SetExternalUpdateClock(true);
+		SetClearACC1DDSAD9852(DDSNumber, Off);
+		SetFSKBitDDSAD9852(DDSNumber, Off);
+		SetRampRateClockDDSAD9852(DDSNumber, 1);
+		// || (SrPALRedAD9852DDSStartNr+27)
+	//	if ( (DDSNumber != (SrPALRedAD9852DDSStartNr+25)) && (DDSNumber != (SrPALRedAD9852DDSStartNr+4)) ) {  // BP 2022-01-26 : hack to bypass the switch off of the DDS, in order to keep the cavity locked to the 689nm.  SrPALRedAD9852DDSStartNr+25 is Y capture DDS3
+		SetAttenuationDDSAD9852(DDSNumber, DDSAD9852AttenuationMax);
+		//	} 
+
+		//	if ( (DDSNumber != (SrPALRedAD9852DDSStartNr+25)) && (DDSNumber != (SrPALRedAD9852DDSStartNr+4)) ) {  
+		SetFrequencyDDSAD9852(DDSNumber, StartFrequency);
+		SetFrequency2DDSAD9852(DDSNumber, StartFrequency);
+		//	} 
+
+
+			//SetFrequencyDDSAD9852(DDSNumber,StartFrequency);
+			//SetFrequency2DDSAD9852(DDSNumber,StartFrequency);
+		SetModulationFrequencyDDSAD9852(DDSNumber, 0);
+		Output->WriteMultiIOBus();
+		Wait(TillBusBufferEmpty, 2353);
+		Output->SetAD9852Value(DDSNumber, FSKMode, FSKMode, 10);
+		//SetModeDDSAD9852(DDSNumber,FSKMode);
+		Output->WriteMultiIOBus();
+		Wait(TillBusBufferEmpty, 2456);
+		break;
+	case 2:
+		AD9852[DDSNumber]->SetExternalUpdateClock(true);
+		SetClearACC1DDSAD9852(DDSNumber, Off);
+
+		Output->WriteMultiIOBus();
+		Wait(TillBusBufferEmpty, 2353);
+
+		SetTriangleBitDDSAD9852(DDSNumber, Off);
+		SetFSKBitDDSAD9852(DDSNumber, Off);
+		Output->SetAD9852Value(DDSNumber, FSKMode, FSKMode, 10);
+		//SetModeDDSAD9852(DDSNumber,FSKMode);
+		SetRampRateClockDDSAD9852(DDSNumber, 1);
+
+		SetFrequencyDDSAD9852(DDSNumber, StartFrequency);
+		SetFrequency2DDSAD9852(DDSNumber, StopFrequency);
+		SetModulationFrequencyDDSAD9852(DDSNumber, ModulationFrequency);
+		SetIntensityDDSAD9852(DDSNumber, 100);
+		//SetAttenuationDDSAD9852(DDSNumber, DDSAD9852AttenuationMax);
+		Output->WriteMultiIOBus();
+		Output->WaitTillBusBufferEmpty(1);
+		SetTriangleBitDDSAD9852(DDSNumber, On);
+		Output->WriteMultiIOBus();
+		Wait(TillBusBufferEmpty, 2456);
+		break;
+	case 3:
+
+		//		AD9852[DDSNumber]->SetExternalUpdateClock(true); //External Update Clock
+		AD9852[DDSNumber]->SetExternalUpdateClock(false); //External Update Clock
+		Output->SetAD9852Value(DDSNumber, FSKMode, FSKMode, 10);
+		//SetModeDDSAD9852(DDSNumber,FSKMode);
+		SetClearACC1DDSAD9852(DDSNumber, Off);
+
+		SetFSKBitDDSAD9852(DDSNumber, Off);
+
+		SetRampRateClockDDSAD9852(DDSNumber, 1);
+
+		SetFrequencyDDSAD9852(DDSNumber, StartFrequency);
+		//Output->WriteMultiIOBus();
+		//Output->WaitTillBusBufferEmpty(3);//WriteMultiIOBus();
+		//Wait(1);
+		SetFrequency2DDSAD9852(DDSNumber, StopFrequency);
+		SetModulationFrequencyDDSAD9852(DDSNumber, ModulationFrequency);
+
+		//buf.Format("%x",);
+		//AfxMessageBox(buf);	
+		//AD9852[DDSNumber]->UpdateFrequencyData();
+		SetTriangleBitDDSAD9852(DDSNumber, On);
+
+		Output->WriteMultiIOBus();
+		Output->WaitTillBusBufferEmpty(0);//WriteMultiIOBus();
+		SetClearACC1DDSAD9852(DDSNumber, On);
+		//Output->WriteMultiIOBus();
+		//Output->WaitTillBusBufferEmpty(3);//WriteMultiIOBus();
+		//Wait(1);			
+		//Wait(1);
+		SetAttenuationDDSAD9852(DDSNumber, DDSAD9852AttenuationMax);
+		Output->WriteMultiIOBus();
+		Wait(TillBusBufferEmpty, 2456);
+		break;
+
+
+
+	}
+
+
+}
+
 
 
 void CSequence::MeasureAnalogInputValues(bool AfterLoading) {
@@ -2331,6 +2438,9 @@ void CSequence::InitializeSystemFirstTime()
 	//SetRepumpGratingOffset(LockSrRepumpPosition);
 //	SetSrBlueGratingOffset(SrBluePosition);
 //	SwitchSrBlueSpecSample(On);
+
+	//Scan red MOT AOM //FS 2025 08 28 this is old style code from SrPAL. Needs to be updated.
+	InitializeAD9852(/*DDSNumber*/4, /*StartFrequency*/78, /*StopFrequency*/80, /*ModulationFrequency*/0.04, /*FSKMode*/2);
 
 	StopSequence();
 	SetWaveformGenerationMode();
