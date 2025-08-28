@@ -1225,8 +1225,8 @@
       }
     },
     {
-      "Name": "LatticeEOM",
-      "Description": "Lattice EOM",
+      "Name": "SpareAD9858DDS",
+      "Description": "Spare AD9858 DDS",
       "Help": "",
       "Type": "DDSAD9858",
       "Sequencer": 0,
@@ -1274,8 +1274,8 @@
       }
     },
     {
-      "Name": "ClockPDHDDS",
-      "Description": "Clock PDH DDS",
+      "Name": "LatticeEOM",
+      "Description": "Lattice EOM",
       "Help": "",
       "Type": "DDSAD9958",
       "Sequencer": 0,

@@ -322,10 +322,10 @@ if __name__ == "__main__":
     builder.add_dds_ad9858(Name="BlueMOTDPAOM", Description="Blue MOT DP AOM", Address=64, MinFrequency=160.0, MaxFrequency=240.0, InitFrequency=200.0)
     builder.add_dds_ad9858(Name="BlueDetectionDPAOM", Description="Blue Detection DP AOM", Address=68,  MinFrequency=160.0, MaxFrequency=240.0, InitFrequency=215.0)
     builder.add_dds_ad9858(Name="LatticeAOM", Description="Lattice AOM", Address=72, MinFrequency=60.0, MaxFrequency=100.0, InitFrequency=80.0)
-    builder.add_dds_ad9858(Name="LatticeEOM", Description="Lattice EOM", Address=76, MinFrequency=160.0, MaxFrequency=240.0, InitFrequency=200.0)
+    builder.add_dds_ad9858(Name="SpareAD9858DDS", Description="Spare AD9858 DDS", Address=76, MinFrequency=160.0, MaxFrequency=240.0, InitFrequency=200.0)
     builder.add_static_text(Text="")
     builder.add_static_text(Text="AQuRA AD9958 DDS")
-    builder.add_dds_ad9958(Name="ClockPDHDDS", Description="Clock PDH DDS", Address=1, MinFrequency=0.0, MaxFrequency=400.0)
+    builder.add_dds_ad9958(Name="LatticeEOM", Description="Lattice EOM", Address=1, MinFrequency=0.0, MaxFrequency=400.0)
 
     builder.add_new_menu(Text="Test DDS")
     builder.add_static_text(Text="Test AD9854 DDS")

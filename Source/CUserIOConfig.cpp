@@ -864,7 +864,7 @@ bool CUserIOItemAD9858::AssembleIOList() {
 	IOList->RegisterAnalogOutputStdFunction(
 		std::bind(&CUserIOItemAD9858::SetFrequency, this, std::placeholders::_1),
 		("SetFrequency"+ Name).c_str(),
-		(Description + " Frequency"+ Name).c_str(),
+		(Description + " Frequency").c_str(),
 		"MHz",
 		Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
 
@@ -994,7 +994,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetFrequencyCh0, this, std::placeholders::_1),
 			("SetFrequencyCh0" + Name).c_str(),
-			(Description + " Frequency Ch0" + Name).c_str(),
+			(Description + " Frequency Ch0").c_str(),
 			"MHz",
 			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
@@ -1002,7 +1002,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetFrequencyTuningWordCh0, this, std::placeholders::_1),
 			("SetFrequencyTuningWordCh0" + Name).c_str(),
-			(Description + " Frequency Tuning Word Ch0" + Name).c_str(),
+			(Description + " Frequency Tuning Word Ch0").c_str(),
 			"",
 			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
@@ -1010,7 +1010,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetAttenuationCh0, this, std::placeholders::_1),
 			("SetAttenuationCh0" + Name).c_str(),
-			(Description + " Attenuation Ch0" + Name).c_str(),
+			(Description + " Attenuation Ch0").c_str(),
 			"-32..0dB",
 			Help.c_str(), DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
 	}
@@ -1034,7 +1034,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetFrequencyCh1, this, std::placeholders::_1),
 			("SetFrequencyCh1" + Name).c_str(),
-			(Description + " Frequency Ch1" + Name).c_str(),
+			(Description + " Frequency Ch1").c_str(),
 			"MHz",
 			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
@@ -1042,7 +1042,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetFrequencyTuningWordCh1, this, std::placeholders::_1),
 			("SetFrequencyTuningWordCh1" + Name).c_str(),
-			(Description + " Frequency Tuning Word Ch1" + Name).c_str(),
+			(Description + " Frequency Tuning Word Ch1").c_str(),
 			"",
 			Help.c_str(), MinFrequency, MaxFrequency, BlockManualControl, Color);
 	}
@@ -1051,7 +1051,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		IOList->RegisterAnalogOutputStdFunction(
 			std::bind(&CUserIOItemAD9958::SetAttenuationCh1, this, std::placeholders::_1),
 			("SetAttenuationCh1" + Name).c_str(),
-			(Description + " Attenuation Ch1" + Name).c_str(),
+			(Description + " Attenuation Ch1").c_str(),
 			"-32..0dB",
 			Help.c_str(), DDSAD9958AttenuationMax, 0, BlockManualControl, Color);
 	}
@@ -1068,7 +1068,7 @@ bool CUserIOItemAD9958::AssembleIOList() {
 		("SetPhaseCh1" + Name).c_str(),
 		(Description + " Phase Ch1").c_str(),
 		"",
-		Help.c_str(), 0, 100, BlockManualControl, Color);
+		Help.c_str(), 0, 360, BlockManualControl, Color);
 	IOList->AddStatic("");
 
 	return true;

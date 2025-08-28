@@ -2,7 +2,7 @@
 Address Usage Table, created by ControlUserIOConfigFileCreator.py and stored in AddressUsageTable.txt:
 Sequencer  Address    Subaddress Hardware Use                   User IO Use                   
 ==========================================================================================
-0          1          0          DDSAD9958Boards                ClockPDHDDS                   
+0          1          0          DDSAD9958Boards                LatticeEOM                    
 0          2          0          DigitalOutBoards               -                             
 0          2          1          DigitalOutBoards               -                             
 0          2          2          DigitalOutBoards               -                             
@@ -156,7 +156,7 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          73         0          DDSAD9858Boards                -                             
 0          74         0          DDSAD9858Boards                -                             
 0          75         0          DDSAD9858Boards                -                             
-0          76         0          DDSAD9858Boards                LatticeEOM                    
+0          76         0          DDSAD9858Boards                SpareAD9858DDS                
 0          77         0          DDSAD9858Boards                -                             
 0          78         0          DDSAD9858Boards                -                             
 0          79         0          DDSAD9858Boards                -                             
