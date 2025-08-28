@@ -202,6 +202,8 @@ public:
 	void SetTorunCoilDriverState(unsigned char state);
 	void ShutterTimingMenu();
 	void SetElectricFields(unsigned char Nr);
+	void SwitchZSOff();
+	void SwitchZSOn();
 	void SwitchBlueMOTOff();
 	void RampRedMOT(unsigned char Nr, bool BroadbandRedMOT);
 	void SwitchRedMOTOff();

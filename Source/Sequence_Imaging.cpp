@@ -1020,6 +1020,7 @@ bool CSequence::TakeFluorescencePicture() {
 	SetFrequencyBlueMOTDPAOM(0);
 	IOList->StoreAnalogOutValue("SetFrequencyBlueDetectionDPAOM");
 	SetFrequencyBlueDetectionDPAOM(0);
+	SetMOTCoilCurrent(0);
 	/*IOList->StoreAnalogOutValue("SetFrequencyLatticeAOM");
 	SetFrequencyLatticeAOM(0);*/
 	IOList->StoreAnalogOutValue("SetIntensityRedPumpAOM");

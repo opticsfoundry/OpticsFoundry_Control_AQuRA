@@ -133,7 +133,33 @@ void CSequence::MeasureAnalogInputValues(bool AfterLoading) {
 
 
 void CSequence::EmptyReservoir() {
+	//Empty traps, i.e. let all atoms fly out of imaging region
+	IOList->StoreAnalogOutValue("SetIntensityRedMOTAOM");
+	SetIntensityRedMOTAOM(0);
+	IOList->StoreAnalogOutValue("SetFrequencyBlueMOTDPAOM");
+	SetFrequencyBlueMOTDPAOM(0);
+	IOList->StoreAnalogOutValue("SetFrequencyBlueDetectionDPAOM");
+	SetFrequencyBlueDetectionDPAOM(0);
+	SetMOTCoilCurrent(0);
+	/*IOList->StoreAnalogOutValue("SetFrequencyLatticeAOM");
+	SetFrequencyLatticeAOM(0);*/
+	IOList->StoreAnalogOutValue("SetIntensityRedPumpAOM");
+	SetIntensityRedPumpAOM(0);
+	IOList->StoreAnalogOutValue("SetLatticePowerSetpoint");
+	SetLatticePowerSetpoint(0);
+	//SwitchTrapOff(/*LeaveFieldsOn*/false,/*LeaveDipoleTrapOn*/AbsPictureLeaveLeaveDipoleTrapOn, AbsPictureLeaveTranspOn, AbsPictureLeaveRepumpTranspOn, AbsPictureLeaveLeaveDipoleTrapFreq);
 
+
+	Wait(300);
+
+	//set light environment back to the one used for fluorescence imaging
+	IOList->RecallAnalogOutValue("SetIntensityRedMOTAOM");
+	IOList->RecallAnalogOutValue("SetFrequencyBlueMOTDPAOM");
+	IOList->RecallAnalogOutValue("SetFrequencyBlueDetectionDPAOM");
+	//IOList->RecallAnalogOutValue("SetFrequencyLatticeAOM");
+	IOList->RecallAnalogOutValue("SetIntensityRedPumpAOM");
+	IOList->RecallAnalogOutValue("SetLatticePowerSetpoint");
+	SetMOTCoilCurrent(*InitMOTCoilCurrent);
 }
 
 
@@ -1237,6 +1263,48 @@ void CSequence::SetElectricFields(unsigned char Nr) {
 	}
 }
 
+
+
+
+
+//Switch ZS off
+void CSequence::SwitchZSOff() {
+	static bool DoSwitchZSOff;
+	static double SwitchZSOffWait;
+	if (!AssemblingParamList()) {
+		if (!Decision("DoSwitchZSOff")) return;
+		SwitchZSShutter(Off);
+		Wait(SwitchZSOffWait, 1456);
+	}
+	else {
+		ParamList->RegisterBool(&DoSwitchZSOff, "DoSwitchZSOff", "Switch ZS off ?", "ZO");
+		ParamList->RegisterDouble(&SwitchZSOffWait, "SwitchZSOffWait", 0, 2000, "Wait", "ms");
+	}
+}
+
+//Switch ZS on
+void CSequence::SwitchZSOn() {
+	static bool DoSwitchZSOn;
+	static double SwitchZSOnDelay;
+	if (!AssemblingParamList()) {
+		if (!Decision("DoSwitchZSOn")) return;
+		if (SwitchZSOnDelay < 0) {
+			SwitchZSShutter(On);
+			Wait(-SwitchZSOnDelay);
+		}
+		else {
+			double Start = GetTime();
+			Wait(SwitchZSOnDelay, 1456);
+			SwitchZSShutter(On);
+			GoToTime(Start);
+		}
+	}
+	else {
+		ParamList->RegisterBool(&DoSwitchZSOn, "DoSwitchZSOn", "Switch ZS on ?", "ZO");
+		ParamList->RegisterDouble(&SwitchZSOnDelay, "SwitchZSOnDelay", -2000, 2000, "Delay", "ms");
+	}
+}
+
 //Switch Blue MOT off
 //the 3P0,2 repump laser beams pass through the mF state pumping shutters
 //to avoid having to move those shutters between 3P0,2 repump and mF state pumping state, 
@@ -1293,15 +1361,14 @@ void CSequence::SwitchBlueMOTOff() {
 		StartNewWaveformGroup();
 		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueMOTOffQPCurrent, 1, 0.02));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
-		
 		double StartTimeBlueOff = GetTime();
+		//SZ shutter
+		GoBackInTime(ZSShutterOffPreTrigger);
+		SwitchZSShutter(Off);
+		//there is no ZS AOM, therefore we don't have to wait and switch AOM heating on
+		GoToTime(StartTimeBlueOff);
+		
 		if (DoSwitchBlueMOTOffCloseShutter) {
-			//SZ shutter
-			GoBackInTime(ZSShutterOffPreTrigger);
-			SwitchZSShutter(Off);
-			//there is no ZS AOM, therefore we don't have to wait and switch AOM heating on
-			GoToTime(StartTimeBlueOff);
-
 			GoBackInTime(BlueMOTShutterOffDelay);
 			SwitchBlueMOTShutter(Off);
 			GoToTime(StartTimeBlueOff);
@@ -2330,14 +2397,17 @@ bool CSequence::ProgramTorunCoilDriversBeforeRun(void) {
 void CSequence::InitializeSystemAtBeginningOfRun(bool HardResetSystem) {
 	static bool DoInitializeSystemAtBeginningOfRun;
 	static bool InitializeSystemAtBeginningOfRunOnlyFastOutputs;
+	static double InitializeSystemAtBeginningOfRunWait=0;
 	if (!AssemblingParamList()) {
 		if (!Decision("DoInitializeSystemAtBeginningOfRun")) return;
 		//if (!InitializeSystemAtBeginningOfRunOnlyFastOutputs) Wait(100); //to make time for GoBackInTime commands of shutters.
 		InitializeSystem(InitializeSystemAtBeginningOfRunOnlyFastOutputs, HardResetSystem);
+		Wait(InitializeSystemAtBeginningOfRunWait);
 	}
 	else {
 		ParamList->RegisterBool(&DoInitializeSystemAtBeginningOfRun, "DoInitializeSystemAtBeginningOfRun", "Initialize System", "Re");
 		ParamList->RegisterBool(&InitializeSystemAtBeginningOfRunOnlyFastOutputs, "InitializeSystemAtBeginningOfRunOnlyFastOutputs", "Only Fast Outputs");
+		ParamList->RegisterDouble(&InitializeSystemAtBeginningOfRunWait, "InitializeSystemAtBeginningOfRunWait", 0, 2000, "Wait", "ms");
 	}
 }
 
@@ -2361,6 +2431,8 @@ void CSequence::MainExperimentalSequence() {
 	InitializeSystemAtBeginningOfRun();
 	CheckMOTLoading();
 	SetElectricFields(/* Nr*/ 0);
+	SwitchZSOff();
+	SwitchZSOn();
 	SwitchBlueMOTOff();
 	RampRedMOT(/* Nr */ 0, /* BroadbandRedMOT */ true);
 	RampRedMOT(/* Nr */ 1, /* BroadbandRedMOT */ true);
