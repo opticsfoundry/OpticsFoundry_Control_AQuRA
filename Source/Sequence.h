@@ -205,6 +205,7 @@ public:
 	void SwitchZSOff();
 	void SwitchZSOn();
 	void SwitchBlueMOTOff();
+	void SequenceBlockRampMOTCoilCurrent(unsigned char Nr);
 	void RampRedMOT(unsigned char Nr, bool BroadbandRedMOT);
 	void SwitchRedMOTOff();
 	void SwitchToSingleFrequencyRedMOT(); 
@@ -267,7 +268,7 @@ public:
 	void WriteParamListToASCIIFile();	
 	bool TriggerVision(bool LastChance=false);
 	//void InitializeSystem(bool OnlyFastOutputs=false);
-	void InitializeAD9852(unsigned int DDSNumber, double StartFrequency, double StopFrequency, double ModulationFrequency, double FSKMode);
+	void InitializeAD9852(unsigned int DDSNumber, double StartFrequency, double StopFrequency, double ModulationFrequency, double Intensity, double FSKMode);
 	void ResetSystem();
 	void ExecuteMeasurementDlgDone(CDialog *me);
 	void PauseSystem(CWnd* parent);	

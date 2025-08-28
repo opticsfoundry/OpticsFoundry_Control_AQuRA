@@ -114,7 +114,7 @@ void CSequence::ExecuteMeasurementDlgDone(CDialog *me)
 	// don't delete ExecuteMeasurementDialog; !
 }
 
-void CSequence::InitializeAD9852(unsigned int DDSNumber, double StartFrequency, double StopFrequency, double ModulationFrequency, double FSKMode) {
+void CSequence::InitializeAD9852(unsigned int DDSNumber, double StartFrequency, double StopFrequency, double ModulationFrequency, double Intensity, double FSKMode) {
 	CString buf;
 
 	if (DDSNumber == NotConnected) return;
@@ -170,7 +170,7 @@ void CSequence::InitializeAD9852(unsigned int DDSNumber, double StartFrequency, 
 		SetFrequencyDDSAD9852(DDSNumber, StartFrequency);
 		SetFrequency2DDSAD9852(DDSNumber, StopFrequency);
 		SetModulationFrequencyDDSAD9852(DDSNumber, ModulationFrequency);
-		SetIntensityDDSAD9852(DDSNumber, 100);
+		SetIntensityDDSAD9852(DDSNumber, Intensity);
 		//SetAttenuationDDSAD9852(DDSNumber, DDSAD9852AttenuationMax);
 		Output->WriteMultiIOBus();
 		Output->WaitTillBusBufferEmpty(1);
@@ -1553,6 +1553,41 @@ void CSequence::RampRedMOT(unsigned char Nr, bool BroadbandRedMOT) {
 	}
 }
 
+
+
+//Ramp MOT coil current
+void CSequence::SequenceBlockRampMOTCoilCurrent(unsigned char Nr) {
+	const unsigned char NrRampMOTCoilCurrent = 10;
+	static bool DoRampMOTCoilCurrent[NrRampMOTCoilCurrent];
+	static double RampMOTCoilCurrentQPCurrent[NrRampMOTCoilCurrent];
+	static double RampMOTCoilCurrentRampTime[NrRampMOTCoilCurrent];
+	static double RampMOTCoilCurrentFraction[NrRampMOTCoilCurrent];
+	static double RampMOTCoilCurrentWait[NrRampMOTCoilCurrent];
+	if (!AssemblingParamList()) {
+		if (!Decision("DoRampMOTCoilCurrent" + itos(Nr))) return;
+		const double RampStepTime = 1;
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, RampMOTCoilCurrentQPCurrent[Nr], RampMOTCoilCurrentRampTime[Nr], RampStepTime));
+		if (RampMOTCoilCurrentFraction[Nr] != 100) {
+			Wait(RampMOTCoilCurrentFraction[Nr] * 0.01 * RampMOTCoilCurrentRampTime[Nr]);
+			RemoveWaveformGroup(GetCurrentWaveformGroupNumber());
+		}
+		else {
+			WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		}
+		Wait(RampMOTCoilCurrentWait[Nr], 2300 + Nr);
+	}
+	else {
+		if (Nr >= NrRampMOTCoilCurrent) { ControlMessageBox("CSequence::NrRampMOTCoilCurrent : too many code blocks of this type."); return; }
+		ParamList->RegisterBool(&DoRampMOTCoilCurrent[Nr], "DoRampMOTCoilCurrent" + itos(Nr), "Ramp MOT coil current " + itos(Nr) + " ?", "CC" + itos(Nr));
+		ParamList->RegisterDouble(&RampMOTCoilCurrentQPCurrent[Nr], "RampMOTCoilCurrentQPCurrent" + itos(Nr), 0, 100, "MOT coil current", "A");
+		ParamList->RegisterDouble(&RampMOTCoilCurrentRampTime[Nr], "RampMOTCoilCurrentRampTime" + itos(Nr), 0, 2000, "Ramp Time", "ms");
+		ParamList->RegisterDouble(&RampMOTCoilCurrentFraction[Nr], "RampMOTCoilCurrentFraction" + itos(Nr), 0, 100, "Ramp Fraction", "%");
+		ParamList->RegisterDouble(&RampMOTCoilCurrentWait[Nr], "RampMOTCoilCurrentWait" + itos(Nr), 0, 2000, "Wait", "ms");
+	}
+}
+
+
 //Switch to single frequency red MOT
 void CSequence::SwitchToSingleFrequencyRedMOT() {
 	static bool DoSwitchToSingleFrequencyRedMOT = false;
@@ -2439,9 +2474,7 @@ void CSequence::InitializeSystemFirstTime()
 //	SetSrBlueGratingOffset(SrBluePosition);
 //	SwitchSrBlueSpecSample(On);
 
-	//Scan red MOT AOM //FS 2025 08 28 this is old style code from SrPAL. Needs to be updated.
-	InitializeAD9852(/*DDSNumber*/4, /*StartFrequency*/78, /*StopFrequency*/80, /*ModulationFrequency*/0.04, /*FSKMode*/2);
-
+	
 	StopSequence();
 	SetWaveformGenerationMode();
 	SwitchForceWritingMode(On);
@@ -2544,6 +2577,7 @@ void CSequence::MainExperimentalSequence() {
 	SwitchZSOff();
 	SwitchZSOn();
 	SwitchBlueMOTOff();
+	SequenceBlockRampMOTCoilCurrent(/*Nr*/0);
 	RampRedMOT(/* Nr */ 0, /* BroadbandRedMOT */ true);
 	RampRedMOT(/* Nr */ 1, /* BroadbandRedMOT */ true);
 	SwitchToSingleFrequencyRedMOT();
