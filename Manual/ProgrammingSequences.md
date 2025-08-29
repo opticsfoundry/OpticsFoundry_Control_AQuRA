@@ -2,6 +2,8 @@
 
 This chapter explains how to implement sequences of commands, how to create the main experimental sequence and how to create utilites (short sequences).
 
+&nbsp;
+
 ## Modes of command execution
 
 Commands can be executed in two different modes, called direct mode and waveform mode.
@@ -33,13 +35,16 @@ SetWaveformGenerationMode();
 Outside of methods of _CSequence_, _Output->_ has to be placed in front of each of those commands. Sometimes it is useful to know in which mode the program is. 
 This can be done using the functions  
 ```CPP
-Output->IsInDirectOutputMode()
-Output->IsInAssembleSequenceListMode()
-Output->IsInWaveformMode()
-Output->InScaledOutStoreMode()
-Output->InOutScaledNormalMode()
+Output->IsInDirectOutputMode();
+Output->IsInAssembleSequenceListMode();
+Output->IsInWaveformMode();
+Output->InScaledOutStoreMode();
+Output->InOutScaledNormalMode();
 ```
+
 *Optional information end*
+
+&nbsp;
 
 ## Programming simple sequences
 
@@ -68,115 +73,139 @@ ExecuteSequenceList(/*ShowRunProgressDialog*/false); //and execute the sequence 
 
 The _SetAssembleSequenceListMode()_ command tells the system to place each subsequent command into the "sequence list" instead of executing it directly. The commands in this list are executed later in the waveform generation mode. _StartSequence()_ is the first command stored in that list. It will start the calculation of the waveform sent to the output cards. _StopSequence()_ ends the waveform creation. _SetWaveformGenerationMode()_ switches the waveform generation mode on. _ExecuteSequenceList()_ goes through the list of commands and executes each. The last command contained in that list, _StoSequence_, will put the system again into the direct output mode. The optional parameter _ShowRunProgressDialog_ determines if a progress dialog is shown that displays a status bar of the waveform generation and progress.
 
+&nbsp;
+
 ## Timing commands
 
-Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime)_ command. The command exFor the amount of time specified the system will wait. This does not necessarily mean that nothing is written on the output ports during that time. Outputs commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified
-\begin{verbatim}
-Wait(/*Time in ms*/WaitTime,/*optional Wait ID*/1234); \end{verbatim}
-The Wait ID simplifies finding the source code responsible for a certain output command; see chapter ~\ref{Chap:Debugging}.\\
-The command
-\begin{verbatim}
+Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime_in_ms)_ command. The system will simply wait for the specified time. This does not necessarily mean that nothing is written on the output ports during that time. Output commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified   
+```CPP
+Wait(/*Time in ms*/WaitTime,/*optional Wait ID*/1234);
+```   
+The Wait ID simplifies finding the source code responsible for a certain output command; see chapter ~\ref{Chap:Debugging}.
+
+
+The command  
+```CPP
 WaitTillBusBufferEmpty(/*optional Wait ID*/1234);
-\end{verbatim}
-waits till all commands (excluding software waveforms) have been written out. It is useful to place this command before timing critical commands to make sure those timing critical commands are not unnecessarily delayed by previous commands. The sequence
-\begin{verbatim}
+```  
+waits till all commands (excluding software waveforms) have been written out. It is useful to place this command before timing critical commands to make sure those timing critical commands are not unnecessarily delayed by previous commands. The sequence  
+```CPP
 SwitchCameraTrigger(Off);
 WaitTillBusBufferEmpty(/*optional Wait ID*/1234);
 SwitchCameraTrigger(On);
 WaitTillBusBufferEmpty(/*optional Wait ID*/1235);
 SwitchCameraTrigger(Off);
 WaitTillBusBufferEmpty(/*optional Wait ID*/1236);
-\end{verbatim}
-produces the shortest possible pulse. By contrast
-\begin{verbatim}
+```  
+produces the shortest possible pulse. By contrast  
+```CPP
 SwitchCameraTrigger(Off);
 SwitchCameraTrigger(On);
 SwitchCameraTrigger(Off);
-\end{verbatim}
-would not produce a pulse at all. The \verb"SwitchCameraTrigger(On)" is never executed since it is overwritten by the following \verb"SwitchCameraTrigger(Off)" command.\\
-The command
-\begin{verbatim}
+```  
+would not produce a pulse at all. The _SwitchCameraTrigger(On)_ is never executed since it is overwritten by the following _SwitchCameraTrigger(Off)_ command.  
+The command  
+```CPP 
 SyncToLine(/*Phase*/0);
-\end{verbatim}
-waits between 0\,ms to 1/LineFrequency (20\,ms for Europe) to bring the next command into the same phase relation with line as the hardware trigger at the start of the experimental sequence. A delay of \verb"Phase/(360*LineFrequency)" is added.
-The \verb"SyncToLine" command works only in waveform generation mode. And only if the waveform generation is hardware triggered by a signal in phase with line and the clock signal is also phase stable with line. You can find an electronic circuit to provide those signals on our webpage \textsf{www.nintaka.com}. You also have to set the nominal line frequency of your country in \verb"CSequence::ConfigureHardware" using the \verb"SetLineFrequency" procedure.
+```  
+waits between 0 ms to _1/LineFrequency_ (20 ms for Europe) to bring the next command into the same phase relation with line as the hardware trigger at the start of the experimental sequence. A delay of _Phase/(360*LineFrequency)_ is added.
+The _SyncToLine_ command works only in waveform generation mode. And only if the waveform generation is hardware triggered by a signal in phase with line and the clock signal is also phase stable with line. You can find an electronic circuit to provide those signals on [our webpage](www.strontiumBEC.com) -> Control. You also have to set the nominal line frequency of your country in _CSequence::ConfigureHardware_ using the _SetLineFrequency_ method.
 
-\subsection{Time reordering}
+&nbsp;
 
-Sometimes it is useful to perform an output command before the position where the command appears in the source code. As we will see in Sec.~\ref{Sec:CodeBlocks}, the source code is usually segmented in blocks of code dedicated to perform a step in the experimental sequence. Such a step could be the flash of a laser beam. Laser beams are usually blocked by mechanical shutters that take several milliseconds to open. Thus the command to open the shutter needs to be given before the laser beam is used, which usually means, before the code block is reached. To execute the command at the correct time, time reordering commands are used. Here an implementation of the example discussed.
-\begin{verbatim}
+## Time reordering
+
+Sometimes it is useful to perform an output command before the position where the command appears in the source code. As we will see in Sec.~\ref{Sec:CodeBlocks}, the source code is usually segmented in blocks of code dedicated to perform a step in the experimental sequence. Such a step could be the flash of a laser beam. Laser beams are often blocked by mechanical shutters, which need several milliseconds to open. Thus the command to open the shutter needs to be given before the laser beam is used, which usually means: before the code block in which the laser beam is used. To execute the command at the correct time, time reordering commands are used. Here an implementation of the example discussed.  
+```CPP
 void CSequence::LaserFlash() {
-    double Time=GetTime();
-    GoBackInTime(ShutterPreTriggerTime);
-    SwitchFlashShutter(On);
-    GoToTime(Time);
-    SwitchFlashAOM(On);
-    Wait(FlashTime);
-    SwitchFlashAOM(Off);
+    //We open the shutter before the sequence time at the start of this method
+    double StartTime=GetTime(); //We get the sequence time since StartSequence()
+    //We go back in time by ShutterPreTriggerTime ms to give the shutter time to open.
+    GoBackInTime(FlashShutterPreTriggerTime); 
+    SwitchFlashShutter(On); //the shutter starts to open
+    GoToTime(StartTime); //we go back to the start time. The shutter should be open now
+    
+    //Now we can use the AOM to switch the laser beam on in a well-controlled, fast manner
+    SetIntensityFlashAOM(100); //Intensity in %
+    Wait(FlashDuration); 
+    SetIntensityFlashAOM(0);
+    
+    SwitchFlashShutter(Off); //the shutter starts to close
 }
-\end{verbatim}
-The time within the sequence (counting from the \verb"StartSequence" command) is retrieved with the \verb"GetTime" function and stored in the local variable \verb"Time". The \verb"GoBackInTime" command ensures that the following \verb"SwitchFlashShutter" command is placed into the sequence list at the time\\ \verb"Time-ShutterPreTriggerTime". The \verb"GoToTime(Time)" command ensures that the next commands will be placed into the sequence list as if the \verb"GoBackInTime" command had not happened.
+```  
+The time within the sequence (counting from the _StartSequence_ command) is retrieved with the _GetTime_ function and stored in the local variable _StartTime_. The _GoBackInTime_ command ensures that the following _SwitchFlashShutter_ command is placed into the sequence list at the time _StartTime - FlashShutterPreTriggerTime_. The _GoToTime(StartTime)_ command ensures that the next commands will be placed into the sequence list as if the _GoBackInTime_ command had not happened.
 
-Other time reordering commands exist. \verb"TimeJump(-Delay)" is equivalent to \verb"GoBackInTime(Delay)". \verb"Delay" can have positive or negative values. \verb"FinishLastGoBackInTime()" can replace the \verb"GoToTime(Time)" command used to return to the current time. It also can undo the last \verb"TimeJump" command. Using \verb"FinishLastGoBackInTime" would make the \verb"GetTime" command and the local variable \verb"Time" unnecessary. But it requires attention from the reader of a piece of source code to find the last \verb"GoBackInTime" command. All those time reordering commands can have an optional \verb"WaitID" parameter.
+Other time reordering commands exist. _TimeJump(-Delay)_ is equivalent to _GoBackInTime(Delay)_. _Delay_ can have positive or negative values. _FinishLastGoBackInTime()_ can replace the _GoToTime(Time)_ command used to return to the current time. It also can undo the last _TimeJump_ command. Using _FinishLastGoBackInTime_ would make the _GetTime_ command and the local variable _Time_ unnecessary. But it requires attention from the reader of a piece of source code to find the last _GoBackInTime_ command. All those time reordering commands can have an optional _WaitID_ parameter.
 
-Sometimes it is useful to perform an action after a certain code block has finished. For example it is often useful to keep AOMs on as much as possible to reduce drifts from temperature changes in AOMs. Here an example that switches the AOM on after the shutter has closed.
-\begin{verbatim}
+Sometimes it is useful to perform an action after a certain code block has finished. For example it is often useful to keep AOMs on as much as possible to reduce drifts from temperature changes in AOMs. Often, a laser beam is precisely intensity controlled by an AOM. When in use, the AOM heats up because of the ~1 Watt of rf power driving it. This temperature increase changes the aligment and thereby diffraction efficiency of the AOM. It is best to keep AOMs always thermalized, i.e. as much switched on as possible. In order to achieve this, the laser beam can usually also be blocked by a mechanical shutter, which also provides more attenuation than an AOM, if done well. Again, the challenge is that mechanical shutters are slow and take several milliseconds to open. Here an example of shutter and AOM control that keeps the AOM on when not in use.  
+```CPP
 void CSequence::LaserFlash() {
-    double Time=GetTime();
-    GoBackInTime(ShutterPreTriggerTime);
-      SwitchFlashAOM(Off);
-      SwitchFlashShutter(On);
-    GoToTime(Time);
-    SwitchFlashAOM(On);
-    Wait(FlashTime);
-    SwitchFlashAOM(Off);
-    SwitchFlashShutter(Off);
-    Time=GetTime();
-      Wait(ShutterClosingTime);
-      SwitchFlashAOM(On);
-    GoToTime(Time);
+    //We open the shutter before the sequence time at the start of this method
+    double StartTime=GetTime(); //We get the sequence time since StartSequence()
+    //We go back in time by ShutterPreTriggerTime ms to give the shutter time to open.
+    GoBackInTime(FlashShutterPreTriggerTime); 
+    //the AOM was rf heated. Now it's switched off to allow the shutter to open without sending out a laser beam
+    SetIntensityFlashAOM(0);
+    SwitchFlashShutter(On); //the shutter starts to open
+    GoToTime(StartTime); //we go back to the start time. The shutter should be open now
+    
+    //Now we can use the AOM to switch the laser beam on in a well-controlled, fast manner
+    SetIntensityFlashAOM(100); //Intensity in %
+    Wait(FlashDuration); 
+    SetIntensityFlashAOM(0);
+    
+    //now we close the shutter and rf-heat the AOM again
+    StartTime=GetTime();
+    SwitchFlashShutter(Off); //the shutter starts to close
+    Wait(FlashShutterCloseTime); 
+    //now the shutter should be closed
+    SetIntensityFlashAOM(100); //we rf-heat the AOM again. No laser beam is sent out as the shutter is closed.
+    GoToTime(StartTime); 
+    //we are back at the time directly after the flash
 }
-\end{verbatim}
+```  
 
-Sometimes two such \verb"LaserFlash" commands have to be executed with a time delay from each other shorter than the time required to move the shutter. In those cases it is best to give the user the full control of what happens with the shutter during the procedure. This is done by introducing additional parameters specifying if the shutter should be opened at the beginning or closed at the end of the code block.
-\begin{verbatim}
+Sometimes two such _LaserFlash_ commands have to be executed with a time delay from each other shorter than the time required to move the shutter. In those cases it is best to give the user the full control of what happens with the shutter during the procedure. This is done by introducing additional parameters specifying if the shutter should be opened at the beginning or closed at the end of the code block.  
+```CPP
 void CSequence::LaserFlash(int Nr) {
     double Time=GetTime();
     if (LaserFlashOpenShutter[Nr]) {
         GoBackInTime(ShutterPreTriggerTime);
-          SwitchFlashAOM(Off);
+          SetIntensityFlashAOM(100);
           SwitchFlashShutter(On);
         GoToTime(LaserFlashTime);
     }
-    SwitchFlashAOM(On);
+    SetIntensityFlashAOM(100);
     Wait(LaserFlashTime[Nr]);
-    SwitchFlashAOM(Off);
+    SetIntensityFlashAOM(0);
     if (LaserFlashCloseShutter[Nr]) {
         SwitchFlashShutter(Off);
         Time=GetTime();
           Wait(ShutterClosingTime);
-          SwitchFlashAOM(On);
+          SetIntensityFlashAOM(100);
         GoToTime(Time);
     }
 }
-\end{verbatim}
-The parameters of this code block now depend on the \verb"Nr" parameter of the procedure. The user would select to open the shutter, but not close it the first time this code block is called. The second time the shutter would be not opened but only closed. More information on how to properly program code blocks will be given in Sec.~\ref{Sec:CodeBlocks}.
+```   
+The parameters of this code block now depend on the _Nr_ parameter of the procedure. The user would select to open the shutter, but not close it the first time this code block is called. The second time the shutter would be not opened but only closed. More information on how to properly program code blocks will be given in Sec.~\ref{Sec:CodeBlocks}.
 
-\subsection{Timing accuracy}
+&nbsp;
 
-The exact moment in time at which a command is executed can not be known precisely because of several reasons. The bus system has a maximum throughput of 16\,bit of data every clock cycle, which is typically every 0.5\,$\mu$s. Some commands, like DDS frequency commands, contain more than 16\,bit of data and are distributed on several clock cycles. The following shows an example where this behavior can lead to a problem.
-\begin{verbatim}
+# Timing accuracy
+
+The exact moment in time at which a command is executed can not be known precisely because of several reasons. The bus system has a maximum throughput of 16 bit of data every clock cycle (with a clock cycle being between 30ns and 500 microseconds, depending on your hardware). Some commands, like DDS frequency commands, need several bus commands to be programmed, which are distributed over several clock cycles. The following shows an example where this behavior can lead to a problem.  
+```CPP
 SetMOTLaserDetuning(MOTDetuning);
 SetMOTLaserIntensity(MOTIntensity);
 SwitchMOTCoil(On);
 SwitchFlashAOM(On);
 Wait(0.01);
 SwitchFlashAOM(Off);
-\end{verbatim}
-The laser flash should be 10\,$\mu$s long, but in reality it will be shorter. All output commands before the \verb"Wait" command are here requested to be executed at the same time, which is not possible. The commands are translated into bit patterns sent over the bus and stored on a stack of such commands. It takes some time to transmit this stack. Since the \verb"SwitchFlashAOM" is the last command on the stack, it will be delayed by 7 clock cycles corresponding to 3.5\,$\mu$s (if a write precision of 3 bytes was specified for the MOT laser DDS). The duration of the flash will be reduced by that time.
+```  
+The laser flash should be 10 microsecond long, but in reality it will be shorter. All output commands before the _Wait_ command are here requested to be executed at the same time, which is not possible. The commands are translated into bit patterns sent over the bus and stored on a stack of such commands. It takes some time to transmit this stack. Since the _SwitchFlashAOM_ is the last command on the stack, it will be delayed by 7 clock cycles corresponding to 3.5 microseconds (for a slow (2 MHz) bus speed and if a write precision of 3 bytes was specified for the MOT laser DDS). The duration of the flash will be reduced by that time.
 
-To prevent this delay, it is good practice to frame timing critical commands by \verb"WaitTillBusBufferEmpty()" commands:
-\begin{verbatim}
+To prevent this delay, it is good practice to frame timing critical commands by _WaitTillBusBufferEmpty()_ commands:  
+```CPP  
 SetMOTLaserDetuning(MOTDetuning);
 SetMOTLaserIntensity(MOTIntensity);
 SwitchMOTCoil(On);
@@ -185,10 +214,12 @@ SwitchFlashAOM(On);
 Wait(0.01);
 SwitchFlashAOM(Off);
 WaitTillBusBufferEmpty();
-\end{verbatim}
-Here at least the commands directly before and after the \verb"SwitchFlashAOM" will not disturb the duration of the laser flash. But it is still possible that the duration of the flash is changed by additional bus traffic. This traffic could come from time reordered commands from other code blocks, as the shutter commands in the example above. And it can come from software waveforms running in the background. It is the responsibility of the programmer to avoid these situations. If the timing is very critical it is best to check it using an oscilloscope. If you need to know the delay of the additional wait commands, you replace the \verb"WaitTillBusBufferEmpty()" commands by \verb"Wait(0.01)" or similar commands.
+```  
+Here at least the commands directly before and after the _SwitchFlashAOM_ will not disturb the duration of the laser flash. But it is still possible that the duration of the flash is changed by additional bus traffic. This traffic could come from time reordered commands from other code blocks, as the shutter commands in the example above. And it can come from software waveforms running in the background. It is the responsibility of the programmer to avoid these situations. If the timing is very critical it is best to check it using an oscilloscope. If you need to know the delay of the additional wait commands, you replace the _WaitTillBusBufferEmpty()_ commands by _Wait(0.01)_ or similar commands.
 
-\section{Storing and retrieving output values}
+&nbsp;
+
+# Storing and retrieving output values
 
 It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations. For example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
 
