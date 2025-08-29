@@ -70,7 +70,7 @@ The _SetAssembleSequenceListMode()_ command tells the system to place each subse
 
 ## Timing commands
 
-Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the \verb"Wait(WaitTime)" command. For the amount of time specified the system will wait. This does not necessarily mean that nothing is written on the output ports during that time. Outputs commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified
+Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime)_ command. The command exFor the amount of time specified the system will wait. This does not necessarily mean that nothing is written on the output ports during that time. Outputs commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified
 \begin{verbatim}
 Wait(/*Time in ms*/WaitTime,/*optional Wait ID*/1234); \end{verbatim}
 The Wait ID simplifies finding the source code responsible for a certain output command; see chapter ~\ref{Chap:Debugging}.\\
