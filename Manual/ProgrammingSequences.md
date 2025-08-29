@@ -221,38 +221,39 @@ Here at least the commands directly before and after the _SwitchFlashAOM_ will n
 
 # Storing and retrieving output values
 
-It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations. For example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
+It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations, for example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
 
-The commands used to store and retrieve the output value are
-\begin{verbatim}
+The commands used to store and retrieve the output value are  
+```CPP
 IOList.StoreAnalogOutValue("SetIntensitySrBlueMOTSPAOM");
 IOList.RecallAnalogOutValue("SetIntensitySrBlueMOTSPAOM");
-\end{verbatim}
-The \verb"StoreAnalogOutValue" stores the outputs value at that moment in a variable. The \verb"RecallAnalogOutValue" sets the output back to that value. This could for example be used to prepare output
+```  
+The _StoreAnalogOutValue_ stores the outputs value at that moment in a variable. The _RecallAnalogOutValue_ sets the output back to that value.
 
-In direct output mode, the value of an analog (or digital) output can be accessed by
-\begin{verbatim}
+In direct output mode, the value of an analog (or digital) output can be accessed by  
+```CPP
 IOList.GetAnalogOutValue("SetMOTLightIntensity",MOTLightIntensity);
 IOList.GetDigitalOutValue("SwitchMOTAOM",MOTAOMStatus);
-\end{verbatim}
-where "SetMOTLightIntensity" ("SwitchMOTAOM") is the analog
-(digital) output function name and MOTLightIntensity
-(MOTAOMStatus) is a double (bool) variable to which the value is stored.
+```  
+where _SetMOTLightIntensity_ (_SwitchMOTAOM_) is the analog
+(digital) output function name and _MOTLightIntensity_
+(_MOTAOMStatus_) is a double (bool) variable in which the value is stored.
 
-\section{Software waveforms}
-\label{sec:Waveforms}
+&nbsp;
+
+# Software waveforms
 
 Often it is required to change an output in a smooth way. This is done using software waveforms. The most common are linear ramps and sinusoidal waveforms. It is easy to implement more waveform types. Software waveforms can only be used in the waveform generation mode.
 
-Here is a simple example for the usage of linear ramps implemented with software waveforms.
-\begin{verbatim}
+Here is a simple example for the usage of linear ramps implemented with software waveforms.  
+```CPP
 double TimeStep=0.1;
 Waveform(new CRamp("SetFeshbachPSCCurrent",LastValue,RampZSOffFeshbachCurrent,
   ZSRampTime,TimeStep,/*optional: force execution*/true));
 Waveform(new CRamp("SetIntensitySrBlueZSSPAOM",LastValue,0,ZSRampTime,TimeStep));
 Wait(ZSRampTime);
-\end{verbatim}
-The \verb"Waveform" command puts a waveform in the list of waveforms that are currently executed. As a parameter it takes an instance of a class representing the waveform, in this case \verb"CRamp", a linear ramp. The constructor of \verb"CRamp" takes as parameters the name of the output on which the waveform is executed, the start value and end value of the output, the duration of the ramp and the time resolution of the ramp. The start value can be replaced by the constant \verb"LastValue". In that case the waveform starts with the value that the output had just before the waveform did begin. In case this last value is the same as the end value of this ramp the ramp is not executed\footnote{This can lead to problems. For example if you want to keep the modulation frequency of a DDS constant while changing the start and stop frequencies of the frequency sweep. If you do not reprogram the modulation frequency, this frequency will change if the boundaries of the frequency sweep interval are changed. To avoid this, you need to reprogram the modulation frequency to always the same value. You can force the waveform to be executed with identical start and end value by setting the optional \texttt{force execution} variable to \texttt{true}.}.
+```  
+The _Waveform_ command puts a waveform in the list of waveforms that are currently executed. As a parameter it takes an instance of a class representing the waveform, in this case \verb"CRamp", a linear ramp. The constructor of \verb"CRamp" takes as parameters the name of the output on which the waveform is executed, the start value and end value of the output, the duration of the ramp and the time resolution of the ramp. The start value can be replaced by the constant \verb"LastValue". In that case the waveform starts with the value that the output had just before the waveform did begin. In case this last value is the same as the end value of this ramp the ramp is not executed\footnote{This can lead to problems. For example if you want to keep the modulation frequency of a DDS constant while changing the start and stop frequencies of the frequency sweep. If you do not reprogram the modulation frequency, this frequency will change if the boundaries of the frequency sweep interval are changed. To avoid this, you need to reprogram the modulation frequency to always the same value. You can force the waveform to be executed with identical start and end value by setting the optional \texttt{force execution} variable to \texttt{true}.}.
 Waveforms are never completely smooth since output rate and dynamic range of the outputs are finite. Instead of a linear ramp a staircase pattern is produced. The time resolution of this staircase is specified by \verb"TimeStep". It should be chosen as large as possible to reduce the computational load. The waveforms are executed during the next \verb"ZSRampTime" milliseconds, in this case during the \verb"Wait" command.
 
 At the end of this wait time, a last value of the waveform might still linger on the stack of the bus system. This can have unwanted consequences. To avoid this problem, use the following programming style:
