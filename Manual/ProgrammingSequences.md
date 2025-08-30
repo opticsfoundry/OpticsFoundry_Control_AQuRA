@@ -191,7 +191,7 @@ The parameters of this code block now depend on the _Nr_ parameter of the proced
 
 &nbsp;
 
-# Timing accuracy
+## Timing accuracy
 
 The exact moment in time at which a command is executed can not be known precisely because of several reasons. The bus system has a maximum throughput of 16 bit of data every clock cycle (with a clock cycle being between 30ns and 500 microseconds, depending on your hardware). Some commands, like DDS frequency commands, need several bus commands to be programmed, which are distributed over several clock cycles. The following shows an example where this behavior can lead to a problem.  
 ```CPP
@@ -219,7 +219,7 @@ Here at least the commands directly before and after the _SwitchFlashAOM_ will n
 
 &nbsp;
 
-# Storing and retrieving output values
+## Storing and retrieving output values
 
 It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations, for example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
 
@@ -241,7 +241,7 @@ where _SetMOTLightIntensity_ (_SwitchMOTAOM_) is the analog
 
 &nbsp;
 
-# Software waveforms
+## Software waveforms
 
 Often it is required to change an output in a smooth way. This is done using software waveforms. The most common are linear ramps and sinusoidal waveforms. It is easy to implement more waveform types. Software waveforms can only be used in the waveform generation mode.
 
@@ -253,11 +253,16 @@ Waveform(new CRamp("SetFeshbachPSCCurrent",LastValue,RampZSOffFeshbachCurrent,
 Waveform(new CRamp("SetIntensitySrBlueZSSPAOM",LastValue,0,ZSRampTime,TimeStep));
 Wait(ZSRampTime);
 ```  
-The _Waveform_ command puts a waveform in the list of waveforms that are currently executed. As a parameter it takes an instance of a class representing the waveform, in this case \verb"CRamp", a linear ramp. The constructor of \verb"CRamp" takes as parameters the name of the output on which the waveform is executed, the start value and end value of the output, the duration of the ramp and the time resolution of the ramp. The start value can be replaced by the constant \verb"LastValue". In that case the waveform starts with the value that the output had just before the waveform did begin. In case this last value is the same as the end value of this ramp the ramp is not executed\footnote{This can lead to problems. For example if you want to keep the modulation frequency of a DDS constant while changing the start and stop frequencies of the frequency sweep. If you do not reprogram the modulation frequency, this frequency will change if the boundaries of the frequency sweep interval are changed. To avoid this, you need to reprogram the modulation frequency to always the same value. You can force the waveform to be executed with identical start and end value by setting the optional \texttt{force execution} variable to \texttt{true}.}.
-Waveforms are never completely smooth since output rate and dynamic range of the outputs are finite. Instead of a linear ramp a staircase pattern is produced. The time resolution of this staircase is specified by \verb"TimeStep". It should be chosen as large as possible to reduce the computational load. The waveforms are executed during the next \verb"ZSRampTime" milliseconds, in this case during the \verb"Wait" command.
+The _Waveform_ command puts a waveform in the list of waveforms that are currently executed. As a parameter it takes an instance of a class representing the waveform, in this case _CRamp_, a linear ramp. The constructor of _CRamp_ takes as parameters the name of the output on which the waveform is executed, the start value and end value of the output, the duration of the ramp and the time resolution of the ramp. The start value can be replaced by the constant _LastValue_. In that case the waveform starts with the value that the output had just before the waveform did begin. In case this last value is the same as the end value of this ramp the ramp is not executed.  
 
-At the end of this wait time, a last value of the waveform might still linger on the stack of the bus system. This can have unwanted consequences. To avoid this problem, use the following programming style:
-\begin{verbatim}
+*Optional information start*  
+This can lead to problems. For example if you want to keep the modulation frequency of a DDS constant while changing the start and stop frequencies of the frequency sweep. If you do not reprogram the modulation frequency, this frequency will change if the boundaries of the frequency sweep interval are changed. To avoid this, you need to reprogram the modulation frequency to always the same value. You can force the waveform to be executed with identical start and end value by setting the optional  _force execution_ variable to _true_.  
+*Optional information end*
+
+Waveforms are never completely smooth since output rate and dynamic range of the outputs are finite. Instead of a linear ramp a staircase pattern is produced. The time resolution of this staircase is specified by _TimeStep_. It should be chosen as large as possible to reduce the computational load. The waveforms are executed during the next _ZSRampTime_ milliseconds, in this case during the _Wait_ command.
+
+At the end of this wait time, a last value of the waveform might still linger on the stack of the bus system. This can have unwanted consequences. To avoid this problem, use the following programming style:  
+```CPP
 double TimeStep=0.1;
 StartNewWaveformGroup();
 Waveform(new CRamp("SetFeshbachPSCCurrent",LastValue,RampZSOffFeshbachCurrent,
@@ -265,11 +270,11 @@ Waveform(new CRamp("SetFeshbachPSCCurrent",LastValue,RampZSOffFeshbachCurrent,
 Waveform(new CRamp("SetIntensitySrBlueZSSPAOM",LastValue,0,ZSRampTime,
   TimeStep));
 WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
-\end{verbatim}
-The \verb"StartNewWaveformGroup" function defines that a new waveform group starts. It delivers the number of this waveform group as return value, in case you are interested in that. The \verb"GetCurrentWaveformGroupNumber()" delivers the same number. The \verb"WaitTillEndOfWaveformGroup" command waits till the waveforms belonging to the specified group have finished, including commands from those waveforms that might have lingered on the bus system stack longer than the duration of the waveform. The uncertainty in the duration of this wait command is the \verb"TimeStep" duration plus about 1\,$\mu$ per waveform (in dependence of the nature of the outputs used).
+```  
+The _StartNewWaveformGroup_ function defines that a new waveform group starts. It delivers the number of this waveform group as return value, in case you are interested in that. The _GetCurrentWaveformGroupNumber()_ delivers the same number. The _WaitTillEndOfWaveformGroup_ command waits till the waveforms belonging to the specified group have finished, including commands from those waveforms that might have lingered on the bus system stack longer than the duration of the waveform. The uncertainty in the duration of this wait command is the _TimeStep_ duration plus a few bus cycles per waveform (in dependence of the nature of the outputs used).
 
-You can also mix these programming styles:
-\begin{verbatim}
+You can also mix these programming styles:  
+```CPP
 double TimeStep=0.1;
 StartNewWaveformGroup();
 Waveform(new CRamp("SetFeshbachPSCCurrent",LastValue,RampZSOffFeshbachCurrent,
@@ -279,10 +284,10 @@ Waveform(new CRamp("SetIntensitySrBlueZSSPAOM",LastValue,0,ZSLightRampTime,
 Wait(ZSLightRampTime);
 SwitchZSLightShutter(Off);
 WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
-\end{verbatim}
+```
 
-Sometimes it is useful to execute only a fraction of the ramp. For example the evaporative cooling ramp could be interrupted after a certain fraction of it has been executed.
-\begin{verbatim}
+Sometimes it is useful to execute only a fraction of the ramp. For example the evaporative cooling ramp could be interrupted after a certain fraction of it has been executed.  
+```CPP
 double TimeStep=0.1;
 StartNewWaveformGroup();
 Waveform(new CRamp("SetDipoleTrapAttenuation",LastValue,EndTrapPower,RampTime,
@@ -291,25 +296,25 @@ if (RampFraction<100) {
     Wait(RampTime*RampFraction/100);
     RemoveWaveformGroup(GetCurrentWaveformGroupNumber());
 } else WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
-\end{verbatim}
-\verb"RemoveWaveformGroup" removes all waveforms belonging to the group specified from the list of waveforms. Using this programming style, the waveform can be stopped after a certain fraction by just varying one parameter, the ramp fraction, instead of varying the end value and the duration together.
+```  
+_RemoveWaveformGroup_ removes all waveforms belonging to the group specified from the list of waveforms. Using this programming style, the waveform can be stopped after a certain fraction by just varying one parameter, the ramp fraction, instead of varying the end value and the duration together.
 
-Another usage of the \verb"RemoveWaveformGroup" could be to stop a waveform group in a certain code block, that was started in a different code block and running since then.
+Another usage of the _RemoveWaveformGroup_ could be to stop a waveform group in a certain code block, that was started in a different code block and running since then.
 
-The waveforms provided are CRamp, CSineRamp, CParabolicRamp, CSin, CPulse, CRectangle, CSquare, CDelayedWaveform, and CTimeStretch and a short overview of those waveforms is given in the following.
-\begin{verbatim}
+The waveforms provided are _CRamp_, _CSineRamp_, _CParabolicRamp_, _CSin_, _CPulse_, _CRectangle_, _CSquare_, _CDelayedWaveform_, and _CTimeStretch_ and a short overview of those waveforms is given in the following.  
+```CPP
 CRamp(CString OutputName, double Start, double Stop,
     double Time, double DeltaTime=0, bool ForceExecution=false);
+```  
+ Meaning of parameters:  
+  _OutputName_: Name of output  
+  _Start_: start level. if _(Start==LastValue)_ the last value is taken  
+  _Stop_: end level  
+  _Time_: Duration of ramp  
+  _DeltaTime_: how often the output is updated. if zero, it is updated as often as possible  
+  _ForceExecution_: if _true_, ramp executed even if _Start==Stop_   
 
- Meaning of parameters:
-  OutputName: Name of output
-  Start: start level. if (Start==LastValue) the last value is taken
-  Stop: end level
-  Time: Duration of ramp
-  DeltaTime: how often the output is updated. if zero,
-                it is updated as often as possible
-  ForceExecution: if true, ramp executed even if Start==Stop
-
+```CPP
 CSineRamp(CString aOutputName, double aStart, double aStop, double
 aTime, double aDeltaTime)
   as CRamp, but sine shape with offset and slope.
@@ -321,32 +326,31 @@ double aTime, double aDeltaTime)
 
 CSin(CString OutputName, double Amplitude, double Frequency,
     double Time=0, double Phase=0, double DeltaTime=0);
+```  
+Meaning of parameters:  
+  _OutputName_: Name of output  
+  _Amplitude_: Amplitude  
+  _Frequency_: Frequency in Hz  
+  _Time_: duration, if 0 it is infinite  
+  _Phase_: phase. If phase=LastValue, phase is adapted to start waveform steadily from old value  
+  _DeltaTime_: how often the output is updated. If zero, it is updated as often as possible  
 
-Meaning of parameters:
-  OutputName: Name of output
-  Amplitude: Amplitude
-  Frequency: Frequency in Hz
-  Time: duration, if 0 it is infinite
-  Phase: phase. If phase=LastValue, phase is adapted to
-        start waveform steadily from old value
-  DeltaTime: how often the output is updated.
-        if zero, it is updated as often as possible
-
+```CPP
 CPulse(CString OutputName, double LowDelay, double HighDelay,
     long NrPulses=1, int InitLevel=0, bool StayAtEnd=false,
     double AmplitudeLow=0, double AmplitudeHigh=5);
+```  
+ Meaning of Parameters:  
+  OutputName: Name of output  
+  LowDelay: how long to stay low after start  
+  HighDelay: how long to stay high after transition  
+  NrPulses: number of pulses, 0 means infinite  
+  InitLevel: initial level 0: low; 1: high; 2: the level the output had before this command  
+  StayAtEnd: if true, only an edge is produced, not a real puls  
+  AmplitudeLow: for analog outputs: value corresponding to low  
+  AmplitudeHigh: for analog outputs: value corresponding to high  
 
- Meaning of Parameters:
-  OutputName: Name of output
-  LowDelay: how long to stay low after start
-  HighDelay: how long to stay high after transition
-  NrPulses: number of pulses, 0 means infinite
-  InitLevel: initial level 0: low 1: high
-                2: the level the output had before this command
-  StayAtEnd: if true, only an edge is produced, not a real puls
-  AmplitudeLow: for analog outputs: value corresponding to low
-  AmplitudeHigh: for analog outputs: value corresponding to high
-
+```CPP
 CRectangle::CRectangle(CString aOutputName, double aFrequency,
 double aDutyCycle,double aAmplitudeLow, double
 aAmplitudeHigh,double aTime, bool aStayAtEnd)
@@ -355,16 +359,16 @@ aAmplitudeHigh,double aTime, bool aStayAtEnd)
 CSquare(CString OutputName, double Frequency, double Time=0,
     int aInitLevel=0,bool StayAtEnd=false, double AmplitudeLow=0,
     double AmplitudeHigh=5);
+```  
+ Meaning of parameters:  
+  _OutputName_: Name of output  
+  _Frequency_: Frequency in Hz  
+  _Time_: duration, if 0 it is infinite  
+  _InitLevel_: initial level 0: low; 1: high; 2: the level the output had before this command  
+  _AmplitudeLow_: for analog outputs: value corresponding to low  
+  _AmplitudeHigh_: for analog outputs: value corresponding to high  
 
- Meaning of parameters:
-  OutputName: Name of output
-  Frequency: Frequency in Hz
-  Time: duration, if 0 it is infinite
-  InitLevel: initial level 0: low 1: high
-        2: the level the output had before this command
-  AmplitudeLow: for analog outputs: value corresponding to low
-  AmplitudeHigh: for analog outputs: value corresponding to high
-
+```CPP
 CDelayedWaveform(CWaveform* aMyWaveform, double aDelay)
   Meaning of parameters:
   aMyWaveform: the waveform to be executed
@@ -372,38 +376,42 @@ CDelayedWaveform(CWaveform* aMyWaveform, double aDelay)
 
 CTimeStretch(CWaveform* aMyWaveform, double aSpeedup, double
 aTime)
-  Meaning of parameters:
-  aMyWaveform: the waveform to be executed
-  aSpeedup: initial increase in speed, compensated for by
-            subsequent slowdown. Nice for adiabatic ramps, when
-            adiabaticity condition changes with time.
-  aTime: total time of waveform
-\end{verbatim}
+```  
+Meaning of parameters:  
+  _aMyWaveform_: the waveform to be executed  
+  _aSpeedup_: initial increase in speed, compensated for by subsequent slowdown. Nice for adiabatic ramps, when adiabaticity condition changes with time.  
+  _aTime_: total time of waveform  
 
-The \verb"CDelayedWaveform" and  \verb"CTimeStretch" examples show waveforms that take other waveforms as parameters and influence their behavior.
+The _CDelayedWaveform_ and _CTimeStretch_ examples show waveforms that take other waveforms as parameters and influence their behavior.
 
-%Instead of specifying the name of the output onto which the waveform is sent, it is also possible to specify the address of a function of type
-%\begin{verbatim}
-%double AnalogOutFunc(double Value,bool GetValue);
-%\end{verbatim}
-%If \verb"GetValue" is \verb"true" the function has to return the current parameter. If it is \verb"false" the parameter has to be set to \verb"Value". Such a function can be used to vary a parameter on which for example another waveform depends. This could be used to rotate the axis of an elliptical dipole trap created by the crossed AOM scanning technique.
+*Optional information start*  
 
-%CGrid2DWaveform(CString aOutputNameX, CString aOutputNameY,
-%  double aCenterX, double aCenterY, double aDeltaX, double %aDeltaY,
-%  unsigned int aNx, unsigned int aNy, double aDeltaTime);
+Instead of specifying the name of the output onto which the waveform is sent, it is also possible to specify the address of a function of type  
+```CPP
+double AnalogOutFunc(double Value,bool GetValue);
+```  
+If _GetValue_ is _true_ the function has to return the current parameter. If it is _false_ the parameter has to be set to _Value_. Such a function can be used to vary a parameter on which for example another waveform depends. This could be used to rotate the axis of an elliptical dipole trap created by the crossed AOM scanning technique.
 
-% Meaning of parameters:
-%  OutputNameX: Name of output in X direction
-%  OutputNameY: Name of output in Y direction
-%  CenterX: center of grid in X direction
-%  CenterY: center of grid in Y direction
-%  DeltaX: distance between gridpoints in X direction
-%  DeltaY: distance between gridpoints in Y direction
-%  NrX: number of gridpoints in X direction
-%  NrY: number of gridpoints in Y direction
-%  DeltaTime: time between jumps from gridpoint to gridpoint
+It is also possible to create wavefunctions that act on two outputs at the same time, e.g.
+```CPP
+CGrid2DWaveform(CString aOutputNameX, CString aOutputNameY,
+  double aCenterX, double aCenterY, double aDeltaX, double %aDeltaY,
+  unsigned int aNx, unsigned int aNy, double aDeltaTime);
+```  
+Meaning of parameters:  
+  _OutputNameX_: Name of output in X direction  
+  _OutputNameY_: Name of output in Y direction  
+  _CenterX_: center of grid in X direction  
+  _CenterY_: center of grid in Y direction  
+  _DeltaX_: distance between gridpoints in X direction  
+  _DeltaY_: distance between gridpoints in Y direction  
+  _NrX_: number of gridpoints in X direction  
+  _NrY_: number of gridpoints in Y direction  
+  _DeltaTime_: time between jumps from gridpoint to gridpoint  
 
-%The \verb"Grid2DWavform" acts on two outputs at the same time. The example given is foreseen to be used with a crossed AOM setup, deflecting a dipole trap laser beam horizontally and vertically. In the same way one could create a class that would rotate the dipole trap laser beam around a center. The ellipticity and symmetry axis of the trap could be influenced at the same time by other waveforms. In this way it is possible to create the dipole trap motion required to create for example vortice lattices using the stirring method. The bus systems data rate is more than enough to allow to implement this in software.
+The _Grid2DWavform_ acts on two outputs at the same time. The example given is foreseen to be used with a crossed AOM setup, deflecting a dipole trap laser beam horizontally and vertically. In the same way one could create a class that would rotate the dipole trap laser beam around a center. The ellipticity and symmetry axis of the trap could be influenced at the same time by other waveforms. In this way it is possible to create the dipole trap motion required to create for example vortice lattices using the stirring method. The bus systems data rate is more than enough to allow to implement this in software. For fun, we also implemented a [laser show](https://www.youtube.com/watch?v=JYKxTyi-v-E) in this manner, displaying text or rotating 3D meshed (ask us if you want the code).   
+
+*Optional information end*
 
 It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming \verb"ramp.h" and \verb"ramp.cpp". Next rename the \verb"CRamp" class in the newly created files and add those file to the project as described in Sec.~\ref{sec:SerialOrGPIBClass}. The waveform is initialized in the \verb"Init" method, which is only called once when the waveform is started. The output is updated in the \verb"SetOutputs" function. If this function returns \verb"false" the waveform will be deleted from the list of waveforms.
 
