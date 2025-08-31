@@ -1,6 +1,6 @@
 # Programing sequences of input/output commands
 
-This chapter explains how to implement sequences of commands, how to create the main experimental sequence and how to create utilites (short sequences).
+This file explains how to implement sequences of commands. These sequences are used in _Sequence_Main.cpp_ to describe the experimental sequence and in _Sequence_Utilities.cpp_ to program user utilities. 
 
 &nbsp;
 
@@ -409,11 +409,11 @@ Meaning of parameters:
   _NrY_: number of gridpoints in Y direction  
   _DeltaTime_: time between jumps from gridpoint to gridpoint  
 
-The _Grid2DWavform_ acts on two outputs at the same time. The example given is foreseen to be used with a crossed AOM setup, deflecting a dipole trap laser beam horizontally and vertically. In the same way one could create a class that would rotate the dipole trap laser beam around a center. The ellipticity and symmetry axis of the trap could be influenced at the same time by other waveforms. In this way it is possible to create the dipole trap motion required to create for example vortice lattices using the stirring method. The bus systems data rate is more than enough to allow to implement this in software. For fun, we also implemented a [laser show](https://www.youtube.com/watch?v=JYKxTyi-v-E) in this manner, displaying text or rotating 3D meshed (ask us if you want the code).   
+The _Grid2DWavform_ acts on two outputs at the same time. The example given is foreseen to be used with a crossed AOM setup, deflecting a dipole trap laser beam horizontally and vertically. In the same way one could create a class that would rotate the dipole trap laser beam around a center. The ellipticity and symmetry axis of the trap could be influenced at the same time by other waveforms. In this way it is possible to create the dipole trap motion required to create for example vortice lattices using the stirring method. The bus systems data rate is more than enough to allow to implement this in software. For fun, we also implemented a [laser show](https://www.youtube.com/watch?v=JYKxTyi-v-E) in this manner, displaying text or rotating 3D meshes (ask us if you want the code).   
 
-*Optional information end*
+Adding new waveforms
 
-It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming \verb"ramp.h" and \verb"ramp.cpp". Next rename the \verb"CRamp" class in the newly created files and add those file to the project as described in Sec.~\ref{sec:SerialOrGPIBClass}. The waveform is initialized in the \verb"Init" method, which is only called once when the waveform is started. The output is updated in the \verb"SetOutputs" function. If this function returns \verb"false" the waveform will be deleted from the list of waveforms.
+It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming _ramp.h_ and _ramp.cpp_. Next rename the _CRamp_ class in the newly created files and add those file to the project as described in Sec.~\ref{sec:SerialOrGPIBClass}. The waveform is initialized in the _Init_ method, which is only called once when the waveform is started. The output is updated in the _SetOutputs_ function. If this function returns _false_ the waveform will be deleted from the list of waveforms.
 
 Waveforms can be made dependent on other waveforms. For example in a scanning AOM setup which should stir a laser beam in a circle, the two scanning AOMs should change their frequencies in phase. This can be achieved by defining a virtual analog output, that specifies the phase angle and is ramped linearly upwards. The analog out procedures controlling the AOMs frequencies calculate are made to calculate their frequencies in dependence of this phase angle. Variations of this scheme would allow changes in the ellipticity of the produced trap, rotation of the axis of the average potential and so forth.
 
@@ -421,15 +421,16 @@ Another scheme to complicated waveforms synchronized on several outputs consists
 
 The calculation of waveforms can be sped up by running the control program in "Release" mode and not "Debug" mode. This mode is selected in Visual Studio using the pull down selector in the icon bar next to the green, triangular "play" button that starts the program.
 
-\section{Serial port device and GPIB device programming}
-\label{Sec:SerialPortDevicesInSequence}
+*Optional information end*
+
+## Serial port device and GPIB device programming
 
 The configuration of serial port devices and GPIB devices and he format of the commands to those devices was discussed in Sec.~\ref{sec:SerialOrGPIBClass}. Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
 
-Commands to serial devices can be used in direct output mode and in waveform generation mode. In waveform generation mode only output commands are allowed since the system can not wait for feedback. In direct output mode all types of commands are allowed. Synchronization of serial device commands with the sequence sent out through the national instruments cards is done by checking the progress of the waveform output from time to time. If the time comes close to the moment a serial device command needs to be sent, the software will stop doing anything else than checking the output progress. As soon as the output time has been reached the serial port command is sent. This usually works with a timing precision of better than 1\,ms. The computer will check the progress of waveform output again after the serial command has been sent. If the time laps is more than specified using the \verb"Output->SetMaxSyncCommandDelay(0.01);" command  in \verb"CSequence::ConfigureHardware()" (here 10\,ms) an error message will be displayed.
+Commands to serial devices can be used in direct output mode and in waveform generation mode. In waveform generation mode only output commands are allowed since the system can not wait for feedback. In direct output mode all types of commands are allowed. Synchronization of serial device commands with the sequence sent out through the national instruments cards is done by checking the progress of the waveform output from time to time. If the time comes close to the moment a serial device command needs to be sent, the software will stop doing anything else than checking the output progress. As soon as the output time has been reached the serial port command is sent. This usually works with a timing precision of better than 1\,ms. The computer will check the progress of waveform output again after the serial command has been sent. If the time laps is more than specified using the _Output->SetMaxSyncCommandDelay(0.01);_ command  in _CSequence::ConfigureHardware()_ (here 10 ms) an error message will be displayed.
 
-Sometimes it is useful to send preparation commands to serial devices while the sequence list is assembled and store only a few commands in the sequence list. An example is the preparation of an arbitrary waveform generator. You would program the waveform beforehand and at the most send a trigger signal over the serial port (in case the waveform generator has no TTL trigger input). The programming looks nicer if the preparation of the generator and the trigger signal can be programmed close to each other in the experimental sequence (e.g. in the same code block, see Sec.~\ref{Sec:CodeBlocks}). This also guarantees that the generator is only reprogrammed if needed. To do this, use the following code.
-\begin{verbatim}
+Sometimes it is useful to send preparation commands to serial devices while the sequence list is assembled and store only a few commands in the sequence list. An example is the preparation of an arbitrary waveform generator. You would program the waveform beforehand and at the most send a trigger signal over the serial port (in case the waveform generator has no TTL trigger input). The programming looks nicer if the preparation of the generator and the trigger signal can be programmed close to each other in the experimental sequence (e.g. in the same code block, see Sec.~\ref{Sec:CodeBlocks}). This also guarantees that the generator is only reprogrammed if needed. To do this, use the following code.  
+```CPP
 //we are in the assemble sequence list mode here.
 Serial.SetDirectOutputMode();
 //or GPIB.SetDirectOutputMode();
@@ -437,10 +438,10 @@ Serial.SetDirectOutputMode();
 Serial.SetStoreInSequenceListMode();
 //or GPIB.SetStoreInSequenceListMode();
 //here commands to trigger the generator during sequence list execution.
-\end{verbatim}
+```
 
-Sometimes it is useful to integrate one or a few function(s) of a serial device into the system as if it was a normal analog or digital output. This function can be for example be the frequency or intensity of a frequency generator or the pump diode current of a fiber laser. You would like to be able to change this frequency or intensity using the manual control panels and perform software waveforms on that function (e.g. to perform an evaporative cooling sweep by reducing the power of the dipole trap). After having integrated the serial device as discussed in Sec.~\ref{sec:SerialOrGPIBClass}, this additional behavior can be achieved by declaring, defining and registering an additional analog output, just as if it was an analog output on a national instruments card or the MultiIO bus system. The only difference occurs is the definition of the output procedure in \verb"IOList.cpp". It needs to look similar to the following code.
-\begin{verbatim}
+Sometimes it is useful to integrate one or a few function(s) of a serial device into the system as if it was a normal analog or digital output. This function can be for example be the frequency or intensity of a frequency generator or the pump diode current of a fiber laser. You would like to be able to change this frequency or intensity using the manual control panels and perform software waveforms on that function (e.g. to perform an evaporative cooling sweep by reducing the power of the dipole trap). After having integrated the serial device as discussed in Sec.~\ref{sec:SerialOrGPIBClass}, this additional behavior can be achieved by declaring, defining and registering an additional analog output, just as if it was an analog output on a national instruments card or the MultiIO bus system. The only difference occurs is the definition of the output procedure in _IOList.cpp_. It needs to look similar to the following code.  
+```CPP
 void Set100WIRLaserCurrent(double Current) {  	
   if (Output->InMenuUpdateMode()) return;
   if (!Output->InScaledOutStoreMode()) {			
@@ -449,35 +450,35 @@ void Set100WIRLaserCurrent(double Current) {
   }
   Output->AnalogOutScaled(HelpAnalogOutStartNumber+2,Current,Current);
 }
-\end{verbatim}
-The output can be modified using this procedure. Either directly like \verb"Set100WIRLaserCurrent(1)" or using a software waveform like
-\begin{verbatim}
+```
+
+The output can be modified using this procedure. Either directly like _Set100WIRLaserCurrent(1)_ or using a software waveform like  
+```CPP
 Waveform(new CRamp("Set100WIRLaserCurrent",LastValue,
   RampIRLaserCurrentCurrent,RampIRLaserCurrentTime,50));
-\end{verbatim}
-Note that the timestep of this waveform has been chosen quite large since the laser needs this time to process the serial port commands. This slowness is typical for serial devices. The \begin{verbatim}
-if (Output->InMenuUpdateMode()) return;
-\end{verbatim}
-statement is optional. If it is there, the user can not modify this analog output in the manual control menu. Since the 100\,W laser is a bit dangerous, this statement is here for security. (In our case this lasers power can be changed in a special menu that also displays information on the laser.) The
-\verb"if (!Output->InScaledOutStoreMode())" statement hinders the output code from being executed during the startup of the program, when the system is just acquiring the software output channel of this procedure. The last command
-\begin{verbatim}
+```  
+Note that the timestep of this waveform has been chosen quite large since the laser needs this time to process the serial port commands. This slowness is typical for serial devices. The _if (Output->InMenuUpdateMode()) return;_ statement is optional. If it is there, the user can not modify this analog output in the manual control menu. Since the 100\,W laser is a bit dangerous, this statement is here for security. (In our case this lasers power can be changed in a special menu that also displays information on the laser.) The _if (!Output->InScaledOutStoreMode())_ statement hinders the output code from being executed during the startup of the program, when the system is just acquiring the software output channel of this procedure. The last command  
+```CPP
 Output->AnalogOutScaled(HelpAnalogOutStartNumber+2,Current,Current);
-\end{verbatim}
-allows the system to treat the output as if it was a usual analog output on the system.\\ \verb"HelpAnalogOutStartNumber" is the base software address for all such help analog outputs.\\ \verb"HelpAnalogOutStartNumber+2" is the software address and you have to assure that it is unique. To help you with that an error message will be displayed when the program is started and this is not the case. If you would like to implement a digital output in this way, use
-\begin{verbatim}
+```  
+allows the system to treat the output as if it was a usual analog output on the system.  
+_HelpAnalogOutStartNumber_ is the base software address for all such help analog outputs.  
+_HelpAnalogOutStartNumber+2_ is the software address and you have to assure that it is unique. To help you with that an error message will be displayed when the program is started and this is not the case. If you would like to implement a digital output in this way, use  
+```CPP
 Output->DigitalOutScaled(HelpDigitalOutStartNumber+2,OnOff,OnOff);
-\end{verbatim}
+```  
 instead.
 
 If a serial port multiplexer is used, these new analog or digital output procedures have to be registered in a different manual control menu panel than the digital lines controlling the serial port multiplexer. These lines are adjusted such that signals are sent to the device you are interested in automatically in direct output mode. In waveform output mode you have to take care yourself that these digital lines are set in time to the correct serial port device. If you need to send commands only to one serial port device during the execution of the sequence list you can set the digital lines to the correct device by sending an arbitrary command to that device before the execution of the sequence list and then not sending any command to any other serial port device till the execution is over. If you want to send commands to several serial port devices, you have to place additional commands into the sequence list that put the digital lines into the correct status in time before the serial port command is send.  GPIB device commands do of course not have these complications.
 
-\section{Code example "Position Servo"}
-\label{Sec:ExamplePositionServo}
+&nbsp;
+
+## Code example "Position Servo"
 
 With everything we have discussed in this chapter so far, we are able to understand the code used to command servo motors. This is another code examples of a virtual digital output that has no corresponding hardware digital output. And it demonstrates switching to waveform output mode if needed.
 
-In section \ref{sec:ServoMotors} we saw that servo motors are implemented in the following way.
-\begin{verbatim}
+In section \ref{sec:ServoMotors} we saw that servo motors are implemented in the following way.  
+```CPP
 const int SwitchOvenShutterServoSignalChannelNr=11;
 void SwitchOvenShutterServoSignal(bool OnOff) {
   Output->DigitalOutScaled(SwitchOvenShutterServoSignalChannelNr,OnOff,OnOff);
@@ -489,12 +490,12 @@ void SwitchOvenShutter(bool OnOff) {
   Output->DigitalOutScaled(HelpDigitalOutStartNumber+
     SwitchOvenShutterServoSignalChannelNr,OnOff,OnOff);	
 }
-\end{verbatim}
-Now we are also able to understand what happens in the \verb"PositionServo" function.
-\begin{verbatim}
+```  
+Now we are also able to understand what happens in the _PositionServo_ function.  
+```CPP
 double PositionServo(unsigned int ServoDigitalOutChannelNr, bool OnOff,
     double OnPulseDuration, double OffPulseDuration, double PulseSequenceDuration) {
-  //HiTec HS-50 Servo specs: 50Hz, 0.9ms to 2.1ms, 1.5ms center. 0.09sec/60�	
+  //HiTec HS-50 Servo specs: 50Hz, 0.9ms to 2.1ms, 1.5ms center. 0.09sec/60degrees
   double PulseSeparation=20;
   if (!Output->InOutScaledNormalMode()) return PulseSequenceDuration;
   bool DirectOutMode=false;
@@ -522,17 +523,20 @@ double PositionServo(unsigned int ServoDigitalOutChannelNr, bool OnOff,
   }
   return PulseSequenceDuration;
 }
-\end{verbatim}
-If the system is in direct output mode, the framing code around the generation of the servo motor pulse sequence brings the system into assemble sequence list mode, and executes that sequence at the end. This is required since servo motors require hight timing precision. In waveform generation mode the \begin{verbatim}
+```  
+If the system is in direct output mode, the framing code around the generation of the servo motor pulse sequence brings the system into assemble sequence list mode, and executes that sequence at the end. This is required since servo motors require hight timing precision. In waveform generation mode the  
+```CPP
 Output->ChannelReservationList.CheckDigitalChannelReservation(
   ServoDigitalOutChannelNr, Start, PulseSequenceDuration);
-\end{verbatim}
-command reserves the hardware digital channel of this servo motor for the time required for the motor action to occur. If two \verb"PositionServo" commands reserve overlapping time windows on the same channel, an error message is generated. The \verb"for" loop generates the pulse sequence required for the servo motor.
+```  
+command reserves the hardware digital channel of this servo motor for the time required for the motor action to occur. If two _PositionServo_ commands reserve overlapping time windows on the same channel, an error message is generated. The _for_ loop generates the pulse sequence required for the servo motor.
 
-\section{Loops}
-\label{Sec:Loops}
+&nbsp;
 
-Sometimes you would like to program a sequence of commands that repeats till the user cancels it. The following programming example shows how to create a dialog box that displays some text, has a status bar and a cancel button. The code is executed till the dialog box is closed. Instead of the simple code switching the fiber MOT PIDs reference signal to 0 Volts and then back to its original value in direct output mode, you could also implement sophisticated sequences in waveform mode. \begin{verbatim}
+## Loops
+
+Sometimes you would like to program a sequence of commands that repeats till the user cancels it. The following programming example shows how to create a dialog box that displays some text, has a status bar and a cancel button. The code is executed till the dialog box is closed. Instead of the simple code switching the fiber MOT PIDs reference signal to 0 Volts and then back to its original value in direct output mode, you could also implement sophisticated sequences in waveform mode.  
+```CPP
 void CSequence::BlinkMOTFiber(CWnd* parent) {	
   if ((CancelLoopDialog == NULL) && (parent)) {
     CancelLoopDialog = new CExecuteMeasurementDlg(parent,this);					
@@ -569,38 +573,39 @@ void CSequence::BlinkMOTFiber(CWnd* parent) {
     CancelLoopDialog=NULL;
   }
 }
-\end{verbatim}
-The \verb"CWnd* parent" parameter in the \verb"BlinkMOTFiber" function call is required to link the new window to its parent. \verb"BlinkMOTFiber" is called as explained in Sec.~\ref{sec:Buttons} in \verb"CSequence::MessageMap" by
-\begin{verbatim}
+```  
+The _CWnd* parent_ parameter in the _BlinkMOTFiber_ function call is required to link the new window to its parent. _BlinkMOTFiber_ is called as explained in Sec.~\ref{sec:Buttons} in _CSequence::MessageMap_ by  
+```CPP
 case IDM_BLINK_MOT_FIBER: BlinkMOTFiber(parent); break;
-\end{verbatim}
+```  
 delivering this parameter. In this example the loop is executed at the most 10 times.
 
-You can also create your own dialogs with other elements than text and status bar by duplicating \verb"CExecuteMeasurementDlg", renaming it to \verb"CMyDlg" and modifying it so that it fits your needs. Use the resource editor to draw your dialog. You then need to add
-\begin{verbatim}
+You can also create your own dialogs with other elements than text and status bar by duplicating _CExecuteMeasurementDlg_, renaming it to _CMyDlg_ and modifying it so that it fits your needs. Use the resource editor to draw your dialog. You then need to add  
+```CPP
 #include "MyDlg.h"
 static CMyDlg *MyCancelLoopDialog=NULL;
-\end{verbatim}
-to \verb"sequence.cpp", \verb"CancelLoopDialog=NULL;" to the constructor \verb"CSequence::CSequence" and
-\begin{verbatim}
+```  
+to _sequence_XYZ.cpp_, _CancelLoopDialog=NULL;_ to the constructor _CSequence::CSequence_ and   
+```CPP
 if (MyCancelLoopDialog) {
   MyCancelLoopDialog->DestroyWindow();		
   MyCancelLoopDialog=NULL;
 }
-\end{verbatim}
-to the destructor \verb"CSequence::~CSequence" and
-\begin{verbatim}
+```  
+to the destructor _CSequence::~CSequence_ and  
+```CPP
 if (me==CancelLoopDialog) (CancelLoopDialog = NULL);
-\end{verbatim}
-to \verb"CSequence::ExecuteMeasurementDlgDone". You can open the dialog and detect its status along the lines of the code example given above.
+```  
+to _CSequence::ExecuteMeasurementDlgDone_. You can open the dialog and detect its status along the lines of the code example given above.  
 
-\section{Idle and WakeUp function}
-\label{Sec:IdleAndWakeUpFunction}
+&nbsp;
 
-If no action is performed by the program the CSequence::Idle(CWnd* parent) function is called. When buttons are pressed or an experimental sequence starts or stops the CSequence::WakeUp() function is called. This can be used to put sensitive or dangerous equipment like powerful lasers or power supplies in a save mode when no user is present and nothing is done with the experiment.
+## Idle and WakeUp function
 
-Here is the implementation of the idle function.
-\begin{verbatim}
+If no action is performed by the program the _CSequence::Idle(CWnd* parent)_ function is called. When buttons are pressed or an experimental sequence starts or stops the _CSequence::WakeUp()_ function is called. This can be used to put sensitive or dangerous equipment like powerful lasers or power supplies in a save mode when no user is present and nothing is done with the experiment.
+
+Here is the implementation of the idle function.  
+```CPP
 bool InIdle=false;
 
 void CSequence::Idle(CWnd* parent) {
@@ -635,13 +640,13 @@ void CSequence::Idle(CWnd* parent) {
   }
   InIdle=false;
 }
-\end{verbatim}
-The variable \verb"InIdle" assures it is only entered once. If no action occurred for longer than \verb"OvenShutterOffTime" and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec.~\ref{Sec:Loops}. Then the control is return to the caller of \verb"CSequence::Idle" which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
+```  
+The variable _InIdle_ assures it is only entered once. If no action occurred for longer than _OvenShutterOffTime_ and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec.~\ref{Sec:Loops}. Then the control is return to the caller of _CSequence::Idle_ which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
 
-Sometimes it is also useful to not execute a task directly (because something timing critical needs to be done), but wait with it for some better time. A flag could be set instead of performing the task. This flag could be checked in \verb"CSequence::Idle". If it is set, the task is executed and the flag cleared.
+Sometimes it is also useful to not execute a task directly (because something timing critical needs to be done), but wait with it for some better time. A flag could be set instead of performing the task. This flag could be checked in _CSequence::Idle_. If it is set, the task is executed and the flag cleared.
 
-As soon as the user clicks on any button or changes a menu \verb"CSequence::WakeUp()" is called. It inhibits entering of the save mode, or exits the save mode.
-\begin{verbatim}
+As soon as the user clicks on any button or changes a menu _CSequence::WakeUp()_ is called. It inhibits entering of the save mode, or exits the save mode.  
+```CPP
 void CSequence::WakeUp() {
   LastWakeUpTime=GetSystemTime();
   if (OvenShutterSaveMode) {		
@@ -655,32 +660,34 @@ void CSequence::WakeUp() {
   }
   SaveMode=false;
 }
-\end{verbatim}
+```  
 
-\chapter{Main experimental sequence}
-\label{Chap:MainExperimentalSequence}
+&nbsp;
+
+## Main experimental sequence
 
 The main experimental sequence describes what should happen during the run of the experiment, typically starting with the loading of the magneto-optical trap and ending with some form of data acquisition like absorption imaging. It stands out from the other, simpler sequences in several ways. A button to start this sequence is integrated in every panel of the user interface. It is the sequence that will be called when taking automated sets of measurements. It provides some additional tools of organization that smaller sequences do not need.
 
-Let us start with an overview. The "Run experiment" button on the user interface calls \\ \verb"CSequence::DoExperimentalSequence". This procedure performs preparation work if necessary. The system might be initialized, the fluorescence trigger function might be prepared, some parameters of the sequence might be calculated and checked for consistency and validity. If everything is fine, the cameras are prepared for absorption imaging if required and finally the experimental sequence is prepared and executed as described in Sec.~\ref{Sec:SimpleSequence}. After the sequence has been executed, the parameters are transferred to the data acquisition program, the experiment is reinitialized and the status of the machine is checked. All this will be described in more detail in Sec.~\ref{Sec:DoExperimentalSequence}.
+Let us start with an overview. The "Run experiment" button on the user interface calls _CSequence::DoExperimentalSequence_. This procedure performs preparation work if necessary. The system might be initialized, the fluorescence trigger function might be prepared, some parameters of the sequence might be calculated and checked for consistency and validity. If everything is fine, the cameras are prepared for absorption imaging if required and finally the experimental sequence is prepared and executed as described in Sec.~\ref{Sec:SimpleSequence}. After the sequence has been executed, the parameters are transferred to the data acquisition program, the experiment is reinitialized and the status of the machine is checked. All this will be described in more detail in Sec.~\ref{Sec:DoExperimentalSequence}.
 
-The actual experimental sequence is programmed in \verb"CSequence::ExperimentalSequence". It starts with the \verb"StartSequence" command, which this time contains a link to a function used to trigger the sequence when the MOT is sufficiently loaded. This trigger function is discussed in Sec.~\ref{Sec:FluorescenceTrigger}. Then the experimental sequence is described and finally stopped with the \verb"StopSequence" command. To simplify the organization of the experimental sequence, it is divided into code blocks. The next section explains how to do that.
+The actual experimental sequence is programmed in _CSequence::ExperimentalSequence_. It starts with the _StartSequence_ command, which this time contains a link to a function used to trigger the sequence when the MOT is sufficiently loaded. This trigger function is discussed in Sec.~\ref{Sec:FluorescenceTrigger}. Then the experimental sequence is described and finally stopped with the _StopSequence_ command. To simplify the organization of the experimental sequence, it is divided into code blocks. The next section explains how to do that.
 
-\section{Experimental sequence code blocks}
-\label{Sec:CodeBlocks}
+&nbsp;
 
-A typical experimental run of an ultracold atom machine involves a sequence of steps for example optical pumping, evaporative cooling, and absorption imaging. To organize this sequence of steps better, a certain programming style is used. This style is based on "code blocks". A code block describes one step of the experimental sequence, for example optical pumping, or one radiofrequency sweep, or absorption imaging. The user can select code blocks and quickly assemble an experimental sequence from them. One and the same code block can be used several times with different parameters. A code block requires the definition of some parameters on which it depends, among them one \verb"bool" parameter that decides if the code block is used in a specific sequence or not. And it requires the actual code. The definition of a code block unifies parameter definition, registration and the sequence code using those parameters.
+## Experimental sequence code blocks
 
-Let's create an example code block, one step in an evaporative cooling ramp. We will call this code block \verb"RampOpticalDipoleTrap". Every procedure name or variable name that has to do with this code block either contains \verb"RampOpticalDipoleTrap" or the short name \verb"RampOptDipTrap" to avoid creating parameters with the same name and to make the code more legible. The code block is placed in \verb"sequence.cpp". We show here the complete code block and discuss it below step by step.
-\begin{verbatim}
+A typical experimental run of an ultracold atom machine involves a sequence of steps for example optical pumping, evaporative cooling, and absorption imaging. To organize this sequence of steps better, a certain programming style is used. This style is based on "code blocks". A code block describes one step of the experimental sequence, for example optical pumping, or one radiofrequency sweep, or absorption imaging. The user can select code blocks and quickly assemble an experimental sequence from them. One and the same code block can be used several times with different parameters. A code block requires the definition of some parameters on which it depends, among them one _bool_ parameter that decides if the code block is used in a specific sequence or not. And it requires the actual code. The definition of a code block unifies parameter definition, registration and the sequence code using those parameters.
+
+Let's create an example code block, one step in an evaporative cooling ramp. We will call this code block _RampOpticalDipoleTrap_. Every procedure name or variable name that has to do with this code block either contains _RampOpticalDipoleTrap_ or the short name _RampOptDipTrap_ to avoid creating parameters with the same name and to make the code more legible. The code block is placed in _sequence.cpp_. We show here the complete code block and discuss it below step by step.  
+```CPP
 //Ramp optical dipole trap
-const unsigned int NrOptDipTrapRamps=10;
-bool DoRampOpticalDipoleTrap[NrOptDipTrapRamps];
-double RampDipTrapAttenuation[NrOptDipTrapRamps];
-double RampDipTrapRampTime[NrOptDipTrapRamps];
-double RampDipTrapRampFraction[NrOptDipTrapRamps];
-double RampDipTrapWaitTime[NrOptDipTrapRamps];
 void CSequence::RampOpticalDipoleTrap(int Nr) {
+  const unsigned int NrOptDipTrapRamps=10;
+  static bool DoRampOpticalDipoleTrap[NrOptDipTrapRamps];
+  static double RampDipTrapAttenuation[NrOptDipTrapRamps];
+  static double RampDipTrapRampTime[NrOptDipTrapRamps];
+  static double RampDipTrapRampFraction[NrOptDipTrapRamps];
+  static double RampDipTrapWaitTime[NrOptDipTrapRamps];
   if (!AssemblingParamList()) {
     if (!Decision("DoRampOpticalDipoleTrap"+itos(Nr))) return;
     StartNewWaveformGroup();
@@ -701,27 +708,27 @@ void CSequence::RampOpticalDipoleTrap(int Nr) {
     }
     CString DDSUnits;
     DDSUnits.Format("%.0f..0dB",DDSAttenuationMax);
-    ParamList.RegisterBool(&DoRampOpticalDipoleTrap[Nr],"DoRampOpticalDipoleTrap"+itos(Nr),
+    ParamList->RegisterBool(&DoRampOpticalDipoleTrap[Nr],"DoRampOpticalDipoleTrap"+itos(Nr),
       "Ramp optical dipole trap "+itos(Nr)+" ?","D"+itos(Nr));
-    ParamList.RegisterDouble(&RampDipTrapAttenuation[Nr], "RampDipTrapAttenuation"+itos(Nr),
+    ParamList->RegisterDouble(&RampDipTrapAttenuation[Nr], "RampDipTrapAttenuation"+itos(Nr),
       DDSAttenuationMax,0,"Attenuation",DDSUnits);
-    ParamList.RegisterDouble(&RampDipTrapRampTime[Nr],"RampDipTrapRampTime"+itos(Nr),0,200000,
+    ParamList->RegisterDouble(&RampDipTrapRampTime[Nr],"RampDipTrapRampTime"+itos(Nr),0,200000,
       "Ramp Time","ms");
-    ParamList.RegisterDouble(&RampDipTrapRampFraction[Nr],"RampDipTrapRampFraction"+itos(Nr),
+    ParamList->RegisterDouble(&RampDipTrapRampFraction[Nr],"RampDipTrapRampFraction"+itos(Nr),
       0,100,"Ramp Fraction executed","%");
-    ParamList.RegisterDouble(&RampDipTrapWaitTime[Nr],"RampDipTrapWaitTime"+itos(Nr),
+    ParamList->RegisterDouble(&RampDipTrapWaitTime[Nr],"RampDipTrapWaitTime"+itos(Nr),
       0.01,500000,"Wait Time at end of ramp","ms");
   }
 }
-\end{verbatim}
-The code block starts with the parameter definitions. \verb"NrOptDipTrapRamps" defines how many code blocks of this type might maximally exist. The \verb"bool" variable that starts with \verb"Do" decides if a code block is executed. Since several code blocks of this type can exist, each parameter is now an array. The parameters defined here do not have to be declared external in \verb"sequence.h" (or \verb"paramlist.h"). The slight disadvantage of this simplification is that the parameters can only be used below their definition in \verb"sequence.cpp". If you need to use them also above, just put an external declaration into \verb"sequence.h" or shuffle the different methods in \verb"sequence.cpp" around until all usages of a parameter are below the definition of the parameter.
+```  
+The code block starts with the parameter definitions. _NrOptDipTrapRamps_ defines how many code blocks of this type might maximally exist. The _bool_ variable that starts with _Do_ decides if a code block is executed. Since several code blocks of this type can exist, each parameter is now an array. The parameters defined here do not have to be declared external in _sequence.h_ (or _paramlist.h_). The slight disadvantage of this simplification is that the parameters can only be used below their definition in _sequence.cpp_. If you need to use them also above, just put an external declaration into _sequence.h_ or shuffle the different methods in _sequence.cpp_ around until all usages of a parameter are below the definition of the parameter.
 
-The method \verb"CSequence::RampOpticalDipoleTrap(int Nr)" is called twice, once during the assembly of the \verb"ParamList" and once when the experimental sequence is run. When it is called during \verb"ParamList" assembly, \verb"AssembleParamList()" delivers \verb"true" and the registration part of\\ \verb"CSequence::RampOpticalDipoleTrap(int Nr)" is called. The \verb"Register..." commands are the same as discussed in chapter \ref{Chap:Parameters}, but you need to place \verb"ParamList." in front of them. You can also add \verb"NewColumn", \verb"AddStatic" etc. commands, also adding \verb"ParamList." in front of them.
+The method _CSequence::RampOpticalDipoleTrap(int Nr)_ is called twice, once during the assembly of the _ParamList_ and once when the experimental sequence is run. When it is called during _ParamList_ assembly, _AssembleParamList()_ delivers _true_ and the registration part of _CSequence::RampOpticalDipoleTrap(int Nr)_ is called. The _Register..._ commands are the same as discussed in chapter \ref{Chap:Parameters}, but you need to place _ParamList->_ in front of them. You can also add _NewColumn_, _AddStatic_ etc. commands, also adding _ParamList->_ in front of them.
 
-The second time \verb"CSequence::RampOpticalDipoleTrap(int Nr)" is called is during the execution of the sequence and in this case \verb"AssembleParamList()" delivers \verb"false". Now the actual sequence code is executed. The \verb"Decision" command at the beginning is nearly equivalent to an \verb"if (DoRampOpticalDipoleTrap[Nr])" statement. The only difference is that it adds the short description of the \verb"DoRampOpticalDipoleTrap" variable defined when registering this variable to a special string in case the code block is executed. At the end of the experimental run this string contains a short description of the experimental sequence. If the sequences are short enough, this might be helpful when scanning through old measurements to quickly find out what was done. Note that the time step of the \verb"CRamp" waveform is adapted in dependence of the total duration of the ramp. Note also the \verb"Wait" command terminating the code block. The availability of a \verb"Wait" command at the end of a code block is often useful.
+The second time _CSequence::RampOpticalDipoleTrap(int Nr)_ is called is during the execution of the sequence and in this case _AssembleParamList()_ delivers _false_. Now the actual sequence code is executed. The _Decision_ command at the beginning is nearly equivalent to an _if (DoRampOpticalDipoleTrap[Nr])_ statement. The only difference is that it adds the short description of the _DoRampOpticalDipoleTrap_ variable defined when registering this variable to a special string in case the code block is executed. At the end of the experimental run this string contains a short description of the experimental sequence. If the sequences are short enough, this might be helpful when scanning through old measurements to quickly find out what was done. Note that the time step of the _CRamp_ waveform is adapted in dependence of the total duration of the ramp. Note also the _Wait_ command terminating the code block. The availability of a _Wait_ command at the end of a code block is often useful.
 
-To add this code block to the experimental sequence and at the same time to the parameter menus, you have to add a call to \verb"CSequence::RampOpticalDipoleTrap" to \verb"CSequence::MainExperimentalSequence()". This method could look like the following:
-\begin{verbatim}
+To add this code block to the experimental sequence and at the same time to the parameter menus, you have to add a call to _CSequence::RampOpticalDipoleTrap_ to _CSequence::MainExperimentalSequence()_. This method could look like the following:  
+```CPP
 void CSequence::MainExperimentalSequence() {
   CMOT();
   SwitchMOTOff();
@@ -736,24 +743,23 @@ void CSequence::MainExperimentalSequence() {
   ParamList.NewMenu("Detection parameters");	
   RecaptureToMOT();
 }
-\end{verbatim}
-Note that the \verb"RampOpticalDipoleTrap" method is called twice, with different \verb"Nr" parameter. Care has to be taken that the \verb"Nr" parameter is used in strictly increasing order starting from 0, which also tells you that a certain parameter may never be used twice for the same code block. This can be easily checked by searching for \verb"RampOpticalDipoleTrap" in all files and analyzing the search result list.
+```   
+Note that the _RampOpticalDipoleTrap_ method is called twice, with different _Nr_ parameter. Care has to be taken that the _Nr_ parameter is unique for each call of a certain block. This can be easily checked by searching for _RampOpticalDipoleTrap_ in all files and analyzing the search result list.
 
-The \verb"CParamList::CParamList" constructor calls \verb"Sequence.MainExperimentalSequence()". Since during this
-call the system is in the assemble sequence list mode, \verb"AssembleParamList()" delivers \verb"true" and the registration commands of all code blocks are executed. When the experimental sequence is executed, \verb"CSequence.ExperimentalSequence" calls \verb"Sequence.MainExperimentalSequence()" and the sequence code of each code block is executed. In this way it is guaranteed that the parameter registration, and thus the parameter display on the user interface, happens in exactly the same order in which the code blocks are called during the experimental run.
+The _CParamList::CParamList_ constructor calls _Sequence->MainExperimentalSequence()_. Since during this
+call the system is in the assemble sequence list mode, _AssembleParamList()_ delivers _true" and the registration commands of all code blocks are executed. When the experimental sequence is executed, _CSequence.ExperimentalSequence_ calls _Sequence->MainExperimentalSequence()_ and the sequence code of each code block is executed. In this way it is guaranteed that the parameter registration, and thus the parameter display on the user interface, happens in exactly the same order in which the code blocks are called during the experimental run.
 
-\section{Utilities}
-\label{Sec:Utilities}
+## Utilities
 
-Utilities are small experimental sequences that perform simple tasks like testing a shutter. Programming of utilities is simplified by a scheme that follows the programming of code blocks closely. Here is an example:
-\begin{verbatim}
+Utilities are small experimental sequences that perform simple tasks like testing a shutter. Programming of utilities is simplified by a scheme that follows the programming of code blocks closely. Here is an example:  
+```CPP
 //Utility DebugVision
-CString *VisionDebugFilename;
 bool CSequence::DebugVision(unsigned int Message, CWnd* parent) {
-   if (!AssemblingUtilityDialog()) {
+  static CString *VisionDebugFilename;
+  if (!AssemblingUtilityDialog()) {
       switch (Message) {
          case IDM_VISION_DEBUG_START:
-            Vision.DebugStart(*VisionDebugFilename);
+            Vision.DebugStart(*DebugFilePath + *VisionDebugFilename);
          break;
          case IDM_VISION_DEBUG_STOP:
             Vision.DebugStop();
@@ -761,20 +767,20 @@ bool CSequence::DebugVision(unsigned int Message, CWnd* parent) {
          default: return false;
       }
    } else {
-      UtilityDialog.RegisterString(VisionDebugFilename,
-         "VisionDebugFilename","c:\\FeLiKx\\VisionDebug.dat",
+      UtilityDialog->RegisterString(VisionDebugFilename,
+         "VisionDebugFilename","VisionDebug.dat",
          200,"Vision debug Filename");		
-      UtilityDialog.AddButton(IDM_VISION_DEBUG_START,&Sequence);
-      UtilityDialog.AddButton(IDM_VISION_DEBUG_STOP,&Sequence);
-      UtilityDialog.AddStatic("");
+      UtilityDialog->AddButton(IDM_VISION_DEBUG_START,&Sequence);
+      UtilityDialog->AddButton(IDM_VISION_DEBUG_STOP,&Sequence);
+      UtilityDialog->AddStatic("");
    }
    return true;
 }
-\end{verbatim}
-Again the parameters on which the utility depends are defined above the method containing the code of the utility. And again this method contains two parts, the first containing the sequences that are executed if a certain button on the user interface is pressed and another part containing the registration of the parameters and declarations of the buttons. This time the registration commands have to be preceded by \verb"UtilityDialog." since the parameters are integrated into the utility dialog. When a button is pressed, the same code is called again, but this time \verb"AssemblingUtilityDialog()" is false and the first part of the code is executed. The switch statement selects the code associated with a specific button. This code can contain sequences executed in waveform mode or loops. To be able to implement loops, the \verb"CWnd* parent" parameter is available.
+```  
+Again the parameters on which the utility depends are defined above the method containing the code of the utility. And again this method contains two parts, the first containing the sequences that are executed if a certain button on the user interface is pressed and another part containing the registration of the parameters and declarations of the buttons. This time the registration commands have to be preceded by _UtilityDialog->" since the parameters are integrated into the utility dialog. When a button is pressed, the same code is called again, but this time _AssemblingUtilityDialog()_ is false and the first part of the code is executed. The switch statement selects the code associated with a specific button. This code can contain sequences executed in waveform mode or loops. To be able to implement loops, the _CWnd* parent_ parameter is available.
 
-Each such utility needs to be called in \verb"CSequence::MainUtilities" as follows.
-\begin{verbatim}
+Each such utility needs to be called in _CSequence::MainUtilities_ as follows.  
+```CPP
 bool CSequence::MainUtilities(unsigned int Message, CWnd* parent) {
    bool Received=false;
    if (AssemblingUtilityDialog()) UtilityDialog.NewMenu("Utilities");
@@ -783,5 +789,6 @@ bool CSequence::MainUtilities(unsigned int Message, CWnd* parent) {
    ...			
    return Received;
 }
-\end{verbatim}
+```  
 Take a look at the other examples called there to get a good impression of what is possible.
+
