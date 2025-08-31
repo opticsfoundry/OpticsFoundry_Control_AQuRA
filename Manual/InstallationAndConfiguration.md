@@ -4,13 +4,13 @@ This file describes how to install and configure Control.exe and ControlAPI. It 
 
 Table of content
 1. [Control.exe](#controlexe)
-....- [Configuration of Control.exe](#configuration-of-controlexe)
-....- [Specifying hardware configuration](#specifying-hardware-configuration)
-....- [Specifying user IO configuration](#specifying-user-io-configuration)
-....- [Option for cleaner looking, 3x faster C code](#option-for-cleaner-looking-3x-faster-c-code)
+   - [Configuration of Control.exe](#configuration-of-controlexe)
+   - [Specifying hardware configuration](#specifying-hardware-configuration)
+   - [Specifying user IO configuration](#specifying-user-io-configuration)
+   - [Option for cleaner looking, 3x faster C code](#option-for-cleaner-looking-3x-faster-c-code)
 2. [Data acquisition using Vision](#data-acquisition-using-vision)
 3. [ControlAPI](#controlapi)
-....- [Recompiling Control.dll](#recompiling-controldll)
+   - [Recompiling Control.dll](#recompiling-controldll)
  
 
 

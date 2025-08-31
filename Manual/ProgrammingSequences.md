@@ -7,17 +7,17 @@ If you want to start quickly, read from the beginning to section [Time reorderin
 
 1. [Modes of command execution](#modes-of-command-execution)
 2. [Programming simple sequences](#programming-simple-sequences)
-....- [Timing commands](#timing-commands)
-....- [Time reordering](#time-reordering)
-....- [Timing accuracy](#timing-accuracy)
-....- [Storing and retrieving output values](#storing-and-retrieving-output-values)
-....- [Software waveforms](#software-waveforms)
-....- [Serial port device and GPIB device programming](#serial-port-device-and-gpib-device-programming)
-....- [Code example "Position Servo"](#code-example-position-servo)
-....- [Loops](#loops)
+   - [Timing commands](#timing-commands)
+   - [Time reordering](#time-reordering)
+   - [Timing accuracy](#timing-accuracy)
+   - [Storing and retrieving output values](#storing-and-retrieving-output-values)
+   - [Software waveforms](#software-waveforms)
+   - [Serial port device and GPIB device programming](#serial-port-device-and-gpib-device-programming)
+   - [Code example "Position Servo"](#code-example-position-servo)
+   - [Loops](#loops)
 3. [Idle and WakeUp function](#idle-and-wakeup-function)
 4. [Main experimental sequence](#main-experimental-sequence)
-....- [Experimental sequence code blocks](#experimental-sequence-code-blocks)
+   - [Experimental sequence code blocks](#experimental-sequence-code-blocks)
 5. [Utilities](#utilities)]
 
 
