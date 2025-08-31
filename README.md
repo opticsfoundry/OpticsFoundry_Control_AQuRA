@@ -26,6 +26,7 @@ Pay attention to always **use the same x64/Win32 Debug/Release setting** for the
 
 &nbsp;
 
-## Installation
+## Table of content
 
-See [Installation and Configuration](Manual\InstallationAndConfiguration.md).
+[Installation and Configuration](Manual/InstallationAndConfiguration.md)  
+[Programing experimental sequences](Manual/ProgrammingSequences.md)  
