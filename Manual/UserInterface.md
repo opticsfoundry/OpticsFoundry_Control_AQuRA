@@ -7,8 +7,9 @@
 3. [Initial Parameters Dialog](#initial-parameters-dialog)
 4. [Experimental Sequence Dialog](#experimental-sequence-dialog)
 5. [Measurement dialog](#measurement-dialog)
-6. [Useful Utilities](#useful-utilities)
-7. [System configuration parameters](#system-configuration-parameters)
+6. [Measurement queue](#measurement-queue)
+7. [Useful Utilities](#useful-utilities)
+8. [System configuration parameters](#system-configuration-parameters)
 
 Back to [Overview](../README.md)
 
@@ -125,13 +126,13 @@ Using these dialog names as guides, it is relatively easy to find a parameter.
 The parameters can be changed in steps of a fixed size (from "Start Value" to "Stop value" in "Number of points" steps), or by specifying a list of values in the ASCII file given in the "Value List File Name" box.  
 The value list file has the format   
 ```
-NrPoints
+NrOfPoints
 Value1
 Value2
 Value3
 
 ```
-(There must be [NrPoints] values in the list, one per line. Each line must be terminated by enter.)
+(There must be _NrPoints_ values in the list, one per line. Each line must be terminated by enter.)
 
 
 
@@ -141,7 +142,7 @@ The button "Execute" executes the measurement series directly.
 The button "Queue measurement" adds the measurement to a queue of measurements, which can be launched by clicking "Run measurement queue" in the main measurement dialog.  
 The "Measurement name" will be shown on the buttons in the main measurement dialog (after a change: only after it is reopened).  
 
-If a parameter name is empty, that parameter is not varied.
+If a parameter name is empty, it is not included in the measurement series.
 
 If more than one parameter is selected, the measurements will be arranged in a 2D, 3D or 4D matrix. Often one is only interested in the diagonal entries of this matrix. This can be selected by checking "Link".
 
@@ -157,6 +158,35 @@ You can start a measurement from a certain point in the series, given in "Start 
 
 
 
+
+&nbsp;
+
+&nbsp;
+
+## Measurement queue
+
+Several measurements can be stored in a queue and executed one after the other. Simple experimental runs can be added using the "Queue experiment" button in the main dialog.
+Measurement series can be added using the "Store in queue" button in the measurement dialog, as described above.
+
+
+![Measurement queue dialog](Images/MeasurementQueueDialog.png)
+
+The queued measurements are shown in green.
+
+If "Reference interval" is not zero, a reference run is executed every "Reference interval" runs. 
+The reference run is defined by clicking the "Reference queue experiment" button in the main dialog, which defines the current set of parameters as the ones for the reference run.
+
+If "Call ExecuteQueueFinished at the end of run", then the function _CSequence::ExecuteQueueFinished()_ in _Sequence_Main.cpp_ is called at the end of the measurement queue. This can be used to e.g. send a message to a user or switch off high power lasers at the end of a long measurement queue.
+
+"Execute queue" starts one execution of the measurement queue.
+
+"Iterate queue" repeats the queue till the user stops it.
+
+"Clear measurement queue" clears the whole queue."
+
+"Clear last of queue" removes the last entry of the queue.
+
+
 &nbsp;
 
 
@@ -164,7 +194,7 @@ You can start a measurement from a certain point in the series, given in "Start 
 
 There are various utilities that can be used to test the hardware or perform specific tasks. Some particularly useful ones are described below.
 
-![Measure FPGA ethernet bandwidth](Images/MeasureFPGAEthernetBandwidth.png)
+![Measure FPGA ethernet bandwidth](Images/MeasureFPGAEthernetBandwidthUtility.png)
 
 The measured ethernet bandwidth should be around 300MBit/s.
 
