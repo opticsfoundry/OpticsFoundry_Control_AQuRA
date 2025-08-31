@@ -240,16 +240,23 @@ In either mode, you need to select the IP address of the FPGA. You do this using
 
 ### Recompiling Control.dll
 
-To recompile Control.dll, open Control.sln in Visual Studio 2022. Select Debug, x64 in the toolbar. 
+To recompile Control.dll, open Control.sln in Visual Studio 2022. Usually, select _Debug_ and _x64_ in the toolbar. 
+
+Note: pay attention to always **use the same x64/Win32 Debug/Release setting** for the DLL compiler and for the compiler that compiles the program that uses the DLL.  
+- **_x64_ or _Win32_** (i.e. 32bit or 64bit AMD/Intel code). For most situations x64 is better. The one situation in which Win32 is better is when editing the Control.exe software, as the compilation of Control.exe is vastly faster in Win32 than x64 mode.  
+- **_Debug_ or _Release_**: Release is quite a bit faster than Debug, both when compiling and when executing the program. Debug enables one to see Visual Studio debug information (even when using the DLL in Qt with MinGW).  
+- **_DLL or EXE:_** If not automatically changed to DLL when selecting _x64_, in the Solution Explorer (in the Visual Studio GUI) you right click on "Control" (not " Solution Control" ) and select DLL under Configuration Properties -> General-> Configuration Type.  
+
 
 To select "DLL", right-click on "Control" in the Solution explorer (not "Solution Control"). Select Properties. Select DLL under "General Properties -> Configuration Type".  
+
 Build the solution. Look at the linker output. It tells you in which folder the DLL was created, e.g.  
 _D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_AQuRA\\x64\\Template_  
 
 Copy _Control.dll_ to the folder in which Qt creates your executable, e.g.  
-_D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_Qt\\build\\Desktop_Qt_6_7_2_MinGW_64_bit-Debug\\debug_  
+_D:\\Florian\\Firefly\\FireflyControl\\Control_Firefly_Qt\\_  
 
-If you want to change the hardware configuration, do it by modifying the Configuration Python scripts and running them to create configuration json files, see Sec. 3) Control.exe.  
+If you want to change the hardware configuration, do it by modifying the Configuration Python scripts and running them to create configuration json files, see [Specifying hardware configuration](#specifying-hardware-configuration).  
 
 If you need a second name for an output, do that in the file _ConfigFiles\AlternativeCommandNames.txt_, which contains alternative names for user IO outputs and their calibration.  
 _MOTCurrent = SetMOTCoilCurrent * 2 + 0_  
