@@ -1317,9 +1317,7 @@ void CControlApp::SaveParameterDialog()
 {
 	CFileDialog FileDialog( false, "dat", *UserParameterFileName);
 	if (FileDialog.DoModal()==IDOK) {		
-		*UserParameterFileName=FileDialog.GetPathName();
 		*UserParameterFileName = FileDialog.GetPathName();
-		int dotIndex = UserParameterFileName->ReverseFind('_');
 		SaveParams(*UserParameterFileName);
 	}
 }
@@ -1342,8 +1340,17 @@ void CControlApp::SaveParamsAsBinary(CString Name) {
 
 void CControlApp::SaveParamsAsASCII(CString Name) {
 	if (Name == "") Name = *ParamFileName;
-	/*int dotIndex = Name.ReverseFind('.');
-	if (dotIndex != -1) Name = Name.Left(dotIndex);*/
+	int dotIndex = Name.ReverseFind('.');
+	if ((dotIndex != -1) && (dotIndex>1)) {
+		if (Name[dotIndex - 1] != '.') {
+			Name = Name.Left(dotIndex);
+		}
+	}
+	int underlineIndex = Name.ReverseFind('_');
+	int slashIndex = Name.ReverseFind('\\');
+	if ((underlineIndex != -1) && (underlineIndex > slashIndex)) {
+		Name = Name.Left(underlineIndex);
+	}
 	ParamList->WriteToASCIIFile(Name+"_ParamList.txt", false, false);
 	UtilityDialog->WriteToASCIIFile(Name + "_UtilityDialog.txt", false, false);
 	SystemParamList->WriteToASCIIFile(Name + "_SystemParamList.txt", false, false);
@@ -1431,7 +1438,16 @@ void CControlApp::LoadParamsFromBinary(CString Name) {
 
 void CControlApp::LoadReferenceParams(CString Name) {	
 	int dotIndex = Name.ReverseFind('.');
-	if (dotIndex != -1) Name = Name.Left(dotIndex);
+	if ((dotIndex != -1) && (dotIndex > 1)) {
+		if (Name[dotIndex - 1] != '.') {
+			Name = Name.Left(dotIndex);
+		}
+	}
+	int underlineIndex = Name.ReverseFind('_');
+	int slashIndex = Name.ReverseFind('\\');
+	if ((underlineIndex != -1) && (underlineIndex > slashIndex)) {
+		Name = Name.Left(underlineIndex);
+	}
 	LoadSystemParamsFromASCII(Name, /*LoadReferenceParams */ true);
 	LoadNonSystemParamsFromASCII(Name, /*LoadReferenceParams */ true);
 	

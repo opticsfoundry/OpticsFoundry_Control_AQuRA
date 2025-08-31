@@ -2,7 +2,8 @@
 
 This file describes how to install and configure Control.exe and ControlAPI. It is assumed that you have installed Visual Studio C++ 2022 with MFC (Microsoft Foundation Classes, or Afx) support.
 
-Table of content
+*Table of content*  
+
 1. [Control.exe](#controlexe)
    - [Configuration of Control.exe](#configuration-of-controlexe)
    - [Specifying hardware configuration](#specifying-hardware-configuration)

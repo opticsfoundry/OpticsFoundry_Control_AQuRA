@@ -453,8 +453,17 @@ void CSequenceLib::SelectReferenceParameterFile() {
 	CFileDialog FileDialog( true, "txt", *ParameterReferenceFileName);
 	if (FileDialog.DoModal()==IDOK) {		
 		*ParameterReferenceFileName=FileDialog.GetPathName();
-		int dotIndex = ParameterReferenceFileName->ReverseFind('_');
-		if (dotIndex != -1) (*ParameterReferenceFileName) = ParameterReferenceFileName->Left(dotIndex);
+		int dotIndex = ParameterReferenceFileName->ReverseFind('.');
+		if ((dotIndex != -1) && (dotIndex > 1)) {
+			if ((*ParameterReferenceFileName)[dotIndex - 1] != '.') {
+				(*ParameterReferenceFileName) = ParameterReferenceFileName->Left(dotIndex);
+			}
+		}
+		int underlineIndex = ParameterReferenceFileName->ReverseFind('_');
+		int slashIndex = ParameterReferenceFileName->ReverseFind('\\');
+		if ((underlineIndex != -1) && (underlineIndex > slashIndex)) {
+			(*ParameterReferenceFileName) = ParameterReferenceFileName->Left(underlineIndex);
+		}
 		SaveParams();
 		ControlApp.LoadReferenceParams(*ParameterReferenceFileName);			
 	}

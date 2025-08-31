@@ -1,0 +1,1 @@
+This folder contains the manual of the 2010 version of control. Until all information from this manual has been correctly transferred to the GitHub manual it is included here. 
