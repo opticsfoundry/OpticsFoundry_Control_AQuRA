@@ -28,6 +28,6 @@ Pay attention to always **use the same x64/Win32 Debug/Release setting** for the
 
 ## Table of content
 
-[Installation and Configuration](Manual/InstallationAndConfiguration.md)  
-[Programing experimental sequences](Manual/ProgrammingSequences.md)
-[User interface](Manual/UserInterface.md)
+1. [Installation and Configuration](Manual/InstallationAndConfiguration.md)  
+2. [User interface](Manual/UserInterface.md)  
+3. [Programing experimental sequences](Manual/ProgrammingSequences.md)  
