@@ -12,7 +12,7 @@ Table of content
 3. [ControlAPI](#controlapi)
    - [Recompiling Control.dll](#recompiling-controldll)
  
-
+Back to [Overview](../README.md)].
 
 &nbsp;
 
