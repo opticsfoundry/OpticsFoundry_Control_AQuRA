@@ -47,7 +47,11 @@ In either mode, you need to select the IP address of the FPGA. You do this using
 
 ### Recompiling Control.dll
 
-To recompile Control.dll, open Control.sln in Visual Studio 2022. Usually, select _Debug_ and _x64_ in the toolbar. 
+To recompile Control.dll, install [Visual Studio 2022 with MFC](InstallationOfVisualStudio.md) and open Control.sln in Visual Studio 2022. 
+
+Usually, select _Debug_ and _x64_ in the toolbar. 
+
+![Build version selector](Images/VisualStudio2022BuildVersionSelection.png)
 
 Note: pay attention to always **use the same x64/Win32 Debug/Release setting** for the DLL compiler and for the compiler that compiles the program that uses the DLL.  
 - **_x64_ or _Win32_** (i.e. 32bit or 64bit AMD/Intel code). For most situations x64 is better. The one situation in which Win32 is better is when editing the Control.exe software, as the compilation of Control.exe is vastly faster in Win32 than x64 mode.  

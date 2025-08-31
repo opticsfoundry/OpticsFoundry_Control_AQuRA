@@ -17,12 +17,16 @@ Back to [Overview](../README.md).
 
 ## Control.exe
 
-Control.exe is a full-fledged experiment control system. It's also the basis of ControlAPI. The code is in  
-_Control_Firefly_AQuRA_  
-and you load it into Visual Studio C++ 2022 by double clicking on _Control.sln_.
+Control.exe is a full-fledged experiment control system. It's also the basis of ControlAPI. The code is in _Control_Firefly_AQuRA_. 
+To compile it, install [Visual Studio 2022 with MFC](InstallationOfVisualStudio.md) and load the solution into Visual Studio C++ 2022 by double clicking on _Control.sln_.
 
 To compile _Control.exe_ and not _Control.dll_ in Visual Studio, go to Solution Explorer (Ctrl+Alt+L), right click on "Control" (not " Solution Control" ) and select EXE under Configuration Properties -> General-> Configuration Type.  
-You can select Win32 or x64 and debug or release in Visual Studio's dropdown menus. I recommend Win32 debug, as it compiles much faster in debug mode then x64. It's thereby easier to change CSequence.cpp and quickly resume operating the experiment when needing to make changes to CSequence code blocks (which is usually not all that often). If you came from DLL and switched to EXE, you might have to select exe in the dropdown menu marked below as "Local Windows Debugger", see little white downwards arrow.
+You can select Win32 or x64 and debug or release in Visual Studio's dropdown menus. 
+
+![Build version selector](Images/VisualStudio2022BuildVersionSelection.png)
+
+I recommend Win32 debug, as it compiles much faster in debug mode then x64. It's thereby easier to change CSequence.cpp and quickly resume operating the experiment when needing to make changes to CSequence code blocks (which is usually not all that often). 
+If you came from DLL and switched to EXE, you might have to select exe in the dropdown menu marked below as "Local Windows Debugger", see little white downwards arrow.
 
 ### Configuration of Control.exe
 
