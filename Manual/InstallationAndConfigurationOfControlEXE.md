@@ -11,7 +11,7 @@ This file describes how to install and configure Control.exe and ControlAPI. It 
    - [Option for cleaner looking, 3x faster C code](#option-for-cleaner-looking-3x-faster-c-code)
 2. [Data acquisition using Vision](#data-acquisition-using-vision)
 
-Back to [Overview](../README.md)].
+Back to [Overview](../README.md).
 
 &nbsp;
 

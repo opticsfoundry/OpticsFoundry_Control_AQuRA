@@ -7,7 +7,7 @@ This file describes how to install and configure Control.exe and ControlAPI. It 
 1. [ControlAPI](#controlapi)
    - [Recompiling Control.dll](#recompiling-controldll)
  
-Back to [Overview](../README.md)].
+Back to [Overview](../README.md).
 
 &nbsp;
 
