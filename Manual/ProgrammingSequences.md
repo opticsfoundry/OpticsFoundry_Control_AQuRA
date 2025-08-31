@@ -1,6 +1,25 @@
-# Programing sequences of input/output commands
+# Programming sequences of input/output commands
 
 This file explains how to implement sequences of commands. These sequences are used in _Sequence_Main.cpp_ to describe the experimental sequence and in _Sequence_Utilities.cpp_ to program user utilities. 
+If you want to start quickly, read from the beginning to section [Time reordering](#time-reordering) and then continue with [Main experimental sequence](#main-experimental-sequence).
+
+*Table of content*
+
+1. [Modes of command execution](#modes-of-command-execution)
+2. [Programming simple sequences](#programming-simple-sequences)
+....- [Timing commands](#timing-commands)
+....- [Time reordering](#time-reordering)
+....- [Timing accuracy](#timing-accuracy)
+....- [Storing and retrieving output values](#storing-and-retrieving-output-values)
+....- [Software waveforms](#software-waveforms)
+....- [Serial port device and GPIB device programming](#serial-port-device-and-gpib-device-programming)
+....- [Code example "Position Servo"](#code-example-position-servo)
+....- [Loops](#loops)
+3. [Idle and WakeUp function](#idle-and-wakeup-function)
+4. [Main experimental sequence](#main-experimental-sequence)
+....- [Experimental sequence code blocks](#experimental-sequence-code-blocks)
+5. [Utilities](#utilities)]
+
 
 &nbsp;
 
@@ -75,7 +94,7 @@ The _SetAssembleSequenceListMode()_ command tells the system to place each subse
 
 &nbsp;
 
-## Timing commands
+### Timing commands
 
 Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime_in_ms)_ command. The system will simply wait for the specified time. This does not necessarily mean that nothing is written on the output ports during that time. Output commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified   
 ```CPP
@@ -113,7 +132,7 @@ The _SyncToLine_ command works only in waveform generation mode. And only if the
 
 &nbsp;
 
-## Time reordering
+#### Time reordering
 
 Sometimes it is useful to perform an output command before the position where the command appears in the source code. As we will see in Sec.~\ref{Sec:CodeBlocks}, the source code is usually segmented in blocks of code dedicated to perform a step in the experimental sequence. Such a step could be the flash of a laser beam. Laser beams are often blocked by mechanical shutters, which need several milliseconds to open. Thus the command to open the shutter needs to be given before the laser beam is used, which usually means: before the code block in which the laser beam is used. To execute the command at the correct time, time reordering commands are used. Here an implementation of the example discussed.  
 ```CPP
@@ -191,7 +210,7 @@ The parameters of this code block now depend on the _Nr_ parameter of the proced
 
 &nbsp;
 
-## Timing accuracy
+#### Timing accuracy
 
 The exact moment in time at which a command is executed can not be known precisely because of several reasons. The bus system has a maximum throughput of 16 bit of data every clock cycle (with a clock cycle being between 30ns and 500 microseconds, depending on your hardware). Some commands, like DDS frequency commands, need several bus commands to be programmed, which are distributed over several clock cycles. The following shows an example where this behavior can lead to a problem.  
 ```CPP
@@ -219,7 +238,7 @@ Here at least the commands directly before and after the _SwitchFlashAOM_ will n
 
 &nbsp;
 
-## Storing and retrieving output values
+### Storing and retrieving output values
 
 It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations, for example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
 
@@ -241,7 +260,7 @@ where _SetMOTLightIntensity_ (_SwitchMOTAOM_) is the analog
 
 &nbsp;
 
-## Software waveforms
+### Software waveforms
 
 Often it is required to change an output in a smooth way. This is done using software waveforms. The most common are linear ramps and sinusoidal waveforms. It is easy to implement more waveform types. Software waveforms can only be used in the waveform generation mode.
 
@@ -423,7 +442,7 @@ The calculation of waveforms can be sped up by running the control program in "R
 
 *Optional information end*
 
-## Serial port device and GPIB device programming
+### Serial port device and GPIB device programming
 
 The configuration of serial port devices and GPIB devices and he format of the commands to those devices was discussed in Sec.~\ref{sec:SerialOrGPIBClass}. Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
 
@@ -473,7 +492,7 @@ If a serial port multiplexer is used, these new analog or digital output procedu
 
 &nbsp;
 
-## Code example "Position Servo"
+### Code example "Position Servo"
 
 With everything we have discussed in this chapter so far, we are able to understand the code used to command servo motors. This is another code examples of a virtual digital output that has no corresponding hardware digital output. And it demonstrates switching to waveform output mode if needed.
 
@@ -533,7 +552,7 @@ command reserves the hardware digital channel of this servo motor for the time r
 
 &nbsp;
 
-## Loops
+### Loops
 
 Sometimes you would like to program a sequence of commands that repeats till the user cancels it. The following programming example shows how to create a dialog box that displays some text, has a status bar and a cancel button. The code is executed till the dialog box is closed. Instead of the simple code switching the fiber MOT PIDs reference signal to 0 Volts and then back to its original value in direct output mode, you could also implement sophisticated sequences in waveform mode.  
 ```CPP
@@ -664,7 +683,7 @@ void CSequence::WakeUp() {
 
 &nbsp;
 
-## Main experimental sequence
+# Main experimental sequence
 
 The main experimental sequence describes what should happen during the run of the experiment, typically starting with the loading of the magneto-optical trap and ending with some form of data acquisition like absorption imaging. It stands out from the other, simpler sequences in several ways. A button to start this sequence is integrated in every panel of the user interface. It is the sequence that will be called when taking automated sets of measurements. It provides some additional tools of organization that smaller sequences do not need.
 

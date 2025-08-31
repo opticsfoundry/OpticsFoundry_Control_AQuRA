@@ -2,6 +2,20 @@
 
 This file describes how to install and configure Control.exe and ControlAPI. It is assumed that you have installed Visual Studio C++ 2022 with MFC (Microsoft Foundation Classes, or Afx) support.
 
+Table of content
+1. [Control.exe](#controlexe)
+....- [Configuration of Control.exe](#configuration-of-controlexe)
+....- [Specifying hardware configuration](#specifying-hardware-configuration)
+....- [Specifying user IO configuration](#specifying-user-io-configuration)
+....- [Option for cleaner looking, 3x faster C code](#option-for-cleaner-looking-3x-faster-c-code)
+2. [Data acquisition using Vision](#data-acquisition-using-vision)
+3. [ControlAPI](#controlapi)
+....- [Recompiling Control.dll](#recompiling-controldll)
+ 
+
+
+&nbsp;
+
 ## Control.exe
 
 Control.exe is a full-fledged experiment control system. It's also the basis of ControlAPI. The code is in  
@@ -11,7 +25,7 @@ and you load it into Visual Studio C++ 2022 by double clicking on _Control.sln_.
 To compile _Control.exe_ and not _Control.dll_ in Visual Studio, go to Solution Explorer (Ctrl+Alt+L), right click on "Control" (not " Solution Control" ) and select EXE under Configuration Properties -> General-> Configuration Type.  
 You can select Win32 or x64 and debug or release in Visual Studio's dropdown menus. I recommend Win32 debug, as it compiles much faster in debug mode then x64. It's thereby easier to change CSequence.cpp and quickly resume operating the experiment when needing to make changes to CSequence code blocks (which is usually not all that often). If you came from DLL and switched to EXE, you might have to select exe in the dropdown menu marked below as "Local Windows Debugger", see little white downwards arrow.
 
-
+### Configuration of Control.exe
 
 Control.exe configures itself from configuration files. It searches for "config.txt" in the folder that contains the executable, in the three folder levels closer to the root folder, and in any "ConfigParams" folder relative to those folders. If it finds a "_config.txt_" file that is empty, it will look for all other configuration files in the folder in which the empty "config.txt" file was found. If the _config.txt_ file is not empty, its first line (terminated by new line) will be used as config file path. If no _config.txt_ is found, the first argument passed to control.exe is used as configuration file path.
 
@@ -66,6 +80,10 @@ In _UniMessList.h_ you can adjust the maximum number of UniMess entries in the M
 _const unsigned int MaxNrUniMess=76;_  
 If you find menus with more columns then you can display, insert _NewMenu_ commands as appropriate, see manual below.
 
+
+### Specifying hardware configuration
+
+
 Here an example hardware configuration file generator Python script:
 
 ```py
@@ -92,6 +110,10 @@ if __name__ == "__main__":
    builder.RegisterDDSAD9958Board(Address=21)
    builder.Save()
 ```
+
+
+### Specifying user IO configuration
+
 
 Here an example IO configuration file generator Python script:
 
@@ -130,7 +152,7 @@ if __name__ == "__main__":
 
 &nbsp;
 
-**Option for cleaner looking, 3x faster C code**
+### Option for cleaner looking, 3x faster C code
 
 
 There is one little twist to the story of configuring user IO through JSON files. To write the cleanest code and obtain the highest speed, one would like to write commands such as  
@@ -169,6 +191,10 @@ Similarly,
 _\[DebugFolder\]\\ParamList_shortcuts_auto_create.h_ and _.cpp_  
 need to be copied into source folder and give access to the initialization parameters of all outputs selected by the user in the initial parameter menus, by providing pointers to those parameters. These parameters can be useful if one wants to intermittently set an output back to its initial value, e.g. for the heating of AOMs.
 
+If you remove an output from the configuration file, the corresponding C function will remain in the _IOList_shortcuts_auto_create.h_ and _.cpp_ files until you regenerate those files. 
+If you did not yet regenerate those files, you will get a warning when starting Control.exe. Just ignore that warning and regenerate those files.
+
+
 &nbsp;
 
 ## Data acquisition using Vision
@@ -179,17 +205,11 @@ Control.exe directly supports the [Vision](https://github.com/opticsfoundry/Visi
 
 
 
-
-
 ## ControlAPI
 
+The large version of the ControlAPI interface is a DLL that can be used by Visual Studio 2022 C++ and Qt Creator (MinGW). If you need it for Python, please tell us as it would be very easy to support it.
 
-The large version of the ControlAPI interface can be accessed over TCP/IP (when running Control.exe), or be used as a DLL from Visual Studio 2022 C++, Qt Creator, or Python (can quickly be implemented if needed).
-
-
-The list of functions is described in [this Google Sheet](https://docs.google.com/spreadsheets/d/1ACSwebKKuk_bsI_3-E2YGZ4p2IvL3By_wfjo8vWTsmc/edit?usp=sharing).
-
-The best way to get to know this API is to study the demo code in Control_Firefly_AQuRA_Qt.
+The best way to get to know this API is to study the demo code in [Control_Firefly_AQuRA_Qt](https://github.com/opticsfoundry/OpticsFoundry_Control_Qt).
 
 
 The ControlAPI is basically Control.exe, just running without showing the GUI, as a DLL. This means it is configured like Control.exe. One difference is how one points the DLL to the folder in which the configuration files are. For ControlAPI, you specify this folder when you call "ConnectToLowLevelSoftware", see the definition of ParamFileDirectory in TestSequence.cpp. For example  
@@ -216,7 +236,9 @@ By defining or not defining
 _#define USE_CA_DLL_  
 If you use the TCPIP mode, search for "192.168." and adjust the IP adress to the one of the computer on which Control.exe is running. Make sure that Control.exe starts the ControlAPI sever, by enabling that option in the system parameter menus.  
 
-In either mode, you need to select the IP address of the FPGA. You do this using a Python hardware configuration script, which is described in Section 3) Control.exe.  
+In either mode, you need to select the IP address of the FPGA. You do this using a Python hardware configuration script, which is described in section [Configuration of Control.exe](#configuration-of-controlexe).  
+
+### Recompiling Control.dll
 
 To recompile Control.dll, open Control.sln in Visual Studio 2022. Select Debug, x64 in the toolbar. 
 
