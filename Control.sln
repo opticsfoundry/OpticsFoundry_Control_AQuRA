@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manual", "Manual", "{8EC462
 		Manual\InstallationAndConfigurationOfControlEXE.md = Manual\InstallationAndConfigurationOfControlEXE.md
 		Manual\ProgrammingSequences.md = Manual\ProgrammingSequences.md
 		README.md = README.md
-		UserInterface.md = UserInterface.md
+		Manual\UserInterface.md = Manual\UserInterface.md
 	EndProjectSection
 EndProject
 Global
