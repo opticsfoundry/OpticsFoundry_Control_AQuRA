@@ -90,6 +90,7 @@ void CSequence::SwitchZSOff() {
 ```
 
 This code block takes care of declaring and registering all parameters on which the code block depends and on describing the experimental sequence part that is executed when the code block is selected.
+Registering the parameters automatically creates a user interface entry for them, safes/loads them to/from disk and transfers them to the data analysis program with each run.
 
 In the following, we introduce how experimental sequences are programmed, and then how such sequences are used to define code blocks of the experimental sequence, utilities or Idle and WakeUp safety functions.
 
@@ -630,7 +631,8 @@ The main experimental sequence describes what should happen during the run of th
 
 Let us start with an overview. The "Run experiment" button on the user interface calls _CSequence::DoExperimentalSequence_. This procedure performs preparation work if necessary. The system might be initialized, the fluorescence trigger function might be prepared, some parameters of the sequence might be calculated and checked for consistency and validity. If everything is fine, the cameras are prepared for absorption imaging if required and finally the experimental sequence is prepared and executed as described in Sec.~\ref{Sec:SimpleSequence}. After the sequence has been executed, the parameters are transferred to the data acquisition program, the experiment is reinitialized and the status of the machine is checked. All this will be described in more detail in Sec.~\ref{Sec:DoExperimentalSequence}.
 
-The actual experimental sequence is programmed in _CSequence::ExperimentalSequence_. It starts with the _StartSequence_ command, which this time contains a link to a function used to trigger the sequence when the MOT is sufficiently loaded. This trigger function is discussed in Sec.~\ref{Sec:FluorescenceTrigger}. Then the experimental sequence is described and finally stopped with the _StopSequence_ command. To simplify the organization of the experimental sequence, it is divided into code blocks. The next section explains how to do that.
+The actual experimental sequence is programmed in _CSequence::ExperimentalSequence_. It starts with the _StartSequence_ command, which this time contains a link to a function used to trigger the sequence when the MOT is sufficiently loaded. This trigger function is discussed in Sec.~\ref{Sec:FluorescenceTrigger}. Then the experimental sequence is described and finally stopped with the _StopSequence_ command. To simplify the organization of the experimental sequence, it is divided into code blocks.
+
 
 &nbsp;
 
