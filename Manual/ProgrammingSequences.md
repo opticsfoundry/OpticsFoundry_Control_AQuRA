@@ -5,22 +5,93 @@ If you want to start quickly, read from the beginning to section [Time reorderin
 
 *Table of content*
 
-1. [Modes of command execution](#modes-of-command-execution)
-2. [Programming simple sequences](#programming-simple-sequences)
+1. [Introduction](#introduction)
+2. [Modes of command execution](#modes-of-command-execution)
+3. [Programming experimental sequences](#programming-experimental-sequences)
    - [Timing commands](#timing-commands)
    - [Time reordering](#time-reordering)
    - [Timing accuracy](#timing-accuracy)
    - [Storing and retrieving output values](#storing-and-retrieving-output-values)
    - [Software waveforms](#software-waveforms)
-   - [Serial port device and GPIB device programming](#serial-port-device-and-gpib-device-programming)
-   - [Code example "Position Servo"](#code-example-position-servo)
-   - [Loops](#loops)
-3. [Idle and WakeUp function](#idle-and-wakeup-function)
+   - [Serial, GPIB, and VISA device programming](#serial-gpib-and-visa-device-programming)
+   - [Code example "Position Servo"](#code-example-position-servo)  
 4. [Main experimental sequence](#main-experimental-sequence)
    - [Experimental sequence code blocks](#experimental-sequence-code-blocks)
 5. [Utilities](#utilities)]
+   - [Loops](#loops)
+6. [Idle and WakeUp function](#idle-and-wakeup-function)
 
 Back to [Overview](../README.md).
+
+&nbsp;
+
+## Introduction
+
+The main experimental sequence is programmed in _Sequence_Main.cpp_ in _CSequence::MainExperimentalSequence()_. Here is the one used for the AQuRA clock:  
+```CPP
+//Main experimental sequence
+void CSequence::MainExperimentalSequence() {
+	if (AssemblingParamList()) ParamList->NewMenu("Shutter timing", IDM_MENU_0);
+	ShutterTimingMenu();
+	if (AssemblingParamList()) ParamList->NewMenu("AQuRA clock sequence", IDM_MENU_0);
+	InitializeSystemAtBeginningOfRun();
+	CheckMOTLoading();
+	SetElectricFields(/* Nr*/ 0);
+	SwitchZSOff();
+	SwitchZSOn();
+	SwitchBlueMOTOff();
+	SequenceBlockRampMOTCoilCurrent(/*Nr*/0);
+	RampRedMOT(/* Nr */ 0, /* BroadbandRedMOT */ true);
+	RampRedMOT(/* Nr */ 1, /* BroadbandRedMOT */ true);
+	SwitchToSingleFrequencyRedMOT();
+	RampRedMOT(/* Nr */ 2, /* BroadbandRedMOT */ false);
+	if (AssemblingParamList()) ParamList->NewMenu("Clock interrogation", IDM_MENU_0);
+	RampRedMOT(/* Nr */ 3, /* BroadbandRedMOT */ false);
+	SwitchRedMOTOff();
+	OpticalPumping();
+	//if (AssemblingParamList()) ParamList->NewMenu("Interrogation stage", IDM_MENU_0);
+	RampToInterrogationConditions();
+	CoarseClockSpectroscopy();
+	ClockInterrogation();
+	ClockReadout();
+	AnalogIn();
+	if (AssemblingParamList()) ParamList->NewMenu("Fluorescence imaging", IDM_MENU_0);
+	SwitchBlueFluorescenceDetectionMOTOn();
+	SwitchRedFluorescenceDetectionMOTOn();
+	SwitchBlueFluorescenceProbeBeamOn();
+	TakePicture();
+	//switch back to blue MOT
+	if (AssemblingParamList()) ParamList->SwitchRegistration(Off); //We already added the param menus for the Initialization. We shouldn't do that twice, so we switch PatameterList addition off.
+	ExampleCodeBlock();
+	InitializeSystem(/* OnlyFast */true);
+	if (AssemblingParamList()) {
+		ParamList->SwitchRegistration(On);
+		ParamList->NewMenu("Final stage (direct mode)", IDM_MENU_0);
+	}
+}
+```
+
+The experimental sequence is segmented in blocks of code, each block performing a certain task and implemented as a method of _CSequence_. A simple example of such a code block is  
+```CPP
+//Switch ZS off
+void CSequence::SwitchZSOff() {
+	static bool DoSwitchZSOff;
+	static double SwitchZSOffWait;
+	if (!AssemblingParamList()) {
+		if (!Decision("DoSwitchZSOff")) return;
+		SwitchZSShutter(Off);
+		Wait(SwitchZSOffWait, 1456);
+	}
+	else {
+		ParamList->RegisterBool(&DoSwitchZSOff, "DoSwitchZSOff", "Switch ZS off ?", "ZO");
+		ParamList->RegisterDouble(&SwitchZSOffWait, "SwitchZSOffWait", 0, 2000, "Wait", "ms");
+	}
+}
+```
+
+This code block takes care of declaring and registering all parameters on which the code block depends and on describing the experimental sequence part that is executed when the code block is selected.
+
+In the following, we introduce how experimental sequences are programmed, and then how such sequences are used to define code blocks of the experimental sequence, utilities or Idle and WakeUp safety functions.
 
 
 &nbsp;
@@ -67,7 +138,7 @@ Output->InOutScaledNormalMode();
 
 &nbsp;
 
-## Programming simple sequences
+## Programming experimental sequences
 
 Let us start to program a simple sequence of output commands. The following example sequences could be placed in a method of _CSequence_ that is called by pressing a button on the user interface; see Sec.~\ref{sec:Buttons}.
 
@@ -444,9 +515,9 @@ The calculation of waveforms can be sped up by running the control program in "R
 
 *Optional information end*
 
-### Serial port device and GPIB device programming
+### Serial, GPIB, and VISA device programming
 
-The configuration of serial port devices and GPIB devices and he format of the commands to those devices was discussed in Sec.~\ref{sec:SerialOrGPIBClass}. Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
+The configuration of serial port devices, GPIB devices and VISA devices and the format of the commands to those devices was discussed in Sec.~\ref{sec:SerialOrGPIBClass}. Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
 
 Commands to serial devices can be used in direct output mode and in waveform generation mode. In waveform generation mode only output commands are allowed since the system can not wait for feedback. In direct output mode all types of commands are allowed. Synchronization of serial device commands with the sequence sent out through the national instruments cards is done by checking the progress of the waveform output from time to time. If the time comes close to the moment a serial device command needs to be sent, the software will stop doing anything else than checking the output progress. As soon as the output time has been reached the serial port command is sent. This usually works with a timing precision of better than 1\,ms. The computer will check the progress of waveform output again after the serial command has been sent. If the time laps is more than specified using the _Output->SetMaxSyncCommandDelay(0.01);_ command  in _CSequence::ConfigureHardware()_ (here 10 ms) an error message will be displayed.
 
@@ -552,138 +623,6 @@ Output->ChannelReservationList.CheckDigitalChannelReservation(
 ```  
 command reserves the hardware digital channel of this servo motor for the time required for the motor action to occur. If two _PositionServo_ commands reserve overlapping time windows on the same channel, an error message is generated. The _for_ loop generates the pulse sequence required for the servo motor.
 
-&nbsp;
-
-### Loops
-
-Sometimes you would like to program a sequence of commands that repeats till the user cancels it. The following programming example shows how to create a dialog box that displays some text, has a status bar and a cancel button. The code is executed till the dialog box is closed. Instead of the simple code switching the fiber MOT PIDs reference signal to 0 Volts and then back to its original value in direct output mode, you could also implement sophisticated sequences in waveform mode.  
-```CPP
-void CSequence::BlinkMOTFiber(CWnd* parent) {	
-  if ((CancelLoopDialog == NULL) && (parent)) {
-    CancelLoopDialog = new CExecuteMeasurementDlg(parent,this);					
-    CancelLoopDialog->Create();		
-    CancelLoopDialog->SetWindowPos( &CWnd::wndTop ,100,200,150,150, SWP_NOZORDER
-      | SWP_NOSIZE | SWP_DRAWFRAME );
-  }
-  int LoopNr=0;
-  while ((CancelLoopDialog) && (LoopNr<10)) {
-    LoopNr++;
-    if (CancelLoopDialog) CancelLoopDialog->SetData("MOT fiber off",
-      /*StatusBarAktValue*/0,/*StatusBarMaxValue*/1,/*PumpMessages*/true);
-    else return;
-    IOList.StoreAnalogOutValue("SetSrBlueMOTFiberReference");
-    SetSrBlueMOTFiberReference(0);
-    double TimeOver=0;
-    while ((CancelLoopDialog) && (TimeOver<100)) {
-      CancelLoopDialog->PumpMessages();
-      Wait(1);
-      TimeOver=TimeOver+1;
-    }
-    if (CancelLoopDialog) CancelLoopDialog->SetData("MOT fiber on",
-      /*StatusBarAktValue*/1,/*StatusBarMaxValue*/1,/*PumpMessages*/true);		
-    IOList.RecallAnalogOutValue("SetSrRedMOTFiberReference");
-    TimeOver=0;
-    while ((CancelLoopDialog) && (TimeOver<100)) {
-      CancelLoopDialog->PumpMessages();
-      Wait(1);
-      TimeOver=TimeOver+1;
-    }
-  }
-  if (CancelLoopDialog) {
-    CancelLoopDialog->DestroyWindow();		
-    CancelLoopDialog=NULL;
-  }
-}
-```  
-The _CWnd* parent_ parameter in the _BlinkMOTFiber_ function call is required to link the new window to its parent. _BlinkMOTFiber_ is called as explained in Sec.~\ref{sec:Buttons} in _CSequence::MessageMap_ by  
-```CPP
-case IDM_BLINK_MOT_FIBER: BlinkMOTFiber(parent); break;
-```  
-delivering this parameter. In this example the loop is executed at the most 10 times.
-
-You can also create your own dialogs with other elements than text and status bar by duplicating _CExecuteMeasurementDlg_, renaming it to _CMyDlg_ and modifying it so that it fits your needs. Use the resource editor to draw your dialog. You then need to add  
-```CPP
-#include "MyDlg.h"
-static CMyDlg *MyCancelLoopDialog=NULL;
-```  
-to _sequence_XYZ.cpp_, _CancelLoopDialog=NULL;_ to the constructor _CSequence::CSequence_ and   
-```CPP
-if (MyCancelLoopDialog) {
-  MyCancelLoopDialog->DestroyWindow();		
-  MyCancelLoopDialog=NULL;
-}
-```  
-to the destructor _CSequence::~CSequence_ and  
-```CPP
-if (me==CancelLoopDialog) (CancelLoopDialog = NULL);
-```  
-to _CSequence::ExecuteMeasurementDlgDone_. You can open the dialog and detect its status along the lines of the code example given above.  
-
-&nbsp;
-
-## Idle and WakeUp function
-
-If no action is performed by the program the _CSequence::Idle(CWnd* parent)_ function is called. When buttons are pressed or an experimental sequence starts or stops the _CSequence::WakeUp()_ function is called. This can be used to put sensitive or dangerous equipment like powerful lasers or power supplies in a save mode when no user is present and nothing is done with the experiment.
-
-Here is the implementation of the idle function.  
-```CPP
-bool InIdle=false;
-
-void CSequence::Idle(CWnd* parent) {
-  if (InIdle) return;
-  InIdle=true;	
-  bool CreateCancelDialog=!SaveMode;
-  double TimeSinceLastBoot=GetSystemTime();//in seconds
-  double ElapsedTime=TimeSinceLastBoot-LastWakeUpTime;
-  if ((OvenShutterOffTime>0) && (ElapsedTime>OvenShutterOffTime) &&
-      (!OvenShutterSaveMode)) {
-    OvenShutterSaveMode=true;
-    SaveMode=true;
-    SwitchOvenShutter(Off);
-    PlaySound("d:\\SrBEC\\ControlSrBEC\\Sound\\StarTrek\\C818.WAV",NULL,SND_FILENAME);
-  }
-  ... some more devices brought to save mode here
-  if (SaveMode) {
-    if (CreateCancelDialog && (IdleDialog == NULL) && (parent)) {
-      IdleDialog = new CExecuteMeasurementDlg(parent,this);					
-      IdleDialog->Create();		
-      IdleDialog->SetWindowPos( &CWnd::wndTop ,100,200,150,150, SWP_NOZORDER |
-                                SWP_NOSIZE | SWP_DRAWFRAME );			
-    }
-    if (IdleDialog) {
-      CString buf;
-      buf.Format("Save mode activated\n\nOven shutter : %s\nPower supplies : %s",
-        (OvenShutterSaveMode) ? "Off" : "On",(PowerSupplySaveMode) ? "Off" : "On");
-      unsigned long ElapsedTimeInt=(unsigned long)ElapsedTime;
-      IdleDialog->SetData(buf,ElapsedTimeInt%2,1,false);
-      CheckDevices();		
-    } else WakeUp();
-  }
-  InIdle=false;
-}
-```  
-The variable _InIdle_ assures it is only entered once. If no action occurred for longer than _OvenShutterOffTime_ and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec.~\ref{Sec:Loops}. Then the control is return to the caller of _CSequence::Idle_ which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
-
-Sometimes it is also useful to not execute a task directly (because something timing critical needs to be done), but wait with it for some better time. A flag could be set instead of performing the task. This flag could be checked in _CSequence::Idle_. If it is set, the task is executed and the flag cleared.
-
-As soon as the user clicks on any button or changes a menu _CSequence::WakeUp()_ is called. It inhibits entering of the save mode, or exits the save mode.  
-```CPP
-void CSequence::WakeUp() {
-  LastWakeUpTime=GetSystemTime();
-  if (OvenShutterSaveMode) {		
-    OvenShutterSaveMode=false;
-    SwitchOvenShutter(On);
-  }
-  ...  some more devices brought out of save mode here
-  if (IdleDialog) {
-    IdleDialog->DestroyWindow();		
-    IdleDialog=NULL;
-  }
-  SaveMode=false;
-}
-```  
-
-&nbsp;
 
 # Main experimental sequence
 
@@ -772,7 +711,10 @@ call the system is in the assemble sequence list mode, _AssembleParamList()_ del
 
 ## Utilities
 
-Utilities are small experimental sequences that perform simple tasks like testing a shutter. Programming of utilities is simplified by a scheme that follows the programming of code blocks closely. Here is an example:  
+Utilities are small experimental sequences that perform simple tasks like testing a shutter. They are contained in _Sequence_Utilities.cpp_.
+_
+
+Programming of utilities is simplified by a scheme that follows the programming of code blocks closely. Here is an example:  
 ```CPP
 //Utility DebugVision
 bool CSequence::DebugVision(unsigned int Message, CWnd* parent) {
@@ -800,16 +742,180 @@ bool CSequence::DebugVision(unsigned int Message, CWnd* parent) {
 ```  
 Again the parameters on which the utility depends are defined above the method containing the code of the utility. And again this method contains two parts, the first containing the sequences that are executed if a certain button on the user interface is pressed and another part containing the registration of the parameters and declarations of the buttons. This time the registration commands have to be preceded by _UtilityDialog->" since the parameters are integrated into the utility dialog. When a button is pressed, the same code is called again, but this time _AssemblingUtilityDialog()_ is false and the first part of the code is executed. The switch statement selects the code associated with a specific button. This code can contain sequences executed in waveform mode or loops. To be able to implement loops, the _CWnd* parent_ parameter is available.
 
-Each such utility needs to be called in _CSequence::MainUtilities_ as follows.  
+Each such utility needs to be called in _CSequence::SequenceUtilities_ as follows.  
 ```CPP
-bool CSequence::MainUtilities(unsigned int Message, CWnd* parent) {
-   bool Received=false;
-   if (AssemblingUtilityDialog()) UtilityDialog.NewMenu("Utilities");
-   Received|=TestSequence(Message,parent);
-   Received|=DebugVision(Message,parent);
-   ...			
-   return Received;
+// MainUtilities arranges functions module block on User interface
+//If you want to add more utilities, follow this style.
+bool CSequence::SequenceUtilities(unsigned int Message, CWnd* parent) {
+	bool Received = false;
+	
+	if (AssemblingUtilityDialog()) {
+		UtilityDialog->NewMenu("User utilities");
+		UtilityDialog->AddStatic("Run AQuRA clock");
+	}
+	Received |= UtilityRunClock(Message, parent);
+
+	if (AssemblingUtilityDialog()) {
+		//UtilityDialog->NewColumn();
+		UtilityDialog->AddStatic("User utilities");
+		//		UtilityDialog->AddStatic("");
+	}
+	Received |= UtilityTestSequence(Message, parent);
+	Received |= UtilityTest448nmCavityAnalogOut(Message, parent);
+	Received |= UtilityBlinkShutters(Message, parent);
+	
+    ... more utilities here ...
+	
+    return Received;
 }
 ```  
 Take a look at the other examples called there to get a good impression of what is possible.
 
+&nbsp;
+
+### Loops
+
+Sometimes you would like to program a utility that consists of a sequence of commands that repeats till the user cancels it. The following programming example shows how to create a dialog box that displays some text, has a status bar and a cancel button. The code is executed till the dialog box is closed. Instead of the simple code switching the fiber MOT PIDs reference signal to 0 Volts and then back to its original value in direct output mode, you could also implement sophisticated sequences in waveform mode (using the code that is commented out below).  
+```CPP
+	//Utility UtilitySweepMOTFrequency
+	bool CSequence::UtilitySweepMOTFrequency(unsigned int Message, CWnd* parent)
+	{
+		static double SweepMOTFrequencyFrequencyStart;
+		static double SweepMOTFrequencyFrequencyStop;
+		static double SweepMOTFrequencyStepSize;
+
+		if (!AssemblingUtilityDialog()) {
+			if (Message != IDM_SWEEP_MOT_FREQUENCY) return false;
+			if ((CancelLoopDialog == NULL) && (parent)) {
+				CancelLoopDialog = new CExecuteMeasurementDlg(parent, this);
+				CancelLoopDialog->Create();
+				CancelLoopDialog->SetWindowPos(&CWnd::wndTop, 100, 200, 150, 150, SWP_NOZORDER | SWP_NOSIZE | SWP_DRAWFRAME);
+			}
+			bool DirectionUp = true;
+			double MOTFrequency = SweepMOTFrequencyFrequencyStart;
+			while (CancelLoopDialog) {
+				CString buf;
+				buf.Format("MOT Frequency %.2f MHz", MOTFrequency);
+				if (CancelLoopDialog) CancelLoopDialog->SetData(buf, 100 * (MOTFrequency - SweepMOTFrequencyFrequencyStart)/(SweepMOTFrequencyFrequencyStop - SweepMOTFrequencyFrequencyStart), 100);
+				if (!CancelLoopDialog) return true;
+				//SetAssembleSequenceListMode();
+				//StartSequence(NULL, parent, false);
+				SetFrequencyBlueMOTDPAOM(MOTFrequency);
+				//StopSequence();
+				//SetWaveformGenerationMode();
+				//ExecuteSequenceList(/*ShowRunProgressDialog*/false);
+				if (DirectionUp) {
+					MOTFrequency += SweepMOTFrequencyStepSize;
+					if (MOTFrequency >= SweepMOTFrequencyFrequencyStop) {
+						MOTFrequency = SweepMOTFrequencyFrequencyStop;
+						DirectionUp = false;
+					}
+				}
+				else {
+					MOTFrequency -= SweepMOTFrequencyStepSize;
+					if (MOTFrequency <= SweepMOTFrequencyFrequencyStart) {
+						MOTFrequency = SweepMOTFrequencyFrequencyStart;
+						DirectionUp = true;
+					}
+				}
+			}
+		}
+		else {
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyFrequencyStart, "SweepMOTFrequencyFrequencyStart", 160, 240, "MOT DP AOM frequency start", "MHz");
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyFrequencyStop, "SweepMOTFrequencyFrequencyStop", 160, 240, "MOT DP AOM frequency stop", "MHz");
+			UtilityDialog->RegisterDouble(&SweepMOTFrequencyStepSize, "SweepMOTFrequencyStepSize", 0, 10, "Frequency step", "MHz");
+			UtilityDialog->AddButton(IDM_SWEEP_MOT_FREQUENCY, Sequence);
+			UtilityDialog->AddStatic("");
+		}
+		return true;
+	}
+```  
+The _CWnd* parent_ parameter in the _UtilitySweepMOTFrequency_ function call is required to link a new window to its parent.  
+
+
+
+You can also create your own dialogs with other elements than text and status bar by duplicating _CExecuteMeasurementDlg_, renaming it to _CMyDlg_ and modifying it so that it fits your needs. Use the resource editor to draw your dialog. You then need to add  
+```CPP
+#include "MyDlg.h"
+static CMyDlg *MyCancelLoopDialog=NULL;
+```  
+to _sequence_XYZ.cpp_, _CancelLoopDialog=NULL;_ to the constructor _CSequence::CSequence_ and   
+```CPP
+if (MyCancelLoopDialog) {
+  MyCancelLoopDialog->DestroyWindow();		
+  MyCancelLoopDialog=NULL;
+}
+```  
+to the destructor _CSequence::~CSequence_ and  
+```CPP
+if (me==CancelLoopDialog) (CancelLoopDialog = NULL);
+```  
+to _CSequence::ExecuteMeasurementDlgDone_. You can open the dialog and detect its status along the lines of the code example given above.  
+
+
+
+&nbsp;
+
+## Idle and WakeUp function
+
+If no action is performed by the program the _CSequence::Idle(CWnd* parent)_ function is called. When buttons are pressed or an experimental sequence starts or stops the _CSequence::WakeUp()_ function is called. This can be used to put sensitive or dangerous equipment like powerful lasers or power supplies in a save mode when no user is present and nothing is done with the experiment.
+
+Here is the implementation of the idle function.  
+```CPP
+bool InIdle=false;
+
+void CSequence::Idle(CWnd* parent) {
+  if (InIdle) return;
+  InIdle=true;	
+  bool CreateCancelDialog=!SaveMode;
+  double TimeSinceLastBoot=GetSystemTime();//in seconds
+  double ElapsedTime=TimeSinceLastBoot-LastWakeUpTime;
+  if ((OvenShutterOffTime>0) && (ElapsedTime>OvenShutterOffTime) &&
+      (!OvenShutterSaveMode)) {
+    OvenShutterSaveMode=true;
+    SaveMode=true;
+    SwitchOvenShutter(Off);
+    PlaySound("d:\\SrBEC\\ControlSrBEC\\Sound\\StarTrek\\C818.WAV",NULL,SND_FILENAME);
+  }
+  ... some more devices brought to save mode here
+  if (SaveMode) {
+    if (CreateCancelDialog && (IdleDialog == NULL) && (parent)) {
+      IdleDialog = new CExecuteMeasurementDlg(parent,this);					
+      IdleDialog->Create();		
+      IdleDialog->SetWindowPos( &CWnd::wndTop ,100,200,150,150, SWP_NOZORDER |
+                                SWP_NOSIZE | SWP_DRAWFRAME );			
+    }
+    if (IdleDialog) {
+      CString buf;
+      buf.Format("Save mode activated\n\nOven shutter : %s\nPower supplies : %s",
+        (OvenShutterSaveMode) ? "Off" : "On",(PowerSupplySaveMode) ? "Off" : "On");
+      unsigned long ElapsedTimeInt=(unsigned long)ElapsedTime;
+      IdleDialog->SetData(buf,ElapsedTimeInt%2,1,false);
+      CheckDevices();		
+    } else WakeUp();
+  }
+  InIdle=false;
+}
+```  
+The variable _InIdle_ assures it is only entered once. If no action occurred for longer than _OvenShutterOffTime_ and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec.~\ref{Sec:Loops}. Then the control is return to the caller of _CSequence::Idle_ which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
+
+Sometimes it is also useful to not execute a task directly (because something timing critical needs to be done), but wait with it for some better time. A flag could be set instead of performing the task. This flag could be checked in _CSequence::Idle_. If it is set, the task is executed and the flag cleared.
+
+As soon as the user clicks on any button or changes a menu _CSequence::WakeUp()_ is called. It inhibits entering of the save mode, or exits the save mode.  
+```CPP
+void CSequence::WakeUp() {
+  LastWakeUpTime=GetSystemTime();
+  if (OvenShutterSaveMode) {		
+    OvenShutterSaveMode=false;
+    SwitchOvenShutter(On);
+  }
+  ...  some more devices brought out of save mode here
+  if (IdleDialog) {
+    IdleDialog->DestroyWindow();		
+    IdleDialog=NULL;
+  }
+  SaveMode=false;
+}
+```  
+
+&nbsp;
