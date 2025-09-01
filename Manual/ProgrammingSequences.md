@@ -394,6 +394,8 @@ _RemoveWaveformGroup_ removes all waveforms belonging to the group specified fro
 
 Another usage of the _RemoveWaveformGroup_ could be to stop a waveform group in a certain code block, that was started in a different code block and running since then.
 
+#### Waveforms provided
+
 The waveforms provided are _CRamp_, _CSineRamp_, _CParabolicRamp_, _CSin_, _CPulse_, _CRectangle_, _CSquare_, _CDelayedWaveform_, and _CTimeStretch_ and a short overview of those waveforms is given in the following.  
 ```CPP
 CRamp(CString OutputName, double Start, double Stop,
@@ -504,7 +506,7 @@ Meaning of parameters:
 
 The _Grid2DWavform_ acts on two outputs at the same time. The example given is foreseen to be used with a crossed AOM setup, deflecting a dipole trap laser beam horizontally and vertically. In the same way one could create a class that would rotate the dipole trap laser beam around a center. The ellipticity and symmetry axis of the trap could be influenced at the same time by other waveforms. In this way it is possible to create the dipole trap motion required to create for example vortice lattices using the stirring method. The bus systems data rate is more than enough to allow to implement this in software. For fun, we also implemented a [laser show](https://www.youtube.com/watch?v=JYKxTyi-v-E) in this manner, displaying text or rotating 3D meshes (ask us if you want the code).   
 
-Adding new waveforms
+#### Adding new waveforms
 
 It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming _ramp.h_ and _ramp.cpp_. Next rename the _CRamp_ class in the newly created files and add those file to the project as described in Sec.~\ref{sec:SerialOrGPIBClass}. The waveform is initialized in the _Init_ method, which is only called once when the waveform is started. The output is updated in the _SetOutputs_ function. If this function returns _false_ the waveform will be deleted from the list of waveforms.
 
