@@ -132,10 +132,7 @@ Value2
 Value3
 
 ```
-(There must be _NrPoints_ values in the list, one per line. Each line must be terminated by enter.)
-
-
-
+(There must be _NrPoints_ values in the list, one per line. Each line must be terminated by enter.) By defining one such list for each parameter that is varied, one can easily perform arbitrary scans including up to four parameters.
 
 
 The button "Execute" executes the measurement series directly.  
@@ -156,6 +153,12 @@ If you want to add data points to an ongoing measurement series, check "Continue
 
 You can start a measurement from a certain point in the series, given in "Start measurement point". This is useful when something went wrong with the execution of a long series. It also works for randomized series, as they use pseudo-random numbers with the same seed.
 
+Here is an example showing the usefulness of "linking" parameters:
+
+![Red MOT frequency scan dialog](Images/MeasurementExampleRedMOTFrequency.png)
+
+This example is searching for the correct red MOT frequency. The red MOT AOM is scanned between a start and a stop frequency. If we would scan only one of these frequencies we would change the scan range, which we don't want to do.
+Therefore we scan the start and stop frequency in parallel by "Linking" the measurements, keeping the scan range constant.
 
 
 
