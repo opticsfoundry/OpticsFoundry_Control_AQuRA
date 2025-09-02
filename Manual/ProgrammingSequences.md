@@ -141,7 +141,7 @@ Output->InOutScaledNormalMode();
 
 ## Programming experimental sequences
 
-Let us start to program a simple sequence of output commands. The following example sequences could be placed in a method of _CSequence_ that is called by pressing a button on the user interface; see Sec.~\ref{sec:Buttons}.
+Let us start to program a simple sequence of output commands. The following example sequences could be placed in a method of _CSequence_ that is called by pressing a button on the user interface; see Sec. {sec:Buttons}.
 
 Very simple sequences of commands can be executed in *direct mode*. Here as example a simple output sequence that discards atoms from the magneto-optical trap (MOT) until the MOT fluorescence is below a given threshold.  
 ```CPP
@@ -170,7 +170,7 @@ The _SetAssembleSequenceListMode()_ command tells the system to place each subse
 
 ### Timing commands
 
-Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime_in_ms)_ command. The system will simply wait for the specified time. This does not necessarily mean that nothing is written on the output ports during that time. Output commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec.~\ref{sec:Waveforms}. For debugging purposes, a second, optional parameter called "Wait ID" can be specified   
+Timing commands are used to separate output commands in time and to reorder the timing sequence of output commands. Time is always specified in milliseconds. The basic timing command is the _Wait(WaitTime_in_ms)_ command. The system will simply wait for the specified time. This does not necessarily mean that nothing is written on the output ports during that time. Output commands might have slipped into that wait period by time reordering commands. And software waveforms might be executed on some outputs; see Sec. [Software waveforms](#software-waveforms). For debugging purposes, a second, optional parameter called "Wait ID" can be specified   
 ```CPP
 Wait(/*Time in ms*/WaitTime,/*optional Wait ID*/1234);
 ```   
@@ -208,7 +208,7 @@ The _SyncToLine_ command works only in waveform generation mode. And only if the
 
 #### Time reordering
 
-Sometimes it is useful to perform an output command before the position where the command appears in the source code. As we will see in Sec.~\ref{Sec:CodeBlocks}, the source code is usually segmented in blocks of code dedicated to perform a step in the experimental sequence. Such a step could be the flash of a laser beam. Laser beams are often blocked by mechanical shutters, which need several milliseconds to open. Thus the command to open the shutter needs to be given before the laser beam is used, which usually means: before the code block in which the laser beam is used. To execute the command at the correct time, time reordering commands are used. Here an implementation of the example discussed.  
+Sometimes it is useful to perform an output command before the position where the command appears in the source code. As we will see in Sec. [Main experimental sequence](#main-experimental-sequence), the source code is usually segmented in blocks of code dedicated to perform a step in the experimental sequence. Such a step could be the flash of a laser beam. Laser beams are often blocked by mechanical shutters, which need several milliseconds to open. Thus the command to open the shutter needs to be given before the laser beam is used, which usually means: before the code block in which the laser beam is used. To execute the command at the correct time, time reordering commands are used. Here an implementation of the example discussed.  
 ```CPP
 void CSequence::LaserFlash() {
     //We open the shutter before the sequence time at the start of this method
@@ -280,7 +280,7 @@ void CSequence::LaserFlash(int Nr) {
     }
 }
 ```   
-The parameters of this code block now depend on the _Nr_ parameter of the procedure. The user would select to open the shutter, but not close it the first time this code block is called. The second time the shutter would be not opened but only closed. More information on how to properly program code blocks will be given in Sec.~\ref{Sec:CodeBlocks}.
+The parameters of this code block now depend on the _Nr_ parameter of the procedure. The user would select to open the shutter, but not close it the first time this code block is called. The second time the shutter would be not opened but only closed. More information on how to properly program code blocks will be given in Sec. [Main experimental sequence](#main-experimental-sequence).
 
 &nbsp;
 
@@ -314,7 +314,7 @@ Here at least the commands directly before and after the _SwitchFlashAOM_ will n
 
 ### Storing and retrieving output values
 
-It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations, for example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec.~\ref{Sec:IdleAndWakeUpFunction}.
+It is possible to store the values of output channels and retrieve those values later. This can be useful in some special situations, for example fluorescence measurements. Here, a pair of measurements, one with, one without atoms is taken and the signal from the atoms is extracted. To recreate the background light situation for the background measurement, the setting of the MOT laser beam during the first measurement can be stored. The laser is then briefly switched off to discard the atoms and brought back to the initial value for the background measurement. By storing and retrieving the output value, the measurement procedure will work whatever setting the MOT laser had before the measurement. Another example can be found in Sec. [Idle and WakeUp function](#idle-and-wakeup-function).
 
 The commands used to store and retrieve the output value are  
 ```CPP
@@ -508,7 +508,7 @@ The _Grid2DWavform_ acts on two outputs at the same time. The example given is f
 
 #### Adding new waveforms
 
-It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming _ramp.h_ and _ramp.cpp_. Next rename the _CRamp_ class in the newly created files and add those file to the project as described in Sec.~\ref{sec:SerialOrGPIBClass}. The waveform is initialized in the _Init_ method, which is only called once when the waveform is started. The output is updated in the _SetOutputs_ function. If this function returns _false_ the waveform will be deleted from the list of waveforms.
+It is easy to add more waveforms by creating new waveform classes. To do this you could start by duplicating and renaming _ramp.h_ and _ramp.cpp_. Next rename the _CRamp_ class in the newly created files and add those file to the project as described in Sec. [Serial, GPIB, and VISA device programming](#serial-gpib-and-visa-device-programming). The waveform is initialized in the _Init_ method, which is only called once when the waveform is started. The output is updated in the _SetOutputs_ function. If this function returns _false_ the waveform will be deleted from the list of waveforms.
 
 Waveforms can be made dependent on other waveforms. For example in a scanning AOM setup which should stir a laser beam in a circle, the two scanning AOMs should change their frequencies in phase. This can be achieved by defining a virtual analog output, that specifies the phase angle and is ramped linearly upwards. The analog out procedures controlling the AOMs frequencies calculate are made to calculate their frequencies in dependence of this phase angle. Variations of this scheme would allow changes in the ellipticity of the produced trap, rotation of the axis of the average potential and so forth.
 
@@ -520,11 +520,11 @@ The calculation of waveforms can be sped up by running the control program in "R
 
 ### Serial, GPIB, and VISA device programming
 
-The configuration of serial port devices, GPIB devices and VISA devices and the format of the commands to those devices was discussed in Sec.~\ref{sec:SerialOrGPIBClass}. Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
+The configuration of serial port devices, GPIB devices and VISA devices and the format of the commands to those devices was discussed in Sec. [Serial, GPIB, and VISA device programming](#serial-gpib-and-visa-device-programming). Here we discuss some additional aspects concerning the different programming modes and better integration into the system. In the following "serial device" will be used as short name for both types of devices.
 
 Commands to serial devices can be used in direct output mode and in waveform generation mode. In waveform generation mode only output commands are allowed since the system can not wait for feedback. In direct output mode all types of commands are allowed. Synchronization of serial device commands with the sequence sent out through the national instruments cards is done by checking the progress of the waveform output from time to time. If the time comes close to the moment a serial device command needs to be sent, the software will stop doing anything else than checking the output progress. As soon as the output time has been reached the serial port command is sent. This usually works with a timing precision of better than 1\,ms. The computer will check the progress of waveform output again after the serial command has been sent. If the time laps is more than specified using the _Output->SetMaxSyncCommandDelay(0.01);_ command  in _CSequence::ConfigureHardware()_ (here 10 ms) an error message will be displayed.
 
-Sometimes it is useful to send preparation commands to serial devices while the sequence list is assembled and store only a few commands in the sequence list. An example is the preparation of an arbitrary waveform generator. You would program the waveform beforehand and at the most send a trigger signal over the serial port (in case the waveform generator has no TTL trigger input). The programming looks nicer if the preparation of the generator and the trigger signal can be programmed close to each other in the experimental sequence (e.g. in the same code block, see Sec.~\ref{Sec:CodeBlocks}). This also guarantees that the generator is only reprogrammed if needed. To do this, use the following code.  
+Sometimes it is useful to send preparation commands to serial devices while the sequence list is assembled and store only a few commands in the sequence list. An example is the preparation of an arbitrary waveform generator. You would program the waveform beforehand and at the most send a trigger signal over the serial port (in case the waveform generator has no TTL trigger input). The programming looks nicer if the preparation of the generator and the trigger signal can be programmed close to each other in the experimental sequence (e.g. in the same code block, see Sec. [Experimental sequence code blocks](#experimental-sequence-code-blocks)). This also guarantees that the generator is only reprogrammed if needed. To do this, use the following code.  
 ```CPP
 //we are in the assemble sequence list mode here.
 Serial.SetDirectOutputMode();
@@ -535,7 +535,7 @@ Serial.SetStoreInSequenceListMode();
 //here commands to trigger the generator during sequence list execution.
 ```
 
-Sometimes it is useful to integrate one or a few function(s) of a serial device into the system as if it was a normal analog or digital output. This function can be for example be the frequency or intensity of a frequency generator or the pump diode current of a fiber laser. You would like to be able to change this frequency or intensity using the manual control panels and perform software waveforms on that function (e.g. to perform an evaporative cooling sweep by reducing the power of the dipole trap). After having integrated the serial device as discussed in Sec.~\ref{sec:SerialOrGPIBClass}, this additional behavior can be achieved by declaring, defining and registering an additional analog output, just as if it was an analog output on a national instruments card or the MultiIO bus system. The only difference occurs is the definition of the output procedure in _IOList.cpp_. It needs to look similar to the following code.  
+Sometimes it is useful to integrate one or a few function(s) of a serial device into the system as if it was a normal analog or digital output. This function can be for example be the frequency or intensity of a frequency generator or the pump diode current of a fiber laser. You would like to be able to change this frequency or intensity using the manual control panels and perform software waveforms on that function (e.g. to perform an evaporative cooling sweep by reducing the power of the dipole trap). After having integrated the serial device as discussed in Sec. [Serial, GPIB, and VISA device programming](#serial-gpib-and-visa-device-programming), this additional behavior can be achieved by declaring, defining and registering an additional analog output, just as if it was an analog output on a national instruments card or the MultiIO bus system. The only difference occurs is the definition of the output procedure in _IOList.cpp_. It needs to look similar to the following code.  
 ```CPP
 void Set100WIRLaserCurrent(double Current) {  	
   if (Output->InMenuUpdateMode()) return;
@@ -631,7 +631,7 @@ command reserves the hardware digital channel of this servo motor for the time r
 
 The main experimental sequence describes what should happen during the run of the experiment, typically starting with the loading of the magneto-optical trap and ending with some form of data acquisition like absorption imaging. It stands out from the other, simpler sequences in several ways. A button to start this sequence is integrated in every panel of the user interface. It is the sequence that will be called when taking automated sets of measurements. It provides some additional tools of organization that smaller sequences do not need.
 
-Let us start with an overview. The "Run experiment" button on the user interface calls _CSequence::DoExperimentalSequence_. This procedure performs preparation work if necessary. The system might be initialized, the fluorescence trigger function might be prepared, some parameters of the sequence might be calculated and checked for consistency and validity. If everything is fine, the cameras are prepared for absorption imaging if required and finally the experimental sequence is prepared and executed as described in Sec.\ref{Sec:SimpleSequence}. After the sequence has been executed, the parameters are transferred to the data acquisition program, the experiment is reinitialized and the status of the machine is checked. All this will be described in more detail in Sec.\ref{Sec:DoExperimentalSequence}.
+Let us start with an overview. The "Run experiment" button on the user interface calls _CSequence::DoExperimentalSequence_. This procedure performs preparation work if necessary. The system might be initialized, the fluorescence trigger function might be prepared, some parameters of the sequence might be calculated and checked for consistency and validity. If everything is fine, the cameras are prepared for absorption imaging if required and finally the experimental sequence is prepared and executed as described in Sec. [Programming experimental sequences](#programming-experimental-sequences). After the sequence has been executed, the parameters are transferred to the data acquisition program, the experiment is reinitialized and the status of the machine is checked. All this will be described in more detail in Sec.\ref{Sec:DoExperimentalSequence}.
 
 The actual experimental sequence is programmed in _CSequence::ExperimentalSequence_. It starts with the _StartSequence_ command, which this time contains a link to a function used to trigger the sequence when the MOT is sufficiently loaded. This trigger function is discussed in Sec.\ref{Sec:FluorescenceTrigger}. Then the experimental sequence is described and finally stopped with the _StopSequence_ command. To simplify the organization of the experimental sequence, it is divided into code blocks.
 
@@ -901,7 +901,7 @@ void CSequence::Idle(CWnd* parent) {
   InIdle=false;
 }
 ```  
-The variable _InIdle_ assures it is only entered once. If no action occurred for longer than _OvenShutterOffTime_ and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec.~\ref{Sec:Loops}. Then the control is return to the caller of _CSequence::Idle_ which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
+The variable _InIdle_ assures it is only entered once. If no action occurred for longer than _OvenShutterOffTime_ and this variable is >0, then the save mode is entered. The oven shutter is closed, a sound is played to alert the user that the save mode was entered. If no save mode dialog has been displayed before it is created now; see Sec. [Loops](#loops). Then the control is return to the caller of _CSequence::Idle_ which will most likely call it right afterwards again in case the user has not done anything. The status bar blinks every second and perhaps some additional devices are brought into save mode later.
 
 Sometimes it is also useful to not execute a task directly (because something timing critical needs to be done), but wait with it for some better time. A flag could be set instead of performing the task. This flag could be checked in _CSequence::Idle_. If it is set, the task is executed and the flag cleared.
 
