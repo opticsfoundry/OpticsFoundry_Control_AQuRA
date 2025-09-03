@@ -1253,7 +1253,7 @@ bool CEthernetMultiIOControllerOpticsFoundry::AddData(unsigned __int32* BusData,
 
 	//Add preamble for external clock and trigger setup
 
-	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency - 1);
+	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency);
 	if (DelayMultiplier < 1) DelayMultiplier = 1;
 
 	unsigned int StrobeDelay = ((DelayMultiplier + 1) / 3) - 1;

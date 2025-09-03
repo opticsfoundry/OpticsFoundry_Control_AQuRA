@@ -17,7 +17,7 @@ If you want to start quickly, read from the beginning to section [Time reorderin
    - [Code example "Position Servo"](#code-example-position-servo)  
 4. [Main experimental sequence](#main-experimental-sequence)
    - [Experimental sequence code blocks](#experimental-sequence-code-blocks)
-5. [Utilities](#utilities)]
+5. [Utilities](#utilities)
    - [Loops](#loops)
 6. [Idle and WakeUp function](#idle-and-wakeup-function)
 
