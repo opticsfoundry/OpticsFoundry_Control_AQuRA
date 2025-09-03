@@ -273,7 +273,7 @@ void CEthernetMultiIOControllerOpticsFoundry::StartXADCAnalogInAcquisition(unsig
 	high_buffer = INPUT_REPEAT_wait | (INPUT_REPEAT_trigger_secondary_interrupt_when_finished << (56-32)) | (INPUT_REPEAT_command << (57-32));
 	AddSequencerCommandToSequenceList( high_buffer, low_buffer);
 	
-	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency - 1);
+	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency);
 	if (DelayMultiplier < 1) DelayMultiplier = 1;
 	AddProgramLineToSequenceList(1, 0, DelayMultiplier*3-2); //CMD_STEP doing nothing, just in order to keep the time calculated by COutput aligned with the time used by the FPGA; needed because the two commands above only consume 2 FPGA cycles, but are accounted for with 2 bus cycles by COutput
 }
@@ -567,7 +567,7 @@ void CEthernetMultiIOControllerOpticsFoundry::WriteReadSPI(unsigned int chip_sel
 	high_buffer = (start_now << (40 - 32)) | (SPI_chip_select_next << 2) | (0x03 & SPI_SEL_next);
 	AddSequencerCommandToSequenceList(high_buffer, low_buffer);
 
-	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency - 1);
+	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency);
 	if (DelayMultiplier < 1) DelayMultiplier = 1;
 	//the following code needs to be checked if timing is crucial
 	if (DelayMultiplier == 1) {
@@ -667,7 +667,7 @@ void CEthernetMultiIOControllerOpticsFoundry::StartSPIAnalogInAcquisition(unsign
 	high_buffer = INPUT_REPEAT_wait | (INPUT_REPEAT_trigger_secondary_interrupt_when_finished << (56 - 32)) | (INPUT_REPEAT_command << (57 - 32));
 	AddSequencerCommandToSequenceList( high_buffer, low_buffer);
 
-	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency - 1);
+	unsigned __int32 DelayMultiplier = floor(FPGAClockFrequencyInHz / BusFrequency);
 	if (DelayMultiplier < 1) DelayMultiplier = 1;
 	if (DelayMultiplier == 1) {
 		AddProgramLineToSequenceList(1, 0, DelayMultiplier * 3 - 2); //CMD_STEP doing nothing, just in order to keep the time calculated by COutput aligned with the time used by the FPGA; needed because the four commands above only consume 4 FPGA cycles, but are accounted for with 2 bus cycles by COutput
@@ -1282,7 +1282,7 @@ bool CEthernetMultiIOControllerOpticsFoundry::AddData(unsigned __int32* BusData,
 			}
 			else {
 				ControlMessageBox("EthernetMultiIOControllerOpticsFoundry.cpp: AddData(): special command not found in special command list.");
-				AddProgramLine(buffer, n + AdditionalSteps + PreambleProgramLines, CMD_STEP, 0, DelayMultiplier);
+				AddProgramLine(buffer, n + AdditionalSteps + PreambleProgramLines, CMD_STEP, 0, DelayMultiplier - 1);
 			}
 		}
 		else {
@@ -1290,15 +1290,15 @@ bool CEthernetMultiIOControllerOpticsFoundry::AddData(unsigned __int32* BusData,
 			//if (n == (Count - 1)) {
 			//	Spacing[n] = 1; //2025 05 30 : bug: last step has enormous delay, quick fix here
 			//}
-			AddProgramLine(buffer, n + AdditionalSteps + PreambleProgramLines, CMD_STEP, BusData[n], Spacing[n] * DelayMultiplier);
+			AddProgramLine(buffer, n + AdditionalSteps + PreambleProgramLines, CMD_STEP, BusData[n], Spacing[n] * DelayMultiplier - 1);
 		}
 	}
 	//on Z-turn, one of the bus lines is currently on the buzzer. The following puts the bus to zero to avoid buzzing endlessly
 	//When adding the feature to add code lines while code is running, it's important to overwrite this line with the first real additional code line.
-	AddProgramLine(buffer, PreambleProgramLines + AdditionalSteps + Count, CMD_STEP, 0, DelayMultiplier);
+	AddProgramLine(buffer, PreambleProgramLines + AdditionalSteps + Count, CMD_STEP, 0, DelayMultiplier - 1);
 	for (unsigned __int32 n = (PreambleProgramLines + AdditionalSteps + Count + 1); n < (PreambleProgramLines + AdditionalSteps + PostProgramLines - 1 + Count); n++) { //add a few code lines to make sure program is not too short for DMA transfer to start and stop correctly; might be better solved by improving MicroZed code
 		AddProgramLine(buffer, n, CMD_STOP, 0, 0);
-		//AddProgramLine(buffer, n, CMD_STEP, 0, DelayMultiplier); 
+		//AddProgramLine(buffer, n, CMD_STEP, 0, DelayMultiplier - 1); 
 	}
 	//AddProgramLine(buffer, Count + PreambleProgramLines + PostProgramLines - 2, CMD_STOP, 0, 0);
 	AddProgramLine(buffer, Count + AdditionalSteps + PreambleProgramLines + PostProgramLines - 1, CMD_STOP, 0, 0);
