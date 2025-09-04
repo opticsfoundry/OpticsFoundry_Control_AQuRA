@@ -705,7 +705,7 @@ API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, 
 
 	API_EXPORT void ControlAPI_OnIdle() {
 		API_LOCK_GUARD;
-		Sequence->Idle(ActiveDialog);
+		ControlAPI.OnIdle(ActiveDialog);
 		API_UNLOCK;
 	}
 

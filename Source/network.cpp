@@ -208,7 +208,7 @@ bool CNetwork::ResetConnection(unsigned long sleep_time) {
 	BOOL bDummyCreated = dummy.Create();
 	DisconnectSocket();
 	if (sleep_time>0) Sleep_ms(sleep_time);
-	bool ret= Reconnect(/*maxRetries*/ 10,/*timeout_s*/0,/*delay_ms*/100);
+	bool ret= Reconnect(/*maxRetries*/ 4,/*timeout_s*/0,/*delay_ms*/100);
 	if (bDummyCreated)
 		dummy.Close();
 	return ret;
