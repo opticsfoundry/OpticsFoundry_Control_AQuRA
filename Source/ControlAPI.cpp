@@ -587,6 +587,10 @@ void CControlAPI::GoBackInTime(CString arguments) {
 
 bool CControlAPI::ReplaceCommand(unsigned long cycle_number, unsigned int command_line_nr, const std::string& new_command) {
 	//ProcessingMessage = true;
+	if (cycle_number == NextCycleNumber) {
+		ReplaceCommandForNextCycle(command_line_nr, new_command);
+		return true;
+	}
 	if (ReplaceCommandCycleNr[NextReplaceCommandSlot] != -1) {
 		ControlMessageBox("ControlAPI.cpp: ReplaceCommand() too many replacement commands; increase ReplaceCommandListLength.");
 		//ProcessingMessage = false;
@@ -748,8 +752,6 @@ void CControlAPI::OnIdle(CWnd* parent) {
 				}
 				MarkTiming("GetNextCycleNumber");
 				ControlAPI_Sequencer->GetNextCycleNumber(NextCycleNumber);
-				MarkTiming("ReplaceCommandsForNextCycle");
-				ReplaceCommandsForNextCycle();
 				MarkTiming("End analyze cycle");
 			}
 		} else {
@@ -761,6 +763,8 @@ void CControlAPI::OnIdle(CWnd* parent) {
 			}
 			if (CyclingSoftPreTrigger_in_ms > 0) {
 				if ((TickCount < StartLastCycleTickCount) || ((TickCount - StartLastCycleTickCount) > (PeriodicTriggerPeriod_in_ms - CyclingSoftPreTrigger_in_ms))) {
+					MarkTiming("ReplaceCommandsForNextCycle");
+					ReplaceCommandsForNextCycle();
 					MarkTiming("StartSequence call start 1");
 					if (!StartSequence(CyclingShowRunProgressDialog)) {
 						Cycling = false;
@@ -776,6 +780,8 @@ void CControlAPI::OnIdle(CWnd* parent) {
 				}
 			}
 			else {
+				MarkTiming("ReplaceCommandsForNextCycle");
+				ReplaceCommandsForNextCycle();
 				MarkTiming("StartSequence call start 2");
 				if (!StartSequence(CyclingShowRunProgressDialog)) {
 					Cycling = false;
@@ -849,9 +855,9 @@ bool CControlAPI::GetNextCycleStartTimeAndNumber(long& aTimeTillNextCycleStart_i
 	if (Cycling) {
 		DWORD TickCount = GetTickCount();
 		aTimeTillNextCycleStart_in_ms = CycleDuration_in_ms - (TickCount - LastStartPreTriggerTime);
-		if (aTimeTillNextCycleStart_in_ms < 0) aTimeTillNextCycleStart_in_ms = 0;
-		if (aTimeTillNextCycleStart_in_ms > PeriodicTriggerPeriod_in_ms) aTimeTillNextCycleStart_in_ms = -1;
-		if (aTimeTillNextCycleStart_in_ms > CycleDuration_in_ms) aTimeTillNextCycleStart_in_ms = -1;
+		//if (aTimeTillNextCycleStart_in_ms < 0) aTimeTillNextCycleStart_in_ms = 0;
+		//if (aTimeTillNextCycleStart_in_ms > PeriodicTriggerPeriod_in_ms) aTimeTillNextCycleStart_in_ms = -99999;
+		//if (aTimeTillNextCycleStart_in_ms > CycleDuration_in_ms) aTimeTillNextCycleStart_in_ms = -99998;
 		aNextCycleNumber = NextCycleNumber;
 		//ProcessingMessage = false;
 		return true;
