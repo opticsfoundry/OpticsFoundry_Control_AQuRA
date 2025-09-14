@@ -68,6 +68,7 @@ void CRemoteControl::ProcessMessage(CString aMessage) {
 	else if (aMessage == "ResetInterlock") ResetInterlock(); //next version
 	else if (aMessage == "SetExternalTrigger") SetExternalTrigger();
 	else if (aMessage == "SetPeriodicTrigger") SetPeriodicTrigger();
+	else if (aMessage == "Trigger") Trigger();
 	else if (aMessage == "GetPeriodicTriggerError") GetPeriodicTriggerError();
 	else if (aMessage == "SetExternalClock") SetExternalClock();
 	else if (aMessage == "ResetFPGA") ResetFPGA();
@@ -430,6 +431,11 @@ void CRemoteControl::SetPeriodicTrigger() {
 		ControlMessageBox("RemoteControl.cpp: SetPeriodicTrigger() : error");
 	}
 }
+
+void CRemoteControl::Trigger() {
+	ControlAPI->Trigger();
+}
+
 
 void CRemoteControl::GetPeriodicTriggerError() {
 	WriteBool(ControlAPI->GetPeriodicTriggerError());

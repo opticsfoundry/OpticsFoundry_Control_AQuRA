@@ -62,6 +62,7 @@ public:
 	void ResetInterlock(); //);
 	void SetExternalTrigger(); //void ExternalTrigger0, void ExternalTrigger1);
 	void SetPeriodicTrigger(); //double PeriodicTriggerPeriod_in_ms, double PeriodicTriggerAllowedWaitTime_in_ms);
+	void Trigger();
 	void GetPeriodicTriggerError(); //);
 	void SetExternalClock(); //void ExternalClock0, void ExternalClock1);
 	void ResetFPGA(); //);

@@ -895,6 +895,12 @@ API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, 
 		ControlAPI.SetPeriodicTrigger(period_ms, allowedWait_ms);
 		API_UNLOCK;
 	}
+	
+	API_EXPORT void ControlAPI_Trigger() {
+		API_LOCK_GUARD;
+		ControlAPI.Trigger();
+		API_UNLOCK;
+	}
 
 	API_EXPORT bool ControlAPI_GetPeriodicTriggerError() { API_LOCK_GUARD;
 		bool ret =  ControlAPI.GetPeriodicTriggerError();

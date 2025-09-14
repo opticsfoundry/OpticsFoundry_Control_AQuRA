@@ -78,6 +78,7 @@ CControlAPI::CControlAPI() {
 	DebugModeOn = false;
 	DebugTimingOnOff = false;
 	DebugTimingFile = NULL;
+	InstantPeriodicTrigger = false;
 	ResetCommandList();
 }
 
@@ -629,6 +630,11 @@ void CControlAPI::SetPeriodicTrigger(double aPeriodicTriggerPeriod_in_ms, double
 	//ProcessingMessage = false;
 }
 
+void CControlAPI::Trigger() {
+	InstantPeriodicTrigger = true;
+	OnIdle(ActiveDialog);
+}
+
 bool CControlAPI::GetPeriodicTriggerError() {
 	//ProcessingMessage = true;
 	if (!Cycling) {
@@ -762,7 +768,7 @@ void CControlAPI::OnIdle(CWnd* parent) {
 				return;
 			}
 			if (CyclingSoftPreTrigger_in_ms > 0) {
-				if ((TickCount < StartLastCycleTickCount) || ((TickCount - StartLastCycleTickCount) > (PeriodicTriggerPeriod_in_ms - CyclingSoftPreTrigger_in_ms))) {
+				if (InstantPeriodicTrigger || (TickCount < StartLastCycleTickCount) || ((TickCount - StartLastCycleTickCount) > (PeriodicTriggerPeriod_in_ms - CyclingSoftPreTrigger_in_ms))) {
 					MarkTiming("ReplaceCommandsForNextCycle");
 					ReplaceCommandsForNextCycle();
 					MarkTiming("StartSequence call start 1");
@@ -776,6 +782,7 @@ void CControlAPI::OnIdle(CWnd* parent) {
 						LastStartPreTriggerTime = GetTickCount();
 						NextCycleNumber++;
 						CyclingWaitForEndOfCycle = true;
+						InstantPeriodicTrigger = false;
 					}
 				}
 			}
@@ -793,6 +800,7 @@ void CControlAPI::OnIdle(CWnd* parent) {
 					LastStartPreTriggerTime = GetTickCount();
 					NextCycleNumber++;
 					CyclingWaitForEndOfCycle = true;
+					InstantPeriodicTrigger = false;
 				}
 			}
 		}

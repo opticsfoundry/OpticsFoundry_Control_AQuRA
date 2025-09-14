@@ -52,6 +52,7 @@ struct CommandInfo {
 class CControlAPI : public CObject
 {
 private:
+	bool InstantPeriodicTrigger;
 	bool DisplayCommandErrors;
 	bool DebugModeOn;
 	// storage of alternative command name
@@ -175,6 +176,7 @@ public:
 	bool ResetInterlock();
 	void SetExternalTrigger(bool ExternalTrigger0, bool ExternalTrigger1);
 	void SetPeriodicTrigger(double PeriodicTriggerPeriod_in_ms, double PeriodicTriggerAllowedWaitTime_in_ms);
+	void Trigger();
 	bool GetPeriodicTriggerError();
 	void SetExternalClock(bool ExternalClock0, bool ExternalClock1);
 	bool SetupSerialPort(unsigned char port_number, unsigned long baud_rate);

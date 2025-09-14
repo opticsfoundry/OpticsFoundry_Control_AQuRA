@@ -161,6 +161,7 @@ API_EXPORT bool ControlAPI_HasInterlockTriggered();
 API_EXPORT bool ControlAPI_ResetInterlock();
 API_EXPORT void ControlAPI_SetExternalTrigger(bool externalTrigger0, bool externalTrigger1);
 API_EXPORT void ControlAPI_SetPeriodicTrigger(double period_ms, double allowedWait_ms);
+API_EXPORT void ControlAPI_Trigger();
 API_EXPORT bool ControlAPI_GetPeriodicTriggerError();
 API_EXPORT void ControlAPI_SetExternalClock(bool externalClock0, bool externalClock1);
 API_EXPORT bool ControlAPI_SetupSerialPort(unsigned char port_number, unsigned long baud_rate);
