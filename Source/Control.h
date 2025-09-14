@@ -73,6 +73,7 @@ extern "C" {
 	API_EXPORT bool ControlAPI_Configure(bool displayErrors);
 	API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, bool AfxSocketInit, bool displayErrors);
 	API_EXPORT void ControlAPI_StoreSequenceInMemory(bool store);
+	API_EXPORT void ControlAPI_SwitchDebugMode(bool OnOff, bool DebugTimingOnOff);
 	API_EXPORT void ControlAPI_OnIdle(); //#ifndef USE_DLL_TIMER and you want to use automatic cycling, you need to call this function periodically from your main loop
 	API_EXPORT void ControlAPI_SwitchToDirectOutputMode();
 	API_EXPORT bool ControlAPI_StartSequence(bool showDialog);

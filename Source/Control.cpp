@@ -702,6 +702,11 @@ API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, 
 	void AddMarker(unsigned char marker);
 */
 
+	API_EXPORT void ControlAPI_SwitchDebugMode(bool OnOff, bool DebugTimingOnOff) {
+		API_LOCK_GUARD;
+		ControlAPI.SwitchDebugMode(OnOff, DebugTimingOnOff);
+		API_UNLOCK;
+	}
 
 	API_EXPORT void ControlAPI_OnIdle() {
 		API_LOCK_GUARD;
