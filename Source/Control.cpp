@@ -810,8 +810,8 @@ API_EXPORT bool ControlAPI_Create(const char* ParamFileDirectory, bool AfxInit, 
 		return ret;
 	}
 
-	API_EXPORT bool ControlAPI_StartCycling(long idleTime_ms, long softPreTrigger_ms, bool onlyTransmitDiff, bool showDialog) { API_LOCK_GUARD;
-		bool ret =  ControlAPI.StartCycling(idleTime_ms, softPreTrigger_ms, onlyTransmitDiff, showDialog);
+	API_EXPORT bool ControlAPI_StartCycling(long idleTime_ms, long softPreTrigger_ms, bool onlyTransmitDiff, bool DoEnterWindowsCriticalPriorityMode, bool showDialog) { API_LOCK_GUARD;
+		bool ret =  ControlAPI.StartCycling(idleTime_ms, softPreTrigger_ms, onlyTransmitDiff, DoEnterWindowsCriticalPriorityMode, showDialog);
 		API_UNLOCK;
 		return ret;
 	}

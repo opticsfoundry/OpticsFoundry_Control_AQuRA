@@ -19,6 +19,7 @@
 
 
 
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
@@ -48,6 +49,7 @@ void CInputBuffer::Init() {
 
 
 CControlAPI::CControlAPI() {
+	EnterWindowsCriticalPriorityMode = NULL;
 	//ProcessingMessage = false;
 	LastTimingMark = 0;
 	LastStartPreTriggerTime = 0;
@@ -647,8 +649,17 @@ bool CControlAPI::GetPeriodicTriggerError() {
 	return error;
 }
 
-bool CControlAPI::StartCycling(long IdleTime_in_ms, long aSoftPreTrigger_in_ms, bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible, bool ShowRunProgressDialog) {
+bool CControlAPI::StartCycling(long IdleTime_in_ms, long aSoftPreTrigger_in_ms, bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible, bool DoEnterWindowsCriticalPriorityMode, bool ShowRunProgressDialog) {
 	//ProcessingMessage = true;
+	if (DoEnterWindowsCriticalPriorityMode) {
+		if (!EnterWindowsCriticalPriorityMode) EnterWindowsCriticalPriorityMode = new CEnterWindowsCriticalPriorityMode();
+	}
+	else {
+		if (EnterWindowsCriticalPriorityMode) {
+			delete EnterWindowsCriticalPriorityMode;
+			EnterWindowsCriticalPriorityMode = NULL;
+		}
+	}
 	if (DoStoreSequenceInMemory && (PeriodicTriggerPeriod_in_ms > 0)) {
 		Cycling = true;
 		CyclingWaitForEndOfCycle = false;
@@ -843,6 +854,10 @@ bool CControlAPI::GetCycleData(unsigned char*& buffer, unsigned long& buffer_len
 }
 
 void CControlAPI::StopCycling() { 
+	if (EnterWindowsCriticalPriorityMode) {
+		delete EnterWindowsCriticalPriorityMode;
+		EnterWindowsCriticalPriorityMode = NULL;
+	}
 	//ProcessingMessage = true;
 	DoStopCycling = true; 
 	ControlAPI_Sequencer->WaitForPeriodicTrigger(false);

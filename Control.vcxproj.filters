@@ -1088,6 +1088,9 @@
     <ClInclude Include="Source\theme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EnterWindowsCriticalPriorityMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource.hm">

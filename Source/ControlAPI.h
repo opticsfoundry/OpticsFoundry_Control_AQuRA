@@ -16,6 +16,7 @@
 #include <wtypes.h>
 #include <string>
 #include <unordered_map>
+#include "EnterWindowsCriticalPriorityMode.h"
 
 
 #include <fstream>
@@ -52,6 +53,7 @@ struct CommandInfo {
 class CControlAPI : public CObject
 {
 private:
+	CEnterWindowsCriticalPriorityMode* EnterWindowsCriticalPriorityMode;
 	bool InstantPeriodicTrigger;
 	bool DisplayCommandErrors;
 	bool DebugModeOn;
@@ -159,7 +161,7 @@ public:
 	void ResetCommandList();
 	bool AssembleSequenceListFromMemory();
 	bool StartSequence(bool ShowRunProgressDialog = false);
-	bool StartCycling(long IdleTime_in_ms = 100, long SoftPreTrigger_in_ms = 0, bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible = false, bool ShowRunProgressDialog = false);
+	bool StartCycling(long IdleTime_in_ms = 100, long SoftPreTrigger_in_ms = 0, bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible = false, bool DoEnterWindowsCriticalPriorityMode = false, bool ShowRunProgressDialog = false);
 	void StopCycling();
 	bool IsCycling();
 	bool DataAvailable();

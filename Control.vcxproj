@@ -1877,6 +1877,7 @@
     <ResourceCompile Include="Source\Control.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnterWindowsCriticalPriorityMode.h" />
     <ClInclude Include="Source\AD9852.h" />
     <ClInclude Include="Source\AD9858.h" />
     <ClInclude Include="Source\AD9958.h" />

@@ -147,7 +147,7 @@ API_EXPORT void ControlAPI_ReplaceCommandForNextCycle(unsigned int command_line_
 API_EXPORT void ControlAPI_ReplaceCommandsForNextCycle();
 API_EXPORT void ControlAPI_ResetCommandList();
 API_EXPORT bool ControlAPI_AssembleSequenceListFromMemory();
-API_EXPORT bool ControlAPI_StartCycling(long idleTime_ms, long softPreTrigger_ms, bool onlyTransmitDiff, bool showDialog);
+API_EXPORT bool ControlAPI_StartCycling(long idleTime_ms, long softPreTrigger_ms, bool onlyTransmitDiff, bool DoEnterWindowsCriticalPriorityMode, bool showDialog);
 API_EXPORT void ControlAPI_StopCycling();
 API_EXPORT bool ControlAPI_IsCycling();
 API_EXPORT bool ControlAPI_DataAvailable();

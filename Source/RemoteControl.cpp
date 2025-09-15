@@ -278,10 +278,12 @@ void CRemoteControl::StartCycling() {
 	ok = ok && ReadLong(SoftPreTrigger_in_ms);
 	bool DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible;
 	ok = ok && ReadBool(DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible);
+	bool DoEnterWindowsCriticalPriorityMode;
+	ok = ok && ReadBool(DoEnterWindowsCriticalPriorityMode);
 	bool ShowRunProgressDialog;
 	ok = ok && ReadBool(ShowRunProgressDialog);
 	if (ok) {
-		WriteBool(ControlAPI->StartCycling(IdleTime_in_ms, SoftPreTrigger_in_ms, DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible, ShowRunProgressDialog));
+		WriteBool(ControlAPI->StartCycling(IdleTime_in_ms, SoftPreTrigger_in_ms, DoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible, DoEnterWindowsCriticalPriorityMode, ShowRunProgressDialog));
 	}
 	else {
 		ControlMessageBox("RemoteControl.cpp: StartCycling() : error");
@@ -312,7 +314,7 @@ void CRemoteControl::GetNextCycleStartTimeAndNumber() {
 		Display(buf, false);
 	}
 	else {
-		ControlMessageBox("RemoteControl.cpp: StartCycling() : error");
+		ControlMessageBox("RemoteControl.cpp: GetNextCycleStartTimeAndNumber() : error");
 		WriteLong(-1);
 	}
 }
