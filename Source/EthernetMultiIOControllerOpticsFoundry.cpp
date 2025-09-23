@@ -60,6 +60,7 @@ CEthernetMultiIOControllerOpticsFoundry::CEthernetMultiIOControllerOpticsFoundry
 	core_option_PL_to_PS = 0;
 	SetPeriodicTriggerAtBeginningOfNextSequence = false;
 	WaitForPeriodicTriggerAtBeginningOfSequence = false;
+	ChangePeriodicTriggerPeriodWhileCycling = false;
 	LastPeriodicTriggerPeriod_in_s = 0;
 	DebugModeOn = false;
 	InputBuffer = NULL;
@@ -190,7 +191,6 @@ constexpr unsigned char CMD_CALC_AD9854_FREQUENCY_TUNING_WORD = 28;
 constexpr unsigned char NrCommands = 29;
 const CString CommandNames[NrCommands] = { "CMD_STOP", "CMD_STEP", "CMD_STEP_AND_ENTER_FAST_MODE", "CMD_SET_OPTIONS", "CMD_LOAD_REG_LOW", "CMD_LOAD_REG_HIGH", "CMD_LATCH_STATE", "CMD_RESET_WAIT_CYCLES", "CMD_LONG_WAIT", "CMD_SET_STROBE_OPTIONS", "CMD_SET_INPUT_BUF_MEM", "CMD_WAIT_FOR_TRIGGER", "CMD_SET_LOOP_COUNT", "CMD_CONDITIONAL_JUMP_FORWARD", "CMD_CONDITIONAL_JUMP_BACKWARD", "CMD_I2C_OUT", "CMD_SPI_OUT_IN", "CMD_INPUT_REPEATED_OUT_IN", "CMD_SET_PERIODIC_TRIGGER_PERIOD", "CMD_SET_PERIODIC_TRIGGER_ALLOWED_WAIT_TIME", "CMD_WAIT_FOR_PERIODIC_TRIGGER", "CMD_WAIT_FOR_WAIT_CYCLE_NR", "CMD_DIG_IN", "CMD_TRIGGER_SECONDARY_PL_PS_INTERRUPT", "CMD_ANALOG_IN_OUT", "CMD_PL_TO_PS_COMMAND", "CMD_LOAD_COMMAND_BUFFER", "CMD_SAVE_CYCLE_COUNT_SINCE_STARTUP_IN_INPUT_BUF_MEM", "CMD_CALC_AD9854_FREQUENCY_TUNING_WORD"};
 constexpr bool CommandUsesBuffer[NrCommands] = { false   , false     , false                         , true             , false             , false              , false            , false                  , true           , true                    , true                   , true                  , true                , true                          , true                           , true         , true            , true                       , true                             , true                                        , false                          , true                        , true        , false                                  , true               , true                  , false                , false												, true };
-constexpr bool UseCommandBuffer = true;
 
 void CEthernetMultiIOControllerOpticsFoundry::StartAnalogInAcquisition(unsigned char SPI_port, unsigned char SPI_CS, unsigned int channel_nr, unsigned int number_of_datapoints, double delay_between_datapoints_in_ms) {
 	//if (channel_nr < 2) {
@@ -201,13 +201,11 @@ void CEthernetMultiIOControllerOpticsFoundry::StartAnalogInAcquisition(unsigned 
 }
 
 void CEthernetMultiIOControllerOpticsFoundry::AddSequencerCommandToSequenceList(unsigned __int32 high_buffer, unsigned __int32 low_buffer) {
-	if (UseCommandBuffer) {
-		const unsigned int command = low_buffer & 0x1F;
-		if (command <= NrCommands) {
-			if (CommandUsesBuffer[command]) {
-				unsigned __int32 low_command_buffer = (low_buffer & 0xFFFFFFE0) | (0x1F & CMD_LOAD_COMMAND_BUFFER);
-				myOutput->AddSequencerCommandToSequenceList(MyMultiIO, high_buffer, low_command_buffer);
-			}
+	const unsigned int command = low_buffer & 0x1F;
+	if (command <= NrCommands) {
+		if (CommandUsesBuffer[command]) {
+			unsigned __int32 low_command_buffer = (low_buffer & 0xFFFFFFE0) | (0x1F & CMD_LOAD_COMMAND_BUFFER);
+			myOutput->AddSequencerCommandToSequenceList(MyMultiIO, high_buffer, low_command_buffer);
 		}
 	}
 	myOutput->AddSequencerCommandToSequenceList(MyMultiIO, high_buffer, low_buffer);
@@ -729,17 +727,11 @@ void CEthernetMultiIOControllerOpticsFoundry::SetStrobeOptions(unsigned __int32*
 	const unsigned char command_mask = 0x1F;  //5 bit
 	unsigned char command = CMD_SET_STROBE_OPTIONS;
 
-	if (UseCommandBuffer) {
-		buffer[n * 2 + 0] = ((strobe_high_length & 0xFF) << 24) | ((strobe_low_length & 0xFF) << 16) | ((strobe_choice & 0x07) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);
-		buffer[n * 2 + 1] = 0;
-		buffer[(n+1) * 2 + 0] = ((strobe_high_length & 0xFF) << 24) | ((strobe_low_length & 0xFF) << 16) | ((strobe_choice & 0x07) << 8) | (command_mask & command);
-		buffer[(n+1) * 2 + 1] = 0;
-	}
-	else {
-		buffer[n * 2 + 0] = ((strobe_high_length & 0xFF) << 24) | ((strobe_low_length & 0xFF) << 16) | ((strobe_choice & 0x07) << 8) | (command_mask & command);
-		buffer[n * 2 + 1] = 0;
-	}
-
+	buffer[n * 2 + 0] = ((strobe_high_length & 0xFF) << 24) | ((strobe_low_length & 0xFF) << 16) | ((strobe_choice & 0x07) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);
+	buffer[n * 2 + 1] = 0;
+	buffer[(n+1) * 2 + 0] = ((strobe_high_length & 0xFF) << 24) | ((strobe_low_length & 0xFF) << 16) | ((strobe_choice & 0x07) << 8) | (command_mask & command);
+	buffer[(n+1) * 2 + 1] = 0;
+	
 	if (DebugBufferFile) {
 		CString buf;
 		buf.Format("%8u CMD %x data = %08X %08X", n, command, buffer[n * 2 + 1], buffer[n * 2 + 0]);
@@ -761,7 +753,6 @@ void CEthernetMultiIOControllerOpticsFoundry::SetBufferWriteSystemTimeToInputMem
 }
 
 void CEthernetMultiIOControllerOpticsFoundry::AddExternalTrigger(unsigned __int32* buffer, unsigned __int32 n, bool ExternalTrigger0, bool ExternalTrigger1, bool FPGASoftwareTrigger) {
-// if (UseCommandBuffer) uses two command slots	ELSE uses one command slot
 	if (ExternalTrigger0 || ExternalTrigger1 || FPGASoftwareTrigger) {
 		//CMD_WAIT_FOR_TRIGGER: begin
 		//	if ((trigger_0 && (command[8:8] == 1)) || (trigger_1 && (command[9:9] == 1)) || (trigger_PS && (command[10:10] == 1))) address <= address + 1;
@@ -773,20 +764,14 @@ void CEthernetMultiIOControllerOpticsFoundry::AddExternalTrigger(unsigned __int3
 		unsigned char trigger1 = (ExternalTrigger1) ? 2 : 0;
 		unsigned char softtrigger = (ExternalTrigger1) ? 4 : 0;
 
-		if (UseCommandBuffer) {
-			buffer[n * 2 + 0] = ((trigger0 | trigger1 | softtrigger) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);
-			buffer[n * 2 + 1] = 0;
-			buffer[(n+1) * 2 + 0] = ((trigger0 | trigger1 | softtrigger) << 8) | (command_mask & command);
-			buffer[(n+1) * 2 + 1] = 0;
-		}
-		else {
-			buffer[n * 2 + 0] = ((trigger0 | trigger1 | softtrigger) << 8) | (command_mask & command);
-			buffer[n * 2 + 1] = 0;
-		}
+		buffer[n * 2 + 0] = ((trigger0 | trigger1 | softtrigger) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);
+		buffer[n * 2 + 1] = 0;
+		buffer[(n+1) * 2 + 0] = ((trigger0 | trigger1 | softtrigger) << 8) | (command_mask & command);
+		buffer[(n+1) * 2 + 1] = 0;
 	}
 	else {
 		AddProgramLine(buffer, n, 1, 0, 1); //CMD_STEP
-		if (UseCommandBuffer) AddProgramLine(buffer, n + 1, 1, 0, 1); //CMD_STEP
+		AddProgramLine(buffer, n + 1, 1, 0, 1); //CMD_STEP
 	}
 	if (DebugBufferFile) {
 		CString buf;
@@ -796,7 +781,6 @@ void CEthernetMultiIOControllerOpticsFoundry::AddExternalTrigger(unsigned __int3
 }
 
 void CEthernetMultiIOControllerOpticsFoundry::SetTriggerOptions( unsigned __int32* buffer, unsigned __int32 n, bool ExternalTrigger0, bool ExternalTrigger1) {
-// if (UseCommandBuffer) uses six command slots	ELSE uses three command slot
 	if (SetPeriodicTriggerAtBeginningOfNextSequence && (PeriodicTriggerPeriod_in_s > 0)) {
 		SetPeriodicTriggerAtBeginningOfNextSequence = false;
 		//CMD_SET_PERIODIC_TRIGGER_PERIOD: begin
@@ -806,94 +790,96 @@ void CEthernetMultiIOControllerOpticsFoundry::SetTriggerOptions( unsigned __int3
 		const unsigned char command_mask = 0x1F;  //5 bit
 		unsigned char command = CMD_SET_PERIODIC_TRIGGER_PERIOD;
 		
-		if (UseCommandBuffer) {
-			buffer[n * 2 + 0] = ((PeriodicTriggerPeriod & 0xFFFFFF) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);  //low 24 bit << 8
-			buffer[n * 2 + 1] = (PeriodicTriggerPeriod >> 24) & 0xFFFFFF; // high 24 bit
-			buffer[(n+1) * 2 + 0] = ((PeriodicTriggerPeriod & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
-			buffer[(n+1) * 2 + 1] = (PeriodicTriggerPeriod >> 24) & 0xFFFFFF; // high 24 bit
-		}
-		else {
-			buffer[n * 2 + 0] = ((PeriodicTriggerPeriod & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
-			buffer[n * 2 + 1] = (PeriodicTriggerPeriod >> 24) & 0xFFFFFF; // high 24 bit
-		}
+		buffer[n * 2 + 0] = ((PeriodicTriggerPeriod & 0xFFFFFF) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);  //low 24 bit << 8
+		buffer[n * 2 + 1] = (PeriodicTriggerPeriod >> 24) & 0xFFFFFF; // high 24 bit
+		buffer[(n+1) * 2 + 0] = ((PeriodicTriggerPeriod & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
+		buffer[(n+1) * 2 + 1] = (PeriodicTriggerPeriod >> 24) & 0xFFFFFF; // high 24 bit
 		//CMD_SET_PERIODIC_TRIGGER_ALLOWED_WAIT_TIME: begin 
 		//	periodic_trigger_allowed_wait_cycles <= command[55:8]; // >>8 =  [47:0] = 48 bit;  55:32 = 23:0 = 24 bit 
 		//end
 		unsigned __int64 PeriodicTriggerAllowedWaitCycles = floor(PeriodicTriggerAllowedWait_in_s * FPGAClockFrequencyInHz / 1000);
 		command = CMD_SET_PERIODIC_TRIGGER_ALLOWED_WAIT_TIME;
-		if (UseCommandBuffer) {
-			buffer[(n + 2) * 2 + 0] = ((PeriodicTriggerAllowedWaitCycles & 0xFFFFFF) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);  //low 24 bit << 8
-			buffer[(n + 2) * 2 + 1] = (PeriodicTriggerAllowedWaitCycles >> 24) & 0xFFFFFF; // high 24 bit
-			buffer[(n + 3) * 2 + 0] = ((PeriodicTriggerAllowedWaitCycles & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
-			buffer[(n + 3) * 2 + 1] = (PeriodicTriggerAllowedWaitCycles >> 24) & 0xFFFFFF; // high 24 bit
+		buffer[(n + 2) * 2 + 0] = ((PeriodicTriggerAllowedWaitCycles & 0xFFFFFF) << 8) | (command_mask & CMD_LOAD_COMMAND_BUFFER);  //low 24 bit << 8
+		buffer[(n + 2) * 2 + 1] = (PeriodicTriggerAllowedWaitCycles >> 24) & 0xFFFFFF; // high 24 bit
+		buffer[(n + 3) * 2 + 0] = ((PeriodicTriggerAllowedWaitCycles & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
+		buffer[(n + 3) * 2 + 1] = (PeriodicTriggerAllowedWaitCycles >> 24) & 0xFFFFFF; // high 24 bit
 
-		}
-		else {
-			buffer[(n + 1) * 2 + 0] = ((PeriodicTriggerAllowedWaitCycles & 0xFFFFFF) << 8) | (command_mask & command);  //low 24 bit << 8
-			buffer[(n + 1) * 2 + 1] = (PeriodicTriggerAllowedWaitCycles >> 24) & 0xFFFFFF; // high 24 bit
-		}
 		LastPeriodicTriggerPeriod_in_s = PeriodicTriggerPeriod_in_s;
-		AddExternalTrigger(buffer, (UseCommandBuffer) ? n + 4 : n + 2, ExternalTrigger0, ExternalTrigger1, false);
-	}
-	else if (WaitForPeriodicTriggerAtBeginningOfSequence && (LastPeriodicTriggerPeriod_in_s > 0)) {
 
-
-		
-
-		if (UseCommandBuffer) {
-			
+		if (ChangePeriodicTriggerPeriodWhileCycling) {			
+			//switch LED on to indicate to user that we are waiting for the periodic trigger
 			core_option_LED = true;
 			unsigned char command = CMD_LOAD_COMMAND_BUFFER;
-			buffer[(n + 0) * 2 + 0] =  command;
-			buffer[(n + 0) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
-			command = CMD_SET_OPTIONS;
-			buffer[(n + 1) * 2 + 0] = command;
-			buffer[(n + 1) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
-
-			
-			
-			//AddProgramLine(buffer, n, CMD_STEP, 0, 0);
-			//AddProgramLine(buffer, n + 1, CMD_STEP, 0, 0);
-			AddProgramLine(buffer, n + 2, CMD_STEP, 0, 1);
-			//buffer[(n + 2) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
-			//buffer[(n + 2) * 2 + 1] = 0;
-			buffer[(n + 3) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
-			buffer[(n + 3) * 2 + 1] = 0;
-
-			
-			
-			core_option_LED = false;
-			command = CMD_LOAD_COMMAND_BUFFER;
 			buffer[(n + 4) * 2 + 0] = command;
 			buffer[(n + 4) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
 			command = CMD_SET_OPTIONS;
 			buffer[(n + 5) * 2 + 0] = command;
 			buffer[(n + 5) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
 
-			
-			//AddProgramLine(buffer, n + 4, CMD_STEP, 0, 0);
-			//AddProgramLine(buffer, n + 5, CMD_STEP, 0, 0);
+			buffer[(n + 6) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
+			buffer[(n + 6) * 2 + 1] = 0;
+
+			//switch LED off again to indicate to user that we have detected the periodic trigger and are continuing with the sequence	
+			core_option_LED = false;
+			command = CMD_LOAD_COMMAND_BUFFER;
+			buffer[(n + 7) * 2 + 0] = command;
+			buffer[(n + 7) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+			command = CMD_SET_OPTIONS;
+			buffer[(n + 8) * 2 + 0] = command;
+			buffer[(n + 8) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+
+
+			//we don't have enough space in the buffer to add the commands to switch the LED on and off here, see below
 		}
 		else {
-			AddProgramLine(buffer, n, CMD_STEP, 0, 1);
-			AddProgramLine(buffer, n + 1, CMD_STEP, 0, 1);
-			buffer[(n + 2) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
-			buffer[(n + 2) * 2 + 1] = 0;
-		}
-	}
-	else {
-		if (UseCommandBuffer) {
-			AddProgramLine(buffer, n, CMD_STEP, 0, 1);
-			AddProgramLine(buffer, n + 1, CMD_STEP, 0, 1);
-			AddProgramLine(buffer, n + 2, CMD_STEP, 0, 1);
-			AddProgramLine(buffer, n + 3, CMD_STEP, 0, 1);
 			AddExternalTrigger(buffer, n + 4, ExternalTrigger0, ExternalTrigger1, false);
 		}
-		else {
-			AddProgramLine(buffer, n, CMD_STEP, 0, 1);
-			AddProgramLine(buffer, n + 1, CMD_STEP, 0, 1);
-			AddExternalTrigger(buffer, n + 2, ExternalTrigger0, ExternalTrigger1, false);
-		}
+	}
+	else if (WaitForPeriodicTriggerAtBeginningOfSequence && (LastPeriodicTriggerPeriod_in_s > 0)) {
+		//switch LED on to indicate to user that we are waiting for the periodic trigger
+		core_option_LED = true;
+		unsigned char command = CMD_LOAD_COMMAND_BUFFER;
+		buffer[(n + 0) * 2 + 0] =  command;
+		buffer[(n + 0) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+		command = CMD_SET_OPTIONS;
+		buffer[(n + 1) * 2 + 0] = command;
+		buffer[(n + 1) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+			
+		//AddProgramLine(buffer, n, CMD_STEP, 0, 0);
+		//AddProgramLine(buffer, n + 1, CMD_STEP, 0, 0);
+		AddProgramLine(buffer, n + 2, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 3, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 4, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 5, CMD_STEP, 0, 1);
+		//buffer[(n + 2) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
+		//buffer[(n + 2) * 2 + 1] = 0;
+		buffer[(n + 6) * 2 + 0] = CMD_WAIT_FOR_PERIODIC_TRIGGER;
+		buffer[(n + 6) * 2 + 1] = 0;
+
+		//switch LED off again to indicate to user that we have detected the periodic trigger and are continuing with the sequence	
+		core_option_LED = false;
+		command = CMD_LOAD_COMMAND_BUFFER;
+		buffer[(n + 7) * 2 + 0] = command;
+		buffer[(n + 7) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+		command = CMD_SET_OPTIONS;
+		buffer[(n + 8) * 2 + 0] = command;
+		buffer[(n + 8) * 2 + 1] = ((core_option_PL_to_PS & 0xFF) << 24) | ((core_option_dig_out & 0xFF) << 8) | ((core_option_SPI_CS & 0x0F) << 1) | (core_option_LED & 0x01);
+
+		//AddProgramLine(buffer, n + 4, CMD_STEP, 0, 0);
+		//AddProgramLine(buffer, n + 5, CMD_STEP, 0, 0);
+		
+		
+	}
+	else {
+		AddProgramLine(buffer, n, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 1, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 2, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 3, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 4, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 5, CMD_STEP, 0, 1);
+		AddProgramLine(buffer, n + 6, CMD_STEP, 0, 1);
+		AddExternalTrigger(buffer, n + 7, ExternalTrigger0, ExternalTrigger1, false);
+	
 	}
 }
 
@@ -994,10 +980,8 @@ void CEthernetMultiIOControllerOpticsFoundry::WriteBufferToFile(unsigned __int32
 			high_command_buffer = high_buffer;
 		}
 		else if (CommandUsesBuffer[command]) {
-			if (UseCommandBuffer) {
-				low_buffer = low_command_buffer;
-				high_buffer = high_command_buffer;
-			}
+			low_buffer = low_command_buffer;
+			high_buffer = high_command_buffer;
 		}
 		if (command == CMD_STEP) {
 			/*
@@ -1170,11 +1154,13 @@ void CEthernetMultiIOControllerOpticsFoundry::SetPeriodicTrigger(double aPeriodi
 	PeriodicTriggerPeriod_in_s = aPeriodicTriggerPeriod_in_s;
 	PeriodicTriggerAllowedWait_in_s = aPeriodicTriggerAllowedWaitTime_in_s;
 	SetPeriodicTriggerAtBeginningOfNextSequence = true;
-	WaitForPeriodicTrigger(true);
+	ChangePeriodicTriggerPeriodWhileCycling = WaitForPeriodicTriggerAtBeginningOfSequence;
+	//WaitForPeriodicTrigger(true); //not needed here as it will be called by StartCycling
 }
 
 void CEthernetMultiIOControllerOpticsFoundry::WaitForPeriodicTrigger(bool aWaitForPeriodicTriggerAtBeginningOfSequence) {
 	WaitForPeriodicTriggerAtBeginningOfSequence = aWaitForPeriodicTriggerAtBeginningOfSequence;
+
 }
 
 void CEthernetMultiIOControllerOpticsFoundry::TransmitOnlyDifferenceBetweenCommandSequenceIfPossible(bool aDoTransmitOnlyDifferenceBetweenCommandSequenceIfPossible) {
@@ -1241,7 +1227,7 @@ bool CEthernetMultiIOControllerOpticsFoundry::AddData(unsigned __int32* BusData,
 		(*DebugBufferFile) << endl;
 	}
 	////Timestamp.Mark("AddData");
-	unsigned __int32 PreambleProgramLines = (UseCommandBuffer) ? 9 : 5;  //make sure you put the number of program lines in the preamble here
+	unsigned __int32 PreambleProgramLines =  12;  //make sure you put the number of program lines in the preamble here
 	unsigned __int32 PostProgramLines = 11;  //make sure you put the number of program lines in the preamble here
 	unsigned __int32 DataSize = (PreambleProgramLines + PostProgramLines + Count) * 8; //data size in byte
 
@@ -1261,7 +1247,7 @@ bool CEthernetMultiIOControllerOpticsFoundry::AddData(unsigned __int32* BusData,
 	SetBufferWriteSystemTimeToInputMemory(buffer, 0); //write time stamp to first command line
 	//strobe/clock output pin content: 0: clock 1: strobe, 2: low, 3: high, 4: flags_hi[31]
 	SetStrobeOptions(buffer, 1, (FPGAUseStrobeGenerator) ? 1 : 0, StrobeDelay, StrobeDelay); // this command fills 1 command lines or if (UseCommandBuffer) 2 command lines
-	SetTriggerOptions(buffer, (UseCommandBuffer) ? 3 : 2, ExternalTrigger0, ExternalTrigger1); // this command fills 3 command lines or if (UseCommandBuffer) 6 command lines
+	SetTriggerOptions(buffer, 3, ExternalTrigger0, ExternalTrigger1); // this command fills 3 command lines or if (UseCommandBuffer) 6 command lines
 
 	//end of preamble
 	unsigned __int32 FPGA_Special_Command = BusSequencerSpecialCommand << (2 + 16);

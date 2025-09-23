@@ -56,6 +56,7 @@ private:
 	unsigned char core_option_PL_to_PS;
 	bool SetPeriodicTriggerAtBeginningOfNextSequence;
 	bool WaitForPeriodicTriggerAtBeginningOfSequence;
+	bool ChangePeriodicTriggerPeriodWhileCycling;
 	unsigned __int32* previous_command_buffer;
 	unsigned long previous_command_buffer_length;
 	unsigned char* InputBuffer;
