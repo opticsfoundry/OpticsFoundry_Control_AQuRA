@@ -832,7 +832,10 @@ void CEthernetMultiIOControllerOpticsFoundry::SetTriggerOptions( unsigned __int3
 			//we don't have enough space in the buffer to add the commands to switch the LED on and off here, see below
 		}
 		else {
-			AddExternalTrigger(buffer, n + 4, ExternalTrigger0, ExternalTrigger1, false);
+			AddProgramLine(buffer, n + 4, CMD_STEP, 0, 1);
+			AddProgramLine(buffer, n + 5, CMD_STEP, 0, 1);
+			AddProgramLine(buffer, n + 6, CMD_STEP, 0, 1);
+			AddExternalTrigger(buffer, n + 7, ExternalTrigger0, ExternalTrigger1, false);
 		}
 	}
 	else if (WaitForPeriodicTriggerAtBeginningOfSequence && (LastPeriodicTriggerPeriod_in_s > 0)) {
