@@ -1476,13 +1476,15 @@ void CSequence::SwitchBlueMOTOff() {
 		GoToTime(StartTimeBlueOff);
 		
 		if (DoSwitchBlueMOTOffCloseShutter) {
-			GoBackInTime(BlueMOTShutterOffDelay);
+			//GoBackInTime(BlueMOTShutterOffDelay);
 			SwitchBlueMOTShutter(Off);
-			GoToTime(StartTimeBlueOff);
+			Wait(BlueMOTShutterOffDelay);
+			//GoToTime(StartTimeBlueOff);
 
 			//now shutters are blocking beams -> we can heat AOMs
 			//UserIOConfig->ResetUserIOOutput("BlueMOTDPAOM");  //One style of programming: resets this DDS entirely
 			SetFrequencyBlueMOTDPAOM(*InitFrequencyBlueMOTDPAOM); //Another style of programming: only resets DDS frequency, which is the only thing we changed to switch DDS off.
+			GoToTime(StartTimeBlueOff);
 		}
 		//optical pumping in red bb MOT
 		Wait(SwitchBlueMOTOffRepumpTime);
@@ -1494,7 +1496,7 @@ void CSequence::SwitchBlueMOTOff() {
 			GoToTime(StartTime);
 		}
 		//Go back to start of bb red MOT, i.e. we start ramping red MOT while doing repumping. Do we want that?
-		GoToTime(StartTime);
+		GoToTime(StartTimeBlueOff);
 		Wait(SwitchBlueMOTOffWait, 1300);
 	}
 	else {
@@ -2120,7 +2122,7 @@ void CSequence::SwitchBlueFluorescenceProbeBeamOn() {
 		if (!Decision("DoSwitchBlueFluoDetectionProbeOn")) return;
 		if (SwitchBlueFluoDetectionProbeOnShutter) {
 			double Start = GetTime();
-			GoBackInTime(20);
+			GoBackInTime(BlueDetectionShutterOnDelay);
 			SwitchBlueDetectionShutter(On);
 			SetFrequencyBlueDetectionDPAOM(0);
 			GoToTime(Start);

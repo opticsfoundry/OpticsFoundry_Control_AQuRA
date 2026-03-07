@@ -348,6 +348,7 @@ void CSequence::InitializeSystem(bool OnlyFastOutputs, bool HardResetSystem) {
 	InitializeCoilDriverTorun3x3A(OnlyFastOutputs, 0);
 	InitializeCoilDriverTorun100A();
 	if ((!AssemblingIOList()) && (!AssemblingParamList())) {
+		SetTorunCoilDriverState(0);
 		//Scan red MOT AOM //FS 2025 08 28 this is old style code from SrPAL. Needs to be updated.
 		InitializeAD9852(/*DDSNumber*/4, /*StartFrequency*/*InitStartFrequencyRedMOTAOM,
 			/*StopFrequency*/*InitStopFrequencyRedMOTAOM, /*ModulationFrequency*/*InitModulationFrequencyRedMOTAOM, /*Intensity*/*InitIntensityRedMOTAOM, /*FSKMode*/2);
