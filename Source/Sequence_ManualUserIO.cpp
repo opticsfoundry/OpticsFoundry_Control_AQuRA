@@ -300,6 +300,8 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			SetRampTimeState3(InitCoilDriverTorun3x3ARampTimeState3);
 			SwitchMOTCoilDriver(InitMOTCoilDriverEnabled);
 			SetMOTCoilDriverRampRate(InitCoilDriverTorun100AMaxRampRate);
+			SetTorunCoilDriverState(0);
+
 		}
 	}
 }

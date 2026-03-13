@@ -204,6 +204,7 @@ public:
 	void SetElectricFields(unsigned char Nr);
 	void SwitchZSOff();
 	void SwitchZSOn();
+	void SwitchBlueMOTParameters(unsigned char Nr);
 	void SwitchBlueMOTOff();
 	void SequenceBlockRampMOTCoilCurrent(unsigned char Nr);
 	void RampRedMOT(unsigned char Nr, bool BroadbandRedMOT);

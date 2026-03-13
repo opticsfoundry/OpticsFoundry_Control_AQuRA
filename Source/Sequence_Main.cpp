@@ -1294,12 +1294,22 @@ void CSequence::SyncToLineInSequence(int Nr) {
 
 
 void CSequence::SetTorunCoilDriverState(unsigned char state) {
+	unsigned char helpstate = state + 1;
+	if (helpstate == 4) helpstate = 0;
+	SwitchTorunCoilDriverD0(helpstate & 0x01);
+	SwitchTorunCoilDriverD1(helpstate & 0x02);
+	SwitchTorunCoilDriverD2(helpstate & 0x04);
+	Wait(0.01);// Wait(0.01);
+	SwitchTorunCoilDriverTrigger(On);
+	Wait(0.01);// Wait(0.01);
+	SwitchTorunCoilDriverTrigger(Off);
+	Wait(0.01);
 	SwitchTorunCoilDriverD0(state & 0x01);
 	SwitchTorunCoilDriverD1(state & 0x02);
 	SwitchTorunCoilDriverD2(state & 0x04);
-	Wait(0.01);
+	Wait(0.01);// Wait(0.01);
 	SwitchTorunCoilDriverTrigger(On);
-	Wait(0.01);
+	Wait(0.01);// Wait(0.01);
 	SwitchTorunCoilDriverTrigger(Off);
 }
 
@@ -1411,6 +1421,37 @@ void CSequence::SwitchZSOn() {
 		ParamList->RegisterDouble(&SwitchZSOnDelay, "SwitchZSOnDelay", -2000, 2000, "Delay", "ms");
 	}
 }
+
+
+
+//SwitchBlueMOTParameters
+void CSequence::SwitchBlueMOTParameters(unsigned char Nr) {
+	const unsigned char NrSwitchBlueMOTParameters = 10;
+	static bool DoSwitchBlueMOTParameters[NrSwitchBlueMOTParameters];
+	static double SwitchBlueMOTParametersBlueMOTIntensity[NrSwitchBlueMOTParameters];
+	static double SwitchBlueMOTParametersBlueMOTFrequency[NrSwitchBlueMOTParameters];
+	static double SwitchBlueMOTParametersQPCurrent[NrSwitchBlueMOTParameters];
+	static double SwitchBlueMOTParametersWait[NrSwitchBlueMOTParameters];
+
+	if (!AssemblingParamList()) {
+		if (!Decision("DoSwitchBlueMOTParameters" + itos(Nr))) return;
+		SetFrequencyBlueMOTDPAOM(SwitchBlueMOTParametersBlueMOTFrequency[Nr]);
+		SetIntensityBlueMOTDPAOM(SwitchBlueMOTParametersBlueMOTIntensity[Nr]);
+		//Ramp MOT QP current off
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchBlueMOTParametersQPCurrent[Nr], 0.1, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		Wait(SwitchBlueMOTParametersWait[Nr], 1300);
+	}
+	else {
+		ParamList->RegisterBool(&DoSwitchBlueMOTParameters[Nr], "DoSwitchBlueMOTParameters" + itos(Nr), "Switch blue MOT parameters " + itos(Nr), "M");
+		ParamList->RegisterDouble(&SwitchBlueMOTParametersBlueMOTFrequency[Nr], "SwitchBlueMOTParametersBlueMOTFrequency" + itos(Nr), 180, 220, "Blue MOT frequency", "MHz");
+		ParamList->RegisterDouble(&SwitchBlueMOTParametersBlueMOTIntensity[Nr], "SwitchBlueMOTParametersBlueMOTIntensity" + itos(Nr), 0, 100, "Blue MOT intensity", "%");
+		ParamList->RegisterDouble(&SwitchBlueMOTParametersQPCurrent[Nr], "SwitchBlueMOTParametersQPCurrent" + itos(Nr), 0, 2000, "QP current", "A");
+		ParamList->RegisterDouble(&SwitchBlueMOTParametersWait[Nr], "SwitchBlueMOTParametersWait" + itos(Nr), 0, 20000, "Wait", "ms");
+	}
+}
+
 
 //Switch Blue MOT off
 //the 3P0,2 repump laser beams pass through the mF state pumping shutters
@@ -2578,6 +2619,8 @@ void CSequence::MainExperimentalSequence() {
 	SetElectricFields(/* Nr*/ 0);
 	SwitchZSOff();
 	SwitchZSOn();
+	SwitchBlueMOTParameters(0);
+	SwitchBlueMOTParameters(1);
 	SwitchBlueMOTOff();
 	SequenceBlockRampMOTCoilCurrent(/*Nr*/0);
 	RampRedMOT(/* Nr */ 0, /* BroadbandRedMOT */ true);
