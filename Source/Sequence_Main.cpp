@@ -2662,6 +2662,8 @@ void CSequence::MainExperimentalSequence() {
 	ClockInterrogation();
 	ClockReadout();
 	AnalogIn();
+	if (AssemblingParamList()) ParamList->NewMenu("Placeholder parameters", IDM_MENU_0);
+	PlaceholderForUnusedTorunDriverStates();
 	if (AssemblingParamList()) ParamList->NewMenu("Fluorescence imaging", IDM_MENU_0);
 	SwitchBlueFluorescenceDetectionMOTOn();
 	SwitchRedFluorescenceDetectionMOTOn();
@@ -2670,7 +2672,6 @@ void CSequence::MainExperimentalSequence() {
 	//switch back to blue MOT
 	if (AssemblingParamList()) ParamList->SwitchRegistration(Off); //We already added the param menus for the Initialization. We shouldn't do that twice, so we switch PatameterList addition off.
 	ExampleCodeBlock();
-	PlaceholderForUnusedTorunDriverStates();
 	InitializeSystem(/* OnlyFast */true);
 	if (AssemblingParamList()) {
 		ParamList->SwitchRegistration(On);
