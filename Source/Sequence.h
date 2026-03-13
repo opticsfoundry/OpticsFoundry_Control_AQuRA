@@ -221,6 +221,7 @@ public:
 	void SwitchBlueFluorescenceProbeBeamOn();
 	void ReadoutFPGAMemory();
 	void ExampleCodeBlock();
+	void PlaceholderForUnusedTorunDriverStates();
 
 
 	bool LoadParameterFileBeforeRun(CWnd* parent);

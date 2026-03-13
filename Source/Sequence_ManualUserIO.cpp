@@ -225,49 +225,49 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 		IOList->RegisterAnalogOutput(&SetCurrentState0Coil0, "SetCurrentState0Coil0", "Torun state 0 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState0Coil1, "SetCurrentState0Coil1", "Torun state 0 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState0Coil2, "SetCurrentState0Coil2", "Torun state 0 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState0, "SetRampTimeState0", "Torun state 0 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState0, "SetRampTimeState0", "Torun state 0 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("1: D2=0, D1=0, D0=1: red MOT");
 		IOList->RegisterAnalogOutput(&SetCurrentState1Coil0, "SetCurrentState1Coil0", "Torun state 1 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState1Coil1, "SetCurrentState1Coil1", "Torun state 1 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState1Coil2, "SetCurrentState1Coil2", "Torun state 1 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState1, "SetRampTimeState1", "Torun state 1 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState1, "SetRampTimeState1", "Torun state 1 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("2: D2=0, D1=1, D0=0: interrogation");
 		IOList->RegisterAnalogOutput(&SetCurrentState2Coil0, "SetCurrentState2Coil0", "Torun state 2 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState2Coil1, "SetCurrentState2Coil1", "Torun state 2 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState2Coil2, "SetCurrentState2Coil2", "Torun state 2 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState2, "SetRampTimeState2", "Torun state 2 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState2, "SetRampTimeState2", "Torun state 2 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("3: D2=0, D1=1, D0=1: optical pumping");
 		IOList->RegisterAnalogOutput(&SetCurrentState3Coil0, "SetCurrentState3Coil0", "Torun state 3 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState3Coil1, "SetCurrentState3Coil1", "Torun state 3 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState3Coil2, "SetCurrentState3Coil2", "Torun state 3 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState3, "SetRampTimeState3", "Torun state 3 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState3, "SetRampTimeState3", "Torun state 3 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("4: D2=1, D1=0, D0=0");
 		IOList->RegisterAnalogOutput(&SetCurrentState4Coil0, "SetCurrentState4Coil0", "Torun state 4 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState4Coil1, "SetCurrentState4Coil1", "Torun state 4 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState4Coil2, "SetCurrentState4Coil2", "Torun state 4 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState4, "SetRampTimeState4", "Torun state 4 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState4, "SetRampTimeState4", "Torun state 4 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("5: D2=1, D1=0, D0=1");
 		IOList->RegisterAnalogOutput(&SetCurrentState5Coil0, "SetCurrentState5Coil0", "Torun state 5 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState5Coil1, "SetCurrentState5Coil1", "Torun state 5 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState5Coil2, "SetCurrentState5Coil2", "Torun state 5 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState5, "SetRampTimeState5", "Torun state 5 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState5, "SetRampTimeState5", "Torun state 5 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("6: D2=1, D1=1, D0=0");
 		IOList->RegisterAnalogOutput(&SetCurrentState6Coil0, "SetCurrentState6Coil0", "Torun state 6 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState6Coil1, "SetCurrentState6Coil1", "Torun state 6 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState6Coil2, "SetCurrentState6Coil2", "Torun state 6 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState6, "SetRampTimeState6", "Torun state 6 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState6, "SetRampTimeState6", "Torun state 6 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("7: D2=1, D1=1, D0=1");
 		IOList->RegisterAnalogOutput(&SetCurrentState7Coil0, "SetCurrentState7Coil0", "Torun state 7 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState7Coil1, "SetCurrentState7Coil1", "Torun state 7 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetCurrentState7Coil2, "SetCurrentState7Coil2", "Torun state 7 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetRampTimeState7, "SetRampTimeState7", "Torun state 7 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState7, "SetRampTimeState7", "Torun state 7 ramp time", "ms", /*Help*/ "", /*Min*/ 1, /*Max*/ 1000, Constant);
 		IOList->AddStatic("");
 		IOList->AddStatic("MOT coil driver");
 		IOList->RegisterDigitalOutput(&SwitchMOTCoilDriver, "SwitchMOTCoilDriver", "Enable MOT Coil Driver");

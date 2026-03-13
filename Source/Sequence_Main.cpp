@@ -1773,6 +1773,32 @@ void CSequence::RampToInterrogationConditions() {
 	}
 }
 
+//PlaceholderForUnusedTorunDriverStates
+void CSequence::PlaceholderForUnusedTorunDriverStates() {
+	static bool DoPlaceholderForUnusedTorunDriverStates;
+	if (!AssemblingParamList()) {
+		if (!Decision("DoPlaceholderForUnusedTorunDriverStates")) return;
+		//Move the following commands, and the variable registrations below, to where you want to use them.
+		SetTorunCoilDriverState(4);
+		Wait(500);
+		SetTorunCoilDriverState(5);
+		Wait(500);
+		SetTorunCoilDriverState(6);
+		Wait(500);
+		SetTorunCoilDriverState(7);
+		Wait(00);
+	}
+	else {
+		ParamList->RegisterBool(&DoPlaceholderForUnusedTorunDriverStates, "DoPlaceholderForUnusedTorunDriverStates", "Unused Torun Driver States ?", "T");
+		InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 4);
+		InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 5);
+		InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 6);
+		InitializeCoilDriverTorun3x3A(/*OnlyFastOutputs*/false, 7);
+	}
+}
+
+
+
 //Coarse clock spectroscopy
 void CSequence::CoarseClockSpectroscopy() {
 	static bool DoCoarseClockSpectroscopy = false;
@@ -2644,6 +2670,7 @@ void CSequence::MainExperimentalSequence() {
 	//switch back to blue MOT
 	if (AssemblingParamList()) ParamList->SwitchRegistration(Off); //We already added the param menus for the Initialization. We shouldn't do that twice, so we switch PatameterList addition off.
 	ExampleCodeBlock();
+	PlaceholderForUnusedTorunDriverStates();
 	InitializeSystem(/* OnlyFast */true);
 	if (AssemblingParamList()) {
 		ParamList->SwitchRegistration(On);
