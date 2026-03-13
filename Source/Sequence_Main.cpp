@@ -1295,21 +1295,20 @@ void CSequence::SyncToLineInSequence(int Nr) {
 
 void CSequence::SetTorunCoilDriverState(unsigned char state) {
 	unsigned char helpstate = state + 1;
-	if (helpstate == 4) helpstate = 0;
 	SwitchTorunCoilDriverD0(helpstate & 0x01);
 	SwitchTorunCoilDriverD1(helpstate & 0x02);
 	SwitchTorunCoilDriverD2(helpstate & 0x04);
-	Wait(0.01);// Wait(0.01);
+	Wait(0.01);
 	SwitchTorunCoilDriverTrigger(On);
-	Wait(0.01);// Wait(0.01);
+	Wait(0.01);
 	SwitchTorunCoilDriverTrigger(Off);
 	Wait(0.01);
 	SwitchTorunCoilDriverD0(state & 0x01);
 	SwitchTorunCoilDriverD1(state & 0x02);
 	SwitchTorunCoilDriverD2(state & 0x04);
-	Wait(0.01);// Wait(0.01);
+	Wait(0.01);
 	SwitchTorunCoilDriverTrigger(On);
-	Wait(0.01);// Wait(0.01);
+	Wait(0.01);
 	SwitchTorunCoilDriverTrigger(Off);
 }
 
@@ -2031,7 +2030,7 @@ void CSequence::ClockReadout() {
 		ParamList->RegisterDouble(&ClockReadoutBlueMOTDPAOMFrequency, "ClockReadoutBlueMOTDPAOMFrequency", 0, 2000, "Blue MOT Frequency", "MHz");
 		ParamList->RegisterDouble(&ClockReadoutBlueMOTDPAOMIntensity, "ClockReadoutBlueMOTDPAOMIntensity", 0, 100, "Blue MOT Intensity", "%");
 		ParamList->RegisterDouble(&ClockReadoutBlueMOTQPCurrent, "ClockReadoutBlueMOTQPCurrent", 0, 100, "Blue MOT QP current", "A");
-		ParamList->RegisterLong(&ClockReadoutTorunCoilDriverState, "ClockReadoutTorunCoilDriverState", 0, 3, "Torun coil driver state", "0..3");
+		ParamList->RegisterLong(&ClockReadoutTorunCoilDriverState, "ClockReadoutTorunCoilDriverState", 0, 7, "Torun coil driver state", "0..7");
 		ParamList->AddStatic("Timing");
 		ParamList->RegisterDouble(&ClockReadoutSettleTime, "ClockReadoutSettleTime", 0, 2000, "Settle Time", "ms");
 		ParamList->RegisterDouble(&ClockReadoutAnalogInPeriod, "ClockReadoutAnalogInPeriod", 0.001, 10, "Period between points", "s");
@@ -2089,7 +2088,7 @@ void CSequence::SwitchBlueFluorescenceDetectionMOTOn() {
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionMOTOnAOMFrequency, "SwitchBlueFluoDetectionMOTOnAOMFrequency", 0, 2000, "Frequency", "MHz");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionMOTOnAOMIntensity, "SwitchBlueFluoDetectionMOTOnAOMIntensity", 0, 100, "Intensity", "%");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionMOTOnQPCurrent, "SwitchBlueFluoDetectionMOTOnQPCurrent", 0, 100, "Blue capture MOT QP current", "A");
-		ParamList->RegisterLong(&SwitchBlueFluoDetectionMOTOnTorunCoilDriverState, "SwitchBlueFluoDetectionMOTOnTorunCoilDriverState", 0, 3, "Torun coil driver state", "0..3");
+		ParamList->RegisterLong(&SwitchBlueFluoDetectionMOTOnTorunCoilDriverState, "SwitchBlueFluoDetectionMOTOnTorunCoilDriverState", 0, 7, "Torun coil driver state", "0..7");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionMOTOnWait, "SwitchBlueFluoDetectionMOTOnWait", 0, 2000, "Wait", "ms");
 	}
 }
@@ -2145,7 +2144,7 @@ void CSequence::SwitchRedFluorescenceDetectionMOTOn() {
 		ParamList->RegisterDouble(&SwitchRedFluoDetectionMOTOnAOMStopFrequency, "SwitchRedFluoDetectionMOTOnAOMStopFrequency", 0, 2000, "Stop Frequency", "MHz");
 		ParamList->RegisterDouble(&SwitchRedFluoDetectionMOTOnAOMIntensity, "SwitchRedFluoDetectionMOTOnAOMIntensity", 0, 100, "Intensity", "%");
 		ParamList->RegisterDouble(&SwitchRedFluoDetectionMOTOnQPCurrent, "SwitchRedFluoDetectionMOTOnQPCurrent", 0, 100, "Red capture MOT QP current", "A");
-		ParamList->RegisterLong(&SwitchRedFluoDetectionMOTOnTorunCoilDriverState, "SwitchRedFluoDetectionMOTOnTorunCoilDriverState", 0, 3, "Torun coil driver state", "0..3");
+		ParamList->RegisterLong(&SwitchRedFluoDetectionMOTOnTorunCoilDriverState, "SwitchRedFluoDetectionMOTOnTorunCoilDriverState", 0, 7, "Torun coil driver state", "0..7");
 		ParamList->RegisterDouble(&SwitchRedFluoDetectionMOTOnWait, "SwitchRedFluoDetectionMOTOnWait", 0, 2000, "Wait", "ms");
 	}
 }
@@ -2197,7 +2196,7 @@ void CSequence::SwitchBlueFluorescenceProbeBeamOn() {
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionProbeOnAOMFrequency, "SwitchBlueFluoDetectionProbeOnAOMFrequency", 0, 2000, "Frequency", "MHz");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionProbeOnAOMIntensity, "SwitchBlueFluoDetectionProbeOnAOMIntensity", 0, 100, "Intensity", "%");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionProbeOnQPCurrent, "SwitchBlueFluoDetectionProbeOnQPCurrent", 0, 100, "Blue capture Probe QP current", "A");
-		ParamList->RegisterLong(&SwitchBlueFluoDetectionProbeOnTorunCoilDriverState, "SwitchBlueFluoDetectionProbeOnTorunCoilDriverState", 0, 3, "Torun coil driver state", "0..3");
+		ParamList->RegisterLong(&SwitchBlueFluoDetectionProbeOnTorunCoilDriverState, "SwitchBlueFluoDetectionProbeOnTorunCoilDriverState", 0, 7, "Torun coil driver state", "0..7");
 		ParamList->RegisterDouble(&SwitchBlueFluoDetectionProbeOnWait, "SwitchBlueFluoDetectionProbeOnWait", 0, 2000, "Wait", "ms");
 	}
 }

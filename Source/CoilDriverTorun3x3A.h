@@ -11,7 +11,7 @@
 #endif // _MSC_VER > 1000
 
 const int CoilDriverTorun3x3ANrCoils = 3;
-const int CoilDriverTorun3x3ANrSettings = 4;
+const int CoilDriverTorun3x3ANrSettings = 8;
 class CCoilDriverTorun3x3A : public CNetworkClient
 {
 public: 

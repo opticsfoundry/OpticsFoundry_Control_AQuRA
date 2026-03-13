@@ -196,10 +196,26 @@ double InitCoilDriverTorun3x3ACurrentState2Coil2;
 double InitCoilDriverTorun3x3ACurrentState3Coil0;
 double InitCoilDriverTorun3x3ACurrentState3Coil1;
 double InitCoilDriverTorun3x3ACurrentState3Coil2;
+double InitCoilDriverTorun3x3ACurrentState4Coil0;
+double InitCoilDriverTorun3x3ACurrentState4Coil1;
+double InitCoilDriverTorun3x3ACurrentState4Coil2;
+double InitCoilDriverTorun3x3ACurrentState5Coil0;
+double InitCoilDriverTorun3x3ACurrentState5Coil1;
+double InitCoilDriverTorun3x3ACurrentState5Coil2;
+double InitCoilDriverTorun3x3ACurrentState6Coil0;
+double InitCoilDriverTorun3x3ACurrentState6Coil1;
+double InitCoilDriverTorun3x3ACurrentState6Coil2;
+double InitCoilDriverTorun3x3ACurrentState7Coil0;
+double InitCoilDriverTorun3x3ACurrentState7Coil1;
+double InitCoilDriverTorun3x3ACurrentState7Coil2;
 double InitCoilDriverTorun3x3ARampTimeState0;
 double InitCoilDriverTorun3x3ARampTimeState1;
 double InitCoilDriverTorun3x3ARampTimeState2;
 double InitCoilDriverTorun3x3ARampTimeState3;
+double InitCoilDriverTorun3x3ARampTimeState4;
+double InitCoilDriverTorun3x3ARampTimeState5;
+double InitCoilDriverTorun3x3ARampTimeState6;
+double InitCoilDriverTorun3x3ARampTimeState7;
 bool InitMOTCoilDriverEnabled=False;
 double InitCoilDriverTorun100AMaxRampRate=50;
 void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setting) {
@@ -224,10 +240,34 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 		IOList->RegisterAnalogOutput(&SetRampTimeState2, "SetRampTimeState2", "Torun state 2 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
 
 		IOList->AddStatic("3: D2=0, D1=1, D0=1: optical pumping");
-		IOList->RegisterAnalogOutput(&SetCurrentState3Coil0, "SetCurrentState2Coil0", "Torun state 3 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetCurrentState3Coil1, "SetCurrentState2Coil1", "Torun state 3 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
-		IOList->RegisterAnalogOutput(&SetCurrentState3Coil2, "SetCurrentState2Coil2", "Torun state 3 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState3Coil0, "SetCurrentState3Coil0", "Torun state 3 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState3Coil1, "SetCurrentState3Coil1", "Torun state 3 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState3Coil2, "SetCurrentState3Coil2", "Torun state 3 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
 		IOList->RegisterAnalogOutput(&SetRampTimeState3, "SetRampTimeState3", "Torun state 3 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+
+		IOList->AddStatic("4: D2=1, D1=0, D0=0");
+		IOList->RegisterAnalogOutput(&SetCurrentState4Coil0, "SetCurrentState4Coil0", "Torun state 4 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState4Coil1, "SetCurrentState4Coil1", "Torun state 4 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState4Coil2, "SetCurrentState4Coil2", "Torun state 4 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState4, "SetRampTimeState4", "Torun state 4 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+
+		IOList->AddStatic("5: D2=1, D1=0, D0=1");
+		IOList->RegisterAnalogOutput(&SetCurrentState5Coil0, "SetCurrentState5Coil0", "Torun state 5 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState5Coil1, "SetCurrentState5Coil1", "Torun state 5 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState5Coil2, "SetCurrentState5Coil2", "Torun state 5 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState5, "SetRampTimeState5", "Torun state 5 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+
+		IOList->AddStatic("6: D2=1, D1=1, D0=0");
+		IOList->RegisterAnalogOutput(&SetCurrentState6Coil0, "SetCurrentState6Coil0", "Torun state 6 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState6Coil1, "SetCurrentState6Coil1", "Torun state 6 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState6Coil2, "SetCurrentState6Coil2", "Torun state 6 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState6, "SetRampTimeState6", "Torun state 6 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
+
+		IOList->AddStatic("7: D2=1, D1=1, D0=1");
+		IOList->RegisterAnalogOutput(&SetCurrentState7Coil0, "SetCurrentState7Coil0", "Torun state 7 coil 0 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState7Coil1, "SetCurrentState7Coil1", "Torun state 7 coil 1 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetCurrentState7Coil2, "SetCurrentState7Coil2", "Torun state 7 coil 2 current", "A", /*Help*/ "", /*Min*/ -3, /*Max*/ 3, Constant);
+		IOList->RegisterAnalogOutput(&SetRampTimeState7, "SetRampTimeState7", "Torun state 7 ramp time", "ms", /*Help*/ "", /*Min*/ 0, /*Max*/ 1000, Constant);
 		IOList->AddStatic("");
 		IOList->AddStatic("MOT coil driver");
 		IOList->RegisterDigitalOutput(&SwitchMOTCoilDriver, "SwitchMOTCoilDriver", "Enable MOT Coil Driver");
@@ -274,6 +314,38 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState3, "InitCoilDriverTorun3x3ARampTimeState3", 0, 1000, "Torun state 3 ramp time", "ms");
 
 			break;
+		case 4:
+			ParamList->AddStatic("4: D2=1, D1=0, D0=0");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState4Coil0, "InitCoilDriverTorun3x3ACurrentState4Coil0", -3, 3, "Torun state 4 coil 0 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState4Coil1, "InitCoilDriverTorun3x3ACurrentState4Coil1", -3, 3, "Torun state 4 coil 1 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState4Coil2, "InitCoilDriverTorun3x3ACurrentState4Coil2", -3, 3, "Torun state 4 coil 2 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState4, "InitCoilDriverTorun3x3ARampTimeState4", 0, 1000, "Torun state 4 ramp time", "ms");
+
+			break;
+		case 5:
+			ParamList->AddStatic("5: D2=1, D1=0, D0=1");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState5Coil0, "InitCoilDriverTorun3x3ACurrentState5Coil0", -3, 3, "Torun state 5 coil 0 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState5Coil1, "InitCoilDriverTorun3x3ACurrentState5Coil1", -3, 3, "Torun state 5 coil 1 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState5Coil2, "InitCoilDriverTorun3x3ACurrentState5Coil2", -3, 3, "Torun state 5 coil 2 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState5, "InitCoilDriverTorun3x3ARampTimeState5", 0, 1000, "Torun state 5 ramp time", "ms");
+
+			break;
+		case 6:
+			ParamList->AddStatic("6: D2=1, D1=1, D0=0");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState6Coil0, "InitCoilDriverTorun3x3ACurrentState6Coil0", -3, 3, "Torun state 6 coil 0 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState6Coil1, "InitCoilDriverTorun3x3ACurrentState6Coil1", -3, 3, "Torun state 6 coil 1 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState6Coil2, "InitCoilDriverTorun3x3ACurrentState6Coil2", -3, 3, "Torun state 6 coil 2 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState6, "InitCoilDriverTorun3x3ARampTimeState6", 0, 1000, "Torun state 6 ramp time", "ms");
+
+			break;
+		case 7:
+			ParamList->AddStatic("7: D2=1, D1=1, D0=1");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState7Coil0, "InitCoilDriverTorun3x3ACurrentState7Coil0", -3, 3, "Torun state 7 coil 0 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState7Coil1, "InitCoilDriverTorun3x3ACurrentState7Coil1", -3, 3, "Torun state 7 coil 1 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ACurrentState7Coil2, "InitCoilDriverTorun3x3ACurrentState7Coil2", -3, 3, "Torun state 7 coil 2 current", "A");
+			ParamList->RegisterDouble(&InitCoilDriverTorun3x3ARampTimeState7, "InitCoilDriverTorun3x3ARampTimeState7", 0, 1000, "Torun state 7 ramp time", "ms");
+
+			break;
 		default:
 			break;
 		}
@@ -294,10 +366,26 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			SetCurrentState3Coil0(InitCoilDriverTorun3x3ACurrentState3Coil0);
 			SetCurrentState3Coil1(InitCoilDriverTorun3x3ACurrentState3Coil1);
 			SetCurrentState3Coil2(InitCoilDriverTorun3x3ACurrentState3Coil2);
+			SetCurrentState4Coil0(InitCoilDriverTorun3x3ACurrentState4Coil0);
+			SetCurrentState4Coil1(InitCoilDriverTorun3x3ACurrentState4Coil1);
+			SetCurrentState4Coil2(InitCoilDriverTorun3x3ACurrentState4Coil2);
+			SetCurrentState5Coil0(InitCoilDriverTorun3x3ACurrentState5Coil0);
+			SetCurrentState5Coil1(InitCoilDriverTorun3x3ACurrentState5Coil1);
+			SetCurrentState5Coil2(InitCoilDriverTorun3x3ACurrentState5Coil2);
+			SetCurrentState6Coil0(InitCoilDriverTorun3x3ACurrentState6Coil0);
+			SetCurrentState6Coil1(InitCoilDriverTorun3x3ACurrentState6Coil1);
+			SetCurrentState6Coil2(InitCoilDriverTorun3x3ACurrentState6Coil2);
+			SetCurrentState7Coil0(InitCoilDriverTorun3x3ACurrentState7Coil0);
+			SetCurrentState7Coil1(InitCoilDriverTorun3x3ACurrentState7Coil1);
+			SetCurrentState7Coil2(InitCoilDriverTorun3x3ACurrentState7Coil2);
 			SetRampTimeState0(InitCoilDriverTorun3x3ARampTimeState0);
 			SetRampTimeState1(InitCoilDriverTorun3x3ARampTimeState1);
 			SetRampTimeState2(InitCoilDriverTorun3x3ARampTimeState2);
 			SetRampTimeState3(InitCoilDriverTorun3x3ARampTimeState3);
+			SetRampTimeState4(InitCoilDriverTorun3x3ARampTimeState4);
+			SetRampTimeState5(InitCoilDriverTorun3x3ARampTimeState5);
+			SetRampTimeState6(InitCoilDriverTorun3x3ARampTimeState6);
+			SetRampTimeState7(InitCoilDriverTorun3x3ARampTimeState7);
 			SwitchMOTCoilDriver(InitMOTCoilDriverEnabled);
 			SetMOTCoilDriverRampRate(InitCoilDriverTorun100AMaxRampRate);
 			SetTorunCoilDriverState(0);

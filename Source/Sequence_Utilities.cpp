@@ -890,7 +890,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		else {
 			UtilityDialog->AddStatic("Offset coil driver");
 			UtilityDialog->AddButton(IDM_PROGRAM_TORUN_COIL_DRIVER_3X3A, Sequence);
-			UtilityDialog->RegisterLong(&CoilDriver3x3AState, "CoilDriver3x3AState", 0, 3, "Coil Driver 3x3A State", "0..3");
+			UtilityDialog->RegisterLong(&CoilDriver3x3AState, "CoilDriver3x3AState", 0, 7, "Coil Driver 3x3A State", "0..7");
 			UtilityDialog->AddButton(IDM_SET_STATE_TORUN_COIL_DRIVER_3X3A, Sequence);
 			UtilityDialog->AddStatic("");
 			UtilityDialog->AddStatic("MOT coil driver");

@@ -148,10 +148,30 @@ extern void SetCurrentState3Coil0(double current);
 extern void SetCurrentState3Coil1(double current);
 extern void SetCurrentState3Coil2(double current);
 
+extern void SetCurrentState4Coil0(double current);
+extern void SetCurrentState4Coil1(double current);
+extern void SetCurrentState4Coil2(double current);
+
+extern void SetCurrentState5Coil0(double current);
+extern void SetCurrentState5Coil1(double current);
+extern void SetCurrentState5Coil2(double current);
+
+extern void SetCurrentState6Coil0(double current);
+extern void SetCurrentState6Coil1(double current);
+extern void SetCurrentState6Coil2(double current);
+
+extern void SetCurrentState7Coil0(double current);
+extern void SetCurrentState7Coil1(double current);
+extern void SetCurrentState7Coil2(double current);
+
 extern void SetRampTimeState0(double RampTime);
 extern void SetRampTimeState1(double RampTime);
 extern void SetRampTimeState2(double RampTime);
 extern void SetRampTimeState3(double RampTime);
+extern void SetRampTimeState4(double RampTime);
+extern void SetRampTimeState5(double RampTime);
+extern void SetRampTimeState6(double RampTime);
+extern void SetRampTimeState7(double RampTime);
 
 extern void SwitchMOTCoilDriver(bool OnOff);
 extern void SetMOTCoilDriverRampRate(double RampRate);

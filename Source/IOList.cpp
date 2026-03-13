@@ -858,24 +858,104 @@ void SetCurrentState3Coil2(double current) {
 	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 11, current, current);
 }
 
+void SetCurrentState4Coil0(double current) {
+	CoilDriverTorun3x3A->SetCurrent(4, 0, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 12, current, current);
+}
+
+void SetCurrentState4Coil1(double current) {
+	CoilDriverTorun3x3A->SetCurrent(4, 1, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 13, current, current);
+}
+
+void SetCurrentState4Coil2(double current) {
+	CoilDriverTorun3x3A->SetCurrent(4, 2, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 14, current, current);
+}
+
+void SetCurrentState5Coil0(double current) {
+	CoilDriverTorun3x3A->SetCurrent(5, 0, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 15, current, current);
+}
+
+void SetCurrentState5Coil1(double current) {
+	CoilDriverTorun3x3A->SetCurrent(5, 1, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 16, current, current);
+}
+
+void SetCurrentState5Coil2(double current) {
+	CoilDriverTorun3x3A->SetCurrent(5, 2, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 17, current, current);
+}
+
+void SetCurrentState6Coil0(double current) {
+	CoilDriverTorun3x3A->SetCurrent(6, 0, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 18, current, current);
+}
+
+void SetCurrentState6Coil1(double current) {
+	CoilDriverTorun3x3A->SetCurrent(6, 1, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 19, current, current);
+}
+
+void SetCurrentState6Coil2(double current) {
+	CoilDriverTorun3x3A->SetCurrent(6, 2, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 20, current, current);
+}
+
+void SetCurrentState7Coil0(double current) {
+	CoilDriverTorun3x3A->SetCurrent(7, 0, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 21, current, current);
+}
+
+void SetCurrentState7Coil1(double current) {
+	CoilDriverTorun3x3A->SetCurrent(7, 1, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 22, current, current);
+}
+
+void SetCurrentState7Coil2(double current) {
+	CoilDriverTorun3x3A->SetCurrent(7, 2, current);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 23, current, current);
+}
+
 void SetRampTimeState0(double RampTime) {
 	CoilDriverTorun3x3A->SetRampTime(0, RampTime);
-	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 12, RampTime, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 24, RampTime, RampTime);
 }
 
 void SetRampTimeState1(double RampTime) {
 	CoilDriverTorun3x3A->SetRampTime(1, RampTime);
-	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 13, RampTime, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 25, RampTime, RampTime);
 }
 
 void SetRampTimeState2(double RampTime) {
 	CoilDriverTorun3x3A->SetRampTime(2, RampTime);
-	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 14, RampTime, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 26, RampTime, RampTime);
 }
 
 void SetRampTimeState3(double RampTime) {
 	CoilDriverTorun3x3A->SetRampTime(3, RampTime);
-	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 15, RampTime, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 27, RampTime, RampTime);
+}
+
+void SetRampTimeState4(double RampTime) {
+	CoilDriverTorun3x3A->SetRampTime(4, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 28, RampTime, RampTime);
+}
+
+void SetRampTimeState5(double RampTime) {
+	CoilDriverTorun3x3A->SetRampTime(5, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 29, RampTime, RampTime);
+}
+
+void SetRampTimeState6(double RampTime) {
+	CoilDriverTorun3x3A->SetRampTime(6, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 30, RampTime, RampTime);
+}
+
+void SetRampTimeState7(double RampTime) {
+	CoilDriverTorun3x3A->SetRampTime(7, RampTime);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 31, RampTime, RampTime);
 }
 
 void SwitchMOTCoilDriver(bool OnOff) {
@@ -885,5 +965,5 @@ void SwitchMOTCoilDriver(bool OnOff) {
 
 void SetMOTCoilDriverRampRate(double RampRate) {
 	CoilDriverTorun100A->SetRampRate(RampRate);
-	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart+16, RampRate, RampRate);
+	Output->AnalogOutScaled(TorunDriverHelpAnalogOutStart + 32, RampRate, RampRate);
 }
