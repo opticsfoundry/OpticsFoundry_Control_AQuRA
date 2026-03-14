@@ -1294,15 +1294,6 @@ void CSequence::SyncToLineInSequence(int Nr) {
 
 
 void CSequence::SetTorunCoilDriverState(unsigned char state) {
-	unsigned char helpstate = state + 1;
-	SwitchTorunCoilDriverD0(helpstate & 0x01);
-	SwitchTorunCoilDriverD1(helpstate & 0x02);
-	SwitchTorunCoilDriverD2(helpstate & 0x04);
-	Wait(0.01);
-	SwitchTorunCoilDriverTrigger(On);
-	Wait(0.01);
-	SwitchTorunCoilDriverTrigger(Off);
-	Wait(0.01);
 	SwitchTorunCoilDriverD0(state & 0x01);
 	SwitchTorunCoilDriverD1(state & 0x02);
 	SwitchTorunCoilDriverD2(state & 0x04);

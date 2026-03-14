@@ -388,8 +388,13 @@ void CSequence::InitializeCoilDriverTorun3x3A(bool OnlyFast, unsigned char setti
 			SetRampTimeState7(InitCoilDriverTorun3x3ARampTimeState7);
 			SwitchMOTCoilDriver(InitMOTCoilDriverEnabled);
 			SetMOTCoilDriverRampRate(InitCoilDriverTorun100AMaxRampRate);
+			//The offset coil driver only accepts changes of states. 
+			//Reprogramming the same state twice does not make it accept new value for that state.
+			//Therefore we first set the state to 0 and then to the state we desire
+			//The only place in the code in which the desired currents are reprogramed over ethernet is here.
+			//This means this trick doesn't have to be used anywhere else.
+			SetTorunCoilDriverState(7);
 			SetTorunCoilDriverState(0);
-
 		}
 	}
 }
