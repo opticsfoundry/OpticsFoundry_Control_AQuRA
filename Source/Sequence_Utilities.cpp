@@ -677,6 +677,7 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 
 
 	void CSequence::SwitchAQuRAShutters(bool OnOff) {
+		SwitchBlueMasterShutter(OnOff);
 		SwitchBlueDetectionShutter(OnOff);
 		SwitchBlueMOTShutter(OnOff);
 		SwitchZSShutter(OnOff);
@@ -690,7 +691,6 @@ void CSequence::LineNoiseCompensationApplyWaveform() {
 		SwitchExtraClockShutter1(OnOff);
 		SwitchExtraClockShutter2(OnOff);
 		SwitchExtraClockShutter3(OnOff);
-		SwitchExtraClockShutter4(OnOff);
 		SwitchAdditionalShutter0(OnOff);
 		SwitchAdditionalShutter1(OnOff);
 		SwitchAdditionalShutter2(OnOff);
