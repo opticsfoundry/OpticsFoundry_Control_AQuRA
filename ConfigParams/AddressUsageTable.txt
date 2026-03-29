@@ -78,11 +78,11 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          6          8          DigitalOutBoards               BlueDetectionShutter          
 0          6          9          DigitalOutBoards               RedPumpShutter                
 0          6          10         DigitalOutBoards               CoarseSpectroscopyShutter     
-0          6          11         DigitalOutBoards               ExtraClockShutter0            
-0          6          12         DigitalOutBoards               ExtraClockShutter1            
-0          6          13         DigitalOutBoards               ExtraClockShutter2            
-0          6          14         DigitalOutBoards               ExtraClockShutter3            
-0          6          15         DigitalOutBoards               ExtraClockShutter4            
+0          6          11         DigitalOutBoards               BlueMasterShutter             
+0          6          12         DigitalOutBoards               ExtraClockShutter0            
+0          6          13         DigitalOutBoards               ExtraClockShutter1            
+0          6          14         DigitalOutBoards               ExtraClockShutter2            
+0          6          15         DigitalOutBoards               ExtraClockShutter3            
 0          7          0          DigitalOutBoards               SpareDigitalOut0              
 0          7          1          DigitalOutBoards               SpareDigitalOut1              
 0          7          2          DigitalOutBoards               SpareDigitalOut2              
@@ -196,7 +196,7 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          153        0          DDSAD9854Boards                -                             
 0          154        0          DDSAD9854Boards                -                             
 0          155        0          DDSAD9854Boards                -                             
-0          156        0          DDSAD9854Boards                UserIOTestDDSAD9854_0         
+0          156        0          DDSAD9854Boards                ClockCavityDedriftAOM         
 0          157        0          DDSAD9854Boards                -                             
 0          158        0          DDSAD9854Boards                -                             
 0          159        0          DDSAD9854Boards                -                             

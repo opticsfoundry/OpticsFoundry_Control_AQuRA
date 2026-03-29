@@ -626,6 +626,25 @@
       }
     },
     {
+      "Name": "BlueMasterShutter",
+      "Description": "Blue Master Shutter",
+      "Help": "",
+      "Type": "DigitalOut",
+      "Sequencer": 0,
+      "Address": 6,
+      "Bit": 11,
+      "Inverted": true,
+      "Init": false,
+      "Hardreset": false,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
       "Name": "BlueDetectionShutter",
       "Description": "Blue Detection Shutter",
       "Help": "",
@@ -791,12 +810,48 @@
       }
     },
     {
-      "Name": "CoarseSpectroscopyAOM",
-      "Description": "Coarse Spectroscopy AOM",
+      "Name": "ClockCavityDedriftAOM",
+      "Description": "Clock Cavity Dedrift AOM",
       "Help": "",
       "Type": "DDSAD9854",
       "Sequencer": 0,
-      "Address": 140,
+      "Address": 156,
+      "FrequencyControl": "FrequencyInMHz",
+      "PowerControl": "PowerInPercent",
+      "PowerCalibrationPolynom": [
+        {
+          "order": 0,
+          "value": 0
+        },
+        {
+          "order": 1,
+          "value": 1
+        }
+      ],
+      "MinFrequency": 0.0,
+      "MaxFrequency": 100.0,
+      "InitFrequency": 78.0,
+      "InitPower": 100,
+      "ScanningDDS": true,
+      "StopFrequencyInit": 80.0,
+      "ModulationFrequencyInit": 0.02,
+      "StartScanning": true,
+      "Hardreset": true,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
+      "Name": "ClockSteeringAOM",
+      "Description": "Clock Steering AOM",
+      "Help": "",
+      "Type": "DDSAD9854",
+      "Sequencer": 0,
+      "Address": 128,
       "FrequencyControl": "FrequencyInMHz",
       "PowerControl": "PowerInPercent",
       "PowerCalibrationPolynom": [
@@ -827,12 +882,12 @@
       }
     },
     {
-      "Name": "ClockSteeringAOM",
-      "Description": "Clock Steering AOM",
+      "Name": "CoarseSpectroscopyAOM",
+      "Description": "Coarse Spectroscopy AOM",
       "Help": "",
       "Type": "DDSAD9854",
       "Sequencer": 0,
-      "Address": 128,
+      "Address": 140,
       "FrequencyControl": "FrequencyInMHz",
       "PowerControl": "PowerInPercent",
       "PowerCalibrationPolynom": [
@@ -1029,7 +1084,7 @@
           "value": 1
         }
       ],
-      "MinFrequency": 0.0,
+      "MinFrequency": 60.0,
       "MaxFrequency": 100.0,
       "InitFrequency": 78.0,
       "InitPower": 100,
@@ -1312,60 +1367,6 @@
     {
       "Text": "Test DDS",
       "Type": "NewMenu"
-    },
-    {
-      "Text": "Test AD9854 DDS",
-      "Type": "StaticText",
-      "Color": {
-        "Red": 1.0,
-        "Green": 1.0,
-        "Blue": 1.0
-      }
-    },
-    {
-      "Name": "UserIOTestDDSAD9854_0",
-      "Description": "Test DDS AD9854 0",
-      "Help": "",
-      "Type": "DDSAD9854",
-      "Sequencer": 0,
-      "Address": 156,
-      "FrequencyControl": "FrequencyAsBinary",
-      "PowerControl": "PowerInPercent",
-      "PowerCalibrationPolynom": [
-        {
-          "order": 0,
-          "value": 0
-        },
-        {
-          "order": 1,
-          "value": 1
-        }
-      ],
-      "MinFrequency": 60.0,
-      "MaxFrequency": 100.0,
-      "InitFrequency": 78.0,
-      "InitPower": 100,
-      "ScanningDDS": true,
-      "StopFrequencyInit": 80.0,
-      "ModulationFrequencyInit": 0.02,
-      "StartScanning": true,
-      "Hardreset": true,
-      "Softreset": true,
-      "BlockManualControl": false,
-      "Color": {
-        "Red": 1.0,
-        "Green": 1.0,
-        "Blue": 1.0
-      }
-    },
-    {
-      "Text": "",
-      "Type": "StaticText",
-      "Color": {
-        "Red": 1.0,
-        "Green": 1.0,
-        "Blue": 1.0
-      }
     },
     {
       "Text": "Test AD9858 DDS",
@@ -2055,7 +2056,7 @@
       "Type": "DigitalOut",
       "Sequencer": 0,
       "Address": 6,
-      "Bit": 11,
+      "Bit": 12,
       "Inverted": false,
       "Init": false,
       "Hardreset": false,
@@ -2074,7 +2075,7 @@
       "Type": "DigitalOut",
       "Sequencer": 0,
       "Address": 6,
-      "Bit": 12,
+      "Bit": 13,
       "Inverted": false,
       "Init": false,
       "Hardreset": false,
@@ -2093,7 +2094,7 @@
       "Type": "DigitalOut",
       "Sequencer": 0,
       "Address": 6,
-      "Bit": 13,
+      "Bit": 14,
       "Inverted": false,
       "Init": false,
       "Hardreset": false,
@@ -2108,25 +2109,6 @@
     {
       "Name": "ExtraClockShutter3",
       "Description": "Extra Clock Shutter 3",
-      "Help": "",
-      "Type": "DigitalOut",
-      "Sequencer": 0,
-      "Address": 6,
-      "Bit": 14,
-      "Inverted": false,
-      "Init": false,
-      "Hardreset": false,
-      "Softreset": true,
-      "BlockManualControl": false,
-      "Color": {
-        "Red": 1.0,
-        "Green": 1.0,
-        "Blue": 1.0
-      }
-    },
-    {
-      "Name": "ExtraClockShutter4",
-      "Description": "Extra Clock Shutter 4",
       "Help": "",
       "Type": "DigitalOut",
       "Sequencer": 0,

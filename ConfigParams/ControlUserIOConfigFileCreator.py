@@ -293,6 +293,7 @@ if __name__ == "__main__":
     builder.add_digital_out(Name="10MHzRfSourceSelection", Description="10MHz RF source selection", Address=3, Bit= 15)
     builder.add_new_column()
     builder.add_static_text(Text="Shutters")
+    builder.add_digital_out(Name="BlueMasterShutter", Description="Blue Master Shutter", Inverted = True, Address=6, Bit=11)
     builder.add_digital_out(Name="BlueDetectionShutter", Description="Blue Detection Shutter", Inverted = True, Address=6, Bit=8)
     builder.add_digital_out(Name="BlueMOTShutter", Description="Blue MOT Shutter", Inverted = True, Address=6, Bit=6)
     builder.add_digital_out(Name="ZSShutter", Description="ZS Shutter", Inverted = True, Address=6, Bit=5)    
@@ -305,8 +306,9 @@ if __name__ == "__main__":
 
     builder.add_new_menu(Text="AQuRA AD9854 DDS 1")
     builder.add_static_text(Text="AQuRA AD9854 DDS")
-    builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=140, MinFrequency=60.0, MaxFrequency=100.0)
+    builder.add_dds_ad9854(Name="ClockCavityDedriftAOM", Description="Clock Cavity Dedrift AOM", Address=156, MinFrequency=0.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSteeringAOM", Description="Clock Steering AOM", Address=128, MinFrequency=60.0, MaxFrequency=100.0)
+    builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=140, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSpectroscopyDDS", Description="Clock Spectroscopy DDS", Address=136, ScanningDDS=False, InitFrequency=80,MinFrequency=60,MaxFrequency=100)
     builder.add_dds_ad9854(Name="ClockSpectroscopyDDSfixed40MHz", Description="Clock Spectroscopy DDS fixed 40MHz", Address=132, ScanningDDS=False, InitFrequency=40,MinFrequency=40,MaxFrequency=40)
     builder.add_dds_ad9854(Name="ClockFNCOutputAlignmentDDS", Description="Clock FNC Out Alignment DDS", Address=160, ScanningDDS=False, InitFrequency=75,MinFrequency=60,MaxFrequency=100)
@@ -328,9 +330,6 @@ if __name__ == "__main__":
     builder.add_dds_ad9958(Name="LatticeEOM", Description="Lattice EOM", Address=1, MinFrequency=0.0, MaxFrequency=400.0)
 
     builder.add_new_menu(Text="Test DDS")
-    builder.add_static_text(Text="Test AD9854 DDS")
-    builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=156, FrequencyControl= "FrequencyAsBinary")
-    builder.add_static_text(Text="")
     builder.add_static_text(Text="Test AD9858 DDS")
     builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_static_text(Text="")
@@ -347,8 +346,8 @@ if __name__ == "__main__":
         builder.add_digital_out(Name=f"SpareDigitalOut{i}", Description=f"Spare Digital Output {i}", Address=7, Bit = i)
     builder.add_new_column()
     builder.add_static_text(Text="Spare Shutter Outs")
-    for i in range(5):
-        builder.add_digital_out(Name=f"ExtraClockShutter{i}", Description=f"Extra Clock Shutter {i}", Address=6, Bit = i + 11)
+    for i in range(4):
+        builder.add_digital_out(Name=f"ExtraClockShutter{i}", Description=f"Extra Clock Shutter {i}", Address=6, Bit = i + 12)
     for i in range(8):
         builder.add_digital_out(Name=f"AdditionalShutter{i}", Description=f"Additional Shutter {i}", Address=4, Bit = i)
     
