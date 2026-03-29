@@ -196,7 +196,7 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          153        0          DDSAD9854Boards                -                             
 0          154        0          DDSAD9854Boards                -                             
 0          155        0          DDSAD9854Boards                -                             
-0          156        0          DDSAD9854Boards                ClockCavityDedriftAOM         
+0          156        0          DDSAD9854Boards                ClockCavityDedriftDDS         
 0          157        0          DDSAD9854Boards                -                             
 0          158        0          DDSAD9854Boards                -                             
 0          159        0          DDSAD9854Boards                -                             

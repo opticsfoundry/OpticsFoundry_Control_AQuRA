@@ -306,7 +306,7 @@ if __name__ == "__main__":
 
     builder.add_new_menu(Text="AQuRA AD9854 DDS 1")
     builder.add_static_text(Text="AQuRA AD9854 DDS")
-    builder.add_dds_ad9854(Name="ClockCavityDedriftAOM", Description="Clock Cavity Dedrift AOM", Address=156, MinFrequency=0.0, MaxFrequency=100.0)
+    builder.add_dds_ad9854(Name="ClockCavityDedriftDDS", Description="Clock Cavity Dedrift DDS", Address=156, MinFrequency=0.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSteeringAOM", Description="Clock Steering AOM", Address=128, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="CoarseSpectroscopyAOM", Description="Coarse Spectroscopy AOM", Address=140, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_dds_ad9854(Name="ClockSpectroscopyDDS", Description="Clock Spectroscopy DDS", Address=136, ScanningDDS=False, InitFrequency=80,MinFrequency=60,MaxFrequency=100)

@@ -810,8 +810,8 @@
       }
     },
     {
-      "Name": "ClockCavityDedriftAOM",
-      "Description": "Clock Cavity Dedrift AOM",
+      "Name": "ClockCavityDedriftDDS",
+      "Description": "Clock Cavity Dedrift DDS",
       "Help": "",
       "Type": "DDSAD9854",
       "Sequencer": 0,
