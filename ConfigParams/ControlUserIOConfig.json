@@ -1369,6 +1369,60 @@
       "Type": "NewMenu"
     },
     {
+      "Text": "Test AD9854 DDS",
+      "Type": "StaticText",
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
+      "Name": "UserIOTestDDSAD9854_0",
+      "Description": "Test DDS AD9854 0",
+      "Help": "",
+      "Type": "DDSAD9854",
+      "Sequencer": 0,
+      "Address": 168,
+      "FrequencyControl": "FrequencyAsBinary",
+      "PowerControl": "PowerInPercent",
+      "PowerCalibrationPolynom": [
+        {
+          "order": 0,
+          "value": 0
+        },
+        {
+          "order": 1,
+          "value": 1
+        }
+      ],
+      "MinFrequency": 60.0,
+      "MaxFrequency": 100.0,
+      "InitFrequency": 78.0,
+      "InitPower": 100,
+      "ScanningDDS": true,
+      "StopFrequencyInit": 80.0,
+      "ModulationFrequencyInit": 0.02,
+      "StartScanning": true,
+      "Hardreset": true,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
+      "Text": "",
+      "Type": "StaticText",
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
       "Text": "Test AD9858 DDS",
       "Type": "StaticText",
       "Color": {

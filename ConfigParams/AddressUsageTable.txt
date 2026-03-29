@@ -208,7 +208,7 @@ Sequencer  Address    Subaddress Hardware Use                   User IO Use
 0          165        0          DDSAD9854Boards                -                             
 0          166        0          DDSAD9854Boards                -                             
 0          167        0          DDSAD9854Boards                -                             
-0          168        0          DDSAD9854Boards                -                             
+0          168        0          DDSAD9854Boards                UserIOTestDDSAD9854_0         
 0          169        0          DDSAD9854Boards                -                             
 0          170        0          DDSAD9854Boards                -                             
 0          171        0          DDSAD9854Boards                -                             

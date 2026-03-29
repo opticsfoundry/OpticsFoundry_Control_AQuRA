@@ -330,6 +330,9 @@ if __name__ == "__main__":
     builder.add_dds_ad9958(Name="LatticeEOM", Description="Lattice EOM", Address=1, MinFrequency=0.0, MaxFrequency=400.0)
 
     builder.add_new_menu(Text="Test DDS")
+    builder.add_static_text(Text="Test AD9854 DDS")
+    builder.add_dds_ad9854(Name="UserIOTestDDSAD9854_0", Description="Test DDS AD9854 0", Address=168, FrequencyControl= "FrequencyAsBinary")
+    builder.add_static_text(Text="")
     builder.add_static_text(Text="Test AD9858 DDS")
     builder.add_dds_ad9858(Name="UserIOTestDDSAD9858_0", Description="Test DDS AD9858 0", Address=52, PowerControl="PowerIndB", InitFrequency=77.0, InitPower=-10, MinFrequency=60.0, MaxFrequency=100.0)
     builder.add_static_text(Text="")
