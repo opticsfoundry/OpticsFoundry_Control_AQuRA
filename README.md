@@ -1,6 +1,8 @@
 # Overview
 
-OpticsFoudry's control system is suitable for many ultracold atom experiments and supports digital and analog IO and direct digital synthesizers (AD9858, AD9854, AD9958). It is a modernized version of the one presented on [StrontiumBEC.com](https://www.strontiumbec.com/) -> Control. The electronics can be accessed through three types of software, listed below. This repository contains ControlAPI and Control.exe. 
+This is the AQuRA clock version of OpticsFoudry's control system. For the most up-to-date version, see [OpticsFoundry_Control](https://github.com/opticsfoundry/OpticsFoundry_Control).
+
+OpticsFoundry's control system is suitable for many ultracold atom experiments and supports digital and analog IO and direct digital synthesizers (AD9858, AD9854, AD9958). It is a modernized version of the one presented on [StrontiumBEC.com](https://www.strontiumbec.com/) -> Control. The electronics can be accessed through three types of software, listed below. This repository contains ControlAPI and Control.exe. 
 
 1. **Control.exe**  
     A fully featured experiment control system, allowing efficient and convenient operation of ultracold atom (and similar) experiments. 

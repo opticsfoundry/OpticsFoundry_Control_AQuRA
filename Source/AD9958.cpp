@@ -466,7 +466,8 @@ void CAD9958::MasterReset() {
         AktValueContents[i] = AD9958MasterResetValueContents[i];
         WritePrecision[i] = AD9958ValueLength[i];
     }
-
+    //SetIOUpdateEnabled(true);
+    CMultiWriteDeviceSPI::SetQSPIMode(false);
  //   SetPowerDown(true, /*writeDirectly */ false);
     // Toggle MASTER_RESET
     //HAL_GPIO_WritePin(MASTER_RESET_PORT, MASTER_RESET_PIN, GPIO_PIN_SET);
