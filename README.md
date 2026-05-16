@@ -23,3 +23,11 @@ OpticsFoundry's control system is suitable for many ultracold atom experiments a
    3. [Programing experimental sequences](Manual/ProgrammingSequences.md)  
 2. ControlAPI
    1. [Installation and Configuration](Manual/InstallationAndConfigurationOfControlAPI.md)  
+
+
+
+&nbsp;
+
+## Sequencer firmware
+
+The sequencer firmware compatible with this software is [OF_Sequencer_MZ](https://github.com/opticsfoundry/OF_Sequencer_MZ), which uses the MicroZed 7020, or [OF_Sequencer_PYNQ](https://github.com/opticsfoundry/OF_Sequencer_PYNQ), uses the PYNQ-Z2.

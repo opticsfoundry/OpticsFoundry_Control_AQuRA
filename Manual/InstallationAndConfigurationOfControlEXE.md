@@ -203,4 +203,3 @@ If you did not yet regenerate those files, you will get a warning when starting 
 ## Data acquisition using Vision
 
 Control.exe directly supports the [Vision](https://github.com/opticsfoundry/Vision_AQuRA) data acquisition system and can easily be adapted to others.
-
