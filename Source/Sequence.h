@@ -208,6 +208,7 @@ public:
 	void SwitchBlueMOTOff();
 	void SequenceBlockRampMOTCoilCurrent(unsigned char Nr);
 	void RampRedMOT(unsigned char Nr, bool BroadbandRedMOT);
+	void SwitchMOTCoilOrientation(unsigned char Nr);
 	void SwitchRedMOTOff();
 	void SwitchToSingleFrequencyRedMOT(); 
 	void OpticalPumping();

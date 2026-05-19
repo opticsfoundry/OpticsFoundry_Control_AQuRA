@@ -410,6 +410,11 @@ void CSequence::InitializeCoilDriverTorun100A() {
 	}
 	else {
 		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue,/*Current*/ 0,/*RampTime*/ 20, 0.02));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		Wait(5);
+		SwitchMOTCoilsToHelmholtz(false);
+		StartNewWaveformGroup();
 		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, *InitMOTCoilCurrent, (*InitMOTCoilCurrent)/MOTCoilCurrentRampRate, 0.02));
 		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
 	}

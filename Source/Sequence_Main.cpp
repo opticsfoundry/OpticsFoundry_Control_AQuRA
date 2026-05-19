@@ -1586,6 +1586,39 @@ void CSequence::RampRedMOT(unsigned char Nr, bool BroadbandRedMOT) {
 	}
 }
 
+void CSequence::SwitchMOTCoilOrientation(unsigned char Nr) {
+	const unsigned char NrSwitchMOTCoilOrientation = 10;
+	static bool DoSwitchMOTCoilOrientation[NrSwitchMOTCoilOrientation];
+	static double SwitchMOTCoilOrientationRampOffTime[NrSwitchMOTCoilOrientation];
+	static double SwitchMOTCoilOrientationRampOffWait[NrSwitchMOTCoilOrientation];
+	static bool SwitchMOTCoilOrientation[NrSwitchMOTCoilOrientation];
+	static double SwitchMOTCoilOrientationCurrent[NrSwitchMOTCoilOrientation];
+	static double SwitchMOTCoilOrientationRampOnTime[NrSwitchMOTCoilOrientation];
+	static double SwitchMOTCoilOrientationWait[NrSwitchMOTCoilOrientation];
+	if (!AssemblingParamList()) {
+		if (!Decision("DoSwitchMOTCoilOrientation" + itos(Nr))) return;
+		const double RampStepTime = 1;
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, 0, SwitchMOTCoilOrientationRampOffTime[Nr], RampStepTime));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		SwitchMOTCoilsToHelmholtz(SwitchMOTCoilOrientation[Nr]);
+		StartNewWaveformGroup();
+		Waveform(new CRamp("SetMOTCoilCurrent", LastValue, SwitchMOTCoilOrientationCurrent[Nr], SwitchMOTCoilOrientationRampOnTime[Nr], RampStepTime));
+		WaitTillEndOfWaveformGroup(GetCurrentWaveformGroupNumber());
+		Wait(SwitchMOTCoilOrientationWait[Nr], 2300 + Nr);
+	}
+	else {
+		if (Nr >= NrSwitchMOTCoilOrientation) { ControlMessageBox("CSequence::NrSwitchMOTCoilOrientation : too many code blocks of this type."); return; }
+		ParamList->RegisterBool(&DoSwitchMOTCoilOrientation[Nr], "DoSwitchMOTCoilOrientation" + itos(Nr), "Switch MOT coil orientation " + itos(Nr) + " ?", "O" + itos(Nr));
+		ParamList->RegisterDouble(&SwitchMOTCoilOrientationRampOffTime[Nr], "SwitchMOTCoilOrientationRampOffTime" + itos(Nr), 1, 2000, "Ramp Off Time", "ms");
+		ParamList->RegisterDouble(&SwitchMOTCoilOrientationRampOffWait[Nr], "SwitchMOTCoilOrientationRampOffWait" + itos(Nr), 1, 2000, "Ramp Off Wait", "ms");
+		ParamList->RegisterBool(&SwitchMOTCoilOrientation[Nr], "SwitchMOTCoilOrientation" + itos(Nr), "MOT coils Helmholtz " + itos(Nr) + " ?");
+		ParamList->RegisterDouble(&SwitchMOTCoilOrientationCurrent[Nr], "SwitchMOTCoilOrientationCurrent" + itos(Nr), 0, 100, "Red capture MOT current", "A");
+		ParamList->RegisterDouble(&SwitchMOTCoilOrientationRampOnTime[Nr], "SwitchMOTCoilOrientationRampOnTime" + itos(Nr), 1, 2000, "Ramp On Time", "ms");
+		ParamList->RegisterDouble(&SwitchMOTCoilOrientationWait[Nr], "SwitchMOTCoilOrientationWait" + itos(Nr), 0, 2000, "Wait", "ms");
+	}
+
+}
 
 
 //Ramp MOT coil current
@@ -2646,11 +2679,14 @@ void CSequence::MainExperimentalSequence() {
 	if (AssemblingParamList()) ParamList->NewMenu("Clock interrogation", IDM_MENU_0);
 	RampRedMOT(/* Nr */ 3, /* BroadbandRedMOT */ false);
 	SwitchRedMOTOff();
+	SwitchMOTCoilOrientation(0);
 	OpticalPumping();
 	//if (AssemblingParamList()) ParamList->NewMenu("Interrogation stage", IDM_MENU_0);
 	RampToInterrogationConditions();
 	CoarseClockSpectroscopy();
 	ClockInterrogation();
+	SwitchMOTCoilOrientation(1);
+	if (AssemblingParamList()) ParamList->NewMenu("Clock readout", IDM_MENU_0);
 	ClockReadout();
 	AnalogIn();
 	if (AssemblingParamList()) ParamList->NewMenu("Placeholder parameters", IDM_MENU_0);

@@ -46,6 +46,25 @@
       }
     },
     {
+      "Name": "MOTCoilsToHelmholtz",
+      "Description": "MOT Coils to Helmholtz",
+      "Help": "",
+      "Type": "DigitalOut",
+      "Sequencer": 0,
+      "Address": 3,
+      "Bit": 4,
+      "Inverted": false,
+      "Init": false,
+      "Hardreset": false,
+      "Softreset": true,
+      "BlockManualControl": false,
+      "Color": {
+        "Red": 1.0,
+        "Green": 1.0,
+        "Blue": 1.0
+      }
+    },
+    {
       "Name": "ChillerSetpoint",
       "Description": "Chiller temperature setpoint",
       "Units": "degC",
@@ -338,25 +357,6 @@
       "Sequencer": 0,
       "Address": 3,
       "Bit": 3,
-      "Inverted": false,
-      "Init": false,
-      "Hardreset": false,
-      "Softreset": true,
-      "BlockManualControl": false,
-      "Color": {
-        "Red": 1.0,
-        "Green": 1.0,
-        "Blue": 1.0
-      }
-    },
-    {
-      "Name": "MOTCoilsToHelmholtz",
-      "Description": "MOT Coils to Helmholtz",
-      "Help": "",
-      "Type": "DigitalOut",
-      "Sequencer": 0,
-      "Address": 3,
-      "Bit": 4,
       "Inverted": false,
       "Init": false,
       "Hardreset": false,

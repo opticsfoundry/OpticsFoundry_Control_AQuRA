@@ -260,6 +260,7 @@ if __name__ == "__main__":
                 {"order": 0, "value": 0},
                 {"order": 1, "value": 0.1}
             ], BlockManualControl = False, Softreset = False)
+    builder.add_digital_out(Name="MOTCoilsToHelmholtz", Description="MOT Coils to Helmholtz", Address=3, Bit=4)
     builder.add_analog_out(Name="ChillerSetpoint", Description="Chiller temperature setpoint", Address=30, Units="degC", Max=5.0, Init=0.0)    
     builder.add_analog_out(Name="LatticePowerSetpoint", Description="Lattice power setpoint", Address=29, Units="%", Max=5.0, Init=0.0)
     builder.add_analog_out(Name="PMTGain", Description="Photomultiplier tube gain", Address=28, Units="", Max=5.0, Init=0.0)
@@ -274,7 +275,6 @@ if __name__ == "__main__":
     builder.add_digital_out(Name="CameraTrigger0", Description="Camera Trigger 0", Address=3, Bit=1)
     builder.add_digital_out(Name="CameraTrigger1", Description="Camera Trigger 1", Address=3, Bit=2)
     builder.add_digital_out(Name="PMTTrigger", Description="PMT Trigger", Address=3, Bit=3)
-    builder.add_digital_out(Name="MOTCoilsToHelmholtz", Description="MOT Coils to Helmholtz", Address=3, Bit=4)
     builder.add_digital_out(Name="ElectrodeA", Description="Electrode A", Address=3, Bit=5)
     builder.add_digital_out(Name="ElectrodeB", Description="Electrode B", Address=3, Bit=6)
     builder.add_digital_out(Name="ElectrodeC", Description="Electrode C", Address=3, Bit=7)
